@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
-project(Prototipo LANGUAGES CXX)
+project(SimonSays LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -17,7 +17,7 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 # Adicionar arquivos de código fonte
-set(SOURCE
+set(SOURCES
 ./src/main.cpp
 ./src/utils.cpp)
 
@@ -25,7 +25,7 @@ set(SOURCE
 set(HEADER_FILES
 ./include/utils.hpp)
 
-add_executable(main ${SOURCES} ${HEADER_FILES})
-target_include_directories(main PRIVATE ./include/)
+add_executable(exe ${SOURCES} ${HEADER_FILES})
+target_include_directories(exe PRIVATE ./include/)
 
-target_link_libraries(main PRIVATE sfml-graphics)
+target_link_libraries(exe PRIVATE sfml-graphics)
