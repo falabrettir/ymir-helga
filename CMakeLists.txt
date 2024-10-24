@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
-project(CMakeSFMLProject LANGUAGES CXX)
+project(Prototipo LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -17,7 +17,7 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 # Adicionar arquivos de código fonte
-set(SOURCES
+set(SOURCE
 ./src/main.cpp
 ./src/utils.cpp)
 
