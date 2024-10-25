@@ -4,7 +4,7 @@ project(SimonSays LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
 include(FetchContent)
@@ -18,12 +18,12 @@ FetchContent_MakeAvailable(SFML)
 
 # Adicionar arquivos de código fonte
 set(SOURCES
-./src/main.cpp
-./src/utils.cpp)
+./src/Main.cpp
+./src/Principal.cpp)
 
 # Adicionar arquivos de cabeçalho
 set(HEADER_FILES
-./include/utils.hpp)
+./include/Principal.h)
 
 add_executable(exe ${SOURCES} ${HEADER_FILES})
 target_include_directories(exe PRIVATE ./include/)
