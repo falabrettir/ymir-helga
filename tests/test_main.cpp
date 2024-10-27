@@ -1,7 +1,12 @@
 #include "../include/Jogo.h"
 #include <catch2/catch_test_macros.hpp>
 
-TEST_CASE("Game initialization", "[game]") {
+TEST_CASE("Inicialização do jogo") {
   Jogo jogo;
-  REQUIRE(jogo.isRunning() == false);
+
+  SECTION("Jogo ainda não inicializado") { REQUIRE(jogo.isRunning() == false); }
+
+  jogo.Run();
+
+  SECTION("Jogo inicializado") { REQUIRE(jogo.isRunning() == true); }
 }
