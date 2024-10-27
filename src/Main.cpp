@@ -1,6 +1,7 @@
-#include "../include/Principal.h"
+#include "../include/Jogo.h"
 
 int main() {
-  Principal principal;
+  Jogo jogo;
+  jogo.Run();
   return 0;
 }
