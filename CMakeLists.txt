@@ -20,14 +20,7 @@ FetchContent_Declare(
   SYSTEM
 )
 
-FetchContent_Declare(
-  Catch2
-  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-  GIT_TAG        v3.4.0 # or a later release
-)
-
 FetchContent_MakeAvailable(SFML)
-FetchContent_MakeAvailable(Catch2)
 
 add_subdirectory(src)
 add_subdirectory(tests)

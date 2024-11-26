@@ -1,5 +1,6 @@
+#define CATCH_CONFIG_MAIN
 #include "../include/Jogo.h"
-#include <catch2/catch_test_macros.hpp>
+#include <catch2/catch.hpp>
 
 TEST_CASE("Inicialização do jogo") {
   Jogo jogo;
