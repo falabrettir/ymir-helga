@@ -35,5 +35,8 @@
 build/
 bin/
 
-# PDF's
+# PDF's e imagens
+*.jpg
+*.jpeg
+*.png
 *.pdf
