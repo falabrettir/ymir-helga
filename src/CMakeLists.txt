@@ -9,7 +9,7 @@ target_include_directories(jogo
 
 target_link_libraries(jogo
   PUBLIC
-  sfml-graphics
+  sfml-graphic
   sfml-window
   sfml-system
   sfml-audio
