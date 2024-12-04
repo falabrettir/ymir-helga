@@ -28,7 +28,7 @@ fontsize=12
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>528</x>
+      <x>384</x>
       <y>64</y>
       <w>176</w>
       <h>120</h>
@@ -52,7 +52,7 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>832</x>
+      <x>688</x>
       <y>0</y>
       <w>528</w>
       <h>280</h>
@@ -66,7 +66,7 @@ bg=LIGHT_GRAY</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>856</x>
+      <x>712</x>
       <y>96</y>
       <w>176</w>
       <h>88</h>
@@ -87,7 +87,7 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1096</x>
+      <x>952</x>
       <y>64</y>
       <w>208</w>
       <h>176</h>
@@ -116,7 +116,7 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>696</x>
+      <x>552</x>
       <y>120</y>
       <w>176</w>
       <h>40</h>
@@ -134,7 +134,7 @@ layer=5
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>808</x>
+      <x>664</x>
       <y>392</y>
       <w>160</w>
       <h>136</h>
@@ -159,7 +159,7 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>648</x>
+      <x>504</x>
       <y>176</y>
       <w>280</w>
       <h>232</h>
@@ -172,10 +172,10 @@ fg=RED</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>624</x>
+      <x>408</x>
       <y>344</y>
-      <w>760</w>
-      <h>776</h>
+      <w>872</w>
+      <h>768</h>
     </coordinates>
     <panel_attributes>layer=1
 Entidades
@@ -186,7 +186,7 @@ bg=LIGHT_GRAY</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1120</x>
+      <x>1088</x>
       <y>424</y>
       <w>120</w>
       <h>88</h>
@@ -207,20 +207,20 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
+      <x>816</x>
       <y>464</y>
-      <w>176</w>
+      <w>288</w>
       <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=5
 fg=RED</panel_attributes>
-    <additional_attributes>10.0;10.0;200.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;340.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1176</x>
+      <x>1144</x>
       <y>232</y>
       <w>64</w>
       <h>208</h>
@@ -238,9 +238,9 @@ layer=5
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1016</x>
+      <x>832</x>
       <y>592</y>
-      <w>344</w>
+      <w>440</w>
       <h>504</h>
     </coordinates>
     <panel_attributes>Personagens
@@ -252,9 +252,9 @@ layer=2</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>648</x>
+      <x>416</x>
       <y>592</y>
-      <w>344</w>
+      <w>400</w>
       <h>504</h>
     </coordinates>
     <panel_attributes>Obstaculos
@@ -266,7 +266,7 @@ layer=2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>720</x>
+      <x>480</x>
       <y>632</y>
       <w>224</w>
       <h>104</h>
@@ -288,9 +288,9 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>840</x>
+      <x>616</x>
       <y>520</y>
-      <w>24</w>
+      <w>80</w>
       <h>128</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
@@ -299,14 +299,14 @@ layer=5
 
 bg=NONE
 fg=RED</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+    <additional_attributes>80.0;10.0;80.0;100.0;10.0;100.0;10.0;140.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>920</x>
+      <x>680</x>
       <y>216</y>
-      <w>192</w>
+      <w>288</w>
       <h>432</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
@@ -317,12 +317,12 @@ bg=BLUE
 fg=BLUE
 layer=5
 </panel_attributes>
-    <additional_attributes>10.0;520.0;10.0;430.0;140.0;430.0;140.0;10.0;220.0;10.0</additional_attributes>
+    <additional_attributes>10.0;520.0;10.0;440.0;260.0;440.0;260.0;10.0;340.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>664</x>
+      <x>424</x>
       <y>784</y>
       <w>144</w>
       <h>104</h>
@@ -344,7 +344,7 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>736</x>
+      <x>528</x>
       <y>728</y>
       <w>24</w>
       <h>72</h>
@@ -360,7 +360,7 @@ fg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>824</x>
+      <x>648</x>
       <y>904</y>
       <w>144</w>
       <h>104</h>
@@ -382,9 +382,9 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>824</x>
+      <x>632</x>
       <y>728</y>
-      <w>24</w>
+      <w>48</w>
       <h>192</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
@@ -393,13 +393,13 @@ layer=5
 
 bg=NONE
 fg=RED</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;220.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;200.0;40.0;200.0;40.0;220.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>672</x>
-      <y>944</y>
+      <x>488</x>
+      <y>904</y>
       <w>144</w>
       <h>104</h>
     </coordinates>
@@ -420,10 +420,10 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>776</x>
+      <x>576</x>
       <y>728</y>
-      <w>56</w>
-      <h>232</h>
+      <w>24</w>
+      <h>192</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=5
@@ -431,13 +431,13 @@ layer=5
 
 bg=NONE
 fg=RED</panel_attributes>
-    <additional_attributes>50.0;10.0;50.0;230.0;10.0;230.0;10.0;270.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;220.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>840</x>
-      <y>776</y>
+      <x>664</x>
+      <y>768</y>
       <w>144</w>
       <h>104</h>
     </coordinates>
@@ -458,10 +458,10 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>888</x>
+      <x>680</x>
       <y>728</y>
       <w>24</w>
-      <h>64</h>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=5
@@ -469,6 +469,230 @@ layer=5
 
 bg=NONE
 fg=RED</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>848</x>
+      <y>624</y>
+      <w>152</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entidade - Abstrata&gt;&gt;
+*/Personagem/*
+--
+#hp: int
+--
+&lt;&lt;create&gt;&gt;+Personagem()
+&lt;&lt;destroy&gt;&gt;+virtual Personagem()
+/+executar(): virtual void = 0/
++mover(): virtual void
++salvarDataBuffer(): void
+
+layer=5
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1112</x>
+      <y>664</y>
+      <w>152</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Personagem&gt;&gt;
+*/Jogador/*
+--
+-inimMortos: int
+-tesouro: int
+-pontos: int
+-stamina: int
+--
+&lt;&lt;create&gt;&gt;+Jogador()
+&lt;&lt;destroy&gt;&gt;+Jogador()
++executar(): void
++mover(): void
++calculaPontos(): void
++salvarDataBuffer(): void
+
+layer=5
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>992</x>
+      <y>664</y>
+      <w>136</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+layer=5
+
+
+bg=NONE
+fg=RED</panel_attributes>
+    <additional_attributes>10.0;20.0;150.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>856</x>
+      <y>760</y>
+      <w>176</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Personagem - Abstrata&gt;&gt;
+*/Inimigo/*
+--
+#nivel_maldade: int
+#dano: int
+--
+&lt;&lt;create&gt;&gt;+Inimigo()
+&lt;&lt;destroy&gt;&gt;+virtual Inimigo()
+/+executar(): virtual void = 0/
+/+danificar(p: Jogador*): virtual void = 0/
++salvarDataBuffer(): void
+
+layer=5
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>912</x>
+      <y>728</y>
+      <w>24</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+layer=5
+
+
+bg=NONE
+fg=RED</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>904</y>
+      <w>136</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Inimigo Fácil&gt;&gt;
+*/Slime/*
+--
+-gosma: Gosma*
+--
+&lt;&lt;create&gt;&gt;+Slime()
+&lt;&lt;destroy&gt;&gt;+Slime()
++executar(): void
++danificar(p: Jogador*): void
++salvarDataBuffer(): void
+
+layer=5
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>984</x>
+      <y>904</y>
+      <w>136</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Inimigo Médio&gt;&gt;
+*/Esqueleto/*
+--
+-flecha: Flecha*
+--
+&lt;&lt;create&gt;&gt;+Esqueleto()
+&lt;&lt;destroy&gt;&gt;+Esqueleto()
++executar(): void
++danificar(p: Jogador*): void
++salvarDataBuffer(): void
+
+layer=5
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1128</x>
+      <y>904</y>
+      <w>136</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Chefão&gt;&gt;
+*/Orc/*
+--
+-forca: int
+-bolaFogo: BoladeFogo*
+--
+&lt;&lt;create&gt;&gt;+Orc()
+&lt;&lt;destroy&gt;&gt;+Orc()
++executar(): void
++danificar(p: Jogador*): void
++salvarDataBuffer(): void
++operator++(): void
+layer=5
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>928</x>
+      <y>872</y>
+      <w>24</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+layer=5
+
+
+bg=NONE
+fg=RED</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>992</x>
+      <y>872</y>
+      <w>24</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+layer=5
+
+
+bg=NONE
+fg=RED</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1016</x>
+      <y>872</y>
+      <w>152</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+layer=5
+
+
+bg=NONE
+fg=RED</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0;170.0;30.0;170.0;40.0</additional_attributes>
   </element>
 </diagram>
