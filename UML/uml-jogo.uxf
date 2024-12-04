@@ -28,7 +28,7 @@ fontsize=12
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>288</x>
+      <x>528</x>
       <y>64</y>
       <w>176</w>
       <h>120</h>
@@ -52,7 +52,7 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>592</x>
+      <x>832</x>
       <y>0</y>
       <w>528</w>
       <h>280</h>
@@ -66,7 +66,7 @@ bg=LIGHT_GRAY</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
+      <x>856</x>
       <y>96</y>
       <w>176</w>
       <h>88</h>
@@ -87,7 +87,7 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>856</x>
+      <x>1096</x>
       <y>64</y>
       <w>208</w>
       <h>176</h>
@@ -97,10 +97,10 @@ bg=YELLOW</panel_attributes>
 --
 -LIs: vector&lt;*Inimigo&gt;
 -LOs: list&lt;*Obstaculo&gt;
-+LPs: set&lt;*Projetil&gt;
+-LPs: set&lt;*Projetil&gt;
 --
 &lt;&lt;create&gt;&gt;+GerenciadorColisoes()
-&lt;&lt;destroy&gt;&gt;+~GerenciadorColisoes()
+&lt;&lt;destroy&gt;&gt;+GerenciadorColisoes()
 +incluirObstaculo(pO: *Obstaculo): void
 +incluirInimigo(pO: *Inimigo): void
 +incluirProjetil(pO: *Projetil): void
@@ -116,7 +116,7 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>456</x>
+      <x>696</x>
       <y>120</y>
       <w>176</w>
       <h>40</h>
@@ -134,7 +134,7 @@ layer=5
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>568</x>
+      <x>808</x>
       <y>392</y>
       <w>160</w>
       <h>136</h>
@@ -159,19 +159,20 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>408</x>
+      <x>648</x>
       <y>176</y>
       <w>280</w>
       <h>232</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-layer=5</panel_attributes>
+layer=5
+fg=RED</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;160.0;330.0;160.0;330.0;270.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>384</x>
+      <x>624</x>
       <y>344</y>
       <w>760</w>
       <h>776</h>
@@ -185,7 +186,7 @@ bg=LIGHT_GRAY</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>880</x>
+      <x>1120</x>
       <y>424</y>
       <w>120</w>
       <h>88</h>
@@ -206,21 +207,22 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
+      <x>960</x>
       <y>464</y>
       <w>176</w>
       <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-layer=5</panel_attributes>
+layer=5
+fg=RED</panel_attributes>
     <additional_attributes>10.0;10.0;200.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>936</x>
+      <x>1176</x>
       <y>232</y>
-      <w>72</w>
+      <w>64</w>
       <h>208</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
@@ -236,7 +238,7 @@ layer=5
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>776</x>
+      <x>1016</x>
       <y>592</y>
       <w>344</w>
       <h>504</h>
@@ -250,7 +252,7 @@ layer=2</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>408</x>
+      <x>648</x>
       <y>592</y>
       <w>344</w>
       <h>504</h>
@@ -264,7 +266,7 @@ layer=2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>480</x>
+      <x>720</x>
       <y>632</y>
       <w>224</w>
       <h>104</h>
@@ -286,19 +288,23 @@ bg=YELLOW</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>600</x>
+      <x>840</x>
       <y>520</y>
       <w>24</w>
       <h>128</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-layer=5</panel_attributes>
+layer=5
+
+
+bg=NONE
+fg=RED</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>680</x>
+      <x>920</x>
       <y>216</y>
       <w>192</w>
       <h>432</h>
@@ -312,5 +318,157 @@ fg=BLUE
 layer=5
 </panel_attributes>
     <additional_attributes>10.0;520.0;10.0;430.0;140.0;430.0;140.0;10.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>664</x>
+      <y>784</y>
+      <w>144</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Obstáculo&gt;&gt;
+*Plataforma*
+--
+-altura: int
+--
+&lt;&lt;create&gt;&gt; +Plataforma()
+&lt;&lt;destroy&gt;&gt; +Plataforma()
++executar(): void
++obstacular(p: Jogador*): void
+
+layer=5
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>736</x>
+      <y>728</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+layer=5
+
+
+bg=NONE
+fg=RED</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>824</x>
+      <y>904</y>
+      <w>144</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Obstáculo&gt;&gt;
+*Gosma*
+--
+-pegajosidade: int
+--
+&lt;&lt;create&gt;&gt; +Gosma()
+&lt;&lt;destroy&gt;&gt; +Gosma()
++executar(): void
++obstacular(p: Jogador*): void
+
+layer=5
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>824</x>
+      <y>728</y>
+      <w>24</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+layer=5
+
+
+bg=NONE
+fg=RED</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;220.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>672</x>
+      <y>944</y>
+      <w>144</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Obstáculo&gt;&gt;
+*Oleo*
+--
+-deslizabilidade: int
+--
+&lt;&lt;create&gt;&gt; +Oleo()
+&lt;&lt;destroy&gt;&gt; +Oleo()
++executar(): void
++obstacular(p: Jogador*): void
+
+layer=5
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>776</x>
+      <y>728</y>
+      <w>56</w>
+      <h>232</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+layer=5
+
+
+bg=NONE
+fg=RED</panel_attributes>
+    <additional_attributes>50.0;10.0;50.0;230.0;10.0;230.0;10.0;270.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>776</y>
+      <w>144</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Obstáculo&gt;&gt;
+*Espinho*
+--
+-dano: int
+--
+&lt;&lt;create&gt;&gt; +Espinho()
+&lt;&lt;destroy&gt;&gt; +Espinho()
++executar(): void
++obstacular(p: Jogador*): void
+
+layer=5
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>888</x>
+      <y>728</y>
+      <w>24</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+layer=5
+
+
+bg=NONE
+fg=RED</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
 </diagram>
