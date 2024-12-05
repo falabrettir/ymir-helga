@@ -24,21 +24,21 @@ fontsize=12
 
 
 // This text will be stored with each diagram;  use it for notes.</help_text>
-  <zoom_level>13</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1131</x>
-      <y>234</y>
-      <w>286</w>
-      <h>195</h>
+      <x>693</x>
+      <y>133</y>
+      <w>154</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Abstrata&gt;&gt;
 */Ente/*
 --
 #id: int
 #pGG: static *Gerenciador_Grafico
-#pTexture: *texture
+#texture: *sf::Texture
 --
 &lt;&lt;create&gt;&gt;+Ente()
 &lt;&lt;destroy&gt;&gt;+virtual Ente()
@@ -52,10 +52,10 @@ bg=RED</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1625</x>
-      <y>130</y>
-      <w>858</w>
-      <h>455</h>
+      <x>959</x>
+      <y>77</y>
+      <w>462</w>
+      <h>245</h>
     </coordinates>
     <panel_attributes>layer=1
 Gerenciadores
@@ -66,10 +66,10 @@ bg=LIGHT_GRAY</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1664</x>
-      <y>286</y>
-      <w>286</w>
-      <h>143</h>
+      <x>980</x>
+      <y>161</y>
+      <w>154</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Infraestrutura - SFML&gt;&gt;
 *Gerenciador_Grafico *
@@ -87,10 +87,10 @@ bg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2054</x>
-      <y>208</y>
-      <w>338</w>
-      <h>325</h>
+      <x>1141</x>
+      <y>119</y>
+      <w>273</w>
+      <h>175</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Mediador - STL&gt;&gt;
 *Gerenciador_Colisoes*
@@ -118,10 +118,10 @@ bg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1404</x>
-      <y>325</y>
-      <w>286</w>
-      <h>65</h>
+      <x>840</x>
+      <y>182</y>
+      <w>154</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 Utilizar
@@ -136,10 +136,10 @@ layer=5
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1586</x>
-      <y>767</y>
-      <w>260</w>
-      <h>221</h>
+      <x>938</x>
+      <y>420</y>
+      <w>140</w>
+      <h>119</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Abstrata&gt;&gt;
 */Entidade/*
@@ -161,10 +161,10 @@ bg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1326</x>
-      <y>416</y>
-      <w>455</w>
-      <h>377</h>
+      <x>798</x>
+      <y>231</y>
+      <w>245</w>
+      <h>203</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=5
@@ -174,10 +174,10 @@ fg=RED</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1170</x>
-      <y>689</y>
-      <w>1417</w>
-      <h>1248</h>
+      <x>714</x>
+      <y>378</y>
+      <w>763</w>
+      <h>672</h>
     </coordinates>
     <panel_attributes>layer=1
 Entidades
@@ -188,10 +188,10 @@ bg=LIGHT_GRAY</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2275</x>
-      <y>819</y>
-      <w>195</w>
-      <h>143</h>
+      <x>1309</x>
+      <y>448</y>
+      <w>105</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entidade&gt;&gt;
 *Projetil*
@@ -209,10 +209,10 @@ bg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1833</x>
-      <y>884</y>
-      <w>468</w>
-      <h>39</h>
+      <x>1071</x>
+      <y>483</y>
+      <w>252</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=5
@@ -222,10 +222,10 @@ fg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2366</x>
-      <y>520</y>
-      <w>117</w>
-      <h>325</h>
+      <x>1358</x>
+      <y>287</y>
+      <w>56</w>
+      <h>175</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 Gerenciar
@@ -240,10 +240,10 @@ layer=5
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1859</x>
-      <y>1092</y>
-      <w>715</w>
-      <h>819</h>
+      <x>1085</x>
+      <y>595</y>
+      <w>385</w>
+      <h>441</h>
     </coordinates>
     <panel_attributes>Personagens
 --
@@ -254,10 +254,10 @@ layer=2</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1183</x>
-      <y>1092</y>
-      <w>650</w>
-      <h>819</h>
+      <x>721</x>
+      <y>595</y>
+      <w>350</w>
+      <h>441</h>
     </coordinates>
     <panel_attributes>Obstaculos
 --
@@ -268,10 +268,10 @@ layer=2</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1287</x>
-      <y>1157</y>
-      <w>364</w>
-      <h>169</h>
+      <x>777</x>
+      <y>630</y>
+      <w>196</w>
+      <h>91</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entidade - Abstrata&gt;&gt;
 */Obstaculo/*
@@ -290,10 +290,10 @@ bg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1508</x>
-      <y>975</y>
-      <w>130</w>
-      <h>208</h>
+      <x>896</x>
+      <y>532</y>
+      <w>70</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=5
@@ -306,10 +306,10 @@ fg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1612</x>
-      <y>455</y>
-      <w>468</w>
-      <h>728</h>
+      <x>952</x>
+      <y>252</y>
+      <w>231</w>
+      <h>392</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 Gerenciar
@@ -319,15 +319,15 @@ bg=BLUE
 fg=BLUE
 layer=5
 </panel_attributes>
-    <additional_attributes>10.0;540.0;10.0;460.0;260.0;460.0;260.0;10.0;340.0;10.0</additional_attributes>
+    <additional_attributes>10.0;540.0;10.0;460.0;260.0;460.0;260.0;10.0;270.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1196</x>
-      <y>1404</y>
-      <w>234</w>
-      <h>169</h>
+      <x>728</x>
+      <y>763</y>
+      <w>126</w>
+      <h>91</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Obstáculo&gt;&gt;
 *Plataforma*
@@ -346,10 +346,10 @@ bg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1365</x>
-      <y>1313</y>
-      <w>39</w>
-      <h>117</h>
+      <x>819</x>
+      <y>714</y>
+      <w>21</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=5
@@ -362,10 +362,10 @@ fg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1560</x>
-      <y>1599</y>
-      <w>234</w>
-      <h>169</h>
+      <x>924</x>
+      <y>868</y>
+      <w>126</w>
+      <h>91</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Obstáculo&gt;&gt;
 *Gosma*
@@ -384,10 +384,10 @@ bg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1534</x>
-      <y>1313</y>
-      <w>78</w>
-      <h>312</h>
+      <x>910</x>
+      <y>714</y>
+      <w>42</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=5
@@ -400,10 +400,10 @@ fg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1300</x>
-      <y>1599</y>
-      <w>234</w>
-      <h>169</h>
+      <x>784</x>
+      <y>868</y>
+      <w>126</w>
+      <h>91</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Obstáculo&gt;&gt;
 *Oleo*
@@ -422,10 +422,10 @@ bg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1443</x>
-      <y>1313</y>
-      <w>39</w>
-      <h>312</h>
+      <x>861</x>
+      <y>714</y>
+      <w>21</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=5
@@ -438,10 +438,10 @@ fg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1586</x>
-      <y>1378</y>
-      <w>234</w>
-      <h>169</h>
+      <x>938</x>
+      <y>749</y>
+      <w>126</w>
+      <h>91</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Obstáculo&gt;&gt;
 *Espinho*
@@ -460,10 +460,10 @@ bg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1612</x>
-      <y>1313</y>
-      <w>39</w>
-      <h>91</h>
+      <x>952</x>
+      <y>714</y>
+      <w>21</w>
+      <h>49</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=5
@@ -476,10 +476,10 @@ fg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1885</x>
-      <y>1144</y>
-      <w>247</w>
-      <h>182</h>
+      <x>1099</x>
+      <y>623</y>
+      <w>133</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entidade - Abstrata&gt;&gt;
 */Personagem/*
@@ -499,10 +499,10 @@ bg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2262</x>
-      <y>1209</y>
-      <w>247</w>
-      <h>273</h>
+      <x>1302</x>
+      <y>658</y>
+      <w>133</w>
+      <h>147</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Personagem&gt;&gt;
 */Jogador/*
@@ -527,10 +527,10 @@ bg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2119</x>
-      <y>1209</y>
-      <w>169</w>
-      <h>52</h>
+      <x>1225</x>
+      <y>658</y>
+      <w>91</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=5
@@ -543,10 +543,10 @@ fg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1898</x>
-      <y>1365</y>
-      <w>286</w>
-      <h>195</h>
+      <x>1106</x>
+      <y>742</y>
+      <w>154</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Personagem - Abstrata&gt;&gt;
 */Inimigo/*
@@ -567,10 +567,10 @@ bg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1989</x>
-      <y>1313</y>
-      <w>39</w>
-      <h>78</h>
+      <x>1155</x>
+      <y>714</y>
+      <w>21</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=5
@@ -583,10 +583,10 @@ fg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1872</x>
-      <y>1599</y>
-      <w>221</w>
-      <h>208</h>
+      <x>1092</x>
+      <y>868</y>
+      <w>119</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Inimigo Fácil&gt;&gt;
 *Slime*
@@ -607,10 +607,10 @@ bg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2106</x>
-      <y>1599</y>
-      <w>221</w>
-      <h>208</h>
+      <x>1218</x>
+      <y>868</y>
+      <w>119</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Inimigo Médio&gt;&gt;
 *Esqueleto*
@@ -631,10 +631,10 @@ bg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2340</x>
-      <y>1599</y>
-      <w>221</w>
-      <h>221</h>
+      <x>1344</x>
+      <y>868</y>
+      <w>119</w>
+      <h>119</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Chefão&gt;&gt;
 *Orc*
@@ -655,10 +655,10 @@ bg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2015</x>
-      <y>1547</y>
-      <w>39</w>
-      <h>78</h>
+      <x>1169</x>
+      <y>840</y>
+      <w>21</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=5
@@ -671,10 +671,10 @@ fg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2119</x>
-      <y>1547</y>
-      <w>39</w>
-      <h>78</h>
+      <x>1225</x>
+      <y>840</y>
+      <w>21</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=5
@@ -687,10 +687,10 @@ fg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2158</x>
-      <y>1547</y>
-      <w>247</w>
-      <h>78</h>
+      <x>1246</x>
+      <y>840</y>
+      <w>133</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 layer=5
@@ -703,10 +703,10 @@ fg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2457</x>
-      <y>936</y>
-      <w>260</w>
-      <h>845</h>
+      <x>1407</x>
+      <y>511</y>
+      <w>133</w>
+      <h>455</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 Arremessar
@@ -718,10 +718,10 @@ fg=BLUE</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>52</x>
-      <y>117</y>
-      <w>832</w>
-      <h>715</h>
+      <x>112</x>
+      <y>70</y>
+      <w>448</w>
+      <h>385</h>
     </coordinates>
     <panel_attributes>layer=1
 Listas
@@ -732,10 +732,10 @@ bg=WHITE</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>78</x>
-      <y>182</y>
-      <w>611</w>
-      <h>598</h>
+      <x>126</x>
+      <y>105</y>
+      <w>329</w>
+      <h>322</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Encadeamento Simples&gt;&gt;
 *Lista*
@@ -756,10 +756,10 @@ bg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>611</x>
-      <y>156</y>
-      <w>78</w>
-      <h>26</h>
+      <x>413</x>
+      <y>91</y>
+      <w>42</w>
+      <h>14</h>
     </coordinates>
     <panel_attributes>TL: CLASS
 bg=red
@@ -771,10 +771,10 @@ fg=BLACK</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>312</x>
-      <y>481</y>
-      <w>286</w>
-      <h>195</h>
+      <x>252</x>
+      <y>266</y>
+      <w>154</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Elemento&gt;&gt;
 Elemento
@@ -795,10 +795,10 @@ bg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>455</y>
-      <w>78</w>
-      <h>26</h>
+      <x>364</x>
+      <y>252</y>
+      <w>42</w>
+      <h>14</h>
     </coordinates>
     <panel_attributes>TE: CLASS
 bg=red
@@ -810,10 +810,10 @@ fg=BLACK</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>195</x>
-      <y>429</y>
-      <w>221</w>
-      <h>117</h>
+      <x>196</x>
+      <y>238</y>
+      <w>105</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0...1
@@ -821,15 +821,15 @@ m2=0...1
 Conhecer próximo
 layer=8
 fg=BLUE</panel_attributes>
-    <additional_attributes>90.0;60.0;60.0;60.0;60.0;20.0;120.0;20.0;120.0;40.0</additional_attributes>
+    <additional_attributes>80.0;60.0;50.0;60.0;50.0;20.0;110.0;20.0;110.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>338</x>
-      <y>663</y>
-      <w>182</w>
-      <h>143</h>
+      <x>266</x>
+      <y>364</y>
+      <w>91</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0...1
@@ -842,10 +842,10 @@ fg=BLUE</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>533</x>
-      <y>663</y>
-      <w>169</w>
-      <h>143</h>
+      <x>371</x>
+      <y>364</y>
+      <w>84</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 Conhecer último
@@ -858,10 +858,10 @@ fg=BLUE</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>0</x>
-      <y>52</y>
-      <w>2704</w>
-      <h>1937</h>
+      <x>98</x>
+      <y>42</y>
+      <w>1456</w>
+      <h>1043</h>
     </coordinates>
     <panel_attributes>Jogo
 --
