@@ -1,9 +1,13 @@
 # Package GerenciadorGrafico
 add_library(gerenciador-grafico)
 
+target_include_directories(gerenciador-grafico
+  PUBLIC
+  ${CMAKE_SOURCE_DIR}/include)
+
 # ---------------------------------------
 # Executável principal
-add_executable(jogo ./Jogo.cpp)
+add_executable(jogo ./jogo.cpp)
 
 target_include_directories(jogo
   PUBLIC
