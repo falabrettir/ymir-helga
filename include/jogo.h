@@ -1,13 +1,13 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+#include "../include/gerenciador-grafico.h"
 
 class Jogo {
 private:
-  bool running;
+  bool rodando;
 
 public:
   Jogo();
   ~Jogo();
-  void Run();
-  bool isRunning() const;
+  void executar();
+  bool estaRodando() const;
 };

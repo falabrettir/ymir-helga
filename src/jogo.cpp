@@ -1,9 +1,16 @@
-#include "../include/Jogo.h"
+#include "../include/jogo.h"
 
-Jogo::Jogo() : running(false) {}
+Jogo::Jogo() : rodando(false) {}
 
-Jogo::~Jogo() {}
+Jogo::~Jogo() { rodando = false; }
 
-void Jogo::Run() { running = true; }
+void Jogo::executar() {
+  Gerenciadores::Gerenciador_Grafico *GG =
+      new Gerenciadores::Gerenciador_Grafico();
+  rodando = true;
+  while (estaRodando()) {
+    rodando = false;
+  }
+}
 
-bool Jogo::isRunning() const { return running; }
+bool Jogo::estaRodando() const { return rodando; }
