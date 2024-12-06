@@ -2,7 +2,6 @@
 #include "../gerenciadores/gerenciador-grafico.h"
 #include <SFML/System/Vector2.hpp>
 
-namespace Entes {
 class Ente {
 protected:
   int id;
@@ -16,4 +15,3 @@ public:
   virtual void desenhar() = 0;
   virtual void executar() = 0;
 };
-} // namespace Entes
