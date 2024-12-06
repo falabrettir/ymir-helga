@@ -1,11 +1,23 @@
-add_library(jogo
-  ./Jogo.cpp
+# lib Gerenciador_Grafico
+add_library(gerenciador-grafico ./gerenciador-grafico.cpp)
+
+target_include_directories(gerenciador-grafico
+  PUBLIC
+  ${CMAKE_SOURCE_DIR}/include)
+
+target_link_libraries(gerenciador-grafico
+  PUBLIC
+  sfml-graphics
+  sfml-window
+  sfml-system
 )
+
+#lib Jogo
+add_library(jogo ./jogo.cpp)
 
 target_include_directories(jogo
   PUBLIC
-  ${CMAKE_SOURCE_DIR}/include
-)
+  ${CMAKE_SOURCE_DIR}/include)
 
 target_link_libraries(jogo
   PUBLIC
@@ -13,17 +25,18 @@ target_link_libraries(jogo
   sfml-window
   sfml-system
   sfml-audio
+  gerenciador-grafico
 )
 
 # ---------------------------------------
 # Executável principal
-add_executable(simon ./Main.cpp)
+add_executable(main ./main.cpp)
 
-target_include_directories(simon
+target_include_directories(main
   PUBLIC
   ${CMAKE_SOURCE_DIR}/include)
 
-target_link_libraries(simon
-  PRIVATE
+target_link_libraries(main
+  PUBLIC
   jogo
 )
