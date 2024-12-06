@@ -34,3 +34,6 @@
 # CMake output
 build/
 bin/
+
+# Configuração do clangd
+.clangd
