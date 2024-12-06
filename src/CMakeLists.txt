@@ -44,7 +44,7 @@ target_include_directories(jogo
   PUBLIC
   ${CMAKE_SOURCE_DIR}/include)
 
-target_link_libraries(jogo
+target_link_libraries(gerenciador-grafico
   PUBLIC
   ${SFML_LIBS}
   gerenciador-grafico
