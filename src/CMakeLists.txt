@@ -1,13 +1,12 @@
-# Variáveis de configuração
+# Variáveis de dependências
 set(SFML_LIBS sfml-graphics sfml-window sfml-system sfml-audio)
 set(SFML_GRAPHICS_LIBS sfml-graphics sfml-window sfml-system)
 set(SFML_AUDIO_LIBS sfml-audio sfml-system)
-set(PROJECT_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
 
 # ---------------------------------------------------------
-# Lib Gerenciador_Eventos
+# Biblioteca Gerenciador_Eventos
 add_library(gerenciador-eventos
-  ./gerenciadores/gerenciador-eventos.cpp
+  gerenciadores/gerenciador-eventos.cpp
 )
 
 target_include_directories(gerenciador-eventos
@@ -21,9 +20,9 @@ target_link_libraries(gerenciador-eventos
 )
 
 # ---------------------------------------------------------
-# Lib Gerenciador_Grafico
+# Biblioteca Gerenciador_Grafico
 add_library(gerenciador-grafico
-  ./gerenciadores/gerenciador-grafico.cpp
+  gerenciadores/gerenciador-grafico.cpp
 )
 
 target_include_directories(gerenciador-grafico
@@ -38,12 +37,12 @@ target_link_libraries(gerenciador-grafico
 )
 
 # ---------------------------------------------------------
-#lib Jogo
-add_library(jogo ./jogo.cpp)
+# Biblioteca Jogo
+add_library(jogo jogo.cpp)
 
 target_include_directories(jogo
   PUBLIC
-  ${CMAKE_SOURCE_DIR}/include
+  ${PROJECT_INCLUDE_DIR}
 )
 
 target_link_libraries(jogo
@@ -54,14 +53,14 @@ target_link_libraries(jogo
 
 # ---------------------------------------------------------
 # Executável principal
-add_executable(main ./main.cpp)
+add_executable(simon_says main.cpp)
 
-target_include_directories(main
+target_include_directories(simon_says
   PUBLIC
   ${PROJECT_INCLUDE_DIR}
 )
 
-target_link_libraries(main
+target_link_libraries(simon_says
   PUBLIC
   jogo
 )
