@@ -5,3 +5,6 @@ Gerenciadores::Gerenciador_Grafico *pGG(NULL);
 
 Entes::Ente::Ente() : id(cont++) {}
 Entes::Ente::~Ente() {}
+
+void Entes::Ente::desenhar() {}
+void Entes::Ente::executar() {}

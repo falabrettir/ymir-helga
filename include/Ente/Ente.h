@@ -13,5 +13,7 @@ public:
   Ente();
   ~Ente();
   void setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *pGG);
+  virtual void desenhar() = 0;
+  virtual void executar() = 0;
 };
 } // namespace Entes
