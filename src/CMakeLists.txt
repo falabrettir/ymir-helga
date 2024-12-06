@@ -42,6 +42,23 @@ add_library(jogo ./jogo.cpp)
 
 target_include_directories(jogo
   PUBLIC
+  ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(jogo
+  PUBLIC
+  sfml-graphic
+  sfml-window
+  sfml-system
+  sfml-audio
+)
+
+# ---------------------------------------
+# Executável principal
+add_executable(simon ./Main.cpp)
+
+target_include_directories(simon
+  PUBLIC
   ${CMAKE_SOURCE_DIR}/include)
 
 target_link_libraries(gerenciador-grafico
