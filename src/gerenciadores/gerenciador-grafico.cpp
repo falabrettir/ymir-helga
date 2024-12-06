@@ -1,4 +1,4 @@
-#include "../include/gerenciador-grafico.h"
+#include "gerenciadores/gerenciador-grafico.h"
 
 using namespace Gerenciadores;
 

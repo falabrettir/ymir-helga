@@ -1,5 +1,4 @@
 #pragma once
-#include "../include/gerenciador-grafico.h"
 
 class Jogo {
 private:

@@ -1,4 +1,5 @@
-#include "../include/jogo.h"
+#include "jogo.h"
+#include "gerenciadores/gerenciador-grafico.h"
 
 Jogo::Jogo() : rodando(false) {}
 
