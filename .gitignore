@@ -38,3 +38,8 @@ bin/
 # Configuração do clangd
 .clangd
 .cache/
+# PDF's e imagens
+*.jpg
+*.jpeg
+*.png
+*.pdf
