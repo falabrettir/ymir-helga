@@ -5,11 +5,14 @@
 using namespace Gerenciadores;
 
 void Gerenciador_Eventos::executar(Gerenciador_Grafico *pGG) {
-  sf::Window *pJanela = pGG->getJanela();
-  while (pJanela->pollEvent(evento)) {
+  if (pGG != nullptr) {
+    sf::Window *pJanela = pGG->getJanela();
 
-    // Close window: exit
-    if (evento.type == sf::Event::Closed)
-      pJanela->close();
+    while (pJanela->pollEvent(evento)) {
+
+      // Close window: exit
+      if (evento.type == sf::Event::Closed)
+        pJanela->close();
+    }
   }
 }
