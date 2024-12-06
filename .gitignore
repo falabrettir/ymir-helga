@@ -37,3 +37,4 @@ bin/
 
 # Configuração do clangd
 .clangd
+.cache/
