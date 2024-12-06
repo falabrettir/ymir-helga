@@ -4,6 +4,7 @@ set(SFML_GRAPHICS_LIBS sfml-graphics sfml-window sfml-system)
 set(SFML_AUDIO_LIBS sfml-audio sfml-system)
 set(PROJECT_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
 
+# ---------------------------------------------------------
 # Lib Gerenciador_Eventos
 add_library(gerenciador-eventos
   ./gerenciadores/gerenciador-eventos.cpp
@@ -20,7 +21,7 @@ target_link_libraries(gerenciador-eventos
 )
 
 # ---------------------------------------------------------
-# lib Gerenciador_Grafico
+# Lib Gerenciador_Grafico
 add_library(gerenciador-grafico
   ./gerenciadores/gerenciador-grafico.cpp
 )
@@ -47,25 +48,8 @@ target_include_directories(jogo
 
 target_link_libraries(jogo
   PUBLIC
-  sfml-graphic
-  sfml-window
-  sfml-system
-  sfml-audio
-)
-
-# ---------------------------------------
-# Executável principal
-add_executable(simon ./Main.cpp)
-
-target_include_directories(simon
-  PUBLIC
-  ${CMAKE_SOURCE_DIR}/include)
-
-target_link_libraries(gerenciador-grafico
-  PUBLIC
   ${SFML_LIBS}
   gerenciador-grafico
-  gerenciador-eventos
 )
 
 # ---------------------------------------------------------
