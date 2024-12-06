@@ -1,12 +1,13 @@
 #pragma once
 #include "../gerenciadores/gerenciador-grafico.h"
-#include <SFML/System/Vector2.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 class Ente {
 protected:
   int id;
   static Gerenciadores::Gerenciador_Grafico *pGG;
   static int cont;
+  sf::Texture *texture;
 
 public:
   Ente();
