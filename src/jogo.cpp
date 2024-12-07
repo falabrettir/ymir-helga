@@ -9,4 +9,11 @@ Jogo::Jogo()
 
 Jogo::~Jogo() {}
 
-void Jogo::executar() {}
+void Jogo::executar() {
+
+  while (pGG->janelaAberta()) {
+    while (pGG->pollEvent(pGE->))
+      pGG->clear();
+    pGG->display();
+  }
+}
