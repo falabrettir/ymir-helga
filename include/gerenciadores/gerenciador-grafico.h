@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/Window/Event.hpp>
 #include <map>
 #include <string>
 
@@ -18,7 +19,7 @@ public:
   void desenharEnte(/*TODO*/);
   bool estaAberta();
   void display();
-  bool pollEvent();
+  bool pollEvent(sf::Event &evento);
 };
 
 } // namespace Gerenciadores
