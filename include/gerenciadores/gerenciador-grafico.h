@@ -1,4 +1,5 @@
 #pragma once
+#include <../Ente/Ente.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
@@ -18,7 +19,8 @@ private:
 public:
   ~Gerenciador_Grafico();
   Gerenciador_Grafico *getInstancia();
-  void desenharEnte(/*TODO*/);
+  sf::RenderWindow getJanela();
+  void desenharEnte(Ente *pE);
   bool janelaAberta();
   void display();
   bool pollEvent(sf::Event &evento);

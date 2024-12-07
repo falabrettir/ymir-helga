@@ -29,4 +29,12 @@ bool Gerenciador_Grafico::pollEvent(sf::Event &evento) {
   return janela.pollEvent(evento);
 }
 
+sf::RenderWindow Gerenciador_Grafico::getJanela() { return this->janela; }
+
 void Gerenciador_Grafico::clear() { janela.clear(); }
+
+void Gerenciador_Grafico::desenharEnte(Ente *pE) {
+  if (pE->sprite) {
+    getJanela().draw(pE->sprite);
+  }
+}
