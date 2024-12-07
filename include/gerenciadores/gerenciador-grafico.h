@@ -14,13 +14,11 @@ private:
 
 public:
   Gerenciador_Grafico();
-
   ~Gerenciador_Grafico();
-
   void desenharEnte(/*TODO*/);
-
-  sf::RenderWindow *getJanela();
+  bool estaAberta();
   void display();
+  bool pollEvent();
 };
 
 } // namespace Gerenciadores
