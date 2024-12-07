@@ -1,6 +1,5 @@
 #pragma once
 
-#include "gerenciadores/gerenciador-grafico.h"
 #include <SFML/Window/Event.hpp>
 
 namespace Gerenciadores {
@@ -10,7 +9,8 @@ private:
   sf::Event evento;
 
 public:
-  void executar(Gerenciador_Grafico *pGG);
+  Gerenciador_Eventos();
+  ~Gerenciador_Eventos();
 };
 
 } // namespace Gerenciadores
