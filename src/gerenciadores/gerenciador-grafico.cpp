@@ -14,8 +14,10 @@ Gerenciador_Grafico::~Gerenciador_Grafico() {}
 
 void Gerenciador_Grafico::display() { janela.display(); }
 
-bool Gerenciador_Grafico::estaAberta() { return janela.isOpen(); }
+bool Gerenciador_Grafico::janelaAberta() { return janela.isOpen(); }
 
 bool Gerenciador_Grafico::pollEvent(sf::Event &evento) {
   return janela.pollEvent(evento);
 }
+
+void Gerenciador_Grafico::clear() { janela.clear(); }

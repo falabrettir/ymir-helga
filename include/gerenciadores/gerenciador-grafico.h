@@ -17,9 +17,10 @@ public:
   Gerenciador_Grafico();
   ~Gerenciador_Grafico();
   void desenharEnte(/*TODO*/);
-  bool estaAberta();
+  bool janelaAberta();
   void display();
   bool pollEvent(sf::Event &evento);
+  void clear();
 };
 
 } // namespace Gerenciadores
