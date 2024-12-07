@@ -3,6 +3,8 @@
 
 using namespace Gerenciadores;
 
+Gerenciador_Grafico *instancia(nullptr);
+
 Gerenciador_Grafico::Gerenciador_Grafico()
     : textureMap(), janela(sf::VideoMode(800, 600), "Simon says") {
   janela.setVerticalSyncEnabled(true); // VSYNC
@@ -13,6 +15,13 @@ Gerenciador_Grafico::Gerenciador_Grafico()
 Gerenciador_Grafico::~Gerenciador_Grafico() {}
 
 void Gerenciador_Grafico::display() { janela.display(); }
+
+Gerenciador_Grafico *Gerenciador_Grafico::getInstancia() {
+  if (instancia == nullptr) {
+    instancia = new Gerenciador_Grafico();
+  }
+  return instancia; // Singleton
+}
 
 bool Gerenciador_Grafico::janelaAberta() { return janela.isOpen(); }
 
