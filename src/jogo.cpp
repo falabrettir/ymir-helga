@@ -17,6 +17,7 @@ void Jogo::executar() {
   rodando = true;
 
   while (estaRodando()) {
+    pGG->getJanela()->display();
     pGE->executar(pGG);
     pGG->getJanela()->clear(sf::Color::Black);
   }
