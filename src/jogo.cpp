@@ -3,16 +3,19 @@
 #include "gerenciadores/gerenciador-grafico.h"
 #include <SFML/Graphics/Color.hpp>
 
-Jogo::Jogo()
-    : pGG(new Gerenciadores::Gerenciador_Grafico()),
-      pGE(new Gerenciadores::Gerenciador_Eventos()) {}
+Jogo::Jogo() {
+  //: pGG(Gerenciadores::Gerenciador_Grafico::getInstancia()),
+  // pGE(Gerenciadores::Gerenciador_Eventos::getInstancia() {
+  pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
+  pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
+}
 
 Jogo::~Jogo() {}
 
 void Jogo::executar() {
 
   while (pGG->janelaAberta()) {
-    while (pGG->pollEvent(pGE->))
+    while (pGG->pollEvent(pGE->getEvento()))
       pGG->clear();
     pGG->display();
   }

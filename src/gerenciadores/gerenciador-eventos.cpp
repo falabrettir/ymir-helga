@@ -16,3 +16,5 @@ Gerenciador_Eventos *Gerenciador_Eventos::getInstancia() {
 }
 
 Gerenciador_Eventos::~Gerenciador_Eventos() {}
+
+sf::Event &Gerenciador_Eventos::getEvento() { return evento; }
