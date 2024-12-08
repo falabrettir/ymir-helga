@@ -1,6 +1,7 @@
 #include "Ente.h"
 #include "Gerenciadores/GerenciadorGrafico.h"
 #include <iostream>
+#include <string>
 
 int Ente::cont(0);
 Gerenciadores::Gerenciador_Grafico *Ente::pGG(nullptr);
@@ -16,7 +17,9 @@ void Ente::setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *pGG) {
 }
 
 bool Ente::setTexture(const std::string &path) {
-  if (texture->loadFromFile(path)) {
+  std::string filePath = ROOT;
+  filePath += path;
+  if (texture->loadFromFile(filePath)) {
     if (!sprite) {
       sprite = new sf::Sprite();
     }
@@ -28,8 +31,13 @@ bool Ente::setTexture(const std::string &path) {
   }
 }
 
-sf::Sprite *Ente::getSprite() { return sprite; }
+sf::Sprite Ente::getSprite() { return *sprite; }
 
-void Ente::desenhar() {}
+void Ente::setTarget() {
+  if (pGG != nullptr) {
+    alvo = (pGG->getJanela());
+  }
+}
+void Ente::desenhar() { alvo->draw(getSprite()); }
 
 // void Ente::executar() {}
