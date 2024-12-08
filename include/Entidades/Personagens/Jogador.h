@@ -14,7 +14,6 @@ private:
   int tesouro;
   int stamina;
   int dano;
-  sf::RectangleShape hitbox;
 
 public:
   Jogador();
