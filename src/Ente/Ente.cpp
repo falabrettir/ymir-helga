@@ -1,5 +1,5 @@
 #include "Ente/Ente.h"
-#include "gerenciadores/gerenciador-grafico.h"
+#include "Gerenciadores/GerenciadorGrafico.h"
 #include <iostream>
 
 int Ente::cont(0);

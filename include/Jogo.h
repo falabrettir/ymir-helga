@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Gerenciadores/Gerenciador-Eventos.h"
-#include "Gerenciadores/Gerenciador-Grafico.h"
+#include "Gerenciadores/GerenciadorEventos.h"
+#include "Gerenciadores/GerenciadorGrafico.h"
 class Jogo {
 private:
   Gerenciadores::Gerenciador_Grafico *pGG;
