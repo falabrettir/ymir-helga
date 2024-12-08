@@ -1,12 +1,20 @@
 #include "Ente.h"
 #include "Gerenciadores/GerenciadorGrafico.h"
+#include <SFML/Graphics/Texture.hpp>
 #include <iostream>
 #include <string>
 
 int Ente::cont(0);
 Gerenciadores::Gerenciador_Grafico *Ente::pGG(nullptr);
 
-Ente::Ente() : id(cont++), texture(nullptr), sprite(nullptr) {}
+Ente::Ente() : id(cont++) {}
+
+Ente::Ente(const std::string &path) : id(cont++) {
+  sprite = new sf::Sprite();
+  texture = new sf::Texture();
+  setTexture(path);
+  setTarget();
+}
 
 Ente::~Ente() {}
 

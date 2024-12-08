@@ -15,6 +15,7 @@ protected:
 
 public:
   Ente();
+  Ente(const std::string &path);
   ~Ente();
   void setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *pGG);
   bool setTexture(const std::string &path);
