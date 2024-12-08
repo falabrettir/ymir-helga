@@ -17,6 +17,7 @@ option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
 # Diretório de includes do projeto
 set(PROJECT_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
+include_directories(${PROJECT_INCLUDE_DIR})
 
 # Subdiretórios do projeto
 add_subdirectory(src)
