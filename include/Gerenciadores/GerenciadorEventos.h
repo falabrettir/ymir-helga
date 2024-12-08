@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Gerenciadores/GerenciadorGrafico.h"
 #include <SFML/Window/Event.hpp>
 
 namespace Gerenciadores {
@@ -14,6 +15,7 @@ public:
   ~Gerenciador_Eventos();
   static Gerenciador_Eventos *getInstancia();
   sf::Event &getEvento();
+  void processaEventos(Gerenciador_Grafico *pGG);
 };
 
 } // namespace Gerenciadores

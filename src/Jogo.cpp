@@ -15,8 +15,8 @@ Jogo::~Jogo() {}
 void Jogo::executar() {
 
   while (pGG->janelaAberta()) {
-    while (pGG->pollEvent(pGE->getEvento()))
-      pGG->clear();
+    pGG->clear();
+    pGE->processaEventos(pGG);
     pGG->display();
   }
 }
