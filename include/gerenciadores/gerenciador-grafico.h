@@ -1,11 +1,12 @@
 #pragma once
-#include <../Ente/Ente.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Window/Event.hpp>
 #include <map>
 #include <string>
+
+class Ente;
 
 namespace Gerenciadores {
 
@@ -18,7 +19,7 @@ private:
 
 public:
   ~Gerenciador_Grafico();
-  Gerenciador_Grafico *getInstancia();
+  static Gerenciador_Grafico *getInstancia();
   sf::RenderWindow getJanela();
   void desenharEnte(Ente *pE);
   bool janelaAberta();

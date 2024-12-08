@@ -12,8 +12,8 @@ private:
 
 public:
   ~Gerenciador_Eventos();
-  sf::Event *getEvento;
-  Gerenciador_Eventos *getInstancia();
+  sf::Event &getEvento();
+  static Gerenciador_Eventos *getInstancia();
 };
 
 } // namespace Gerenciadores
