@@ -1,6 +1,4 @@
 #include "Jogo.h"
-#include "Gerenciadores/GerenciadorEventos.h"
-#include "Gerenciadores/GerenciadorGrafico.h"
 #include <SFML/Graphics/Color.hpp>
 
 Jogo::Jogo() {
