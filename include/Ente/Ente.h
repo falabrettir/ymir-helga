@@ -4,12 +4,6 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <string>
 
-namespace Gerenciadores {
-
-class Gerenciador_Grafico;
-
-}
-
 class Ente {
 protected:
   int id;
