@@ -1,4 +1,4 @@
-#include "gerenciadores/gerenciador-eventos.h"
+#include "Gerenciadores/Gerenciador-eventos.h"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Window.hpp>
 

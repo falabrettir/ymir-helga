@@ -1,5 +1,5 @@
 #pragma once
-#include "gerenciadores/gerenciador-grafico.h"
+#include "Gerenciadores/Gerenciador-grafico.h"
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <string>

@@ -1,4 +1,4 @@
-#include "gerenciadores/gerenciador-grafico.h"
+#include "Gerenciadores/Gerenciador-grafico.h"
 #include "Ente/Ente.h"
 #include <SFML/Window/Event.hpp>
 
