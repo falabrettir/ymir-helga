@@ -1,9 +1,10 @@
 #include "gerenciadores/gerenciador-grafico.h"
+#include "Ente/Ente.h"
 #include <SFML/Window/Event.hpp>
 
 using namespace Gerenciadores;
 
-Gerenciador_Grafico *instancia(nullptr);
+Gerenciador_Grafico *Gerenciador_Grafico::instancia = nullptr;
 
 Gerenciador_Grafico::Gerenciador_Grafico()
     : textureMap(), janela(sf::VideoMode(800, 600), "Simon says") {
@@ -28,12 +29,13 @@ bool Gerenciador_Grafico::janelaAberta() { return janela.isOpen(); }
 bool Gerenciador_Grafico::pollEvent(sf::Event &evento) {
   return janela.pollEvent(evento);
 }
-sf::RenderWindow Gerenciador_Grafico::getJanela() { return janela; }
+
+// sf::RenderWindow Gerenciador_Grafico::getJanela() { return janela; }
 
 void Gerenciador_Grafico::clear() { janela.clear(); }
 
 void Gerenciador_Grafico::desenharEnte(Ente *pE) {
-  if (pE->sprite) {
+  if (pE->getSprite() != nullptr) {
     pE->desenhar();
   }
 }

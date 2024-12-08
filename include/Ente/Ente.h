@@ -1,6 +1,14 @@
 #pragma once
-#include "../gerenciadores/gerenciador-grafico.h"
+#include "gerenciadores/gerenciador-grafico.h"
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
+#include <string>
+
+namespace Gerenciadores {
+
+class Gerenciador_Grafico;
+
+}
 
 class Ente {
 protected:
@@ -15,7 +23,7 @@ public:
   ~Ente();
   void setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *pGG);
   bool setTexture(const std::string &path);
-  bool setSprite(const std::string &path);
-  virtual void desenhar();
-  virtual void executar() = 0;
+  sf::Sprite *getSprite();
+  void desenhar();
+  // virtual void executar() = 0;
 };

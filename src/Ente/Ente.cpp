@@ -1,10 +1,19 @@
-#include "../../include/Ente/Ente.h"
+#include "Ente/Ente.h"
+#include "gerenciadores/gerenciador-grafico.h"
 #include <iostream>
+
 int Ente::cont(0);
-Gerenciadores::Gerenciador_Grafico *pGG(NULL);
+Gerenciadores::Gerenciador_Grafico *Ente::pGG(nullptr);
 
 Ente::Ente() : id(cont++), texture(nullptr), sprite(nullptr) {}
+
 Ente::~Ente() {}
+
+void Ente::setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *pGG) {
+  if (pGG != nullptr) {
+    this->pGG = pGG;
+  }
+}
 
 bool Ente::setTexture(const std::string &path) {
   if (texture->loadFromFile(path)) {
@@ -19,6 +28,8 @@ bool Ente::setTexture(const std::string &path) {
   }
 }
 
+sf::Sprite *Ente::getSprite() { return sprite; }
+
 void Ente::desenhar() {}
 
-void Ente::executar() {}
+// void Ente::executar() {}

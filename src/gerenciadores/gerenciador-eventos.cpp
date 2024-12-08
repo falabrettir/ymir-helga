@@ -4,7 +4,7 @@
 
 using namespace Gerenciadores;
 
-Gerenciador_Eventos *instancia(nullptr);
+Gerenciador_Eventos *Gerenciador_Eventos::instancia = nullptr;
 
 Gerenciador_Eventos::Gerenciador_Eventos() : evento() {}
 

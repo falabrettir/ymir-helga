@@ -7,13 +7,13 @@ namespace Gerenciadores {
 class Gerenciador_Eventos {
 private:
   sf::Event evento;
-  static Gerenciador_Eventos *instancia;
-  Gerenciador_Eventos(); // Singleton
+  static Gerenciador_Eventos *instancia; // Singleton
+  Gerenciador_Eventos();
 
 public:
   ~Gerenciador_Eventos();
-  sf::Event &getEvento();
   static Gerenciador_Eventos *getInstancia();
+  sf::Event &getEvento();
 };
 
 } // namespace Gerenciadores

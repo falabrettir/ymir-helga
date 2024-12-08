@@ -4,7 +4,7 @@
 #include <SFML/Graphics/Color.hpp>
 
 Jogo::Jogo() {
-  //: pGG(Gerenciadores::Gerenciador_Grafico::getInstancia()),
+  // : pGG(Gerenciadores::Gerenciador_Grafico::getInstancia()),
   // pGE(Gerenciadores::Gerenciador_Eventos::getInstancia() {
   pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
   pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
