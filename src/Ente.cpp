@@ -1,4 +1,4 @@
-#include "Ente/Ente.h"
+#include "Ente.h"
 #include "Gerenciadores/GerenciadorGrafico.h"
 #include <iostream>
 

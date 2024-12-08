@@ -1,5 +1,5 @@
 #include "Gerenciadores/GerenciadorGrafico.h"
-#include "Ente/Ente.h"
+#include "Ente.h"
 #include <SFML/Window/Event.hpp>
 
 using namespace Gerenciadores;

@@ -8,7 +8,7 @@ set(SFML_AUDIO_LIBS sfml-audio sfml-system)
 add_library(gerenciadores-core
   Gerenciadores/GerenciadorGrafico.cpp
   Gerenciadores/GerenciadorEventos.cpp
-  Ente/Ente.cpp
+  Ente.cpp
 )
 
 target_link_libraries(gerenciadores-core
