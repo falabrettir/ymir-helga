@@ -1,4 +1,5 @@
 #include "Jogo.h"
+#include "Entidades/Entidade.h"
 #include <SFML/Graphics/Color.hpp>
 
 Jogo::Jogo() {
@@ -11,10 +12,11 @@ Jogo::Jogo() {
 Jogo::~Jogo() {}
 
 void Jogo::executar() {
-
   while (pGG->janelaAberta()) {
     pGG->clear();
+
     pGE->processaEventos(pGG);
+
     pGG->display();
   }
 }

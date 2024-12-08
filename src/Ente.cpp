@@ -46,6 +46,7 @@ void Ente::setTarget() {
     alvo = (pGG->getJanela());
   }
 }
+
 void Ente::desenhar() { alvo->draw(getSprite()); }
 
 // void Ente::executar() {}
