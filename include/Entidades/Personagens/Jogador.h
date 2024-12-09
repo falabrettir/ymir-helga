@@ -17,6 +17,7 @@ private:
 
 public:
   Jogador();
+  Jogador(const std::string &path);
   ~Jogador();
 
   void calculaPontos();

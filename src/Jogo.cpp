@@ -1,14 +1,9 @@
 #include "Jogo.h"
-#include "Ente.h"
-#include "Entidades/Entidade.h"
-#include "Entidades/Personagens/Personagem.h"
-#include <SFML/Graphics/Color.hpp>
 
 Jogo::Jogo() {
-  // : pGG(Gerenciadores::Gerenciador_Grafico::getInstancia()),
-  // pGE(Gerenciadores::Gerenciador_Eventos::getInstancia() {
   pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
   pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
+  pJog = new Entidades::Personagens::Jogador();
 }
 
 Jogo::~Jogo() {}
@@ -16,6 +11,8 @@ Jogo::~Jogo() {}
 void Jogo::executar() {
   while (pGG->janelaAberta()) {
     pGG->clear();
+
+    pJog->executar();
 
     pGE->processaEventos(pGG);
 
