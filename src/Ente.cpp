@@ -1,5 +1,6 @@
 #include "Ente.h"
 #include "Gerenciadores/GerenciadorGrafico.h"
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <iostream>
 #include <string>
@@ -10,8 +11,8 @@ Gerenciadores::Gerenciador_Grafico *Ente::pGG(nullptr);
 Ente::Ente() : id(cont++) {}
 
 Ente::Ente(const std::string &path) : id(cont++) {
-  sprite = new sf::Sprite();
-  texture = new sf::Texture();
+  pSprite = new sf::Sprite();
+  pTexture = new sf::Texture();
   setTexture(path);
   setTarget();
 }
@@ -20,18 +21,19 @@ Ente::~Ente() {}
 
 void Ente::setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *pGG) {
   if (pGG != nullptr) {
-    this->pGG = pGG;
+    pGG = pGG;
   }
 }
 
 bool Ente::setTexture(const std::string &path) {
   std::string filePath = ROOT;
   filePath += path;
-  if (texture->loadFromFile(filePath)) {
-    if (!sprite) {
-      sprite = new sf::Sprite();
+  if (pTexture->loadFromFile(filePath)) {
+    if (!pSprite) {
+      pSprite = new sf::Sprite();
     }
-    sprite->setTexture(*texture);
+    pSprite->setTexture(*pTexture);
+    pSprite->setTextureRect(sf::IntRect(0, 0, 100, 100));
     return true;
   } else {
     std::cerr << "Erro em loadFromFile" << std::endl;
@@ -39,14 +41,12 @@ bool Ente::setTexture(const std::string &path) {
   }
 }
 
-sf::Sprite Ente::getSprite() { return *sprite; }
+const sf::Sprite *Ente::getSprite() { return pSprite; }
 
 void Ente::setTarget() {
   if (pGG != nullptr) {
-    alvo = (pGG->getJanela());
+    pAlvo = (pGG->getJanela());
   }
 }
 
-void Ente::desenhar() { alvo->draw(getSprite()); }
-
-// void Ente::executar() {}
+void Ente::desenhar() { pAlvo->draw(*(getSprite())); }

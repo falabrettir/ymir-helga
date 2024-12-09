@@ -1,7 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Window/Event.hpp>
+
+const int larguraJanela = 800;
+const int alturaJanela = 600;
 
 class Ente;
 

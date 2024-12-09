@@ -7,16 +7,18 @@ class Entidade : public Ente {
 protected:
   sf::Vector2<float> pos;
   sf::Vector2<float> tamanho;
-  std::ostream buffer;
+  std::ostream *buffer;
 
 public:
   Entidade();
   Entidade(sf::Vector2<float> pos, sf::Vector2<float> tamanho,
            const std::string &path);
   virtual ~Entidade();
-  virtual void desenhar();
-  void salvarDataBuffer();
   virtual void executar() = 0;
+  virtual void salvar() = 0;
+  sf::Vector2<float> getPos() const;
+  void setPos(sf::Vector2<float> &novaPos);
+  void salvarDataBuffer();
 };
 
 } // namespace Entidades

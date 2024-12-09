@@ -9,10 +9,13 @@ namespace Personagens {
 class Personagem : public Entidades::Entidade {
 protected:
   int hp;
+  int numVidas;
+  sf::Vector2<float> velocidade;
 
 public:
   Personagem();
-  Personagem(const std::string &path);
+  Personagem(sf::Vector2<float> pos, sf::Vector2<float> tamanho,
+             const std::string &path);
   ~Personagem();
 
   virtual void mover();

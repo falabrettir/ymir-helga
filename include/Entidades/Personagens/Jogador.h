@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Entidades/Personagens/Personagem.h"
-#include <SFML/Graphics/RectangleShape.hpp>
 
 namespace Entidades {
 
@@ -17,12 +16,14 @@ private:
 
 public:
   Jogador();
-  Jogador(const std::string &path);
+  Jogador(sf::Vector2<float> pos, sf::Vector2<float> tamanho,
+          const std::string &path);
   ~Jogador();
 
   void calculaPontos();
   void salvarDataBuffer();
   void executar();
+  void salvar();
 };
 
 } // namespace Personagens
