@@ -8646,7 +8646,7 @@
 											"top": 1188,
 											"width": 148.05517578125,
 											"height": 11,
-											"text": "+largura: float",
+											"text": "-largura: float",
 											"horizontalAlignment": 0
 										}
 									],
@@ -22486,6 +22486,7 @@
 								"$ref": "3qlNYY7AFUCR6Ic4Ei8bwQAA"
 							},
 							"name": "largura",
+							"visibility": "private",
 							"type": "float"
 						}
 					],
