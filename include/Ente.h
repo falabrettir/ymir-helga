@@ -21,5 +21,5 @@ public:
   sf::Sprite getSprite();
   void setTarget();
   void desenhar();
-  // virtual void executar() = 0;
+  virtual void executar() = 0;
 };
