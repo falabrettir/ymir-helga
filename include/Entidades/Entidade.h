@@ -7,6 +7,7 @@ class Entidade : public Ente {
 protected:
   sf::Vector2<float> pos;
   sf::Vector2<float> tamanho;
+  std::ostream buffer;
 
 public:
   Entidade();

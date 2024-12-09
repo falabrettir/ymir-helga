@@ -1,5 +1,7 @@
 #include "Jogo.h"
+#include "Ente.h"
 #include "Entidades/Entidade.h"
+#include "Entidades/Personagens/Personagem.h"
 #include <SFML/Graphics/Color.hpp>
 
 Jogo::Jogo() {
