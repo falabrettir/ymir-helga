@@ -1,14 +1,15 @@
 #include "Gerenciadores/GerenciadorGrafico.h"
 #include "Ente.h"
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Window/Event.hpp>
+#include <SFML/Window/VideoMode.hpp>
+#include <SFML/Window/WindowStyle.hpp>
 
 using namespace Gerenciadores;
 
 Gerenciador_Grafico *Gerenciador_Grafico::instancia = nullptr;
 
 Gerenciador_Grafico::Gerenciador_Grafico() {
-  janela = new sf::RenderWindow(sf::VideoMode(800, 600), "Simon says");
+  janela = new sf::RenderWindow(sf::VideoMode(sf::VideoMode::getDesktopMode()),
+                                "Simon says", sf::Style::Fullscreen);
   janela->setVerticalSyncEnabled(
       true); // VSYNC janela->setFramerateLimit(30); // call it once, after
              // creating the window

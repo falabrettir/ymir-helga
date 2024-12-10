@@ -11,19 +11,19 @@ protected:
   int id;
   static Gerenciadores::Gerenciador_Grafico *pGG;
   static int cont;
-  sf::RenderTarget *alvo;
-  sf::Texture *texture;
-  sf::Sprite *sprite;
+  sf::RenderTarget *pAlvo;
+  sf::Texture *pTexture;
+  sf::Sprite *pSprite;
 
 public:
   Ente();
   Ente(const std::string &path);
   virtual ~Ente();
 
-  void setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *pGG);
+  static void setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *pGG);
   bool setTexture(const std::string &path);
-  sf::Sprite getSprite();
+  const sf::Sprite *getSprite();
   void setTarget();
-  virtual void desenhar();
+  void desenhar();
   virtual void executar() = 0;
 };

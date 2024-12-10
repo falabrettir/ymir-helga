@@ -1,15 +1,20 @@
 #pragma once
 
+#include "Entidades/Entidade.h"
+
 namespace Entidades {
 
 namespace Personagens {
 
-class Personagem {
+class Personagem : public Entidades::Entidade {
 protected:
   int hp;
+  int numVidas;
 
 public:
   Personagem();
+  Personagem(sf::Vector2<float> pos, sf::Vector2<float> tamanho,
+             const std::string &path);
   ~Personagem();
 
   virtual void mover();

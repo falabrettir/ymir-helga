@@ -17,6 +17,19 @@ target_link_libraries(gerenciadores-core
 )
 
 # ---------------------------------------------------------
+# Biblioteca Entidades
+add_library(entidades
+  Entidades/Entidade.cpp
+  Entidades/Personagens/Jogador.cpp
+  Entidades/Personagens/Personagem.cpp
+)
+
+target_link_libraries(gerenciadores-core
+  PRIVATE
+  ${SFML_LIBS}
+)
+
+# ---------------------------------------------------------
 # Biblioteca Jogo
 add_library(jogo
   Jogo.cpp
@@ -26,6 +39,7 @@ target_link_libraries(jogo
   PRIVATE
   ${SFML_LIBS}
   gerenciadores-core
+  entidades
 )
 
 # ---------------------------------------------------------
