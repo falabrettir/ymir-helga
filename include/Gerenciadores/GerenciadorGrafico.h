@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
 
 const int larguraJanela = 800;
@@ -12,6 +13,8 @@ namespace Gerenciadores {
 class Gerenciador_Grafico {
 private:
   sf::RenderWindow *janela;
+  sf::Clock relogio;
+  float deltaTempo;
   static Gerenciador_Grafico *instancia; // Singleton
   Gerenciador_Grafico();
 
@@ -26,6 +29,8 @@ public:
   bool pollEvent(sf::Event &evento);
   void clear();
   void fecharJanela();
+  void atualizaDeltaTempo();
+  const float getDeltaTempo() const;
 };
 
 } // namespace Gerenciadores

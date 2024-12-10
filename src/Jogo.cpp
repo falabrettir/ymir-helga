@@ -21,9 +21,10 @@ void Jogo::executar() {
   while (pGG->janelaAberta()) {
     pGG->clear();
 
-    pJog->desenhar();
-
     pGE->processaEventos(pGG);
+
+    pJog->mover();
+    pJog->desenhar();
 
     pGG->display();
   }

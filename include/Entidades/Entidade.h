@@ -3,6 +3,8 @@
 
 namespace Entidades {
 
+const float gravidade = 5;
+
 class Entidade : public Ente {
 protected:
   sf::Vector2<float> pos;

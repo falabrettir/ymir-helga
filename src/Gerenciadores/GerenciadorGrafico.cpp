@@ -14,6 +14,8 @@ Gerenciador_Grafico::Gerenciador_Grafico() {
       true); // VSYNC janela->setFramerateLimit(30); // call it once, after
              // creating the window
   janela->requestFocus();
+
+  relogio.restart();
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico() {}
@@ -42,4 +44,12 @@ void Gerenciador_Grafico::desenharEnte(Ente *pE) {
 }
 
 void Gerenciador_Grafico::fecharJanela() { janela->close(); }
+
 sf::RenderWindow *Gerenciador_Grafico::getJanela() const { return janela; }
+
+void Gerenciador_Grafico::atualizaDeltaTempo() {
+  deltaTempo = relogio.getElapsedTime().asMilliseconds();
+  relogio.restart();
+}
+
+const float Gerenciador_Grafico::getDeltaTempo() const { return deltaTempo; }
