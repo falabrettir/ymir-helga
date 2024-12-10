@@ -36,6 +36,7 @@ bool Ente::setTexture(const std::string &path) {
   if (pTexture->loadFromFile(filePath)) {
     pSprite->setTexture(*pTexture);
     pSprite->setTextureRect(sf::IntRect(0, 0, 100, 100));
+    pSprite->setScale(3.f, 3.f);
     return true;
   } else {
     std::cerr << "Erro em loadFromFile" << std::endl;
