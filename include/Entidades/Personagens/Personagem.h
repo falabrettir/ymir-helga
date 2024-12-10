@@ -10,7 +10,6 @@ class Personagem : public Entidades::Entidade {
 protected:
   int hp;
   int numVidas;
-  sf::Vector2<float> velocidade;
 
 public:
   Personagem();

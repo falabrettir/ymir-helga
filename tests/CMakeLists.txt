@@ -20,4 +20,3 @@
 # # Descoberta automática de testes
 # include(Catch)
 # catch_discover_tests(simon_tests)
-#
