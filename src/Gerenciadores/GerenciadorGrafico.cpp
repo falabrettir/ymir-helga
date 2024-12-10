@@ -2,6 +2,7 @@
 #include "Ente.h"
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Window/WindowStyle.hpp>
+#include <iostream>
 
 using namespace Gerenciadores;
 
@@ -14,6 +15,10 @@ Gerenciador_Grafico::Gerenciador_Grafico() {
       true); // VSYNC janela->setFramerateLimit(30); // call it once, after
              // creating the window
   janela->requestFocus();
+
+  larguraJanela = janela->getSize().x;
+  alturaJanela = janela->getSize().y;
+  std::clog << larguraJanela << " " << alturaJanela << std::endl;
 
   relogio.restart();
 }
@@ -53,3 +58,10 @@ void Gerenciador_Grafico::atualizaDeltaTempo() {
 }
 
 const float Gerenciador_Grafico::getDeltaTempo() const { return deltaTempo; }
+
+const float Gerenciador_Grafico::getLarguraJanela() const {
+  return larguraJanela;
+}
+const float Gerenciador_Grafico::getAlturaJanela() const {
+  return alturaJanela;
+}

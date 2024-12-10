@@ -3,9 +3,6 @@
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
 
-const int larguraJanela = 800;
-const int alturaJanela = 600;
-
 class Ente;
 
 namespace Gerenciadores {
@@ -13,6 +10,8 @@ namespace Gerenciadores {
 class Gerenciador_Grafico {
 private:
   sf::RenderWindow *janela;
+  float alturaJanela;
+  float larguraJanela;
   sf::Clock relogio;
   float deltaTempo;
   static Gerenciador_Grafico *instancia; // Singleton
@@ -31,6 +30,8 @@ public:
   void fecharJanela();
   void atualizaDeltaTempo();
   const float getDeltaTempo() const;
+  const float getLarguraJanela() const;
+  const float getAlturaJanela() const;
 };
 
 } // namespace Gerenciadores

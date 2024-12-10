@@ -1,4 +1,5 @@
 #include "Entidades/Personagens/Personagem.h"
+#include "Gerenciadores/GerenciadorGrafico.h"
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 
@@ -14,16 +15,18 @@ Personagens::Personagem::Personagem(sf::Vector2<float> pos,
 Personagens::Personagem::~Personagem() {}
 
 void Personagens::Personagem::mover() {
-  std::clog << "Personagem se movendo.\n";
-  std::clog << "Posicao atual: (" << pos.x << " " << pos.y << ")\n";
-  std::clog << "Velocidade atual: (" << velocidade.x << " " << velocidade.y
-            << ")" << std::endl;
-  sf::Vector2<float> novaPos = getPos() + velocidade * pGG->getDeltaTempo();
-  novaPos.y += gravidade;
+  sf::Vector2<float> novaPos;
 
-  if (novaPos.y > alturaJanela - tamanho.y) {
-    std::clog << "Atingi o piso" << std::endl;
-    novaPos.y = alturaJanela - tamanho.y;
+  const float deltaT = pGG->getDeltaTempo();
+
+  velocidade.y += gravidade;
+
+  novaPos.x = pos.x + velocidade.x * deltaT;
+  novaPos.y = pos.y + velocidade.y * deltaT;
+
+  if (novaPos.y > pGG->getAlturaJanela() - tamanho.y) {
+    velocidade.y = 0;
+    novaPos.y = pGG->getAlturaJanela() - tamanho.y;
   }
 
   this->setPos(novaPos);

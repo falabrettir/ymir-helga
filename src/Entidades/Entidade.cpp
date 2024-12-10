@@ -15,10 +15,7 @@ Entidade::~Entidade() {}
 
 sf::Vector2<float> Entidade::getPos() const { return pos; }
 
-void Entidade::setPos(sf::Vector2<float> &novaPos) {
-  std::clog << "Minha posição está mudando\n" << std::endl;
-  pos = novaPos;
-}
+void Entidade::setPos(sf::Vector2<float> &novaPos) { pos = novaPos; }
 
 void Entidade::salvarDataBuffer() {}
 

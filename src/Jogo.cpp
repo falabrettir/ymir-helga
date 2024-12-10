@@ -10,7 +10,8 @@ Jogo::Jogo() {
   Ente::setGerenciadorGrafico(pGG);
 
   pJog = new Entidades::Personagens::Jogador(
-      sf::Vector2<float>(larguraJanela / 2.0, alturaJanela / 2.0),
+      sf::Vector2<float>(pGG->getLarguraJanela() / 2.0,
+                         pGG->getAlturaJanela() / 2.0),
       sf::Vector2<float>(16.0, 16.0),
       "/assets/Characters(100x100)/Knight/Knight/Knight-Idle.png");
 }
