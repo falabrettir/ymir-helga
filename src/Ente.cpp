@@ -17,11 +17,16 @@ Ente::Ente(const std::string &path) : id(cont++) {
   setTarget();
 }
 
-Ente::~Ente() {}
+Ente::~Ente() {
+  delete pSprite;
+  delete pTexture;
+  delete pAlvo;
+  cont--;
+}
 
-void Ente::setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *pGG) {
-  if (pGG != nullptr) {
-    pGG = pGG;
+void Ente::setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *ppGG) {
+  if (ppGG != nullptr) {
+    pGG = ppGG;
   }
 }
 
@@ -29,9 +34,6 @@ bool Ente::setTexture(const std::string &path) {
   std::string filePath = ROOT;
   filePath += path;
   if (pTexture->loadFromFile(filePath)) {
-    if (!pSprite) {
-      pSprite = new sf::Sprite();
-    }
     pSprite->setTexture(*pTexture);
     pSprite->setTextureRect(sf::IntRect(0, 0, 100, 100));
     return true;
