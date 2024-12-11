@@ -14,23 +14,14 @@ Personagens::Personagem::Personagem(sf::Vector2<float> pos,
 
 Personagens::Personagem::~Personagem() {}
 
-void Personagens::Personagem::mover() {
-  sf::Vector2<float> novaPos;
-
-  const float deltaT = pGG->getDeltaTempo();
-
-  velocidade.y += gravidade;
-
-  novaPos.x = pos.x + velocidade.x * deltaT;
-  novaPos.y = pos.y + velocidade.y * deltaT;
-
-  if (novaPos.y > pGG->getAlturaJanela() - tamanho.y) {
-    velocidade.y = 0;
-    novaPos.y = pGG->getAlturaJanela() - tamanho.y;
-  }
-
+void Personagens::Personagem::mover(sf::Vector2<float> mov) {
+  sf::Vector2<float> novaPos = this->getPos();
+  novaPos.x += mov.x;
+  novaPos.y += mov.y;
   this->setPos(novaPos);
   pSprite->setPosition(novaPos);
+  std::cout << mov.x << " " << mov.y << std::endl;
+  std::cout << novaPos.x << " " << novaPos.y << std::endl;
 }
 
 void Personagens::Personagem::salvarDataBuffer() {}

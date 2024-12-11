@@ -52,4 +52,4 @@ void Ente::setTarget() {
   }
 }
 
-void Ente::desenhar() { pAlvo->draw(*(getSprite())); }
+void Ente::desenhar() { pGG->desenharEnte(this); }

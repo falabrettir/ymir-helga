@@ -32,9 +32,8 @@ Gerenciador_Grafico *Gerenciador_Grafico::getInstancia() {
   return instancia; // Singleton
 }
 
-void Gerenciador_Grafico::display() { janela->display(); }
-
 bool Gerenciador_Grafico::janelaAberta() { return janela->isOpen(); }
+void Gerenciador_Grafico::display() { janela->display(); }
 
 bool Gerenciador_Grafico::pollEvent(sf::Event &evento) {
   return janela->pollEvent(evento);
@@ -43,8 +42,8 @@ bool Gerenciador_Grafico::pollEvent(sf::Event &evento) {
 void Gerenciador_Grafico::clear() { janela->clear(); }
 
 void Gerenciador_Grafico::desenharEnte(Ente *pE) {
-  if (pE) {
-    pE->desenhar();
+  if (janela && pE) {
+    janela->draw(*pE->getSprite());
   }
 }
 
