@@ -9,7 +9,7 @@ Entidade::Entidade() {}
 Entidade::Entidade(sf::Vector2<float> pos, sf::Vector2<float> tamanho,
                    const std::string &path)
     : Ente(path), pos(pos), tamanho(tamanho),
-      velocidade(sf::Vector2<float>(1.0f, 1.0f)) {}
+      velocidade(sf::Vector2<float>(0.1f, 0.1f)) {}
 
 Entidade::~Entidade() {}
 

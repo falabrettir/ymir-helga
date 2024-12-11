@@ -21,7 +21,7 @@ public:
   static Gerenciador_Eventos *getInstancia();
   sf::Event &getEvento();
   void processaEventos(Gerenciador_Grafico *pGG);
-  void processaInput(Entidades::Personagens::Jogador *pJog, float dt);
+  void processaInput(Entidades::Personagens::Jogador *pJog);
 };
 
 } // namespace Gerenciadores

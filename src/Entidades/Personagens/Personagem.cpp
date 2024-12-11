@@ -16,8 +16,8 @@ Personagens::Personagem::~Personagem() {}
 
 void Personagens::Personagem::mover(sf::Vector2<float> mov) {
   sf::Vector2<float> novaPos = this->getPos();
-  novaPos.x += mov.x;
-  novaPos.y += mov.y;
+  novaPos.x += mov.x * pGG->getDeltaTempo();
+  novaPos.y += mov.y * pGG->getDeltaTempo();
   this->setPos(novaPos);
   pSprite->setPosition(novaPos);
   std::cout << mov.x << " " << mov.y << std::endl;

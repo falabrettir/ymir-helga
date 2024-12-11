@@ -22,7 +22,9 @@ void Jogo::executar() {
 
     pGE->processaEventos(pGG);
 
-    pGE->processaInput(pJog, pGG->getDeltaTempo());
+    pGG->atualizaDeltaTempo();
+
+    pGE->processaInput(pJog);
 
     pJog->desenhar();
 

@@ -28,8 +28,7 @@ void Gerenciador_Eventos::processaEventos(Gerenciador_Grafico *pGG) {
       pGG->fecharJanela();
   }
 }
-void Gerenciador_Eventos::processaInput(Entidades::Personagens::Jogador *pJog,
-                                        float dt) {
+void Gerenciador_Eventos::processaInput(Entidades::Personagens::Jogador *pJog) {
   // Initialize movement vector to zero
   sf::Vector2<float> mov(0.0f, 0.0f);
   bool moveu = 0;
