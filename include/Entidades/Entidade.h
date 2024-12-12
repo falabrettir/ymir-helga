@@ -18,8 +18,8 @@ public:
            const std::string &path);
   virtual ~Entidade();
 
-  virtual void executar() = 0;
-  virtual void salvar() = 0;
+  // virtual void executar() = 0;
+  // virtual void salvar() = 0;
   sf::Vector2<float> getPos() const;
   void setPos(sf::Vector2<float> &novaPos);
   sf::Vector2<float> getVel() const;

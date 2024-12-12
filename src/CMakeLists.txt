@@ -22,6 +22,8 @@ add_library(entidades
   Entidades/Entidade.cpp
   Entidades/Personagens/Jogador.cpp
   Entidades/Personagens/Personagem.cpp
+  Entidades/Personagens/Inimigo.cpp
+  Entidades/Personagens/Slime.cpp
 )
 
 target_link_libraries(gerenciadores-core
