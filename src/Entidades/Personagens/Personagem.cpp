@@ -1,7 +1,4 @@
 #include "Entidades/Personagens/Personagem.h"
-#include "Gerenciadores/GerenciadorGrafico.h"
-#include <SFML/System/Vector2.hpp>
-#include <iostream>
 
 using namespace Entidades;
 
@@ -20,8 +17,6 @@ void Personagens::Personagem::mover(sf::Vector2<float> mov) {
   novaPos.y += mov.y * pGG->getDeltaTempo();
   this->setPos(novaPos);
   pSprite->setPosition(novaPos);
-  std::cout << mov.x << " " << mov.y << std::endl;
-  std::cout << novaPos.x << " " << novaPos.y << std::endl;
 }
 
 void Personagens::Personagem::salvarDataBuffer() {}

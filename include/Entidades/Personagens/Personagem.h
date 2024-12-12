@@ -19,7 +19,7 @@ public:
   ~Personagem();
 
   virtual void mover(sf::Vector2<float> mov);
-  // virtual void executar() = 0;
+  virtual void executar() = 0;
   void salvarDataBuffer();
 };
 
