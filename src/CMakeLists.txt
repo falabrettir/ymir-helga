@@ -8,12 +8,27 @@ set(SFML_AUDIO_LIBS sfml-audio sfml-system)
 add_library(gerenciadores-core
   Gerenciadores/GerenciadorGrafico.cpp
   Gerenciadores/GerenciadorEventos.cpp
-  Ente/Ente.cpp
+  Ente.cpp
 )
 
 target_link_libraries(gerenciadores-core
   PRIVATE
   ${SFML_GRAPHICS_LIBS}
+)
+
+# ---------------------------------------------------------
+# Biblioteca Entidades
+add_library(entidades
+  Entidades/Entidade.cpp
+  Entidades/Personagens/Jogador.cpp
+  Entidades/Personagens/Personagem.cpp
+  Entidades/Personagens/Inimigo.cpp
+  Entidades/Personagens/Slime.cpp
+)
+
+target_link_libraries(gerenciadores-core
+  PRIVATE
+  ${SFML_LIBS}
 )
 
 # ---------------------------------------------------------
@@ -26,6 +41,7 @@ target_link_libraries(jogo
   PRIVATE
   ${SFML_LIBS}
   gerenciadores-core
+  entidades
 )
 
 # ---------------------------------------------------------

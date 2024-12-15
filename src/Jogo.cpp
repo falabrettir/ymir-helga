@@ -1,22 +1,39 @@
 #include "Jogo.h"
-#include "Gerenciadores/GerenciadorEventos.h"
+#include "Entidades/Personagens/Jogador.h"
+#include "Entidades/Personagens/Slime.h"
 #include "Gerenciadores/GerenciadorGrafico.h"
-#include <SFML/Graphics/Color.hpp>
+#include <SFML/System/Vector2.hpp>
 
 Jogo::Jogo() {
-  // : pGG(Gerenciadores::Gerenciador_Grafico::getInstancia()),
-  // pGE(Gerenciadores::Gerenciador_Eventos::getInstancia() {
   pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
+
   pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
+  Ente::setGerenciadorGrafico(pGG);
+
+  pJog = new Entidades::Personagens::Jogador(
+      sf::Vector2<float>(500.0, 500.0), sf::Vector2<float>(16.0, 16.0),
+      "/assets/Characters(100x100)/Knight/Knight/Knight-Idle.png");
+  pSl = new Inimigos::Slime(
+      sf::Vector2<float>(390.0, 390.0), sf::Vector2<float>(16.0, 16.0),
+      "/assets/Characters(100x100)/Slime/Slime/Slime-Idle.png");
 }
 
 Jogo::~Jogo() {}
 
 void Jogo::executar() {
-
   while (pGG->janelaAberta()) {
-    while (pGG->pollEvent(pGE->getEvento()))
-      pGG->clear();
+    pGG->clear();
+
+    pGE->processaEventos(pGG);
+
+    pGG->atualizaDeltaTempo();
+
+    pGE->processaInput(pJog);
+
+    pSl->desenhar();
+
+    pJog->desenhar();
+
     pGG->display();
   }
 }

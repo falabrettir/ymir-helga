@@ -9,6 +9,9 @@ enable_testing()
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+#Adiciona CMAKE_SOURCE_DIR como variável global
+add_compile_definitions(ROOT="${CMAKE_SOURCE_DIR}")
+
 # Diretório de saída dos binários
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
