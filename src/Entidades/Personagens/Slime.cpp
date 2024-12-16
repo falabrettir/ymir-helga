@@ -6,9 +6,10 @@
 
 Inimigos::Slime::Slime() {}
 Inimigos::Slime::Slime(sf::Vector2<float> pos, sf::Vector2<float> tamanho,
-                       const std::string &path)
+                       const std::string &path,
+                       Entidades::Personagens::Jogador *pJog)
     : lentidao(0),
-      Entidades::Personagens::Inimigos::Inimigo(pos, tamanho, path) {}
+      Entidades::Personagens::Inimigos::Inimigo(pos, tamanho, path, pJog) {}
 Inimigos::Slime::~Slime() {}
 void Inimigos::Slime::danificar(Entidades::Personagens::Jogador *pJog) {
   std::cout << "Danificando!" << std::endl;

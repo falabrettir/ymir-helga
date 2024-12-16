@@ -15,7 +15,7 @@ Jogo::Jogo() {
       "/assets/Characters(100x100)/Knight/Knight/Knight-Idle.png");
   pSl = new Inimigos::Slime(
       sf::Vector2<float>(390.0, 390.0), sf::Vector2<float>(16.0, 16.0),
-      "/assets/Characters(100x100)/Slime/Slime/Slime-Idle.png");
+      "/assets/Characters(100x100)/Slime/Slime/Slime-Idle.png", pJog);
 }
 
 Jogo::~Jogo() {}
@@ -33,6 +33,8 @@ void Jogo::executar() {
     pSl->desenhar();
 
     pJog->desenhar();
+
+    pSl->persegue();
 
     pGG->display();
   }
