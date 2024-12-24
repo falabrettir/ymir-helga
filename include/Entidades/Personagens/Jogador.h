@@ -16,14 +16,10 @@ private:
 
 public:
   Jogador();
-  Jogador(sf::Vector2<float> pos, sf::Vector2<float> tamanho,
-          const std::string &path);
   ~Jogador();
 
-  void calculaPontos();
-  void salvarDataBuffer();
   void executar();
-  void salvar();
+  void calculaPontos();
 };
 
 } // namespace Personagens
