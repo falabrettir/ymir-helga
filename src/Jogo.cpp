@@ -27,6 +27,8 @@ void Jogo::executar() {
 
     pJog->desenhar();
 
+    pSl->persegue();
+
     pGG->display();
   }
 }
