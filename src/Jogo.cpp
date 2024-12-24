@@ -9,13 +9,6 @@ Jogo::Jogo() {
 
   pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
   Ente::setGerenciadorGrafico(pGG);
-
-  pJog = new Entidades::Personagens::Jogador(
-      sf::Vector2<float>(500.0, 500.0), sf::Vector2<float>(16.0, 16.0),
-      "/assets/Characters(100x100)/Knight/Knight/Knight-Idle.png");
-  pSl = new Inimigos::Slime(
-      sf::Vector2<float>(390.0, 390.0), sf::Vector2<float>(16.0, 16.0),
-      "/assets/Characters(100x100)/Slime/Slime/Slime-Idle.png");
 }
 
 Jogo::~Jogo() {}

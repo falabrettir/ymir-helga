@@ -17,11 +17,11 @@ protected:
 
 public:
   Ente();
-  Ente(const std::string &path);
   virtual ~Ente();
 
   static void setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *pGG);
   bool setTexture(const std::string &path);
+  void atualizaSprite(sf::Texture *pTexture);
   const sf::Sprite *getSprite();
   void setTarget();
   void desenhar();

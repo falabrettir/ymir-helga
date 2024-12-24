@@ -4,20 +4,16 @@
 
 using namespace Entidades;
 
-Entidade::Entidade() {}
-
-Entidade::Entidade(sf::Vector2<float> pos, sf::Vector2<float> tamanho,
-                   const std::string &path)
-    : Ente(path), pos(pos), tamanho(tamanho),
-      velocidade(sf::Vector2<float>(0.1f, 0.1f)) {}
+Entidade::Entidade() : Ente() {
+  velocidade = sf::Vector2<float>(0, 0);
+  gravidade = sf::Vector2<float>(0, 0);
+}
 
 Entidade::~Entidade() {}
 
 sf::Vector2<float> Entidade::getPos() const { return pos; }
 
 void Entidade::setPos(sf::Vector2<float> &novaPos) { pos = novaPos; }
-
-void Entidade::salvarDataBuffer() {}
 
 sf::Vector2<float> Entidade::getVel() const { return velocidade; }
 

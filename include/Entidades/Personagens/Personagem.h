@@ -14,13 +14,10 @@ protected:
 
 public:
   Personagem();
-  Personagem(sf::Vector2<float> pos, sf::Vector2<float> tamanho,
-             const std::string &path);
   virtual ~Personagem();
 
-  virtual void mover(sf::Vector2<float> mov);
-  // virtual void executar() = 0;
-  void salvarDataBuffer();
+  virtual void mover();
+  virtual void executar() = 0;
 };
 
 } // namespace Personagens
