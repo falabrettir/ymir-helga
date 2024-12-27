@@ -1,0 +1,1 @@
+#include "Gerenciadores/GerenciadorInput.h"

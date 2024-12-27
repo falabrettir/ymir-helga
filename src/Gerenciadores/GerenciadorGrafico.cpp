@@ -33,11 +33,8 @@ Gerenciador_Grafico *Gerenciador_Grafico::getInstancia() {
 }
 
 bool Gerenciador_Grafico::janelaAberta() { return janela->isOpen(); }
-void Gerenciador_Grafico::display() { janela->display(); }
 
-bool Gerenciador_Grafico::pollEvent(sf::Event &evento) {
-  return janela->pollEvent(evento);
-}
+void Gerenciador_Grafico::display() { janela->display(); }
 
 void Gerenciador_Grafico::clear() { janela->clear(); }
 

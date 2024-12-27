@@ -25,7 +25,6 @@ public:
   void desenharEnte(Ente *pE);
   bool janelaAberta();
   void display();
-  bool pollEvent(sf::Event &evento);
   void clear();
   void fecharJanela();
   void atualizaDeltaTempo();

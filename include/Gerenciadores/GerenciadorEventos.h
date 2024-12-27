@@ -1,27 +1,36 @@
 #pragma once
 
-#include "Gerenciadores/GerenciadorGrafico.h"
 #include <SFML/Window/Event.hpp>
+#include <SFML/Window/Window.hpp>
+
 namespace Entidades {
 namespace Personagens {
-class Jogador;
-}
 
+class Jogador;
+
+}
 } // namespace Entidades
+
 namespace Gerenciadores {
 
+/*
+ * Gerenciador Grafico nao precisa de ponteiro para sf::Window
+ * apenas o Gerenciador de input.
+ *
+ * Passar um ponteiro para janela no metodo processaEventos
+ */
 class Gerenciador_Eventos {
 private:
-  sf::Event evento;
+  bool janelaFechada;
   static Gerenciador_Eventos *instancia; // Singleton
   Gerenciador_Eventos();
 
 public:
   ~Gerenciador_Eventos();
   static Gerenciador_Eventos *getInstancia();
-  sf::Event &getEvento();
-  void processaEventos(Gerenciador_Grafico *pGG);
-  void processaInput(Entidades::Personagens::Jogador *pJog);
+
+  void processaEventos(sf::Window *pJanela);
+  bool getJanelaFechada();
 };
 
 } // namespace Gerenciadores

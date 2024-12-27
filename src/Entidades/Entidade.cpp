@@ -1,12 +1,11 @@
 #include "Entidades/Entidade.h"
 #include <SFML/System/Vector2.hpp>
-#include <iostream>
 
 using namespace Entidades;
 
 Entidade::Entidade() : Ente() {
-  velocidade = sf::Vector2<float>(0, 0);
-  gravidade = sf::Vector2<float>(0, 0);
+  velocidade = sf::Vector2<float>(0.f, 0.f);
+  gravidade = sf::Vector2<float>(0.f, 0.f);
 }
 
 Entidade::~Entidade() {}
