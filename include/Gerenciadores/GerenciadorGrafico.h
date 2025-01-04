@@ -15,13 +15,16 @@ private:
   sf::Clock relogio;
   float deltaTempo;
   static Gerenciador_Grafico *instancia; // Singleton
+
+private:
   Gerenciador_Grafico();
+  Gerenciador_Grafico(const Gerenciador_Grafico &) = delete;
+  Gerenciador_Grafico &operator=(const Gerenciador_Grafico &) = delete;
 
 public:
   ~Gerenciador_Grafico();
-  static Gerenciador_Grafico *getInstancia(); // Singleton
+  static Gerenciador_Grafico &getInstancia();
   sf::RenderWindow *getJanela() const;
-
   void desenharEnte(Ente *pE);
   bool janelaAberta();
   void display();
