@@ -29,7 +29,7 @@ Gerenciador_Grafico *Gerenciador_Grafico::getInstancia() {
   if (instancia == nullptr) {
     instancia = new Gerenciador_Grafico();
   }
-  return instancia; // Singleton
+  return instancia;
 }
 
 bool Gerenciador_Grafico::janelaAberta() { return janela->isOpen(); }
