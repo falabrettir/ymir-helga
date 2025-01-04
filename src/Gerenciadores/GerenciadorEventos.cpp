@@ -9,7 +9,7 @@ using namespace Gerenciadores;
 
 Gerenciador_Eventos *Gerenciador_Eventos::instancia = nullptr;
 
-Gerenciador_Eventos::Gerenciador_Eventos() : janelaFechada(true) {}
+Gerenciador_Eventos::Gerenciador_Eventos() {}
 
 Gerenciador_Eventos::~Gerenciador_Eventos() {}
 
@@ -17,20 +17,12 @@ Gerenciador_Eventos *Gerenciador_Eventos::getInstancia() {
   if (instancia == nullptr) {
     instancia = new Gerenciador_Eventos();
   }
-  return instancia; // Singleton
+  return instancia;
 }
 
-void Gerenciador_Eventos::processaEventos(sf::Window *pJanela) {
-  sf::Event evento;
+void Gerenciador_Eventos::processaEventos() {}
 
-  while (pJanela->pollEvent(evento)) {
-    if (evento.type == sf::Event::Closed) {
-      janelaFechada = true;
-    }
-  }
-}
-
-bool Gerenciador_Eventos::getJanelaFechada() { return janelaFechada; }
+void Gerenciador_Eventos::setGG(Gerenciador_Grafico *ppGG) { pGG = ppGG; }
 
 void Gerenciador_Eventos::processaInput(Entidades::Personagens::Jogador *pJog) {
   // Initialize movement vector to zero

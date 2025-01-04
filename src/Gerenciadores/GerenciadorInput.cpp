@@ -16,4 +16,4 @@ Gerenciador_Input *Gerenciador_Input::getInstancia() {
   return instancia;
 }
 
-void Gerenciador_Input::setGG(Gerenciador_Grafico *pGG) { this->pGG = pGG; }
+void Gerenciador_Input::setGG(Gerenciador_Grafico *ppGG) { pGG = ppGG; }

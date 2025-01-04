@@ -14,24 +14,21 @@ class Jogador;
 
 namespace Gerenciadores {
 
-/*
- * Gerenciador Eventos nao precisa de ponteiro para sf::Window
- * apenas o Gerenciador de input.
- *
- * Passar um ponteiro para janela no metodo processaEventos
- */
 class Gerenciador_Eventos {
 private:
-  bool janelaFechada;
-  static Gerenciador_Eventos *instancia; // Singleton
+  static Gerenciador_Grafico *pGG;
+  static Gerenciador_Eventos *instancia;
+
+private:
   Gerenciador_Eventos();
+  ~Gerenciador_Eventos();
+  Gerenciador_Eventos(const Gerenciador_Eventos &) = delete;
+  Gerenciador_Eventos &operator=(const Gerenciador_Eventos &) = delete;
 
 public:
-  ~Gerenciador_Eventos();
   static Gerenciador_Eventos *getInstancia();
-
-  void processaEventos(Gerenciador_Grafico *pGG);
-  bool getJanelaFechada();
+  static void setGG(Gerenciador_Grafico *pGG);
+  void processaEventos();
 };
 
 } // namespace Gerenciadores
