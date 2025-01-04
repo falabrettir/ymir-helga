@@ -13,13 +13,14 @@ private:
 
 private:
   Gerenciador_Input();
+  Gerenciador_Input(const Gerenciador_Input &) = delete;
+  Gerenciador_Input &operator=(const Gerenciador_Input &) = delete;
 
 public:
   ~Gerenciador_Input();
-  Gerenciador_Input *getInstancia();
+  static Gerenciador_Input &getInstancia();
   void setGG(Gerenciador_Grafico *pGG);
   void processaInput();
-  bool teclaPressionada(sf::Keyboard::Key tecla) const;
 };
 
 } // namespace Gerenciadores
