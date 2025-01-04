@@ -14,7 +14,7 @@ private:
   float larguraJanela;
   sf::Clock relogio;
   float deltaTempo;
-  static Gerenciador_Grafico *instancia; // Singleton
+  static Gerenciador_Grafico *instancia;
 
 private:
   Gerenciador_Grafico();
