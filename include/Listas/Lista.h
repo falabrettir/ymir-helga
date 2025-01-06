@@ -1,20 +1,110 @@
 #pragma once
-
-#include "Listas/Elemento.h"
-
 namespace Listas {
 
 template <typename TL> class Lista {
 private:
+  template <typename TE> class Elemento {
+
+  private:
+    Elemento<TE> *pProx;
+    TE *pInfo;
+
+  public:
+    Elemento() : pProx(nullptr), pInfo(nullptr) {}
+    ~Elemento() {
+      pProx = nullptr;
+      pInfo = nullptr;
+    }
+    bool incluir(TE *pElem) { pInfo = pElem; }
+    void setProx(Elemento<TE> *pElem) { pProx = pElem; }
+    Elemento<TE> *getProximo() const { return pProx; }
+    TE *getInfo() const { return pInfo; }
+  };
   Elemento<TL> *pPrimeiro;
   Elemento<TL> *pUltimo;
+  int tamanho;
 
 public:
   Lista();
   ~Lista();
 
-  void incluir(TL *p);
-  void limpar();
-};
+  Elemento<TL> *getpPrimeiro() const {
+    if (pPrimeiro)
+      return pPrimeiro;
+  }
+  Elemento<TL> *getpUltimo() const {
+    if (pUltimo)
+      return pUltimo;
+  }
 
+  bool incluir(TL *p) {
+    Elemento<TL> *node = new Elemento<TL>();
+    if (node != nullptr) {
+      node->incluir(p);
+      if (pUltimo != nullptr) {
+        pUltimo->setProx(node);
+        pUltimo = node;
+      } else {
+        pPrimeiro = node;
+        pUltimo = node;
+      }
+      tamanho++;
+      return true;
+    } else {
+      return false;
+    }
+  }
+  void remover(TL *p) {
+    Elemento<TL> *node = pPrimeiro;
+    Elemento<TL> *anterior = nullptr;
+    while (node != nullptr) {
+      anterior = node;
+      node = node->getProximo();
+      if (node->getInfo() == p) {
+        if (node == pPrimeiro) {
+          pPrimeiro = node->getProximo();
+        } else if (node == pUltimo) {
+          pUltimo = anterior;
+        } else {
+          anterior->setProx(node->getProximo());
+        }
+        delete node;
+        tamanho--;
+        break;
+      }
+    }
+    node = nullptr;
+    anterior = nullptr;
+  }
+  // TL pop(TL* p);
+  void limpar() {
+    Elemento<TL> *node = pPrimeiro;
+    while (node != nullptr) {
+      Elemento<TL> *anterior = node;
+      node = node->getProximo();
+      delete anterior;
+    }
+    pUltimo = nullptr;
+    tamanho = 0;
+  }
+  int getSize() const { return tamanho; }
+
+public:
+  class Iterator {
+  private:
+    Elemento<TL> *pAtual;
+
+  public:
+    Iterator() : pAtual(nullptr) {}
+    Iterator(Elemento<TL> *pElem) : pAtual(pElem) {}
+    ~Iterator() { pAtual = nullptr; }
+
+    Iterator &operator++() {
+      pAtual = pAtual->getProximo();
+      return *this;
+    }
+  };
+  Iterator begin() const { return Iterator(pPrimeiro); }
+  Iterator end() const { return Iterator(pUltimo); }
+};
 } // namespace Listas
