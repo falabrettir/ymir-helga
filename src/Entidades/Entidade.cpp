@@ -17,3 +17,7 @@ void Entidade::setPos(sf::Vector2<float> &novaPos) { pos = novaPos; }
 sf::Vector2<float> Entidade::getVel() const { return velocidade; }
 
 void Entidade::setVel(sf::Vector2<float> &novaVel) { velocidade = novaVel; }
+
+sf::Vector2<float> Entidade::getSize() const {
+  return static_cast<sf::Vector2<float>>(pTexture->getSize());
+}

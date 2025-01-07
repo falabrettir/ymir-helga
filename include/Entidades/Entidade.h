@@ -22,6 +22,7 @@ public:
   void setPos(sf::Vector2<float> &novaPos);
   sf::Vector2<float> getVel() const;
   void setVel(sf::Vector2<float> &novaVel);
+  sf::Vector2<float> getSize() const;
 };
 
 } // namespace Entidades
