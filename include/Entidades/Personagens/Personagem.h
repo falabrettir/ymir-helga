@@ -16,7 +16,7 @@ public:
   Personagem();
   virtual ~Personagem();
 
-  virtual void mover();
+  virtual void mover(sf::Vector2<float> mov);
   virtual void executar() = 0;
 };
 

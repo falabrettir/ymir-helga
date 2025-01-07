@@ -1,5 +1,4 @@
 #include "../include/Entidades/Personagens/Inimigo.h"
-#include "Entidades/Personagens/Personagem.h"
 #include <SFML/System/Vector2.hpp>
 
 using namespace Entidades;
@@ -8,8 +7,7 @@ Personagens::Inimigos::Inimigo::Inimigo() {}
 Personagens::Inimigos::Inimigo::Inimigo(sf::Vector2<float> pos,
                                         sf::Vector2<float> tamanho,
                                         const std::string &path, Jogador *pJog)
-    : Entidades::Personagens::Personagem(pos, tamanho, path), visada(700.0),
-      nivelMadade(0) {
+    : visada(700.0), nivelMadade(0) {
   pJ = pJog;
 }
 Personagens::Inimigos::Inimigo::~Inimigo() {}

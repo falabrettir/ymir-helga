@@ -27,8 +27,9 @@ private:
 
 public:
   static Gerenciador_Eventos *getInstancia();
-  static void setGG(Gerenciador_Grafico *pGG);
+  static void setGG(Gerenciador_Grafico *ppGG);
   void processaEventos();
+  void processaInput(Entidades::Personagens::Jogador *pJog);
 };
 
 } // namespace Gerenciadores

@@ -19,7 +19,7 @@ public:
   Ente();
   virtual ~Ente();
 
-  static void setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *pGG);
+  static void setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *ppGG);
   bool setTexture(const std::string &path);
   void atualizaSprite(sf::Texture *pTexture);
   const sf::Sprite *getSprite();

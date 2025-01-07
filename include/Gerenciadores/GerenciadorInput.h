@@ -23,7 +23,7 @@ private:
 
 public:
   static Gerenciador_Input *getInstancia();
-  static void setGG(Gerenciador_Grafico *pGG);
+  static void setGG(Gerenciador_Grafico *ppGG);
   void processaInput();
 };
 
