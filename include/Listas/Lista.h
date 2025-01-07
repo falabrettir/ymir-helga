@@ -3,6 +3,7 @@ namespace Listas {
 
 template <typename TL> class Lista {
 private:
+  // Classe Elemento aninhada
   template <typename TE> class Elemento {
 
   private:
