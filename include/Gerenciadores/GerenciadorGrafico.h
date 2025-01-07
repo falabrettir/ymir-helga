@@ -9,7 +9,7 @@ namespace Gerenciadores {
 
 class Gerenciador_Grafico {
 private:
-  sf::RenderWindow *janela;
+  sf::RenderWindow *pJanela;
   float alturaJanela;
   float larguraJanela;
   sf::Clock relogio;
