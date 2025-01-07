@@ -1,17 +1,21 @@
 #include "Gerenciadores/GerenciadorEventos.h"
-#include "Entidades/Personagens/Jogador.h"
 #include "Gerenciadores/GerenciadorGrafico.h"
+#include "Gerenciadores/GerenciadorInput.h"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Window.hpp>
-#include <iostream>
 
 using namespace Gerenciadores;
 
 Gerenciador_Eventos *Gerenciador_Eventos::instancia = nullptr;
 
-Gerenciador_Eventos::Gerenciador_Eventos() {}
+Gerenciador_Eventos::Gerenciador_Eventos()
+    : pJanela(nullptr), pGG(nullptr), pGI(nullptr) {}
 
-Gerenciador_Eventos::~Gerenciador_Eventos() {}
+Gerenciador_Eventos::~Gerenciador_Eventos() {
+  pJanela = nullptr;
+  pGG = nullptr;
+  pGI = nullptr;
+}
 
 Gerenciador_Eventos *Gerenciador_Eventos::getInstancia() {
   if (instancia == nullptr) {
@@ -20,35 +24,33 @@ Gerenciador_Eventos *Gerenciador_Eventos::getInstancia() {
   return instancia;
 }
 
-void Gerenciador_Eventos::processaEventos() {}
+void Gerenciador_Eventos::setGG(Gerenciador_Grafico *pGG) {
+  if (pGG) {
+    this->pGG = pGG;
+    pJanela = this->pGG->getJanela();
+  }
+}
 
-void Gerenciador_Eventos::setGG(Gerenciador_Grafico *ppGG) { pGG = ppGG; }
+void Gerenciador_Eventos::setGI(Gerenciador_Input *pGI) { this->pGI = pGI; }
 
-void Gerenciador_Eventos::processaInput(Entidades::Personagens::Jogador *pJog) {
-  // Initialize movement vector to zero
-  sf::Vector2<float> mov(0.0f, 0.0f);
-  bool moveu = 0;
-  // Handle movement input
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-    mov.y -= pJog->getVel().y; // Move up
-    moveu = 1;
-    std::cout << "Pra cima  " << mov.y << std::endl;
-  }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-    mov.y += pJog->getVel().y; // Move down
-    moveu = 1;
-  }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-    mov.x -= pJog->getVel().x; // Move left
-    moveu = 1;
-  }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-    mov.x += pJog->getVel().x; // Move right
-    moveu = 1;
-  }
+void Gerenciador_Eventos::processaEventos() {
+  if (pJanela && pGG) {
 
-  // Move the player using the calculated movement vector
-  if (moveu) {
-    pJog->mover(mov);
+    sf::Event evento;
+
+    while (pJanela->pollEvent(evento)) {
+
+      if (evento.type == sf::Event::Closed) {
+        pGG->fecharJanela();
+      }
+
+      else if (evento.type == sf::Event::KeyPressed) {
+        pGI->ProcessaTeclaPressionada(evento.key.code);
+      }
+
+      else if (evento.type == sf::Event::KeyReleased) {
+        pGI->ProcessaTeclaSolta(evento.key.code);
+      }
+    }
   }
 }
