@@ -104,6 +104,10 @@ public:
       pAtual = pAtual->getProximo();
       return *this;
     }
+
+    bool operator!=(const Iterator &outroIt) { return (&(this) != &outroIt); }
+
+    Iterator getAtual() const { return Iterator(pAtual); }
   };
   Iterator begin() const { return Iterator(pPrimeiro); }
   Iterator end() const { return Iterator(pUltimo); }
