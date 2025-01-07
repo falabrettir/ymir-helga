@@ -27,6 +27,10 @@ Gerenciador_Input *Gerenciador_Input::getInstancia() {
   return instancia;
 }
 
-void Gerenciador_Input::setGG(Gerenciador_Grafico *ppGG) { pGG = ppGG; }
+void Gerenciador_Input::ProcessaTeclaPressionada(sf::Keyboard::Key tecla) {
+  // Notificar a tecla pressionada para o Observer (Controlador Jogador)
+}
 
-void Gerenciador_Input::processaInput() {}
+void Gerenciador_Input::ProcessaTeclaSolta(sf::Keyboard::Key tecla) {
+  // Notificar a tecla solta para o Observer (Controlador Jogador)
+}
