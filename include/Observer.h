@@ -1,31 +1,16 @@
 #pragma once
 
-#include <Listas/Lista.h>
-
 class Subject;
 
 class Observer {
-public:
+private:
   bool ativo;
 
 public:
   virtual ~Observer();
-  virtual void Atualizar(Subject *changedSubject) = 0;
+  virtual void Atualizar() = 0;
+  const bool getAtivo() const;
 
 protected:
   Observer();
-};
-
-class Subject {
-public:
-  Listas::Lista<Observer *> observadores;
-
-public:
-  virtual ~Subject();
-  virtual void Inscrever(Observer *o);
-  virtual void Desinscrever(Observer *o);
-  virtual void Notificar();
-
-protected:
-  Subject();
 };

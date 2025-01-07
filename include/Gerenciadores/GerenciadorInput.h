@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Gerenciadores/GerenciadorGrafico.h"
+#include "Subject.h"
 #include <SFML/Window.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Window.hpp>
@@ -9,7 +10,7 @@
 
 namespace Gerenciadores {
 
-class Gerenciador_Input {
+class Gerenciador_Input : public Subject {
 private:
   static Gerenciador_Grafico *pGG;
   static Gerenciador_Input *instancia;
