@@ -9,7 +9,8 @@ class Jogo {
 private:
   Gerenciadores::Gerenciador_Grafico *pGG;
   Gerenciadores::Gerenciador_Eventos *pGE;
-  Entidades::Personagens::Jogador *pJog;
+  Entidades::Personagens::Jogador *pJog1;
+  Entidades::Personagens::Jogador *pJog2;
   Inimigos::Slime *pSl;
 
 public:
