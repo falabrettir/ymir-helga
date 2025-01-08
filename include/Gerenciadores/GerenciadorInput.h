@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Gerenciadores/GerenciadorGrafico.h"
 #include "Subject.h"
 #include <SFML/Window.hpp>
 #include <SFML/Window/Event.hpp>
@@ -9,12 +8,17 @@
 #include <map>
 #include <string>
 
+namespace Controladores {
+class Controlador_Jogador;
+} // namespace Controladores
+
 namespace Gerenciadores {
 
 class Gerenciador_Input : public Subject {
 private:
   static Gerenciador_Input *instancia;
   std::map<sf::Keyboard::Key, std::string> keyMap;
+  Controladores::Controlador_Jogador *pContrJog;
 
 private:
   Gerenciador_Input();
@@ -24,6 +28,8 @@ private:
 
 public:
   static Gerenciador_Input *getInstancia();
+
+  void setContrJog(Controladores::Controlador_Jogador *pContrJog);
 
   void ProcessaTeclaPressionada(sf::Keyboard::Key tecla);
   void ProcessaTeclaSolta(sf::Keyboard::Key tecla);

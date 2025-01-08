@@ -2,7 +2,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Window.hpp>
 
-using namespace Gerenciadores;
+namespace Gerenciadores {
 
 Gerenciador_Input *Gerenciador_Input::instancia = nullptr;
 
@@ -27,10 +27,25 @@ Gerenciador_Input *Gerenciador_Input::getInstancia() {
   return instancia;
 }
 
+void Gerenciador_Input::setContrJog(
+    Controladores::Controlador_Jogador *pContrJog) {
+  if (pContrJog) {
+    this->pContrJog = pContrJog;
+  }
+}
+
 void Gerenciador_Input::ProcessaTeclaPressionada(sf::Keyboard::Key tecla) {
   // Notificar a tecla pressionada para o Observer (Controlador Jogador)
+  if (observadores) {
+    notificarTeclaPressionada(tecla);
+  }
 }
 
 void Gerenciador_Input::ProcessaTeclaSolta(sf::Keyboard::Key tecla) {
   // Notificar a tecla solta para o Observer (Controlador Jogador)
+  if (observadores) {
+    notificarTeclaSolta(tecla);
+  }
 }
+
+} // namespace Gerenciadores
