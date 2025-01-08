@@ -4,12 +4,12 @@ class Subject;
 
 class Observer {
 private:
-  bool ativo;
+  Subject *pSub;
 
 public:
   virtual ~Observer();
-  virtual void Atualizar() = 0;
-  const bool getAtivo() const;
+  virtual void atualizar() = 0;
+  void setSub(Subject *pSub);
 
 protected:
   Observer();

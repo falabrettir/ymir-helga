@@ -9,9 +9,9 @@ public:
 
 public:
   virtual ~Subject();
-  virtual void Inscrever(Observer *o);
-  virtual void Desinscrever(Observer *o);
-  virtual void Notificar();
+  virtual void inscrever(Observer *o);
+  virtual void desinscrever(Observer *o);
+  virtual void notificar();
 
 protected:
   Subject();

@@ -1,5 +1,8 @@
 #include "Observer.h"
+#include "Subject.h"
 
-Observer::Observer() : ativo(true) {}
+Observer::Observer() : pSub(nullptr) {}
 
-const bool Observer::getAtivo() const { return ativo; }
+Observer::~Observer() { pSub = nullptr; }
+
+void Observer::setSub(Subject *pSub) { this->pSub = pSub; }
