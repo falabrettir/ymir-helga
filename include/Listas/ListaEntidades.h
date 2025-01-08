@@ -14,7 +14,9 @@ public:
   ~ListaEntidades();
 
   void incluir(Entidades::Entidade *pE);
-  void percorrer();
+  void deletar(Entidades::Entidade *pE);
+  const int getSize() const;
+  void limpar();
 };
 
 } // namespace Listas
