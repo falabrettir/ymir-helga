@@ -103,8 +103,17 @@ public:
       pAtual = pAtual->getProximo();
       return *this;
     }
+    const Iterator &operator=(const Iterator &outro) const {
+      if (&outro != this) {
+        pAtual = outro.pAtual;
+      }
+      return *this;
+    }
+    const bool &operator!=(const Iterator &outro) const {
+      return this->pAtual != outro.pAtual;
+    }
   };
-  Iterator begin() const { return Iterator(pPrimeiro); }
-  Iterator end() const { return Iterator(pUltimo); }
+  const Iterator begin() { return Iterator(pPrimeiro); }
+  const Iterator end() { return Iterator(pUltimo); }
 };
 } // namespace Listas

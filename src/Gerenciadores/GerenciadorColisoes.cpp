@@ -1,4 +1,5 @@
 #include "Gerenciadores/GerenciadorColisoes.h"
+#include "Listas/Lista.h"
 #include "Listas/ListaEntidades.h"
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
@@ -27,4 +28,10 @@ Gerenciadores::Gerenciador_Colisoes::calculaColisao(Entidades::Entidade *e1,
       t1.y / 2.0f + t2.y / 2.0f); // calcula a distancia entre as arestas
 
   return sf::Vector2<float>(dc.x - metadeRect.x, dc.y - metadeRect.y);
+}
+void Gerenciadores::Gerenciador_Colisoes::executar() {
+  const Listas::Lista<Entidades::Entidade *>::Iterator it;
+  it.operator=(listChar->begin());
+  while (it.operator!=(listChar->end())) {
+  }
 }
