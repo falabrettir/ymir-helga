@@ -99,7 +99,7 @@ public:
     Iterator(Elemento<TL> *pElem) : pAtual(pElem) {}
     ~Iterator() { pAtual = nullptr; }
 
-    Iterator &operator++() {
+    const Iterator &operator++() const {
       pAtual = pAtual->getProximo();
       return *this;
     }

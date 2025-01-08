@@ -30,8 +30,9 @@ Gerenciadores::Gerenciador_Colisoes::calculaColisao(Entidades::Entidade *e1,
   return sf::Vector2<float>(dc.x - metadeRect.x, dc.y - metadeRect.y);
 }
 void Gerenciadores::Gerenciador_Colisoes::executar() {
-  const Listas::Lista<Entidades::Entidade *>::Iterator it;
-  it.operator=(listChar->begin());
-  while (it.operator!=(listChar->end())) {
+  const Listas::Lista<Entidades::Entidade *>::Iterator itChar;
+  const Listas::Lista<Entidades::Entidade *>::Iterator itObst;
+  for (itChar.operator=(listChar->begin()); itChar.operator!=(listChar->end());
+       itChar.operator++()) {
   }
 }
