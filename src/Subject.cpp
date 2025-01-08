@@ -16,11 +16,20 @@ void Subject::desinscrever(Observer *o) {
   }
 }
 
-void Subject::notificar() {
+void Subject::notificarTeclaPressionada(sf::Keyboard::Key tecla) {
   if (observadores) {
     std::list<Observer *>::iterator it;
     for (it = observadores->begin(); it != observadores->end(); it++) {
-      (*it)->atualizar();
+      (*it)->atualizarTeclasPressionadas(tecla);
+    }
+  }
+}
+
+void Subject::notificarTeclaSolta(sf::Keyboard::Key tecla) {
+  if (observadores) {
+    std::list<Observer *>::iterator it;
+    for (it = observadores->begin(); it != observadores->end(); it++) {
+      (*it)->atualizarTeclasSoltas(tecla);
     }
   }
 }

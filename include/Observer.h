@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Window/Keyboard.hpp>
+
 class Subject;
 
 class Observer {
@@ -8,8 +10,11 @@ private:
 
 public:
   virtual ~Observer();
-  virtual void atualizar() = 0;
+
   void setSub(Subject *pSub);
+
+  virtual void atualizarTeclasPressionadas(sf::Keyboard::Key tecla) = 0;
+  virtual void atualizarTeclasSoltas(sf::Keyboard::Key tecla) = 0;
 
 protected:
   Observer();
