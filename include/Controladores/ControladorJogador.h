@@ -3,8 +3,8 @@
 #include "Gerenciadores/GerenciadorInput.h"
 #include "Observer.h"
 #include <SFML/Window/Keyboard.hpp>
-#include <set>
-#include <utility>
+
+typedef sf::Keyboard::Key Key;
 
 namespace Entidades {
 namespace Personagens {
@@ -17,18 +17,27 @@ namespace Controladores {
 class Controlador_Jogador : public Observer {
 private:
   Entidades::Personagens::Jogador *pJog;
-  Gerenciadores::Gerenciador_Input *pGI;
-  std::set<std::pair<sf::Keyboard::Key, bool>> teclasPressionadas;
+  std::map<Key, bool> teclasPressionadas;
+  Key direita;
+  Key esquerda;
+  Key pulo;
+  Key ataque;
 
 public:
   Controlador_Jogador();
   ~Controlador_Jogador();
 
   void setJog(Entidades::Personagens::Jogador *pJog);
-  void setGI(Gerenciadores::Gerenciador_Input *pGI);
 
-  void atualizarTeclasPressionadas(sf::Keyboard::Key tecla);
-  void atualizarTeclasSoltas(sf::Keyboard::Key tecla);
+  // Funcao para diferenciar os controles do jogador2
+  void setControles(Key direita = sf::Keyboard::D,
+                    Key esquerda = sf::Keyboard::A, Key pulo = sf::Keyboard::W,
+                    Key ataque = sf::Keyboard::Space);
+
+  void atualizarTeclasPressionadas(Key tecla);
+  void atualizarTeclasSoltas(Key tecla);
+
+  void controlarJogador();
 };
 
 } // namespace Controladores
