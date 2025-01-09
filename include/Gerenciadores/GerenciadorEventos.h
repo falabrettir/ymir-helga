@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Gerenciadores/GerenciadorGrafico.h"
+#include "Gerenciadores/GerenciadorInput.h"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Window.hpp>
 
@@ -16,8 +17,11 @@ namespace Gerenciadores {
 
 class Gerenciador_Eventos {
 private:
-  static Gerenciador_Grafico *pGG;
   static Gerenciador_Eventos *instancia;
+
+  sf::Window *pJanela;
+  Gerenciador_Grafico *pGG;
+  Gerenciador_Input *pGI;
 
 private:
   Gerenciador_Eventos();
@@ -27,7 +31,9 @@ private:
 
 public:
   static Gerenciador_Eventos *getInstancia();
-  static void setGG(Gerenciador_Grafico *ppGG);
+
+  void setGG(Gerenciador_Grafico *pGG);
+  void setGI(Gerenciador_Input *pGI);
   void processaEventos();
   void processaInput(Entidades::Personagens::Jogador *pJog);
 };
