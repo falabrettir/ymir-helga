@@ -23,8 +23,6 @@ public:
   void executar();
   void calculaPontos();
 
-  void moverDireita();
-  void moverEsquerda();
   void pular();
   void atacar();
 };

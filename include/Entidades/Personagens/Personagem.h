@@ -11,12 +11,13 @@ class Personagem : public Entidades::Entidade {
 protected:
   int hp;
   int numVidas;
+  bool olhandoEsquerda;
 
 public:
   Personagem();
   virtual ~Personagem();
 
-  virtual void mover(sf::Vector2<float> mov);
+  virtual void mover();
   virtual void executar() = 0;
 };
 
