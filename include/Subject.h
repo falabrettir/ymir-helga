@@ -6,6 +6,8 @@
 
 class Subject {
 public:
+  // TODO:
+  // Mudar de list para set
   std::list<Observer *> *observadores;
 
 public:

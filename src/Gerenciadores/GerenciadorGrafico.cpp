@@ -11,9 +11,8 @@ Gerenciador_Grafico *Gerenciador_Grafico::instancia = nullptr;
 Gerenciador_Grafico::Gerenciador_Grafico() {
   pJanela = new sf::RenderWindow(sf::VideoMode(sf::VideoMode::getDesktopMode()),
                                  "Simon says", sf::Style::Fullscreen);
-  pJanela->setVerticalSyncEnabled(
-      true); // VSYNC janela->setFramerateLimit(30); // call it once, after
-             // creating the window
+  pJanela->setVerticalSyncEnabled(true);
+  pJanela->setFramerateLimit(30);
   pJanela->requestFocus();
 
   larguraJanela = pJanela->getSize().x;

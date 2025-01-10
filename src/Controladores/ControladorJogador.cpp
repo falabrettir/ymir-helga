@@ -8,10 +8,7 @@
 namespace Controladores {
 
 // Constroi com controles padrao (WASD+Space)
-Controlador_Jogador::Controlador_Jogador()
-    : pJog(nullptr), Observer(), direita(sf::Keyboard::D),
-      esquerda(sf::Keyboard::A), pulo(sf::Keyboard::W),
-      ataque(sf::Keyboard::Space) {
+Controlador_Jogador::Controlador_Jogador() : pJog(nullptr), Observer() {
   teclasPressionadas.clear();
   setControles();
 }
@@ -46,6 +43,7 @@ void Controlador_Jogador::setControles(Key direita, Key esquerda, Key pulo,
 
 void Controlador_Jogador::atualizarTeclasPressionadas(Key tecla) {
   if (teclasPressionadas.find(tecla) != teclasPressionadas.end()) {
+
     teclasPressionadas[tecla] = true;
 
     // Considerar que a ultima tecla de movimento apertada tem prioridade
@@ -63,14 +61,14 @@ void Controlador_Jogador::atualizarTeclasSoltas(Key tecla) {
   }
 }
 
+// TODO:
+// retemperar
 void Controlador_Jogador::controlarJogador() {
   if (pJog) {
-    sf::Vector2f novaVelocidade = pJog->getVel();
 
     if (teclasPressionadas[direita]) {
-      pJog->moverDireita();
     } else if (teclasPressionadas[esquerda]) {
-      pJog->moverEsquerda();
+    } else {
     }
 
     if (teclasPressionadas[pulo]) {
