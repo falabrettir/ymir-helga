@@ -21,7 +21,7 @@ public:
   ~Jogador();
 
   void calculaPontos();
-  virtual void mover();
+  virtual void mover(bool left);
   void pular();
   virtual void atacar() = 0;
   virtual void executar() = 0;

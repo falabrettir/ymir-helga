@@ -33,5 +33,5 @@ void Personagens::Inimigos::Inimigo::persegue() {
   }
   mov.x -= 0.05;
   mov.y -= 0.05;
-  mover(mov);
+  // mover(mov);
 }

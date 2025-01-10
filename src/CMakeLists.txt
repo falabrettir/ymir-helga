@@ -8,7 +8,11 @@ set(SFML_AUDIO_LIBS sfml-audio sfml-system)
 add_library(gerenciadores-core
   Gerenciadores/GerenciadorGrafico.cpp
   Gerenciadores/GerenciadorEventos.cpp
+  Gerenciadores/GerenciadorInput.cpp
   Ente.cpp
+  Observer.cpp
+  Subject.cpp
+  Controladores/ControladorJogador.cpp
 )
 
 target_link_libraries(gerenciadores-core
@@ -24,6 +28,7 @@ add_library(entidades
   Entidades/Personagens/Personagem.cpp
   Entidades/Personagens/Inimigo.cpp
   Entidades/Personagens/Slime.cpp
+  Entidades/Personagens/Skjolder.cpp
 )
 
 target_link_libraries(gerenciadores-core

@@ -3,6 +3,7 @@
 #include <list>
 
 Subject::Subject() : observadores(new std::list<Observer *>) {}
+Subject::~Subject() {}
 
 void Subject::inscrever(Observer *o) {
   if (observadores) {

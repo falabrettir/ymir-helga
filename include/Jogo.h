@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entidades/Personagens/Jogador.h"
+#include "Entidades/Personagens/Skjolder.h"
 #include "Entidades/Personagens/Slime.h"
 #include "Gerenciadores/GerenciadorEventos.h"
 #include "Gerenciadores/GerenciadorGrafico.h"
@@ -9,7 +10,8 @@ class Jogo {
 private:
   Gerenciadores::Gerenciador_Grafico *pGG;
   Gerenciadores::Gerenciador_Eventos *pGE;
-  Entidades::Personagens::Jogador *pJog1;
+  Gerenciadores::Gerenciador_Input *pGI;
+  Skjolder *pJog1;
   Entidades::Personagens::Jogador *pJog2;
   Inimigos::Slime *pSl;
 

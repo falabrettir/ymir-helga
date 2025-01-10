@@ -67,17 +67,18 @@ void Controlador_Jogador::controlarJogador() {
   if (pJog) {
 
     if (teclasPressionadas[direita]) {
+      pJog->mover(0);
     } else if (teclasPressionadas[esquerda]) {
-    } else {
+      pJog->mover(1);
     }
 
-    if (teclasPressionadas[pulo]) {
+    /*if (teclasPressionadas[pulo]) {
       pJog->pular();
     }
 
     if (teclasPressionadas[ataque]) {
       pJog->atacar();
-    }
+    }*/
   }
 }
 

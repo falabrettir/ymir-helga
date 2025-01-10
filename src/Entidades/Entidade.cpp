@@ -3,7 +3,7 @@
 
 using namespace Entidades;
 
-Entidade::Entidade() : Ente(), gravidade(0, 2), velocidade(0, 0) {};
+Entidade::Entidade() : Ente(), gravidade(0, 2), velocidade(0.1, 0.1) {};
 
 Entidade::~Entidade() {}
 
