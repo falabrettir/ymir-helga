@@ -18,7 +18,6 @@ class Gerenciador_Input : public Subject {
 private:
   static Gerenciador_Input *instancia;
   std::map<sf::Keyboard::Key, std::string> keyMap;
-  Controladores::Controlador_Jogador *pContrJog;
 
 private:
   Gerenciador_Input();
@@ -28,8 +27,6 @@ private:
 
 public:
   static Gerenciador_Input *getInstancia();
-
-  void setContrJog(Controladores::Controlador_Jogador *pContrJog);
 
   void ProcessaTeclaPressionada(sf::Keyboard::Key tecla);
   void ProcessaTeclaSolta(sf::Keyboard::Key tecla);

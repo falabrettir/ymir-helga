@@ -2,13 +2,12 @@
 #include "Ente.h"
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Window/WindowStyle.hpp>
-#include <iostream>
 
 namespace Gerenciadores {
 
 Gerenciador_Grafico *Gerenciador_Grafico::instancia = nullptr;
 
-Gerenciador_Grafico::Gerenciador_Grafico() {
+Gerenciador_Grafico::Gerenciador_Grafico() : deltaTempo(0.f) {
   pJanela = new sf::RenderWindow(sf::VideoMode(sf::VideoMode::getDesktopMode()),
                                  "Simon says", sf::Style::Fullscreen);
   pJanela->setVerticalSyncEnabled(true);
@@ -17,12 +16,14 @@ Gerenciador_Grafico::Gerenciador_Grafico() {
 
   larguraJanela = pJanela->getSize().x;
   alturaJanela = pJanela->getSize().y;
-  std::clog << larguraJanela << " " << alturaJanela << std::endl;
 
   relogio.restart();
 }
 
-Gerenciador_Grafico::~Gerenciador_Grafico() {}
+Gerenciador_Grafico::~Gerenciador_Grafico() {
+  pJanela = nullptr;
+  instancia = nullptr;
+}
 
 Gerenciador_Grafico *Gerenciador_Grafico::getInstancia() {
   if (instancia == nullptr) {
@@ -53,7 +54,7 @@ sf::RenderWindow *Gerenciador_Grafico::getJanela() const {
 }
 
 void Gerenciador_Grafico::atualizaDeltaTempo() {
-  deltaTempo = relogio.restart().asMilliseconds();
+  deltaTempo = relogio.restart().asSeconds();
 }
 
 const float Gerenciador_Grafico::getDeltaTempo() const { return deltaTempo; }

@@ -79,13 +79,6 @@ Gerenciador_Input *Gerenciador_Input::getInstancia() {
   return instancia;
 }
 
-void Gerenciador_Input::setContrJog(
-    Controladores::Controlador_Jogador *pContrJog) {
-  if (pContrJog) {
-    this->pContrJog = pContrJog;
-  }
-}
-
 void Gerenciador_Input::ProcessaTeclaPressionada(sf::Keyboard::Key tecla) {
   // Notificar a tecla pressionada para o Observer (Controlador Jogador)
   if (observadores) {

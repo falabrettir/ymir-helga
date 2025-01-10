@@ -26,11 +26,15 @@ Gerenciador_Eventos *Gerenciador_Eventos::getInstancia() {
 void Gerenciador_Eventos::setGG(Gerenciador_Grafico *pGG) {
   if (pGG) {
     this->pGG = pGG;
-    pJanela = this->pGG->getJanela();
+    pJanela = pGG->getJanela();
   }
 }
 
-void Gerenciador_Eventos::setGI(Gerenciador_Input *pGI) { this->pGI = pGI; }
+void Gerenciador_Eventos::setGI(Gerenciador_Input *pGI) {
+  if (pGI) {
+    this->pGI = pGI;
+  }
+}
 
 void Gerenciador_Eventos::processaEventos() {
   if (pJanela && pGG) {
