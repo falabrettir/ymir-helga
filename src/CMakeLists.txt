@@ -1,28 +1,25 @@
 # Variáveis de dependências
 set(SFML_LIBS sfml-graphics sfml-window sfml-system sfml-audio)
-set(SFML_GRAPHICS_LIBS sfml-graphics sfml-window sfml-system)
-set(SFML_AUDIO_LIBS sfml-audio sfml-system)
 
 # ---------------------------------------------------------
-# Biblioteca Gerenciadores+Ente
-add_library(gerenciadores-core
-  Gerenciadores/GerenciadorGrafico.cpp
-  Gerenciadores/GerenciadorEventos.cpp
-  Gerenciadores/GerenciadorInput.cpp
+# Biblioteca Jogo
+
+add_library(jogo
+  # Raiz do projeto
+  Jogo.cpp
   Ente.cpp
   Observer.cpp
   Subject.cpp
+
+  # Diretorio Gerenciadores
+  Gerenciadores/GerenciadorGrafico.cpp
+  Gerenciadores/GerenciadorEventos.cpp
+  Gerenciadores/GerenciadorInput.cpp
+
+  # Diretorio Controladores
   Controladores/ControladorJogador.cpp
-)
 
-target_link_libraries(gerenciadores-core
-  PRIVATE
-  ${SFML_GRAPHICS_LIBS}
-)
-
-# ---------------------------------------------------------
-# Biblioteca Entidades
-add_library(entidades
+  # Diretorio Entidades
   Entidades/Entidade.cpp
   Entidades/Personagens/Jogador.cpp
   Entidades/Personagens/Personagem.cpp
@@ -31,22 +28,9 @@ add_library(entidades
   Entidades/Personagens/Skjolder.cpp
 )
 
-target_link_libraries(gerenciadores-core
-  PRIVATE
-  ${SFML_LIBS}
-)
-
-# ---------------------------------------------------------
-# Biblioteca Jogo
-add_library(jogo
-  Jogo.cpp
-)
-
 target_link_libraries(jogo
   PRIVATE
   ${SFML_LIBS}
-  gerenciadores-core
-  entidades
 )
 
 # ---------------------------------------------------------
@@ -58,7 +42,5 @@ add_executable(simon_says
 
 target_link_libraries(simon_says
   PRIVATE
-  ${SFML_LIBS}
   jogo
-  gerenciadores-core
 )
