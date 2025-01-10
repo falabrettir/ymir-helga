@@ -3,15 +3,15 @@
 #include "Listas/ListaEntidades.h"
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
-
-Gerenciadores::Gerenciador_Colisoes::Gerenciador_Colisoes(
-    Listas::ListaEntidades *listChar, Listas::ListaEntidades *listObst)
+namespace Gerenciadores {
+Gerenciador_Colisoes::Gerenciador_Colisoes(Listas::ListaEntidades *listChar,
+                                           Listas::ListaEntidades *listObst)
     : listChar(listChar), listObst(listObst) {}
-Gerenciadores::Gerenciador_Colisoes::~Gerenciador_Colisoes() {}
+Gerenciador_Colisoes::~Gerenciador_Colisoes() {}
 
 const sf::Vector2<float>
-Gerenciadores::Gerenciador_Colisoes::calculaColisao(Entidades::Entidade *e1,
-                                                    Entidades::Entidade *e2) {
+Gerenciador_Colisoes::calculaColisao(Entidades::Entidade *e1,
+                                     Entidades::Entidade *e2) {
   sf::Vector2<float> p1 = e1->getPos();
   sf::Vector2<float> p2 = e2->getPos();
 
@@ -31,10 +31,11 @@ Gerenciadores::Gerenciador_Colisoes::calculaColisao(Entidades::Entidade *e1,
 }
 
 // TODO: Cozer
-void Gerenciadores::Gerenciador_Colisoes::executar() {
+void Gerenciador_Colisoes::executar() {
   const Listas::Lista<Entidades::Entidade *>::Iterator itChar;
   const Listas::Lista<Entidades::Entidade *>::Iterator itObst;
   for (itChar.operator=(listChar->begin()); itChar.operator!=(listChar->end());
        itChar.operator++()) {
   }
 }
+} // namespace Gerenciadores

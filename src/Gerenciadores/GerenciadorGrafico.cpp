@@ -4,7 +4,7 @@
 #include <SFML/Window/WindowStyle.hpp>
 #include <iostream>
 
-using namespace Gerenciadores;
+namespace Gerenciadores {
 
 Gerenciador_Grafico *Gerenciador_Grafico::instancia = nullptr;
 
@@ -64,3 +64,4 @@ const float Gerenciador_Grafico::getLarguraJanela() const {
 const float Gerenciador_Grafico::getAlturaJanela() const {
   return alturaJanela;
 }
+} // namespace Gerenciadores

@@ -4,8 +4,7 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Window.hpp>
 
-using namespace Gerenciadores;
-
+namespace Gerenciadores {
 Gerenciador_Eventos *Gerenciador_Eventos::instancia = nullptr;
 
 Gerenciador_Eventos::Gerenciador_Eventos()
@@ -54,3 +53,4 @@ void Gerenciador_Eventos::processaEventos() {
     }
   }
 }
+} // namespace Gerenciadores

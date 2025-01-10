@@ -8,23 +8,23 @@ namespace Entidades {
 namespace Personagens {
 
 class Jogador : public Entidades::Personagens::Personagem {
-private:
+protected:
   Gerenciadores::Gerenciador_Eventos *pGE;
   int pontos;
   int inimMortos;
   int tesouro;
-  int stamina;
   int dano;
+  bool pulou;
 
 public:
   Jogador();
   ~Jogador();
 
-  void executar();
   void calculaPontos();
-
+  virtual void mover();
   void pular();
-  void atacar();
+  virtual void atacar() = 0;
+  virtual void executar() = 0;
 };
 
 } // namespace Personagens
