@@ -1,10 +1,13 @@
 #include "Controladores/ControladorJogador.h"
 #include "Jogador.h"
+
+namespace Entidades::Personagens {
+
 class Skjolder : public Entidades::Personagens::Jogador {
 private:
   float stamina;
   short int furia;
-  Controladores::Controlador_Jogador *pCont;
+  Controladores::Controlador_Jogador *pContr;
 
 public:
   Skjolder();
@@ -13,3 +16,5 @@ public:
   void atacar();
   void executar();
 };
+
+} // namespace Entidades::Personagens
