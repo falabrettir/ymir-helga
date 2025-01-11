@@ -6,8 +6,8 @@
 
 Jogo::Jogo() : pJog2(nullptr), pSl(nullptr) {
   pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
-  pGI = Gerenciadores::Gerenciador_Input::getInstancia();
   pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
+  pGI = Gerenciadores::Gerenciador_Input::getInstancia();
 
   Ente::setGerenciadorGrafico(pGG);
 
