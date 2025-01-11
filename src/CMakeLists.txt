@@ -36,11 +36,11 @@ target_link_libraries(jogo
 # ---------------------------------------------------------
 # Executável principal
 
-add_executable(simon_says
+add_executable(main
   Main.cpp
 )
 
-target_link_libraries(simon_says
+target_link_libraries(main
   PRIVATE
   jogo
 )
