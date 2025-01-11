@@ -11,7 +11,7 @@ Jogo::Jogo() : pJog2(nullptr), pSl(nullptr) {
 
   Ente::setGerenciadorGrafico(pGG);
 
-  pJog1 = new Skjolder();
+  pJog1 = new Entidades::Personagens::Skjolder();
 
   pGI->inscrever(pJog1->getControlador());
 

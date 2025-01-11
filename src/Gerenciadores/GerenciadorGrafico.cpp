@@ -47,7 +47,10 @@ void Gerenciador_Grafico::desenharEnte(Ente *pE) {
   }
 }
 
-void Gerenciador_Grafico::fecharJanela() { pJanela->close(); }
+void Gerenciador_Grafico::fecharJanela() {
+  pJanela->close();
+  pJanela = nullptr;
+}
 
 sf::RenderWindow *Gerenciador_Grafico::getJanela() const {
   if (pJanela) {

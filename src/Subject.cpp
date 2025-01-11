@@ -2,13 +2,15 @@
 #include "Observer.h"
 #include <list>
 
-Subject::Subject() : observadores(new std::list<Observer *>) {}
+Subject::Subject() : observadores(nullptr) {}
 Subject::~Subject() {}
 
 void Subject::inscrever(Observer *o) {
-  if (observadores) {
-    observadores->push_back(o);
+  if (!observadores) {
+    observadores = new std::list<Observer *>();
   }
+
+  observadores->push_back(o);
 }
 
 void Subject::desinscrever(Observer *o) {
