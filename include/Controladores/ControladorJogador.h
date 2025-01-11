@@ -6,11 +6,9 @@
 
 typedef sf::Keyboard::Key Key;
 
-namespace Entidades {
-namespace Personagens {
+namespace Entidades::Personagens {
 class Jogador;
-} // namespace Personagens
-} // namespace Entidades
+} // namespace Entidades::Personagens
 
 namespace Controladores {
 
