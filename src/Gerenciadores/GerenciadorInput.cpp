@@ -1,4 +1,5 @@
 #include "Gerenciadores/GerenciadorInput.h"
+#include "Subject.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Window.hpp>
 
@@ -6,7 +7,7 @@ namespace Gerenciadores {
 
 Gerenciador_Input *Gerenciador_Input::instancia = nullptr;
 
-Gerenciador_Input::Gerenciador_Input() {
+Gerenciador_Input::Gerenciador_Input() : Subject() {
   keyMap.clear();
   keyMap[sf::Keyboard::A] = "A";
   keyMap[sf::Keyboard::B] = "B";
