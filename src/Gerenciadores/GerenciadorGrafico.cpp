@@ -2,6 +2,7 @@
 #include "Ente.h"
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Window/WindowStyle.hpp>
+#include <iostream>
 
 namespace Gerenciadores {
 
@@ -38,8 +39,11 @@ void Gerenciador_Grafico::display() { pJanela->display(); }
 void Gerenciador_Grafico::clear() { pJanela->clear(); }
 
 void Gerenciador_Grafico::desenharEnte(Ente *pE) {
+  std::clog << "desenharEnte" << std::endl;
   if (pJanela && pE) {
-    pJanela->draw(*(pE->getSprite()));
+    pJanela->draw(*pE->getSprite());
+  } else {
+    std::clog << "Nullptr em desenharEnte" << std::endl;
   }
 }
 

@@ -53,4 +53,11 @@ void Ente::setTarget() {
   }
 }
 
-void Ente::desenhar() { pGG->desenharEnte(this); }
+void Ente::desenhar() {
+  std::clog << "desenhar Ente" << std::endl;
+  if (pGG)
+    pGG->desenharEnte(this);
+  else {
+    std::clog << "Nullptr em desenharEnte" << std::endl;
+  }
+}
