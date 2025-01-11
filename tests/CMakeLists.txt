@@ -4,13 +4,18 @@ find_package(Catch2 REQUIRED)
 # Executável dos testes
 add_executable(tests
   main_tests.cpp
+
+  # Adicionar aqui todos os arquivos de teste
+  gg_tests.cpp
 )
 
+# Adiciona o diretorio 'include/'
 target_include_directories(tests
   PRIVATE
   ${PROJECT_INCLUDE_DIR}
 )
 
+# Linka todos os arquivos de implementacao do jogo aos testes
 target_link_libraries(tests
   PUBLIC
   jogo
