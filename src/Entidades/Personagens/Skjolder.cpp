@@ -1,8 +1,11 @@
 #include "Entidades/Personagens/Skjolder.h"
 #include "Controladores/ControladorJogador.h"
 
-Skjolder::Skjolder() : Jogador(), stamina(100.0f), furia(0), pCont(nullptr) {
+Skjolder::Skjolder()
+    : Entidades::Personagens::Jogador(), stamina(100.0f), furia(0),
+      pCont(nullptr) {
   setTexture("/assets/Characters(100x100)/Knight/Knight/Knight-Idle.png");
+
   pCont = new Controladores::Controlador_Jogador();
   pCont->setJog(this);
 }
