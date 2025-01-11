@@ -11,7 +11,7 @@ private:
   Gerenciadores::Gerenciador_Grafico *pGG;
   Gerenciadores::Gerenciador_Eventos *pGE;
   Gerenciadores::Gerenciador_Input *pGI;
-  Skjolder *pJog1;
+  Entidades::Personagens::Skjolder *pJog1;
   Entidades::Personagens::Jogador *pJog2;
   Inimigos::Slime *pSl;
 
