@@ -16,7 +16,7 @@ protected:
 public:
   Personagem();
   virtual ~Personagem();
-  virtual void mover(bool left);
+  virtual void mover(bool esquerda);
   virtual void executar() = 0;
 };
 

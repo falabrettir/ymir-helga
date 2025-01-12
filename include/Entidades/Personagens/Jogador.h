@@ -3,30 +3,25 @@
 #include "Entidades/Personagens/Personagem.h"
 #include "Gerenciadores/GerenciadorEventos.h"
 
-namespace Entidades {
+namespace Entidades::Personagens {
 
-namespace Personagens {
-
-class Jogador : public Entidades::Personagens::Personagem {
+class Jogador : public Personagem {
 protected:
-  Gerenciadores::Gerenciador_Eventos *pGE;
   int pontos;
   int inimMortos;
   int tesouro;
   int dano;
-  bool pulou;
+  bool pudePular;
 
 public:
   Jogador();
   ~Jogador();
 
   void calculaPontos();
-  virtual void mover(bool left);
+  void mover(bool esquerda);
   void pular();
   virtual void atacar() = 0;
   virtual void executar() = 0;
 };
 
-} // namespace Personagens
-
-} // namespace Entidades
+} // namespace Entidades::Personagens

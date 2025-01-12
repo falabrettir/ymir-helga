@@ -14,8 +14,8 @@ Personagens::Jogador::~Jogador() {}
 
 void Personagens::Jogador::calculaPontos() {}
 
-void Personagens::Jogador::mover(bool left) {
-  if (left) {
+void Personagens::Jogador::mover(bool esquerda) {
+  if (esquerda) {
     pos -= velocidade * pGG->getDeltaTempo();
   } else {
     pos += velocidade * pGG->getDeltaTempo();
