@@ -51,15 +51,13 @@ void Gerenciador_Eventos::processaEventos() {
       }
 
       // TODO: Descomentar depois que conseguir renderizar jogador
-      /*
-       else if (evento.type == sf::Event::KeyPressed) {
-         pGI->ProcessaTeclaPressionada(evento.key.code);
-       }
+      else if (evento.type == sf::Event::KeyPressed) {
+        pGI->ProcessaTeclaPressionada(evento.key.code);
+      }
 
-       else if (evento.type == sf::Event::KeyReleased) {
-         pGI->ProcessaTeclaSolta(evento.key.code);
-       }
-      */
+      else if (evento.type == sf::Event::KeyReleased) {
+        pGI->ProcessaTeclaSolta(evento.key.code);
+      }
     }
   }
 }

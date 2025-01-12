@@ -40,7 +40,6 @@ bool Ente::setTexture(const std::string &path) {
   std::string filePath = ROOT;
   filePath += path;
   if (pTexture->loadFromFile(filePath)) {
-    std::clog << "Textura carregada: " << filePath << std::endl;
     atualizaSprite(pTexture);
     return true;
   } else {
@@ -52,9 +51,10 @@ bool Ente::setTexture(const std::string &path) {
 sf::Sprite Ente::getSprite() { return *pSprite; }
 
 void Ente::setTarget() {
-  if (pGG != nullptr) {
+  if (pGG) {
     pAlvo = pGG->getJanela();
-    std::clog << "Target set" << std::endl;
+  } else {
+    std::cerr << "Erro em setTarget" << std::endl;
   }
 }
 
