@@ -3,7 +3,9 @@
 
 namespace Entidades::Personagens {
 
-Skjolder::Skjolder() : Jogador(), stamina(100.0f), furia(0), pContr(nullptr) {
+Skjolder::Skjolder()
+    : Entidades::Personagens::Jogador(), stamina(100.0f), furia(0),
+      pContr(nullptr) {
   setTexture("/assets/Characters(100x100)/Knight/Knight/Knight-Idle.png");
   pContr = new Controladores::Controlador_Jogador();
   pContr->setJog(this);

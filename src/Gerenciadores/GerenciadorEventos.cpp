@@ -2,6 +2,7 @@
 #include "Gerenciadores/GerenciadorGrafico.h"
 #include "Gerenciadores/GerenciadorInput.h"
 #include <SFML/Window/Event.hpp>
+#include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Window.hpp>
 
 namespace Gerenciadores {
@@ -43,17 +44,22 @@ void Gerenciador_Eventos::processaEventos() {
 
     while (pJanela->pollEvent(evento)) {
 
-      if (evento.type == sf::Event::Closed) {
+      // windowClose ou ESC para fechar a janela
+      if (evento.type == sf::Event::Closed ||
+          sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         pGG->fecharJanela();
       }
 
-      else if (evento.type == sf::Event::KeyPressed) {
-        pGI->ProcessaTeclaPressionada(evento.key.code);
-      }
+      // TODO: Descomentar depois que conseguir renderizar jogador
+      /*
+       else if (evento.type == sf::Event::KeyPressed) {
+         pGI->ProcessaTeclaPressionada(evento.key.code);
+       }
 
-      else if (evento.type == sf::Event::KeyReleased) {
-        pGI->ProcessaTeclaSolta(evento.key.code);
-      }
+       else if (evento.type == sf::Event::KeyReleased) {
+         pGI->ProcessaTeclaSolta(evento.key.code);
+       }
+      */
     }
   }
 }

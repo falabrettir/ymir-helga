@@ -22,7 +22,7 @@ public:
   static void setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *ppGG);
   bool setTexture(const std::string &path);
   void atualizaSprite(sf::Texture *pTexture);
-  const sf::Sprite *getSprite();
+  sf::Sprite getSprite();
   void setTarget();
   void desenhar();
   virtual void executar() = 0;

@@ -27,9 +27,10 @@ void Jogo::executar() {
 
     pGG->atualizaDeltaTempo();
 
-    pJog1->desenhar();
-
     pGG->clear();
+
+    pGG->desenharEnte(pJog1);
+
     pGG->display();
   }
 }

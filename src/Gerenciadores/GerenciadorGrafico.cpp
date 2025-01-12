@@ -9,7 +9,8 @@ namespace Gerenciadores {
 Gerenciador_Grafico *Gerenciador_Grafico::instancia = nullptr;
 
 Gerenciador_Grafico::Gerenciador_Grafico() : deltaTempo(0.f) {
-  pJanela = new sf::RenderWindow(sf::VideoMode(800, 600), "Simon says");
+  pJanela = new sf::RenderWindow(sf::VideoMode(sf::VideoMode::getDesktopMode()),
+                                 "Skjolder e Helga", sf::Style::Fullscreen);
   pJanela->setVerticalSyncEnabled(true);
   pJanela->setFramerateLimit(30);
   pJanela->requestFocus();
@@ -39,11 +40,11 @@ void Gerenciador_Grafico::display() { pJanela->display(); }
 void Gerenciador_Grafico::clear() { pJanela->clear(); }
 
 void Gerenciador_Grafico::desenharEnte(Ente *pE) {
-  std::clog << "desenharEnte" << std::endl;
   if (pJanela && pE) {
-    pJanela->draw(*pE->getSprite());
+    pJanela->draw(pE->getSprite());
   } else {
-    std::clog << "Nullptr em desenharEnte" << std::endl;
+    std::clog << "parametro invalido: Gerenciador_Grafico::desenharEnte()"
+              << std::endl;
   }
 }
 
@@ -71,4 +72,5 @@ const float Gerenciador_Grafico::getLarguraJanela() const {
 const float Gerenciador_Grafico::getAlturaJanela() const {
   return alturaJanela;
 }
+
 } // namespace Gerenciadores

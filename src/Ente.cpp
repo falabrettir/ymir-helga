@@ -7,10 +7,12 @@
 #include <string>
 
 int Ente::cont(0);
+
 Gerenciadores::Gerenciador_Grafico *Ente::pGG(nullptr);
 
-Ente::Ente()
-    : id(cont++), pSprite(new sf::Sprite()), pTexture(new sf::Texture()) {
+Ente::Ente() : id(cont++) {
+  pSprite = new sf::Sprite();
+  pTexture = new sf::Texture();
   setTarget();
 }
 
@@ -28,6 +30,7 @@ void Ente::setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *ppGG) {
 }
 
 void Ente::atualizaSprite(sf::Texture *pTexture) {
+  std::clog << "funcao Ente::atualizaSprite" << std::endl;
   pSprite->setTexture(*pTexture);
   pSprite->setTextureRect(sf::IntRect(0, 0, 100, 100));
   pSprite->setScale(3.f, 3.f);
@@ -37,6 +40,7 @@ bool Ente::setTexture(const std::string &path) {
   std::string filePath = ROOT;
   filePath += path;
   if (pTexture->loadFromFile(filePath)) {
+    std::clog << "Textura carregada: " << filePath << std::endl;
     atualizaSprite(pTexture);
     return true;
   } else {
@@ -45,16 +49,16 @@ bool Ente::setTexture(const std::string &path) {
   }
 }
 
-const sf::Sprite *Ente::getSprite() { return pSprite; }
+sf::Sprite Ente::getSprite() { return *pSprite; }
 
 void Ente::setTarget() {
   if (pGG != nullptr) {
-    pAlvo = (pGG->getJanela());
+    pAlvo = pGG->getJanela();
+    std::clog << "Target set" << std::endl;
   }
 }
 
 void Ente::desenhar() {
-  std::clog << "desenhar Ente" << std::endl;
   if (pGG)
     pGG->desenharEnte(this);
   else {
