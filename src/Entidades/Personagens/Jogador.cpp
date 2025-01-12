@@ -13,11 +13,12 @@ Personagens::Jogador::Jogador()
 Personagens::Jogador::~Jogador() {}
 
 void Personagens::Jogador::calculaPontos() {}
+
 void Personagens::Jogador::mover(bool left) {
-  if (!left) {
-    pos += velocidade * pGG->getDeltaTempo();
-  } else {
+  if (left) {
     pos -= velocidade * pGG->getDeltaTempo();
+  } else {
+    pos += velocidade * pGG->getDeltaTempo();
   }
   pSprite->setPosition(pos);
 }

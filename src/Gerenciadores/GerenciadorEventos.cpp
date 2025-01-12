@@ -50,7 +50,6 @@ void Gerenciador_Eventos::processaEventos() {
         pGG->fecharJanela();
       }
 
-      // TODO: Descomentar depois que conseguir renderizar jogador
       else if (evento.type == sf::Event::KeyPressed) {
         pGI->ProcessaTeclaPressionada(evento.key.code);
       }

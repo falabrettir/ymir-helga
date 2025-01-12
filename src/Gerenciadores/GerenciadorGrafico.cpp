@@ -61,7 +61,7 @@ sf::RenderWindow *Gerenciador_Grafico::getJanela() const {
 }
 
 void Gerenciador_Grafico::atualizaDeltaTempo() {
-  deltaTempo = relogio.restart().asSeconds();
+  deltaTempo = relogio.restart().asMilliseconds();
 }
 
 const float Gerenciador_Grafico::getDeltaTempo() const { return deltaTempo; }

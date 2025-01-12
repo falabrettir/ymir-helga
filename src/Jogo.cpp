@@ -4,16 +4,16 @@
 #include "Gerenciadores/GerenciadorInput.h"
 #include <SFML/System/Vector2.hpp>
 
-Jogo::Jogo() : pJog2(nullptr), pSl(nullptr) {
+Jogo::Jogo() {
   pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
   pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
   pGI = Gerenciadores::Gerenciador_Input::getInstancia();
 
   Ente::setGerenciadorGrafico(pGG);
 
-  pJog1 = new Entidades::Personagens::Skjolder();
+  pSkjolder = new Entidades::Personagens::Skjolder();
 
-  pGI->inscrever(pJog1->getControlador());
+  pGI->inscrever(pSkjolder->getControlador());
 
   pGE->setGG(pGG);
   pGE->setGI(pGI);
@@ -23,13 +23,13 @@ Jogo::~Jogo() {}
 
 void Jogo::executar() {
   while (pGG->janelaAberta()) {
+    pGG->clear();
+
     pGE->processaEventos();
 
     pGG->atualizaDeltaTempo();
 
-    pGG->clear();
-
-    pGG->desenharEnte(pJog1);
+    pGG->desenharEnte(pSkjolder);
 
     pGG->display();
   }
