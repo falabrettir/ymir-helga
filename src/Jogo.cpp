@@ -29,6 +29,8 @@ void Jogo::executar() {
 
     pGG->atualizaDeltaTempo();
 
+    pSkjolder->getControlador()->controlarJogador();
+
     pGG->desenharEnte(pSkjolder);
 
     pGG->display();
