@@ -2,6 +2,7 @@
 #include "Subject.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Window.hpp>
+#include <iostream>
 
 namespace Gerenciadores {
 
@@ -83,6 +84,8 @@ Gerenciador_Input *Gerenciador_Input::getInstancia() {
 void Gerenciador_Input::ProcessaTeclaPressionada(sf::Keyboard::Key tecla) {
   // Notificar a tecla pressionada para o Observer (Controlador Jogador)
   if (observadores) {
+    std::clog << "Notificando tecla " << keyMap[tecla] << " pressionada"
+              << std::endl;
     notificarTeclaPressionada(tecla);
   }
 }

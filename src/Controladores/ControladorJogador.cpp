@@ -3,6 +3,7 @@
 #include "Observer.h"
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <iostream>
 #include <utility>
 
 namespace Controladores {
@@ -65,8 +66,9 @@ void Controlador_Jogador::atualizarTeclasSoltas(Key tecla) {
 // retemperar
 void Controlador_Jogador::controlarJogador() {
   if (pJog) {
-
+    std::clog << "Passei aqui" << std::endl;
     if (teclasPressionadas[direita]) {
+      std::clog << "Movendo para direita" << std::endl;
       pJog->mover(false);
     } else if (teclasPressionadas[esquerda]) {
       pJog->mover(true);
