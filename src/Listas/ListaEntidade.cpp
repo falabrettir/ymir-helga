@@ -2,7 +2,7 @@
 
 namespace Listas {
 ListaEntidades::ListaEntidades() : LEs() {}
-ListaEntidades::~ListaEntidades() {}
+ListaEntidades::~ListaEntidades() { LEs.limpar(); }
 void ListaEntidades::incluir(Entidades::Entidade *pE) { LEs.incluir(pE); }
 void ListaEntidades::deletar(Entidades::Entidade *pE) { LEs.remover(pE); }
 const int ListaEntidades::getSize() const { return LEs.getSize(); }
