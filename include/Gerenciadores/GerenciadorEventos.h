@@ -35,7 +35,6 @@ public:
   void setGG(Gerenciador_Grafico *pGG);
   void setGI(Gerenciador_Input *pGI);
   void processaEventos();
-  void processaInput(Entidades::Personagens::Jogador *pJog);
 };
 
 } // namespace Gerenciadores
