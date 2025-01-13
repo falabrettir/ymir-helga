@@ -13,9 +13,7 @@ sf::Vector2f Entidade::getVel() const { return velocidade; }
 
 void Entidade::setPos(sf::Vector2f &novaPos) { pos = novaPos; }
 
-void Entidade::setVel(sf::Vector2f &novaVel) {
-  velocidade = novaVel + gravidade;
-}
+void Entidade::setVel(sf::Vector2f &novaVel) { velocidade = novaVel; }
 
 sf::Vector2<float> Entidade::getSize() const {
   return static_cast<sf::Vector2<float>>(pTexture->getSize());

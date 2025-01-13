@@ -16,7 +16,7 @@ Skjolder::Skjolder()
   setPos(posInicial);
   pSprite->setPosition(posInicial);
 
-  sf::Vector2f velInicial(2, 0);
+  sf::Vector2f velInicial(0.3, 0);
   setVel(velInicial);
 }
 Controladores::Controlador_Jogador *Skjolder::getControlador() const {

@@ -16,7 +16,7 @@ private:
       pProx = nullptr;
       pInfo = nullptr;
     }
-    bool incluir(TE *pElem) { pInfo = pElem; }
+    void incluir(TE *pElem) { pInfo = pElem; }
     void setProx(Elemento<TE> *pElem) { pProx = pElem; }
     Elemento<TE> *getProximo() const { return pProx; }
     TE *getInfo() const { return pInfo; }
@@ -38,7 +38,7 @@ public:
       return pUltimo;
   }
 
-  bool incluir(TL *p) {
+  void incluir(TL *p) {
     Elemento<TL> *node = new Elemento<TL>();
     if (node != nullptr) {
       node->incluir(p);
@@ -50,9 +50,6 @@ public:
         pUltimo = node;
       }
       tamanho++;
-      return true;
-    } else {
-      return false;
     }
   }
   void remover(TL *p) {
@@ -88,6 +85,13 @@ public:
     pUltimo = nullptr;
     tamanho = 0;
   }
+  TL *operator[](int pos) {
+    Elemento<TL> *aux = pPrimeiro;
+    for (int i = 0; i < pos; i++) {
+      aux = aux->getProximo();
+    }
+    return aux->getInfo();
+  }
   int getSize() const { return tamanho; }
 
 public:
@@ -100,21 +104,23 @@ public:
     Iterator(Elemento<TL> *pElem) : pAtual(pElem) {}
     ~Iterator() { pAtual = nullptr; }
 
-    const Iterator &operator++() const {
-      pAtual = pAtual->getProximo();
+    Iterator &operator++() {
+      if (pAtual) {
+        pAtual = pAtual->getProximo();
+      }
       return *this;
     }
-    const Iterator &operator=(const Iterator &outro) const {
+    Iterator &operator=(Iterator &outro) {
       if (&outro != this) {
         pAtual = outro.pAtual;
       }
       return *this;
     }
-    const bool &operator!=(const Iterator &outro) const {
+    bool &operator!=(const Iterator &outro) const {
       return this->pAtual != outro.pAtual;
     }
   };
-  const Iterator begin() { return Iterator(pPrimeiro); }
-  const Iterator end() { return Iterator(pUltimo); }
+  Iterator begin() const { return Iterator(pPrimeiro); }
+  Iterator end() const { return Iterator(pUltimo); }
 };
 } // namespace Listas
