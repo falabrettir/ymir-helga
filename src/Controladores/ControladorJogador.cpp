@@ -5,6 +5,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 #include <utility>
+#define VEL 0.3
 
 namespace Controladores {
 
@@ -70,12 +71,12 @@ void Controlador_Jogador::controlarJogador() {
     std::clog << "Passei aqui" << std::endl;
     if (teclasPressionadas[direita]) {
       std::clog << "Movendo para direita" << std::endl;
-      mov.x = 0.3;
+      mov.x = VEL;
     } else if (teclasPressionadas[esquerda]) {
-      mov.x = -0.3;
+      mov.x = -VEL;
     }
     if (teclasPressionadas[pulo]) {
-      mov.y = -0.3;
+      mov.y = -VEL;
     }
     pJog->setVel(mov);
     pJog->mover();

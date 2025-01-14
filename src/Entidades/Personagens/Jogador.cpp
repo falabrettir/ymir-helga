@@ -13,9 +13,6 @@ Personagens::Jogador::~Jogador() {}
 
 void Personagens::Jogador::calculaPontos() {}
 
-void Personagens::Jogador::mover() {
-  pos += this->getVel() * pGG->getDeltaTempo();
-  pSprite->setPosition(pos);
-}
+void Personagens::Jogador::mover() { pSprite->setPosition(pos); }
 
 void Personagens::Jogador::executar() {}

@@ -6,7 +6,4 @@ Personagens::Personagem::Personagem() : Entidade() {}
 
 Personagens::Personagem::~Personagem() {}
 
-void Personagens::Personagem::mover() {
-  pos += velocidade * pGG->getDeltaTempo();
-  pSprite->setPosition(pos);
-}
+void Personagens::Personagem::mover() {}
