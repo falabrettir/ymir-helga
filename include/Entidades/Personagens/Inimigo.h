@@ -16,8 +16,6 @@ protected:
 
 public:
   Inimigo();
-  Inimigo(sf::Vector2<float> pos, sf::Vector2<float> tamanho,
-          const std::string &path, Jogador *pJog);
   virtual ~Inimigo();
   void persegue();
 

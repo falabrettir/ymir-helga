@@ -5,21 +5,16 @@
 using namespace Entidades;
 
 Personagens::Jogador::Jogador()
-    : Personagens::Personagem(), pontos(0), inimMortos(0), tesouro(0),
-      dano(25) {
+    : Personagens::Personagem(), pontos(0), inimMortos(0), tesouro(0), dano(25){
 
-      };
+                                                                       };
 
 Personagens::Jogador::~Jogador() {}
 
 void Personagens::Jogador::calculaPontos() {}
 
-void Personagens::Jogador::mover(bool esquerda) {
-  if (esquerda) {
-    pos -= velocidade * pGG->getDeltaTempo();
-  } else {
-    pos += velocidade * pGG->getDeltaTempo();
-  }
+void Personagens::Jogador::mover() {
+  pos += this->getVel() * pGG->getDeltaTempo();
   pSprite->setPosition(pos);
 }
 

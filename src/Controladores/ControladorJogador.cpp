@@ -66,17 +66,19 @@ void Controlador_Jogador::atualizarTeclasSoltas(Key tecla) {
 // retemperar
 void Controlador_Jogador::controlarJogador() {
   if (pJog) {
+    sf::Vector2<float> mov(0.f, 0.f);
     std::clog << "Passei aqui" << std::endl;
     if (teclasPressionadas[direita]) {
       std::clog << "Movendo para direita" << std::endl;
-      pJog->mover(false);
+      mov.x = 0.3;
     } else if (teclasPressionadas[esquerda]) {
-      pJog->mover(true);
+      mov.x = -0.3;
     }
-
-    // if (teclasPressionadas[pulo]) {
-    //   pJog->pular();
-    // }
+    if (teclasPressionadas[pulo]) {
+      mov.y = -0.3;
+    }
+    pJog->setVel(mov);
+    pJog->mover();
     //
     // if (teclasPressionadas[ataque]) {
     //   pJog->atacar();

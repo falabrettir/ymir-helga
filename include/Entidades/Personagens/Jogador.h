@@ -2,6 +2,7 @@
 
 #include "Entidades/Personagens/Personagem.h"
 #include "Gerenciadores/GerenciadorEventos.h"
+#include <SFML/System/Vector2.hpp>
 
 namespace Entidades::Personagens {
 
@@ -18,7 +19,7 @@ public:
   ~Jogador();
 
   void calculaPontos();
-  void mover(bool esquerda);
+  void mover();
   void pular();
   virtual void atacar() = 0;
   virtual void executar() = 0;

@@ -3,13 +3,8 @@
 
 using namespace Entidades;
 
-Personagens::Inimigos::Inimigo::Inimigo() {}
-Personagens::Inimigos::Inimigo::Inimigo(sf::Vector2<float> pos,
-                                        sf::Vector2<float> tamanho,
-                                        const std::string &path, Jogador *pJog)
-    : visada(700.0), nivelMadade(0) {
-  pJ = pJog;
-}
+Personagens::Inimigos::Inimigo::Inimigo()
+    : visada(0.f), nivelMadade(0), pJ(nullptr) {}
 Personagens::Inimigos::Inimigo::~Inimigo() {}
 void Personagens::Inimigos::Inimigo::salvarDataBuffer() {}
 void Personagens::Inimigos::Inimigo::persegue() {
