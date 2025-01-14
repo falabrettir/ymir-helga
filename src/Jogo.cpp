@@ -21,18 +21,22 @@ Jogo::Jogo() {
 
 Jogo::~Jogo() {}
 
+void Jogo::atualizar() {
+  pGE->processaEventos();
+
+  pGG->atualizaDeltaTempo();
+
+  pSkjolder->executar();
+
+  pGG->desenharEnte(static_cast<Ente *>(pSkjolder));
+
+  // Sempre deixar display antes de clear
+  pGG->display();
+  pGG->clear();
+}
+
 void Jogo::executar() {
   while (pGG->janelaAberta()) {
-    pGG->clear();
-
-    pGE->processaEventos();
-
-    pGG->atualizaDeltaTempo();
-
-    pSkjolder->getControlador()->controlarJogador();
-
-    pGG->desenharEnte(pSkjolder);
-
-    pGG->display();
+    atualizar();
   }
 }

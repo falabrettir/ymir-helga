@@ -16,8 +16,11 @@ protected:
 public:
   Personagem();
   virtual ~Personagem();
-  virtual void mover() = 0;
+
+  virtual void mover();
   virtual void executar() = 0;
+
+  void setOlhandoEsquerda();
 };
 
 } // namespace Personagens

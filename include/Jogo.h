@@ -15,5 +15,6 @@ private:
 public:
   Jogo();
   ~Jogo();
+  void atualizar();
   void executar();
 };

@@ -3,7 +3,9 @@
 
 using namespace Entidades;
 
-Entidade::Entidade() : Ente(), gravidade(0, 2), velocidade(0, 0) {};
+Entidade::Entidade()
+    : Ente(), pos(0, 0), velocidade(0, 0), gravidade(0, 1), tamanho(0, 0),
+      buffer(nullptr) {};
 
 Entidade::~Entidade() {}
 
@@ -16,5 +18,11 @@ void Entidade::setPos(sf::Vector2f &novaPos) { pos = novaPos; }
 void Entidade::setVel(sf::Vector2f &novaVel) { velocidade = novaVel; }
 
 sf::Vector2<float> Entidade::getSize() const {
-  return static_cast<sf::Vector2<float>>(pTexture->getSize());
+  return static_cast<sf::Vector2f>(pTexture->getSize());
+}
+
+void Entidade::cair() {
+  sf::Vector2f novaVel = getVel() + gravidade;
+  setPos();
+  setVel(novaVel);
 }

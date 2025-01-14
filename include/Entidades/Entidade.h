@@ -8,9 +8,9 @@ const float gravidade = 5;
 class Entidade : public Ente {
 protected:
   sf::Vector2f pos;
-  sf::Vector2f tamanho;
   sf::Vector2f velocidade;
   const sf::Vector2f gravidade;
+  sf::Vector2f tamanho;
   std::ostream *buffer;
 
 public:
@@ -21,9 +21,11 @@ public:
 
   void setVel(sf::Vector2f &novaVel);
   void setPos(sf::Vector2f &novaPos);
-  sf::Vector2f getPos() const;
   sf::Vector2f getVel() const;
-  sf::Vector2<float> getSize() const;
+  sf::Vector2f getPos() const;
+  sf::Vector2f getSize() const;
+
+  void cair();
 };
 
 } // namespace Entidades

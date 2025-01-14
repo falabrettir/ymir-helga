@@ -34,7 +34,6 @@ public:
 
   void atualizarTeclasPressionadas(Key tecla);
   void atualizarTeclasSoltas(Key tecla);
-
   void controlarJogador();
 };
 

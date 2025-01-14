@@ -3,7 +3,6 @@
 #include "Observer.h"
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
-#include <iostream>
 #include <utility>
 #define VEL 0.3
 
@@ -64,7 +63,6 @@ void Controlador_Jogador::atualizarTeclasSoltas(Key tecla) {
 }
 
 // TODO:
-// retemperar
 void Controlador_Jogador::controlarJogador() {
   if (pJog) {
     sf::Vector2<float> mov(0.f, 0.f);

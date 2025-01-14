@@ -26,6 +26,6 @@ Controladores::Controlador_Jogador *Skjolder::getControlador() const {
 // Destrutora e metodos atacar e executar
 Skjolder::~Skjolder() {}
 void Skjolder::atacar() {}
-void Skjolder::executar() {}
+void Skjolder::executar() { pContr->controlarJogador(); }
 
 } // namespace Entidades::Personagens
