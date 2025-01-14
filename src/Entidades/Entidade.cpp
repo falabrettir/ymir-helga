@@ -4,25 +4,29 @@
 using namespace Entidades;
 
 Entidade::Entidade()
-    : Ente(), pos(0, 0), velocidade(0, 0), gravidade(0, 1), tamanho(0, 0),
-      buffer(nullptr) {};
+    : Ente(), pos(0, 0), velocidade(0, 0), gravidade(0, 0.1), tamanho(0, 0),
+      noChao(true), buffer(nullptr) {};
 
-Entidade::~Entidade() {}
+Entidade::~Entidade() { buffer = nullptr; }
+
+void Entidade::setPos(sf::Vector2f novaPos) { pos = novaPos; }
+
+void Entidade::setVel(sf::Vector2f novaVel) { velocidade = novaVel; }
+
+void Entidade::setVelX(float velX) { velocidade.x = velX; }
+
+void Entidade::setVelY(float velY) { velocidade.y = velY; }
+
+void Entidade::setNoChao(bool noChao) { this->noChao = noChao; }
 
 sf::Vector2f Entidade::getPos() const { return pos; }
 
 sf::Vector2f Entidade::getVel() const { return velocidade; }
 
-void Entidade::setPos(sf::Vector2f &novaPos) { pos = novaPos; }
-
-void Entidade::setVel(sf::Vector2f &novaVel) { velocidade = novaVel; }
+bool Entidade::getNoChao() const { return noChao; }
 
 sf::Vector2<float> Entidade::getSize() const {
   return static_cast<sf::Vector2f>(pTexture->getSize());
 }
 
-void Entidade::cair() {
-  sf::Vector2f novaVel = getVel() + gravidade;
-  setPos();
-  setVel(novaVel);
-}
+void Entidade::cair() { setVel(getVel() + gravidade); }

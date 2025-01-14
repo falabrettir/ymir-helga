@@ -5,8 +5,7 @@
 namespace Entidades::Personagens {
 
 Skjolder::Skjolder()
-    : Entidades::Personagens::Jogador(), stamina(100.0f), furia(0),
-      pContr(nullptr) {
+    : Entidades::Personagens::Jogador(), stamina(100.0f), furia(0) {
   setTexture("/assets/Characters(100x100)/Knight/Knight/Knight-Idle.png");
 
   pContr = new Controladores::Controlador_Jogador();
@@ -19,13 +18,11 @@ Skjolder::Skjolder()
   sf::Vector2f velInicial(0.f, 0.f);
   setVel(velInicial);
 }
-Controladores::Controlador_Jogador *Skjolder::getControlador() const {
-  return pContr;
-}
+
 // TODO:
 // Destrutora e metodos atacar e executar
 Skjolder::~Skjolder() {}
+
 void Skjolder::atacar() {}
-void Skjolder::executar() { pContr->controlarJogador(); }
 
 } // namespace Entidades::Personagens

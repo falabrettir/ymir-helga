@@ -8,7 +8,7 @@ namespace Entidades {
 namespace Personagens {
 
 class Personagem : public Entidades::Entidade {
-protected:
+private:
   int hp;
   int numVidas;
   bool olhandoEsquerda;
@@ -20,7 +20,7 @@ public:
   virtual void mover();
   virtual void executar() = 0;
 
-  void setOlhandoEsquerda();
+  void setOlhandoEsquerda(bool olhandoEsquerda);
 };
 
 } // namespace Personagens

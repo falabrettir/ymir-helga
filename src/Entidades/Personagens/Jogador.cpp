@@ -2,20 +2,38 @@
 #include "Entidades/Personagens/Personagem.h"
 #include <SFML/System/Vector2.hpp>
 
-using namespace Entidades;
+using namespace Entidades::Personagens;
 
-Personagens::Jogador::Jogador()
-    : Personagens::Personagem(), pontos(0), inimMortos(0), tesouro(0), dano(25){
+Jogador::Jogador() : Personagem(), pContr(nullptr), podePular(true) {}
 
-                                                                       };
+Jogador::~Jogador() {}
 
-Personagens::Jogador::~Jogador() {}
+void Jogador::andarDireita() { setVelX(VEL); }
 
-void Personagens::Jogador::calculaPontos() {}
+void Jogador::andarEsquerda() { setVelX(-VEL); }
 
-void Personagens::Jogador::mover() {
-  pos += velocidade * pGG->getDeltaTempo();
-  pSprite->setPosition(pos);
+void Jogador::naoAndar() { setVelX(0); }
+
+void Jogador::pular() {
+  if (podePular)
+    setVelY(-VEL);
 }
 
-void Personagens::Jogador::executar() {}
+void Jogador::mover() {
+  sf::Vector2f novaPos = getPos() + getVel() * pGG->getDeltaTempo();
+  setPos(novaPos);
+  pSprite->setPosition(novaPos);
+}
+
+Controladores::Controlador_Jogador *Jogador::getControlador() const {
+  return pContr;
+}
+
+void Jogador::executar() {
+
+  pContr->controlarJogador();
+
+  cair();
+
+  mover();
+}

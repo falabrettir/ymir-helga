@@ -6,12 +6,15 @@ namespace Entidades {
 const float gravidade = 5;
 
 class Entidade : public Ente {
-protected:
+private:
   sf::Vector2f pos;
-  sf::Vector2f velocidade;
   const sf::Vector2f gravidade;
   sf::Vector2f tamanho;
+  bool noChao;
   std::ostream *buffer;
+
+protected:
+  sf::Vector2f velocidade;
 
 public:
   Entidade();
@@ -19,10 +22,15 @@ public:
 
   virtual void executar() = 0;
 
-  void setVel(sf::Vector2f &novaVel);
-  void setPos(sf::Vector2f &novaPos);
+  void setVel(sf::Vector2f novaVel);
+  void setVelX(float velX);
+  void setVelY(float velY);
+  void setPos(sf::Vector2f novaPos);
+  void setNoChao(bool noChao);
+
   sf::Vector2f getVel() const;
   sf::Vector2f getPos() const;
+  bool getNoChao() const;
   sf::Vector2f getSize() const;
 
   void cair();

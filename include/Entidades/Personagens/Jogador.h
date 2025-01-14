@@ -1,28 +1,31 @@
 #pragma once
 
+#include "Controladores/ControladorJogador.h"
 #include "Entidades/Personagens/Personagem.h"
 #include "Gerenciadores/GerenciadorEventos.h"
 #include <SFML/System/Vector2.hpp>
 
 namespace Entidades::Personagens {
 
+#define VEL 0.3
+
 class Jogador : public Personagem {
-protected:
-  int pontos;
-  int inimMortos;
-  int tesouro;
-  int dano;
-  bool pudePular;
+private:
+  bool podePular;
+  Controladores::Controlador_Jogador *pContr;
 
 public:
   Jogador();
   ~Jogador();
 
-  void calculaPontos();
-  void mover();
+  void andarDireita();
+  void andarEsquerda();
+  void naoAndar();
   void pular();
+  void mover();
   virtual void atacar() = 0;
-  virtual void executar() = 0;
+  virtual void executar();
+  Controladores::Controlador_Jogador *getControlador() const;
 };
 
 } // namespace Entidades::Personagens
