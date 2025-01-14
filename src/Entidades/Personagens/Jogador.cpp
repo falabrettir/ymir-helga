@@ -33,7 +33,8 @@ void Jogador::executar() {
 
   pContr->controlarJogador();
 
-  cair();
+  if (!getNoChao())
+    cair();
 
   mover();
 }

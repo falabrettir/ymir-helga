@@ -10,7 +10,7 @@ namespace Entidades::Personagens {
 #define VEL 0.3
 
 class Jogador : public Personagem {
-private:
+protected:
   bool podePular;
   Controladores::Controlador_Jogador *pContr;
 

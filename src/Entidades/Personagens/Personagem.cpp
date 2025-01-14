@@ -11,7 +11,7 @@ Personagem::~Personagem() {}
 void Personagem::mover() {
   sf::Vector2f novaPos = getPos() + (velocidade * pGG->getDeltaTempo());
   setPos(novaPos);
-  pSprite->setPosition(pos);
+  pSprite->setPosition(novaPos);
 }
 
 void Personagem::setOlhandoEsquerda(bool olhandoEsquerda) {
