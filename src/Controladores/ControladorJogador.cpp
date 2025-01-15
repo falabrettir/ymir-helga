@@ -61,7 +61,6 @@ void Controlador_Jogador::atualizarTeclasSoltas(Key tecla) {
   }
 }
 
-// TODO:
 void Controlador_Jogador::controlarJogador() {
   if (pJog) {
 

@@ -5,13 +5,10 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Window.hpp>
 
-namespace Entidades {
-namespace Personagens {
-
+namespace Entidades::Personagens {
 class Jogador;
 
-}
-} // namespace Entidades
+} // namespace Personagens
 
 namespace Gerenciadores {
 
