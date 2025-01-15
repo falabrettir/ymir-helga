@@ -28,9 +28,10 @@ public:
   void setJog(Entidades::Personagens::Jogador *pJog);
 
   // Funcao para diferenciar os controles do jogador2
-  void setControles(Key direita = sf::Keyboard::D,
-                    Key esquerda = sf::Keyboard::A, Key pulo = sf::Keyboard::W,
-                    Key ataque = sf::Keyboard::Space);
+  void setControles();
+
+  // Retorna true se a tecla esta no map 'teclasPressionadas'
+  bool acharTecla(Key tecla);
 
   void atualizarTeclasPressionadas(Key tecla);
   void atualizarTeclasSoltas(Key tecla);

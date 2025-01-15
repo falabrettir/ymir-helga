@@ -10,6 +10,9 @@ namespace Entidades::Personagens {
 #define VEL 0.3
 
 class Jogador : public Personagem {
+private:
+  bool ehPrimeiroJogador;
+
 protected:
   bool podePular;
   Controladores::Controlador_Jogador *pContr;
@@ -17,6 +20,9 @@ protected:
 public:
   Jogador();
   ~Jogador();
+
+  void setPrimeiroJog(bool ehPrimeiroJogador);
+  bool getPrimeiroJog() const;
 
   void andarDireita();
   void andarEsquerda();

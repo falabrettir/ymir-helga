@@ -18,7 +18,6 @@ public:
   virtual ~Personagem();
 
   virtual void mover();
-  virtual void executar() = 0;
 
   void setOlhandoEsquerda(bool olhandoEsquerda);
 };

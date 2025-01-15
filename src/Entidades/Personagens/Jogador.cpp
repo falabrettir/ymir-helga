@@ -4,9 +4,16 @@
 
 using namespace Entidades::Personagens;
 
-Jogador::Jogador() : Personagem(), pContr(nullptr), podePular(true) {}
+Jogador::Jogador()
+    : Personagem(), pContr(nullptr), podePular(true), ehPrimeiroJogador(true) {}
 
 Jogador::~Jogador() {}
+
+void Jogador::setPrimeiroJog(bool ehPrimeiroJogador) {
+  this->ehPrimeiroJogador = ehPrimeiroJogador;
+}
+
+bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
 void Jogador::andarDireita() { setVelX(VEL); }
 
@@ -15,8 +22,9 @@ void Jogador::andarEsquerda() { setVelX(-VEL); }
 void Jogador::naoAndar() { setVelX(0); }
 
 void Jogador::pular() {
-  if (podePular)
+  if (podePular) {
     setVelY(-VEL);
+  }
 }
 
 void Jogador::mover() {

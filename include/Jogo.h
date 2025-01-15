@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Entidades/Personagens/Helga.h"
 #include "Entidades/Personagens/Skjolder.h"
 #include "Gerenciadores/GerenciadorEventos.h"
 #include "Gerenciadores/GerenciadorGrafico.h"
@@ -11,6 +12,7 @@ private:
   Gerenciadores::Gerenciador_Eventos *pGE;
   Gerenciadores::Gerenciador_Input *pGI;
   Entidades::Personagens::Skjolder *pSkjolder;
+  Entidades::Personagens::Helga *pHelga;
 
 public:
   Jogo();

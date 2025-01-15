@@ -20,8 +20,6 @@ public:
   Entidade();
   virtual ~Entidade();
 
-  virtual void executar() = 0;
-
   void setVel(sf::Vector2f novaVel);
   void setVelX(float velX);
   void setVelY(float velY);

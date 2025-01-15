@@ -1,4 +1,8 @@
+#pragma once
+
 #include "Jogador.h"
+
+namespace Entidades::Personagens {
 
 class Helga : public Entidades::Personagens::Jogador {
 private:
@@ -13,3 +17,5 @@ public:
   void atacar();
   void executar();
 };
+
+} // namespace Entidades::Personagens

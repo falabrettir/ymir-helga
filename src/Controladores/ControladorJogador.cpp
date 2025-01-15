@@ -10,7 +10,6 @@ namespace Controladores {
 // Constroi com controles padrao (WASD+Space)
 Controlador_Jogador::Controlador_Jogador() : pJog(nullptr), Observer() {
   teclasPressionadas.clear();
-  setControles();
 }
 
 Controlador_Jogador::~Controlador_Jogador() {
@@ -21,42 +20,50 @@ Controlador_Jogador::~Controlador_Jogador() {
 void Controlador_Jogador::setJog(Entidades::Personagens::Jogador *pJog) {
   if (pJog) {
     this->pJog = pJog;
+    setControles();
   }
 }
 
-// TODO:
-// Apos criar classes para Jogador1 e Jogador2, refatorar essa funcao
-void Controlador_Jogador::setControles(Key direita, Key esquerda, Key pulo,
-                                       Key ataque) {
-  this->direita = direita;
+void Controlador_Jogador::setControles() {
+
+  if (pJog->getPrimeiroJog()) {
+    direita = sf::Keyboard::D;
+    esquerda = sf::Keyboard::A;
+    pulo = sf::Keyboard::W;
+    ataque = sf::Keyboard::Space;
+
+  } else {
+    direita = sf::Keyboard::Right;
+    esquerda = sf::Keyboard::Left;
+    pulo = sf::Keyboard::Up;
+    ataque = sf::Keyboard::RShift;
+  }
+
   teclasPressionadas.insert(std::pair<Key, bool>(direita, false));
-
-  this->esquerda = esquerda;
   teclasPressionadas.insert(std::pair<Key, bool>(esquerda, false));
-
-  this->pulo = pulo;
   teclasPressionadas.insert(std::pair<Key, bool>(pulo, false));
-
-  this->ataque = ataque;
   teclasPressionadas.insert(std::pair<Key, bool>(ataque, false));
 }
 
+bool Controlador_Jogador::acharTecla(Key tecla) {
+  return (teclasPressionadas.find(tecla) != teclasPressionadas.end());
+}
+
 void Controlador_Jogador::atualizarTeclasPressionadas(Key tecla) {
-  if (teclasPressionadas.find(tecla) != teclasPressionadas.end()) {
+  if (acharTecla(tecla)) {
 
     teclasPressionadas[tecla] = true;
 
     // Considerar que a ultima tecla de novaVelimento apertada tem prioridade
-    if (tecla == direita) {
+    if (tecla == direita)
       teclasPressionadas[esquerda] = false;
-    } else if (tecla == esquerda) {
+    else if (tecla == esquerda)
       teclasPressionadas[direita] = false;
-    }
   }
 }
 
 void Controlador_Jogador::atualizarTeclasSoltas(Key tecla) {
-  if (teclasPressionadas.find(tecla) != teclasPressionadas.end()) {
+  if (acharTecla(tecla)) {
     teclasPressionadas[tecla] = false;
   }
 }

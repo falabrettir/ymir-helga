@@ -11,6 +11,7 @@ public:
   Skjolder();
   ~Skjolder();
   void atacar();
+  void executar();
 };
 
 } // namespace Entidades::Personagens
