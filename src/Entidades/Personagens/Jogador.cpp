@@ -23,7 +23,7 @@ void Jogador::naoAndar() { setVelX(0); }
 
 void Jogador::pular() {
   if (podePular) {
-    setVelY(-VEL);
+    setVelY(-2 * VEL);
   }
 }
 
