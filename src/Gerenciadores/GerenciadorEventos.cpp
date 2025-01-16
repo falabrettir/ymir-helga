@@ -4,7 +4,6 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Window.hpp>
-#include <iostream>
 
 namespace Gerenciadores {
 Gerenciador_Eventos *Gerenciador_Eventos::instancia = nullptr;
@@ -29,16 +28,12 @@ void Gerenciador_Eventos::setGG(Gerenciador_Grafico *pGG) {
   if (pGG) {
     this->pGG = pGG;
     pJanela = pGG->getJanela();
-  } else {
-    std::cerr << "erro: em Gerenciador_Eventos::setGG(), pGG == nullptr\n";
   }
 }
 
 void Gerenciador_Eventos::setGI(Gerenciador_Input *pGI) {
   if (pGI) {
     this->pGI = pGI;
-  } else {
-    std::cerr << "erro: em Gerenciador_Eventos::setGI(), pGI == nullptr\n";
   }
 }
 
@@ -63,9 +58,6 @@ void Gerenciador_Eventos::processaEventos() {
         pGI->ProcessaTeclaSolta(evento.key.code);
       }
     }
-  } else {
-    std::cerr << "erro: em Gerenciador_Eventos::processaEventos(), pGG == "
-                 "nullptr || pJanela == nullptr\n";
   }
 }
 } // namespace Gerenciadores
