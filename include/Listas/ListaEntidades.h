@@ -14,7 +14,11 @@ public:
   ~ListaEntidades();
 
   void incluir(Entidades::Entidade *pE);
-  void percorrer();
+  void deletar(Entidades::Entidade *pE);
+  const int getSize() const;
+  void limpar();
+  const Listas::Lista<Entidades::Entidade>::Iterator begin() const;
+  const Listas::Lista<Entidades::Entidade>::Iterator end() const;
 };
 
 } // namespace Listas

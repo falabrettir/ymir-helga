@@ -1,22 +1,19 @@
 #include "Entidades/Personagens/Personagem.h"
+#include <SFML/System/Vector2.hpp>
 
-using namespace Entidades;
+using namespace Entidades::Personagens;
 
-Personagens::Personagem::Personagem() {}
+Personagem::Personagem()
+    : Entidade(), hp(100), numVidas(3), olhandoEsquerda(false) {}
 
-Personagens::Personagem::Personagem(sf::Vector2<float> pos,
-                                    sf::Vector2<float> tamanho,
-                                    const std::string &path)
-    : Entidade::Entidade(pos, tamanho, path), hp(0), numVidas(2) {}
+Personagem::~Personagem() {}
 
-Personagens::Personagem::~Personagem() {}
-
-void Personagens::Personagem::mover(sf::Vector2<float> mov) {
-  sf::Vector2<float> novaPos = this->getPos();
-  novaPos.x += mov.x * pGG->getDeltaTempo();
-  novaPos.y += mov.y * pGG->getDeltaTempo();
-  this->setPos(novaPos);
+void Personagem::mover() {
+  sf::Vector2f novaPos = getPos() + (velocidade * pGG->getDeltaTempo());
+  setPos(novaPos);
   pSprite->setPosition(novaPos);
 }
 
-void Personagens::Personagem::salvarDataBuffer() {}
+void Personagem::setOlhandoEsquerda(bool olhandoEsquerda) {
+  this->olhandoEsquerda = olhandoEsquerda;
+}

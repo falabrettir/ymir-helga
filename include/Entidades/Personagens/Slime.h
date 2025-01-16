@@ -11,8 +11,6 @@ private:
 
 public:
   Slime();
-  Slime(sf::Vector2<float> pos, sf::Vector2<float> tamanho,
-        const std::string &path);
   ~Slime();
   void danificar(Entidades::Personagens::Jogador *pJog);
   void executar();

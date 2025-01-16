@@ -1,58 +1,71 @@
 #include "Gerenciadores/GerenciadorEventos.h"
-#include "Entidades/Personagens/Jogador.h"
 #include "Gerenciadores/GerenciadorGrafico.h"
+#include "Gerenciadores/GerenciadorInput.h"
 #include <SFML/Window/Event.hpp>
+#include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Window.hpp>
 #include <iostream>
 
-using namespace Gerenciadores;
-
+namespace Gerenciadores {
 Gerenciador_Eventos *Gerenciador_Eventos::instancia = nullptr;
 
-Gerenciador_Eventos::Gerenciador_Eventos() : evento() {}
+Gerenciador_Eventos::Gerenciador_Eventos()
+    : pJanela(nullptr), pGG(nullptr), pGI(nullptr) {}
 
-Gerenciador_Eventos::~Gerenciador_Eventos() {}
+Gerenciador_Eventos::~Gerenciador_Eventos() {
+  pJanela = nullptr;
+  pGG = nullptr;
+  pGI = nullptr;
+}
 
 Gerenciador_Eventos *Gerenciador_Eventos::getInstancia() {
   if (instancia == nullptr) {
     instancia = new Gerenciador_Eventos();
   }
-  return instancia; // Singleton
+  return instancia;
 }
 
-sf::Event &Gerenciador_Eventos::getEvento() { return evento; }
-
-void Gerenciador_Eventos::processaEventos(Gerenciador_Grafico *pGG) {
-  while (pGG->pollEvent(getEvento())) {
-    if (evento.type == sf::Event::Closed)
-      pGG->fecharJanela();
+void Gerenciador_Eventos::setGG(Gerenciador_Grafico *pGG) {
+  if (pGG) {
+    this->pGG = pGG;
+    pJanela = pGG->getJanela();
+  } else {
+    std::cerr << "erro: em Gerenciador_Eventos::setGG(), pGG == nullptr\n";
   }
 }
-void Gerenciador_Eventos::processaInput(Entidades::Personagens::Jogador *pJog) {
-  // Initialize movement vector to zero
-  sf::Vector2<float> mov(0.0f, 0.0f);
-  bool moveu = 0;
-  // Handle movement input
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-    mov.y -= pJog->getVel().y; // Move up
-    moveu = 1;
-    std::cout << "Pra cima  " << mov.y << std::endl;
-  }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-    mov.y += pJog->getVel().y; // Move down
-    moveu = 1;
-  }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-    mov.x -= pJog->getVel().x; // Move left
-    moveu = 1;
-  }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-    mov.x += pJog->getVel().x; // Move right
-    moveu = 1;
-  }
 
-  // Move the player using the calculated movement vector
-  if (moveu) {
-    pJog->mover(mov);
+void Gerenciador_Eventos::setGI(Gerenciador_Input *pGI) {
+  if (pGI) {
+    this->pGI = pGI;
+  } else {
+    std::cerr << "erro: em Gerenciador_Eventos::setGI(), pGI == nullptr\n";
   }
 }
+
+void Gerenciador_Eventos::processaEventos() {
+  if (pJanela && pGG) {
+
+    sf::Event evento;
+
+    while (pJanela->pollEvent(evento)) {
+
+      // windowClose ou ESC para fechar a janela
+      if (evento.type == sf::Event::Closed ||
+          sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+        pGG->fecharJanela();
+      }
+
+      else if (evento.type == sf::Event::KeyPressed) {
+        pGI->ProcessaTeclaPressionada(evento.key.code);
+      }
+
+      else if (evento.type == sf::Event::KeyReleased) {
+        pGI->ProcessaTeclaSolta(evento.key.code);
+      }
+    }
+  } else {
+    std::cerr << "erro: em Gerenciador_Eventos::processaEventos(), pGG == "
+                 "nullptr || pJanela == nullptr\n";
+  }
+}
+} // namespace Gerenciadores

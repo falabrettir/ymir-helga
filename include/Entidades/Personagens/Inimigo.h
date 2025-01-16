@@ -11,14 +11,13 @@ namespace Inimigos {
 class Inimigo : public Entidades::Personagens::Personagem {
 protected:
   int nivelMadade;
+  float visada;
   Entidades::Personagens::Jogador *pJ;
 
 public:
   Inimigo();
-  Inimigo(sf::Vector2<float> pos, sf::Vector2<float> tamanho,
-          const std::string &path);
   virtual ~Inimigo();
-
+  void persegue();
   void salvarDataBuffer();
   // virtual void executar() = 0;
   // virtual void danificar(Entidades::Personagens::Jogador *pJog) = 0;

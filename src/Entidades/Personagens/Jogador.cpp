@@ -1,21 +1,51 @@
 #include "Entidades/Personagens/Jogador.h"
+#include "Entidades/Personagens/Personagem.h"
+#include <SFML/System/Vector2.hpp>
 
-using namespace Entidades;
+using namespace Entidades::Personagens;
 
-Personagens::Jogador::Jogador() {}
+Jogador::Jogador()
+    : Personagem(), pContr(nullptr), podePular(true), ehPrimeiroJogador(true) {
 
-Personagens::Jogador::Jogador(sf::Vector2<float> pos,
-                              sf::Vector2<float> tamanho,
-                              const std::string &path)
-    : Personagens::Personagem(pos, tamanho, path), pontos(0), inimMortos(0),
-      tesouro(0), stamina(100), dano(10) {}
+  pContr = new Controladores::Controlador_Jogador();
+}
 
-Personagens::Jogador::~Jogador() {}
+Jogador::~Jogador() {}
 
-void Personagens::Jogador::calculaPontos() {}
+void Jogador::setPrimeiroJog(bool ehPrimeiroJogador) {
+  this->ehPrimeiroJogador = ehPrimeiroJogador;
+}
 
-void Personagens::Jogador::salvarDataBuffer() {}
+bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
-void Personagens::Jogador::executar() {}
+void Jogador::andarDireita() { setVelX(VEL); }
 
-void Personagens::Jogador::salvar() {}
+void Jogador::andarEsquerda() { setVelX(-VEL); }
+
+void Jogador::naoAndar() { setVelX(0); }
+
+void Jogador::pular() {
+  if (podePular) {
+    setVelY(-2 * VEL);
+  }
+}
+
+void Jogador::mover() {
+  sf::Vector2f novaPos = getPos() + getVel() * pGG->getDeltaTempo();
+  setPos(novaPos);
+  pSprite->setPosition(novaPos);
+}
+
+Controladores::Controlador_Jogador *Jogador::getControlador() const {
+  return pContr;
+}
+
+void Jogador::executar() {
+
+  pContr->controlarJogador();
+
+  if (!getNoChao())
+    cair();
+
+  mover();
+}

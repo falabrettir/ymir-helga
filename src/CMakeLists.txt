@@ -1,59 +1,47 @@
 # Variáveis de dependências
 set(SFML_LIBS sfml-graphics sfml-window sfml-system sfml-audio)
-set(SFML_GRAPHICS_LIBS sfml-graphics sfml-window sfml-system)
-set(SFML_AUDIO_LIBS sfml-audio sfml-system)
 
 # ---------------------------------------------------------
-# Biblioteca Gerenciadores+Ente
-add_library(gerenciadores-core
+# Biblioteca Jogo
+
+add_library(jogo
+  # Raiz do projeto
+  Jogo.cpp
+  Ente.cpp
+  Observer.cpp
+  Subject.cpp
+
+  # Diretorio Gerenciadores
   Gerenciadores/GerenciadorGrafico.cpp
   Gerenciadores/GerenciadorEventos.cpp
-  Ente.cpp
-)
+  Gerenciadores/GerenciadorInput.cpp
 
-target_link_libraries(gerenciadores-core
-  PRIVATE
-  ${SFML_GRAPHICS_LIBS}
-)
+  # Diretorio Controladores
+  Controladores/ControladorJogador.cpp
 
-# ---------------------------------------------------------
-# Biblioteca Entidades
-add_library(entidades
+  # Diretorio Entidades
   Entidades/Entidade.cpp
   Entidades/Personagens/Jogador.cpp
   Entidades/Personagens/Personagem.cpp
   Entidades/Personagens/Inimigo.cpp
   Entidades/Personagens/Slime.cpp
-)
-
-target_link_libraries(gerenciadores-core
-  PRIVATE
-  ${SFML_LIBS}
-)
-
-# ---------------------------------------------------------
-# Biblioteca Jogo
-add_library(jogo
-  Jogo.cpp
+  Entidades/Personagens/Skjolder.cpp
+  Entidades/Personagens/Helga.cpp
 )
 
 target_link_libraries(jogo
   PRIVATE
   ${SFML_LIBS}
-  gerenciadores-core
-  entidades
 )
 
 # ---------------------------------------------------------
 # Executável principal
 
-add_executable(simon_says
+add_executable(main
   Main.cpp
 )
 
-target_link_libraries(simon_says
+target_link_libraries(main
   PRIVATE
-  ${SFML_LIBS}
   jogo
-  gerenciadores-core
 )

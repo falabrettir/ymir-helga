@@ -6,25 +6,32 @@ namespace Entidades {
 const float gravidade = 5;
 
 class Entidade : public Ente {
-protected:
-  sf::Vector2<float> pos;
-  sf::Vector2<float> tamanho;
-  sf::Vector2<float> velocidade;
+private:
+  sf::Vector2f pos;
+  const sf::Vector2f gravidade;
+  sf::Vector2f tamanho;
+  bool noChao;
   std::ostream *buffer;
+
+protected:
+  sf::Vector2f velocidade;
 
 public:
   Entidade();
-  Entidade(sf::Vector2<float> pos, sf::Vector2<float> tamanho,
-           const std::string &path);
   virtual ~Entidade();
 
-  // virtual void executar() = 0;
-  // virtual void salvar() = 0;
-  sf::Vector2<float> getPos() const;
-  void setPos(sf::Vector2<float> &novaPos);
-  sf::Vector2<float> getVel() const;
-  void setVel(sf::Vector2<float> &novaVel);
-  void salvarDataBuffer();
+  void setVel(sf::Vector2f novaVel);
+  void setVelX(float velX);
+  void setVelY(float velY);
+  void setPos(sf::Vector2f novaPos);
+  void setNoChao(bool noChao);
+
+  sf::Vector2f getVel() const;
+  sf::Vector2f getPos() const;
+  bool getNoChao() const;
+  sf::Vector2f getSize() const;
+
+  void cair();
 };
 
 } // namespace Entidades

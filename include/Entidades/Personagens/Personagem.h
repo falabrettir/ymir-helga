@@ -8,19 +8,18 @@ namespace Entidades {
 namespace Personagens {
 
 class Personagem : public Entidades::Entidade {
-protected:
+private:
   int hp;
   int numVidas;
+  bool olhandoEsquerda;
 
 public:
   Personagem();
-  Personagem(sf::Vector2<float> pos, sf::Vector2<float> tamanho,
-             const std::string &path);
   virtual ~Personagem();
 
-  virtual void mover(sf::Vector2<float> mov);
-  // virtual void executar() = 0;
-  void salvarDataBuffer();
+  virtual void mover();
+
+  void setOlhandoEsquerda(bool olhandoEsquerda);
 };
 
 } // namespace Personagens

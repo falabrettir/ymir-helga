@@ -1,39 +1,53 @@
 #include "Jogo.h"
-#include "Entidades/Personagens/Jogador.h"
-#include "Entidades/Personagens/Slime.h"
+#include "Gerenciadores/GerenciadorEventos.h"
 #include "Gerenciadores/GerenciadorGrafico.h"
+#include "Gerenciadores/GerenciadorInput.h"
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
 
 Jogo::Jogo() {
   pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
-
   pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
+  pGI = Gerenciadores::Gerenciador_Input::getInstancia();
+
   Ente::setGerenciadorGrafico(pGG);
 
-  pJog = new Entidades::Personagens::Jogador(
-      sf::Vector2<float>(500.0, 500.0), sf::Vector2<float>(16.0, 16.0),
-      "/assets/Characters(100x100)/Knight/Knight/Knight-Idle.png");
-  pSl = new Inimigos::Slime(
-      sf::Vector2<float>(390.0, 390.0), sf::Vector2<float>(16.0, 16.0),
-      "/assets/Characters(100x100)/Slime/Slime/Slime-Idle.png");
+  pSkjolder = new Entidades::Personagens::Skjolder();
+  std::cerr << "skjolder criado" << std::endl;
+
+  pHelga = new Entidades::Personagens::Helga();
+  std::cerr << "helga criada" << std::endl;
+
+  pGI->inscrever(pSkjolder->getControlador());
+  pGI->inscrever(pHelga->getControlador());
+
+  pGE->setGG(pGG);
+  pGE->setGI(pGI);
 }
 
 Jogo::~Jogo() {}
 
+void Jogo::atualizar() {
+
+  pGE->processaEventos();
+
+  pGG->atualizaDeltaTempo();
+
+  pSkjolder->executar();
+  pHelga->executar();
+
+  pGG->desenharEnte(static_cast<Ente *>(pSkjolder));
+  pGG->desenharEnte(static_cast<Ente *>(pHelga));
+
+  // Sempre deixar display antes de clear
+  pGG->display();
+
+  pGG->clear();
+}
+
 void Jogo::executar() {
+
   while (pGG->janelaAberta()) {
-    pGG->clear();
-
-    pGE->processaEventos(pGG);
-
-    pGG->atualizaDeltaTempo();
-
-    pGE->processaInput(pJog);
-
-    pSl->desenhar();
-
-    pJog->desenhar();
-
-    pGG->display();
+    atualizar();
   }
 }

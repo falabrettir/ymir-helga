@@ -4,52 +4,55 @@
 #include <SFML/Window/WindowStyle.hpp>
 #include <iostream>
 
-using namespace Gerenciadores;
+namespace Gerenciadores {
 
 Gerenciador_Grafico *Gerenciador_Grafico::instancia = nullptr;
 
-Gerenciador_Grafico::Gerenciador_Grafico() {
-  janela = new sf::RenderWindow(sf::VideoMode(sf::VideoMode::getDesktopMode()),
-                                "Simon says", sf::Style::Fullscreen);
-  janela->setVerticalSyncEnabled(
-      true); // VSYNC janela->setFramerateLimit(30); // call it once, after
-             // creating the window
-  janela->requestFocus();
+Gerenciador_Grafico::Gerenciador_Grafico() : deltaTempo(0.f) {
+  pJanela = new sf::RenderWindow(sf::VideoMode(sf::VideoMode::getDesktopMode()),
+                                 "Skjolder e Helga", sf::Style::Fullscreen);
+  pJanela->setVerticalSyncEnabled(true);
+  pJanela->setFramerateLimit(30);
+  pJanela->requestFocus();
 
-  larguraJanela = janela->getSize().x;
-  alturaJanela = janela->getSize().y;
-  std::clog << larguraJanela << " " << alturaJanela << std::endl;
+  larguraJanela = pJanela->getSize().x;
+  alturaJanela = pJanela->getSize().y;
 
   relogio.restart();
 }
 
-Gerenciador_Grafico::~Gerenciador_Grafico() {}
+Gerenciador_Grafico::~Gerenciador_Grafico() {
+  pJanela = nullptr;
+  instancia = nullptr;
+}
 
 Gerenciador_Grafico *Gerenciador_Grafico::getInstancia() {
   if (instancia == nullptr) {
     instancia = new Gerenciador_Grafico();
   }
-  return instancia; // Singleton
+  return instancia;
 }
 
-bool Gerenciador_Grafico::janelaAberta() { return janela->isOpen(); }
-void Gerenciador_Grafico::display() { janela->display(); }
+bool Gerenciador_Grafico::janelaAberta() { return pJanela->isOpen(); }
 
-bool Gerenciador_Grafico::pollEvent(sf::Event &evento) {
-  return janela->pollEvent(evento);
-}
+void Gerenciador_Grafico::display() { pJanela->display(); }
 
-void Gerenciador_Grafico::clear() { janela->clear(); }
+void Gerenciador_Grafico::clear() { pJanela->clear(); }
 
 void Gerenciador_Grafico::desenharEnte(Ente *pE) {
-  if (janela && pE) {
-    janela->draw(*pE->getSprite());
+  if (pJanela && pE) {
+    pJanela->draw(pE->getSprite());
+  } else {
+    std::cerr << "parametro invalido: Gerenciador_Grafico::desenharEnte()\n";
   }
 }
 
-void Gerenciador_Grafico::fecharJanela() { janela->close(); }
+void Gerenciador_Grafico::fecharJanela() {
+  pJanela->close();
+  pJanela = nullptr;
+}
 
-sf::RenderWindow *Gerenciador_Grafico::getJanela() const { return janela; }
+sf::RenderWindow *Gerenciador_Grafico::getJanela() const { return pJanela; }
 
 void Gerenciador_Grafico::atualizaDeltaTempo() {
   deltaTempo = relogio.restart().asMilliseconds();
@@ -63,3 +66,5 @@ const float Gerenciador_Grafico::getLarguraJanela() const {
 const float Gerenciador_Grafico::getAlturaJanela() const {
   return alturaJanela;
 }
+
+} // namespace Gerenciadores

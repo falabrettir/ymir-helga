@@ -9,23 +9,25 @@ namespace Gerenciadores {
 
 class Gerenciador_Grafico {
 private:
-  sf::RenderWindow *janela;
+  sf::RenderWindow *pJanela;
   float alturaJanela;
   float larguraJanela;
   sf::Clock relogio;
   float deltaTempo;
-  static Gerenciador_Grafico *instancia; // Singleton
+  static Gerenciador_Grafico *instancia;
+
+private:
   Gerenciador_Grafico();
+  ~Gerenciador_Grafico();
+  Gerenciador_Grafico(const Gerenciador_Grafico &) = delete;
+  Gerenciador_Grafico &operator=(const Gerenciador_Grafico &) = delete;
 
 public:
-  ~Gerenciador_Grafico();
-  static Gerenciador_Grafico *getInstancia(); // Singleton
+  static Gerenciador_Grafico *getInstancia();
   sf::RenderWindow *getJanela() const;
-
   void desenharEnte(Ente *pE);
   bool janelaAberta();
   void display();
-  bool pollEvent(sf::Event &evento);
   void clear();
   void fecharJanela();
   void atualizaDeltaTempo();
