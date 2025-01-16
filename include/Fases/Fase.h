@@ -1,5 +1,6 @@
 #pragma once
 #include "Listas/ListaEntidades.h"
+#include <vector>
 
 namespace Entidades::Personagens {
 class Jogador;
