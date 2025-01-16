@@ -3,12 +3,13 @@
 #include "Gerenciadores/GerenciadorGrafico.h"
 #include "Gerenciadores/GerenciadorInput.h"
 #include <SFML/System/Vector2.hpp>
-#include <iostream>
 
 Jogo::Jogo() {
   pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
   pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
   pGI = Gerenciadores::Gerenciador_Input::getInstancia();
+
+  // TODO: Colocar GC dentro da fase
   pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
 
   pGE->setGG(pGG);
@@ -19,18 +20,15 @@ Jogo::Jogo() {
 
   Ente::setGerenciadorGrafico(pGG);
 
+  // TODO: Colocar Entidades em uma lista dentro da fase
   pSkjolder = new Entidades::Personagens::Skjolder();
-  std::cerr << "skjolder criado" << std::endl;
-
   pHelga = new Entidades::Personagens::Helga();
-  std::cerr << "helga criada" << std::endl;
-
   pPlataforma = new Entidades::Obstaculos::Plataforma();
-  std::cerr << "prataforma criada" << std::endl;
 
-  pGC->incluirChar(pSkjolder);
-  pGC->incluirChar(pHelga);
+  pGC->incluirPers(pSkjolder);
+  pGC->incluirPers(pHelga);
   pGC->incluirObst(pPlataforma);
+
   pGI->inscrever(pSkjolder->getControlador());
   pGI->inscrever(pHelga->getControlador());
 }
@@ -54,13 +52,10 @@ void Jogo::atualizar() {
 
   // Sempre deixar display antes de clear
   pGG->display();
-
   pGG->clear();
 }
 
 void Jogo::executar() {
-
-  while (pGG->janelaAberta()) {
+  while (pGG->janelaAberta())
     atualizar();
-  }
 }

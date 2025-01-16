@@ -1,16 +1,23 @@
-// Código adaptado do então monitor Giovane Nero, disponível em:
-// github.com/Giovanenero/JogoPlataforma2D-Jungle
+/*
+ * Código adaptado do então monitor Giovane Nero, disponível em:
+ * github.com/Giovanenero/JogoPlataforma2D-Jungle
+ */
+
 #include "Gerenciadores/GerenciadorColisoes.h"
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
+
 namespace Gerenciadores {
 
 Gerenciador_Colisoes *Gerenciador_Colisoes::instancia = nullptr;
-Gerenciador_Colisoes::Gerenciador_Colisoes() : vecChar(), listObst() {
-  vecChar.clear();
+
+Gerenciador_Colisoes::Gerenciador_Colisoes() : vecPers(), listObst() {
+  vecPers.clear();
   listObst.clear();
 }
+
 Gerenciador_Colisoes::~Gerenciador_Colisoes() {}
+
 Gerenciador_Colisoes *Gerenciador_Colisoes::getInstancia() {
   if (instancia == nullptr) {
     instancia = new Gerenciador_Colisoes();
@@ -18,52 +25,48 @@ Gerenciador_Colisoes *Gerenciador_Colisoes::getInstancia() {
   return instancia;
 }
 
-sf::Vector2<float>
-Gerenciador_Colisoes::verificaColisao(Entidades::Entidade *e1,
-                                      Entidades::Entidade *e2) {
-  sf::Vector2<float> p1 = e1->getPos();
-  sf::Vector2<float> p2 = e2->getPos();
+sf::Vector2f Gerenciador_Colisoes::verificaColisao(Entidades::Entidade *e1,
+                                                   Entidades::Entidade *e2) {
+  sf::Vector2f p1 = e1->getPos();
+  sf::Vector2f p2 = e2->getPos();
 
-  sf::Vector2<float> t1 = e1->getSize();
-  sf::Vector2<float> t2 = e2->getSize();
+  sf::Vector2f t1 = e1->getSize();
+  sf::Vector2f t2 = e2->getSize();
 
-  sf::Vector2<float> dc(
+  sf::Vector2f dc(
       std::fabs((p1.x + t1.x / 2.0f) - (p2.x + t2.x / 2.0f)),
       std::fabs((p1.y + t1.y / 2.0f) -
                 (p2.y + t2.y / 2.0f))); // calcula a distancia entre os centros
                                         // dos retangulos em x e y
-  sf::Vector2<float> metadeRect(
+  sf::Vector2f metadeRect(
       t1.x / 2.0f + t2.x / 2.0f,
       t1.y / 2.0f + t2.y / 2.0f); // calcula a distancia entre as arestas
-  sf::Vector2<float> ds(dc.x - metadeRect.x, dc.y - metadeRect.y);
+  sf::Vector2f ds(dc.x - metadeRect.x, dc.y - metadeRect.y);
   return ds;
 }
 
-void Gerenciador_Colisoes::incluirChar(
+void Gerenciador_Colisoes::incluirPers(
     Entidades::Personagens::Personagem *pPers) {
-  if (pPers != nullptr) {
-    vecChar.push_back(pPers);
-  } else {
-    return;
-  }
+  if (pPers)
+    vecPers.push_back(pPers);
 }
+
 void Gerenciador_Colisoes::incluirObst(
     Entidades::Obstaculos::Obstaculo *pObst) {
-  if (pObst != nullptr) {
+  if (pObst)
     listObst.push_back(pObst);
-  } else {
-    return;
-  }
 }
+
+// TODO: Implementar colisão com projéteis
 // void Gerenciador_Colisoes::incluirProj(Entidades::Projetil *pProj){
 //   if(pProj != nullptr){
 //     setProj.insert(pProj);
 //   }else{return;}
 // }
 
-// TODO: Cozer
+// TODO: Refatorar
 void Gerenciador_Colisoes::executar() {
-  for (auto pPers : vecChar) {
+  for (auto pPers : vecPers) {
     for (auto pObst : listObst) {
       pObst->colidir(pPers, verificaColisao(pPers, pObst));
     }
