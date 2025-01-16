@@ -2,13 +2,11 @@
 
 #include "Observer.h"
 #include <SFML/Window/Keyboard.hpp>
-#include <list>
+#include <set>
 
 class Subject {
 public:
-  // TODO:
-  // Mudar de list para set
-  std::list<Observer *> *observadores;
+  std::set<Observer *> *observadores;
 
 public:
   virtual ~Subject();

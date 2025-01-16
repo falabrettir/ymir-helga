@@ -1,27 +1,26 @@
 #include "Subject.h"
 #include "Observer.h"
-#include <list>
+#include <set>
 
 Subject::Subject() : observadores(nullptr) {}
 Subject::~Subject() {}
 
 void Subject::inscrever(Observer *o) {
   if (!observadores) {
-    observadores = new std::list<Observer *>();
+    observadores = new std::set<Observer *>();
   }
-
-  observadores->push_back(o);
+  observadores->insert(o);
 }
 
 void Subject::desinscrever(Observer *o) {
   if (observadores) {
-    observadores->remove(o);
+    observadores->erase(o);
   }
 }
 
 void Subject::notificarTeclaPressionada(sf::Keyboard::Key tecla) {
   if (observadores) {
-    std::list<Observer *>::iterator it;
+    std::set<Observer *>::iterator it;
     for (it = observadores->begin(); it != observadores->end(); it++) {
       (*it)->atualizarTeclasPressionadas(tecla);
     }
@@ -30,7 +29,7 @@ void Subject::notificarTeclaPressionada(sf::Keyboard::Key tecla) {
 
 void Subject::notificarTeclaSolta(sf::Keyboard::Key tecla) {
   if (observadores) {
-    std::list<Observer *>::iterator it;
+    std::set<Observer *>::iterator it;
     for (it = observadores->begin(); it != observadores->end(); it++) {
       (*it)->atualizarTeclasSoltas(tecla);
     }
