@@ -32,17 +32,6 @@ add_library(jogo
   Entidades/Obstaculos/Plataforma.cpp
 )
 
-target_link_libraries(gerenciadores-core
-  PRIVATE
-  ${SFML_LIBS}
-)
-
-# ---------------------------------------------------------
-# Biblioteca Jogo
-add_library(jogo
-  Jogo.cpp
-)
-
 target_link_libraries(jogo
   PRIVATE
   ${SFML_LIBS}
