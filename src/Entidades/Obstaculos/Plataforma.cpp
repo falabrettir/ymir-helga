@@ -2,13 +2,23 @@
 #include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Personagens/Personagem.h"
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
 namespace Entidades {
 namespace Obstaculos {
 Plataforma::Plataforma(const bool ehFlut)
-    : Obstaculo(), altura(540.f), ehFlutuante(ehFlut), empuxo(0.f, 0.f) {}
+    : Obstaculo(), altura(540.f), ehFlutuante(ehFlut), empuxo(0.f, 0.f) {
+  setTexture("/assets/Prataforma.png");
+  sf::Vector2<float> posIni(400.f, 900.f);
+  setPos(posIni);
+  pSprite->setPosition(posIni);
+  sf::Vector2<float> velIni(0.f, 0.f);
+  setVel(velIni);
+}
 Plataforma::~Plataforma() {}
-void Plataforma::executar() {}
-void Plataforma::obstacular(Entidades::Personagens::Jogador *pJog) {}
+void Plataforma::executar() { std::cout << "Executando obst"; }
+void Plataforma::obstacular(Entidades::Personagens::Jogador *pJog) {
+  std::cout << "obstaculando";
+}
 void Plataforma::colidir(Entidades::Entidade *pEnt, sf::Vector2f ds) {
   sf::Vector2f posEnt = pEnt->getPos();
   sf::Vector2f tamEnt = pEnt->getSize();

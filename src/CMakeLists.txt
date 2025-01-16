@@ -27,6 +27,8 @@ add_library(jogo
   Entidades/Personagens/Slime.cpp
   Entidades/Personagens/Skjolder.cpp
   Entidades/Personagens/Helga.cpp
+  Entidades/Obstaculos/Obstaculo.cpp
+  Entidades/Obstaculos/Plataforma.cpp
 )
 
 target_link_libraries(jogo
