@@ -3,6 +3,7 @@
 #include "Observer.h"
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <iostream>
 #include <utility>
 
 namespace Controladores {
@@ -21,6 +22,9 @@ void Controlador_Jogador::setJog(Entidades::Personagens::Jogador *pJog) {
   if (pJog) {
     this->pJog = pJog;
     setControles();
+  } else {
+    std::cerr << "error: parametro invalido em Controlador_Jogador::setJog(), "
+                 "pJog == nullptr\n";
   }
 }
 
