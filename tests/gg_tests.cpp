@@ -1,7 +1,5 @@
 #include "Gerenciadores/GerenciadorGrafico.h"
 #include <catch2/catch.hpp>
-#include <cstdio>
-#include <ctime>
 
 using namespace Gerenciadores;
 
