@@ -43,8 +43,7 @@ void Gerenciador_Grafico::desenharEnte(Ente *pE) {
   if (pJanela && pE) {
     pJanela->draw(pE->getSprite());
   } else {
-    std::clog << "parametro invalido: Gerenciador_Grafico::desenharEnte()"
-              << std::endl;
+    std::cerr << "parametro invalido: Gerenciador_Grafico::desenharEnte()\n";
   }
 }
 
@@ -53,12 +52,7 @@ void Gerenciador_Grafico::fecharJanela() {
   pJanela = nullptr;
 }
 
-sf::RenderWindow *Gerenciador_Grafico::getJanela() const {
-  if (pJanela) {
-    return pJanela;
-  }
-  return nullptr;
-}
+sf::RenderWindow *Gerenciador_Grafico::getJanela() const { return pJanela; }
 
 void Gerenciador_Grafico::atualizaDeltaTempo() {
   deltaTempo = relogio.restart().asMilliseconds();
