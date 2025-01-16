@@ -1,3 +1,4 @@
+#pragma once
 #include "Jogador.h"
 
 namespace Entidades::Personagens {

@@ -1,6 +1,4 @@
 #include "Entidades/Obstaculos/Plataforma.h"
-#include "Entidades/Personagens/Jogador.h"
-#include "Entidades/Personagens/Personagem.h"
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 namespace Entidades {
@@ -16,7 +14,7 @@ Plataforma::Plataforma(const bool ehFlut)
 }
 Plataforma::~Plataforma() {}
 void Plataforma::executar() { std::cout << "Executando obst"; }
-void Plataforma::obstacular(Entidades::Personagens::Jogador *pJog) {
+void Plataforma::obstacular(Entidades::Entidade *pEnt) {
   std::cout << "obstaculando";
 }
 void Plataforma::colidir(Entidades::Entidade *pEnt, sf::Vector2f ds) {

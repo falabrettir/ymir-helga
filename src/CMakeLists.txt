@@ -15,6 +15,7 @@ add_library(jogo
   Gerenciadores/GerenciadorGrafico.cpp
   Gerenciadores/GerenciadorEventos.cpp
   Gerenciadores/GerenciadorInput.cpp
+  Gerenciadores/GerenciadorColisoes.cpp
 
   # Diretorio Controladores
   Controladores/ControladorJogador.cpp
