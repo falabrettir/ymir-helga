@@ -4,11 +4,10 @@ namespace Entidades::Personagens {
 
 Helga::Helga() : Jogador(), numFlechas(10) {
 
-  setPrimeiroJog(false);
-
   setTexture("/assets/Characters(100x100)/Archer/Archer/Archer-Idle.png");
 
-  pContr = new Controladores::Controlador_Jogador();
+  setPrimeiroJog(false);
+
   pContr->setJog(this);
 
   sf::Vector2f posInicial(400, 400);

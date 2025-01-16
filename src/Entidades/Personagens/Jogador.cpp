@@ -5,7 +5,10 @@
 using namespace Entidades::Personagens;
 
 Jogador::Jogador()
-    : Personagem(), pContr(nullptr), podePular(true), ehPrimeiroJogador(true) {}
+    : Personagem(), pContr(nullptr), podePular(true), ehPrimeiroJogador(true) {
+
+  pContr = new Controladores::Controlador_Jogador();
+}
 
 Jogador::~Jogador() {}
 
