@@ -84,15 +84,22 @@ Gerenciador_Input *Gerenciador_Input::getInstancia() {
 void Gerenciador_Input::ProcessaTeclaPressionada(sf::Keyboard::Key tecla) {
   // Notificar a tecla pressionada para o Observer (Controlador Jogador)
   if (observadores) {
+    std::clog << "log: Notificando tecla " << keyMap[tecla] << " pressionada\n";
     notificarTeclaPressionada(tecla);
+  } else {
+    std::cerr << "erro: em Gerenciador_Input::ProcessaTeclaPressionada() "
+                 "observadores == nullptr\n";
   }
 }
 
 void Gerenciador_Input::ProcessaTeclaSolta(sf::Keyboard::Key tecla) {
   // Notificar a tecla solta para o Observer (Controlador Jogador)
   if (observadores) {
-    std::clog << "Notificando tecla " << keyMap[tecla] << " solta" << std::endl;
+    std::clog << "log: Notificando tecla " << keyMap[tecla] << " solta\n";
     notificarTeclaSolta(tecla);
+  } else {
+    std::cerr << "erro: em Gerenciador_Input::ProcessaTeclaSolta observadores "
+                 "== nullptr\n";
   }
 }
 
