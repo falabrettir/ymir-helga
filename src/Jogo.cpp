@@ -24,6 +24,9 @@ Jogo::Jogo() {
   pHelga = new Entidades::Personagens::Helga();
   std::cerr << "helga criada" << std::endl;
 
+  pPlataforma = new Entidades::Obstaculos::Plataforma();
+  std::cerr << "prataforma criada" << std::endl;
+
   pGI->inscrever(pSkjolder->getControlador());
   pGI->inscrever(pHelga->getControlador());
 }
@@ -41,6 +44,7 @@ void Jogo::atualizar() {
 
   pGG->desenharEnte(static_cast<Ente *>(pSkjolder));
   pGG->desenharEnte(static_cast<Ente *>(pHelga));
+  pGG->desenharEnte(static_cast<Ente *>(pPlataforma));
 
   // Sempre deixar display antes de clear
   pGG->display();

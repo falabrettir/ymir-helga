@@ -13,7 +13,7 @@ public:
   virtual ~Obstaculo();
   virtual void executar() = 0;
   virtual void obstacular(Personagens::Jogador *pJ) = 0;
-  virtual void colidir(Entidades::Personagens::Personagem *pPers,
+  virtual void colidir(Entidades::Entidade *pEnt,
                        sf::Vector2f ds = sf::Vector2f(0.0f, 0.0f)) = 0;
   const bool ehDanoso() const;
 };
