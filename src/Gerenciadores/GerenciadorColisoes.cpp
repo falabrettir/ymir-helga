@@ -1,14 +1,15 @@
 // Código adaptado do então monitor Giovane Nero, disponível em:
 // github.com/Giovanenero/JogoPlataforma2D-Jungle
 #include "Gerenciadores/GerenciadorColisoes.h"
-#include "Listas/Lista.h"
-#include "Listas/ListaEntidades.h"
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
 namespace Gerenciadores {
-static Gerenciador_Colisoes *instancia(nullptr);
 
-Gerenciador_Colisoes::Gerenciador_Colisoes() : vecChar() {}
+Gerenciador_Colisoes *Gerenciador_Colisoes::instancia = nullptr;
+Gerenciador_Colisoes::Gerenciador_Colisoes() : vecChar(), listObst() {
+  vecChar.clear();
+  listObst.clear();
+}
 Gerenciador_Colisoes::~Gerenciador_Colisoes() {}
 Gerenciador_Colisoes *Gerenciador_Colisoes::getInstancia() {
   if (instancia == nullptr) {
@@ -46,11 +47,14 @@ void Gerenciador_Colisoes::incluirChar(
     return;
   }
 }
-// void Gerenciador_Colisoes::incluirObst(Entidades::Obstaculos* pObst){
-//   if(pObst != nullptr){
-//     listObst.push_back(pObst);
-//   }else{return;}
-// }
+void Gerenciador_Colisoes::incluirObst(
+    Entidades::Obstaculos::Obstaculo *pObst) {
+  if (pObst != nullptr) {
+    listObst.push_back(pObst);
+  } else {
+    return;
+  }
+}
 // void Gerenciador_Colisoes::incluirProj(Entidades::Projetil *pProj){
 //   if(pProj != nullptr){
 //     setProj.insert(pProj);
@@ -58,5 +62,11 @@ void Gerenciador_Colisoes::incluirChar(
 // }
 
 // TODO: Cozer
-void Gerenciador_Colisoes::executar() {}
+void Gerenciador_Colisoes::executar() {
+  for (auto pPers : vecChar) {
+    for (auto pObst : listObst) {
+      pObst->colidir(pPers, verificaColisao(pPers, pObst));
+    }
+  }
+}
 } // namespace Gerenciadores

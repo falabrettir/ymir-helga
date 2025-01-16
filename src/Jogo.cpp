@@ -9,6 +9,7 @@ Jogo::Jogo() {
   pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
   pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
   pGI = Gerenciadores::Gerenciador_Input::getInstancia();
+  pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
 
   pGE->setGG(pGG);
   pGE->setGI(pGI);
@@ -27,6 +28,9 @@ Jogo::Jogo() {
   pPlataforma = new Entidades::Obstaculos::Plataforma();
   std::cerr << "prataforma criada" << std::endl;
 
+  pGC->incluirChar(pSkjolder);
+  pGC->incluirChar(pHelga);
+  pGC->incluirObst(pPlataforma);
   pGI->inscrever(pSkjolder->getControlador());
   pGI->inscrever(pHelga->getControlador());
 }
@@ -39,12 +43,14 @@ void Jogo::atualizar() {
 
   pGG->atualizaDeltaTempo();
 
+  pGC->executar();
+
   pSkjolder->executar();
   pHelga->executar();
 
+  pGG->desenharEnte(static_cast<Ente *>(pPlataforma));
   pGG->desenharEnte(static_cast<Ente *>(pSkjolder));
   pGG->desenharEnte(static_cast<Ente *>(pHelga));
-  pGG->desenharEnte(static_cast<Ente *>(pPlataforma));
 
   // Sempre deixar display antes de clear
   pGG->display();
