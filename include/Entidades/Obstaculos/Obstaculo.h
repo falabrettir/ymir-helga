@@ -13,8 +13,8 @@ public:
   virtual ~Obstaculo();
   virtual void executar() = 0;
   virtual void obstacular(Personagens::Jogador *pJ) = 0;
-  virtual void colidirObst(Entidades::Personagens::Personagem *pPers,
-                           sf::Vector2f ds = sf::Vector2f(0.0f, 0.0f));
+  virtual void colidir(Entidades::Personagens::Personagem *pPers,
+                       sf::Vector2f ds = sf::Vector2f(0.0f, 0.0f)) = 0;
   const bool ehDanoso() const;
 };
 } // namespace Obstaculos
