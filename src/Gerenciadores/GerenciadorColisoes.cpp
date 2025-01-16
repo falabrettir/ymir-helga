@@ -1,14 +1,15 @@
 // Código adaptado do então monitor Giovane Nero, disponível em:
 // github.com/Giovanenero/JogoPlataforma2D-Jungle
 #include "Gerenciadores/GerenciadorColisoes.h"
-#include "Listas/Lista.h"
-#include "Listas/ListaEntidades.h"
+#include "Entidades/Personagens/Personagem.h"
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
+#include <iostream>
+#include <vector>
 namespace Gerenciadores {
-static Gerenciador_Colisoes *instancia(nullptr);
+Gerenciador_Colisoes *Gerenciador_Colisoes::instancia = nullptr;
 
-Gerenciador_Colisoes::Gerenciador_Colisoes() : vecChar() {}
+Gerenciador_Colisoes::Gerenciador_Colisoes() : vecChar(), listObst() {}
 Gerenciador_Colisoes::~Gerenciador_Colisoes() {}
 Gerenciador_Colisoes *Gerenciador_Colisoes::getInstancia() {
   if (instancia == nullptr) {
@@ -25,6 +26,8 @@ Gerenciador_Colisoes::verificaColisao(Entidades::Entidade *e1,
 
   sf::Vector2<float> t1 = e1->getSize();
   sf::Vector2<float> t2 = e2->getSize();
+  // sf::Vector2<float> t2 = sf::Vector2<float>(1080, 50);
+  std::cerr << t2.x << t2.y << std::endl;
 
   sf::Vector2<float> dc(
       std::fabs((p1.x + t1.x / 2.0f) - (p2.x + t2.x / 2.0f)),
@@ -46,11 +49,14 @@ void Gerenciador_Colisoes::incluirChar(
     return;
   }
 }
-// void Gerenciador_Colisoes::incluirObst(Entidades::Obstaculos* pObst){
-//   if(pObst != nullptr){
-//     listObst.push_back(pObst);
-//   }else{return;}
-// }
+void Gerenciador_Colisoes::incluirObst(
+    Entidades::Obstaculos::Obstaculo *pObst) {
+  if (pObst != nullptr) {
+    listObst.push_back(pObst);
+  } else {
+    return;
+  }
+}
 // void Gerenciador_Colisoes::incluirProj(Entidades::Projetil *pProj){
 //   if(pProj != nullptr){
 //     setProj.insert(pProj);
@@ -58,5 +64,18 @@ void Gerenciador_Colisoes::incluirChar(
 // }
 
 // TODO: Cozer
-void Gerenciador_Colisoes::executar() {}
+void Gerenciador_Colisoes::executar() {
+  std::vector<Entidades::Personagens::Personagem *>::iterator pIT;
+  std::list<Entidades::Obstaculos::Obstaculo *>::iterator oIT;
+  // pers obst;
+  pIT = vecChar.begin();
+  oIT = listObst.begin();
+  while (pIT != vecChar.end()) {
+    while (oIT != listObst.end()) {
+      (*oIT)->colidir(*pIT, verificaColisao(*pIT, *oIT));
+      ++oIT;
+    }
+    ++pIT;
+  }
+}
 } // namespace Gerenciadores

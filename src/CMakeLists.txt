@@ -15,6 +15,7 @@ add_library(jogo
   Gerenciadores/GerenciadorGrafico.cpp
   Gerenciadores/GerenciadorEventos.cpp
   Gerenciadores/GerenciadorInput.cpp
+  Gerenciadores/GerenciadorColisoes.cpp
 
   # Diretorio Controladores
   Controladores/ControladorJogador.cpp
@@ -27,6 +28,19 @@ add_library(jogo
   Entidades/Personagens/Slime.cpp
   Entidades/Personagens/Skjolder.cpp
   Entidades/Personagens/Helga.cpp
+  Entidades/Obstaculos/Obstaculo.cpp
+  Entidades/Obstaculos/Plataforma.cpp
+)
+
+target_link_libraries(gerenciadores-core
+  PRIVATE
+  ${SFML_LIBS}
+)
+
+# ---------------------------------------------------------
+# Biblioteca Jogo
+add_library(jogo
+  Jogo.cpp
 )
 
 target_link_libraries(jogo

@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Entidades/Entidade.h"
 #include "Listas/Lista.h"
-
+namespace Entidades {
+class Entidade;
+}
 namespace Listas {
 
 class ListaEntidades {

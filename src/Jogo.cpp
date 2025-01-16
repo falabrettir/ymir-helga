@@ -1,6 +1,4 @@
 #include "Jogo.h"
-#include "Gerenciadores/GerenciadorEventos.h"
-#include "Gerenciadores/GerenciadorGrafico.h"
 #include "Gerenciadores/GerenciadorInput.h"
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
@@ -9,14 +7,24 @@ Jogo::Jogo() {
   pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
   pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
   pGI = Gerenciadores::Gerenciador_Input::getInstancia();
+  pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
+
+  pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
+  pGI = Gerenciadores::Gerenciador_Input::getInstancia();
 
   Ente::setGerenciadorGrafico(pGG);
+
+  pObst = new Entidades::Obstaculos::Plataforma();
 
   pSkjolder = new Entidades::Personagens::Skjolder();
   std::cerr << "skjolder criado" << std::endl;
 
   pHelga = new Entidades::Personagens::Helga();
   std::cerr << "helga criada" << std::endl;
+
+  pGC->incluirChar(pHelga);
+  pGC->incluirChar(pSkjolder);
+  pGC->incluirObst(pObst);
 
   pGI->inscrever(pSkjolder->getControlador());
   pGI->inscrever(pHelga->getControlador());

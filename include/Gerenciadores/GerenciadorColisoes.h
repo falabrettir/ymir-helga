@@ -1,18 +1,20 @@
 #pragma once
+#include "Entidades/Obstaculos/Plataforma.h"
 #include "Listas/ListaEntidades.h"
 #include <SFML/System/Vector2.hpp>
+#include <list>
 #include <vector>
 namespace Entidades {
 namespace Personagens {
 class Personagem;
-}
+} // namespace Personagens
 } // namespace Entidades
 namespace Gerenciadores {
 class Gerenciador_Colisoes {
 private:
   static Gerenciador_Colisoes *instancia;
   std::vector<Entidades::Personagens::Personagem *> vecChar;
-  // std::list<Entidades::Obstaculos> listObst;
+  std::list<Entidades::Obstaculos::Obstaculo *> listObst;
   // std::set<Entidades::Proj> setProj;
 private:
   // Singleton
@@ -26,7 +28,7 @@ public:
   sf::Vector2<float> verificaColisao(Entidades::Entidade *e1,
                                      Entidades::Entidade *e2);
   void incluirChar(Entidades::Personagens::Personagem *pPers);
-  // void incluirObst(Entidades::Obstaculos* pObst);
+  void incluirObst(Entidades::Obstaculos::Obstaculo *pObst);
   // void incluirProj(Entidades::Projetil* pProj);
   void executar();
 };

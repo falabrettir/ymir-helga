@@ -1,5 +1,8 @@
 #include "Entidades/Obstaculos/Plataforma.h"
 #include "Entidades/Personagens/Jogador.h"
+#include "Entidades/Personagens/Personagem.h"
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Vector2.hpp>
 namespace Entidades {
 namespace Obstaculos {
