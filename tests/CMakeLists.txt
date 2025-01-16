@@ -8,6 +8,8 @@ add_executable(tests
   # Adicionar aqui todos os arquivos de teste
   gg_tests.cpp
   gi_tests.cpp
+  ge_tests.cpp
+  controlador_jog_tests.cpp
 )
 
 # Adiciona o diretorio 'include/'
