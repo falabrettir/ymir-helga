@@ -1,5 +1,6 @@
 #include "Entidades/Obstaculos/Plataforma.h"
 #include "Entidades/Personagens/Jogador.h"
+#include "Entidades/Personagens/Personagem.h"
 #include <SFML/System/Vector2.hpp>
 namespace Entidades {
 namespace Obstaculos {
@@ -8,7 +9,30 @@ Plataforma::Plataforma(const bool ehFlut)
 Plataforma::~Plataforma() {}
 void Plataforma::executar() {}
 void Plataforma::obstacular(Entidades::Personagens::Jogador *pJog) {}
-void Plataforma::colidir(Entidades::Entidade *outraEnt, sf::Vector2<float> ds) {
+void Plataforma::colidir(Entidades::Entidade *pEnt, sf::Vector2f ds) {
+  sf::Vector2f posEnt = pEnt->getPos();
+  sf::Vector2f tamEnt = pEnt->getSize();
+  sf::Vector2f velEnt = pEnt->getVel();
+  if (ds.x < 0.f && ds.y < 0.f) { // colidiu
+    if (ds.x > ds.y) {
+      if (posEnt.x < this->getPos().x) {
+        posEnt.x += ds.x;
+      } else {
+        posEnt.x -= ds.x;
+      }
+      velEnt.x = 0.0f;
+    } else {
+      if (posEnt.y < this->getPos().y) {
+        posEnt.y += ds.y;
+        pEnt->setNoChao(true);
+      } else {
+        posEnt.y -= ds.y;
+      }
+      velEnt.y = 0.0f;
+    }
+  }
+  pEnt->setPos(posEnt);
+  pEnt->setVel(velEnt);
 }
 
 } // namespace Obstaculos
