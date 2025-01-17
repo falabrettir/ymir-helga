@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
 
@@ -24,6 +25,7 @@ private:
 
 public:
   static Gerenciador_Grafico *getInstancia();
+  sf::Texture carregarTex(const std::string &path);
   sf::RenderWindow *getJanela() const;
   void desenharEnte(Ente *pE);
   bool janelaAberta();

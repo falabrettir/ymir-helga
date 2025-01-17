@@ -1,5 +1,6 @@
 #include "Gerenciadores/GerenciadorGrafico.h"
 #include "Ente.h"
+#include <SFML/Graphics/Texture.hpp>
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <iostream>
@@ -50,6 +51,16 @@ void Gerenciador_Grafico::desenharEnte(Ente *pE) {
 void Gerenciador_Grafico::fecharJanela() {
   pJanela->close();
   pJanela = nullptr;
+}
+
+sf::Texture Gerenciador_Grafico::carregarTex(const std::string &path) {
+  sf::Texture textura;
+  std::string filePath = ROOT;
+  filePath += path;
+  if (!textura.loadFromFile(path)) {
+    std::cerr << "Erro em loadFromFile" << std::endl;
+  }
+  return textura;
 }
 
 sf::RenderWindow *Gerenciador_Grafico::getJanela() const { return pJanela; }
