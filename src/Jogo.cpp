@@ -9,6 +9,9 @@ Jogo::Jogo() {
   pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
   pGI = Gerenciadores::Gerenciador_Input::getInstancia();
 
+  pGE->setGG(pGG);
+  pGE->setGI(pGI);
+
   // TODO: Colocar GC dentro da fase
   pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
 
