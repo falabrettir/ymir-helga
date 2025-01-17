@@ -10,6 +10,12 @@ Jogo::Jogo() {
   pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
   pGI = Gerenciadores::Gerenciador_Input::getInstancia();
 
+  pGE->setGG(pGG);
+  pGE->setGI(pGI);
+
+  // TODO: Colocar GC dentro da fase
+  pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
+
   Ente::setGerenciadorGrafico(pGG);
 
   pSkjolder = new Entidades::Personagens::Skjolder();
@@ -20,9 +26,6 @@ Jogo::Jogo() {
 
   pGI->inscrever(pSkjolder->getControlador());
   pGI->inscrever(pHelga->getControlador());
-
-  pGE->setGG(pGG);
-  pGE->setGI(pGI);
 }
 
 Jogo::~Jogo() {}

@@ -25,8 +25,9 @@ void Jogador::andarEsquerda() { setVelX(-VEL); }
 void Jogador::naoAndar() { setVelX(0); }
 
 void Jogador::pular() {
-  if (podePular) {
-    setVelY(-2 * VEL);
+  if (getNoChao()) {
+    setVelY(-5 * VEL);
+    setNoChao(false);
   }
 }
 
