@@ -27,11 +27,13 @@ void Jogador::naoAndar() { setVelX(0); }
 void Jogador::pular() {
   if (podePular) {
     setVelY(-2 * VEL);
+    setNoChao(false);
   }
 }
 
 void Jogador::mover() {
   sf::Vector2f novaPos = getPos() + getVel() * pGG->getDeltaTempo();
+
   setPos(novaPos);
   pSprite->setPosition(novaPos);
 }

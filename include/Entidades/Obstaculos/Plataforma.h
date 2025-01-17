@@ -1,8 +1,10 @@
 #pragma once
+
 #include "Obstaculo.h"
 #include <SFML/System/Vector2.hpp>
-namespace Entidades {
-namespace Obstaculos {
+
+namespace Entidades::Obstaculos {
+
 class Plataforma : public Obstaculo {
 private:
   float altura;
@@ -17,5 +19,5 @@ public:
   void colidir(Entidades::Entidade *outraEnt,
                sf::Vector2f ds = sf::Vector2f(0.0f, 0.0f));
 };
-} // namespace Obstaculos
-} // namespace Entidades
+
+} // namespace Entidades::Obstaculos
