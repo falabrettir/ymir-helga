@@ -33,6 +33,7 @@ void Jogador::pular() {
 
 void Jogador::mover() {
   sf::Vector2f novaPos = getPos() + getVel() * pGG->getDeltaTempo();
+
   setPos(novaPos);
   pSprite->setPosition(novaPos);
 }
