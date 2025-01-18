@@ -42,7 +42,9 @@ void Jogo::atualizar() {
 
   pSkjolder->executar();
   pHelga->executar();
-
+  pSkjolder->debug.setPosition(pSkjolder->getPos());
+  pGG->getJanela()->draw(pPlataforma->debug);
+  pGG->getJanela()->draw(pSkjolder->debug);
   pGG->desenharEnte(static_cast<Ente *>(pPlataforma));
   pGG->desenharEnte(static_cast<Ente *>(pSkjolder));
   pGG->desenharEnte(static_cast<Ente *>(pHelga));

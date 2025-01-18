@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Obstaculo.h"
+#include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
 
 namespace Entidades::Obstaculos {
@@ -13,6 +14,7 @@ private:
 
 public:
   Plataforma(const bool ehFlut = false);
+  sf::RectangleShape debug;
   ~Plataforma();
   void executar();
   void obstacular(Entidades::Entidade *pEnt);

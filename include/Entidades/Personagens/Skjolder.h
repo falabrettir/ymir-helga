@@ -1,5 +1,6 @@
 #pragma once
 #include "Jogador.h"
+#include <SFML/Graphics/RectangleShape.hpp>
 
 namespace Entidades::Personagens {
 
@@ -9,6 +10,7 @@ private:
   short int furia;
 
 public:
+  sf::RectangleShape debug;
   Skjolder();
   ~Skjolder();
   void atacar();
