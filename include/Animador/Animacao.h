@@ -13,6 +13,7 @@ public:
   ~Animacao();
   void atualizar(const bool praEsq, std::string imgAtual);
   void addAnim(const std::string &path, std::string nomeAnim,
-               const unsigned short int qtdImg, const sf::Vector2f escala);
+               const unsigned short int qtdImg, float tempotroca,
+               const sf::Vector2f escala);
 };
 } // namespace Animador
