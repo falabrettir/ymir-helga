@@ -15,6 +15,12 @@ Plataforma::Plataforma(const bool ehFlut)
 
   sf::Vector2f velInicial(0.f, 0.f);
   setVel(velInicial);
+  debug.setSize(getSize());
+  debug.setPosition(pSprite->getPosition());
+  debug.setOutlineColor(sf::Color::Blue);
+  debug.setOutlineThickness(1);
+  debug.setFillColor(sf::Color::Transparent);
+  pGG->getJanela()->draw(debug);
 }
 
 Plataforma::~Plataforma() {}

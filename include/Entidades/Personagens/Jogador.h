@@ -3,6 +3,7 @@
 #include "Controladores/ControladorJogador.h"
 #include "Entidades/Personagens/Personagem.h"
 #include "Gerenciadores/GerenciadorEventos.h"
+#include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
 
 namespace Entidades::Personagens {
