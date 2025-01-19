@@ -1,4 +1,5 @@
 #include "Ente.h"
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 
 namespace Entidades {
@@ -15,6 +16,7 @@ private:
 
 protected:
   sf::Vector2f velocidade;
+  sf::FloatRect hitbox;
 
 public:
   Entidade();
@@ -25,11 +27,13 @@ public:
   void setVelY(float velY);
   void setPos(sf::Vector2f novaPos);
   void setNoChao(bool noChao);
+  void setHitbox(sf::FloatRect &hitbox);
 
   sf::Vector2f getVel() const;
   sf::Vector2f getPos() const;
   bool getNoChao() const;
   sf::Vector2f getSize() const;
+  sf::FloatRect getHitbox() const;
 
   void cair();
 };

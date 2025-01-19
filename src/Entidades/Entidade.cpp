@@ -5,7 +5,7 @@ using namespace Entidades;
 
 Entidade::Entidade()
     : Ente(), pos(0, 0), velocidade(0, 0), gravidade(0, 0.1), tamanho(0, 0),
-      noChao(false), buffer(nullptr) {};
+      noChao(false), buffer(nullptr){};
 
 Entidade::~Entidade() { buffer = nullptr; }
 
@@ -30,3 +30,7 @@ sf::Vector2<float> Entidade::getSize() const {
 }
 
 void Entidade::cair() { setVel(getVel() + gravidade); }
+void Entidade::setHitbox(sf::FloatRect &hitbox) { this->hitbox = hitbox; }
+sf::FloatRect Entidade::getHitbox() const {
+  return pSprite->getTransform().transformRect(hitbox);
+}
