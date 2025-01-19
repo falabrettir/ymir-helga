@@ -19,6 +19,9 @@ Jogo::Jogo() {
   pHelga = new Entidades::Personagens::Helga();
   pPlataforma = new Entidades::Obstaculos::Plataforma();
 
+  pSkjolder->getSprite().setTextureRect({41, 39, 27, 20});
+  pPlataforma->getSprite().setTextureRect({2, 11, 171, 18});
+
   pGC->incluirPers(pSkjolder);
   pGC->incluirPers(pHelga);
   pGC->incluirObst(pPlataforma);
@@ -41,13 +44,14 @@ void Jogo::atualizar() {
   pGC->executar();
 
   pSkjolder->executar();
-  pHelga->executar();
-  pSkjolder->debug.setPosition(pSkjolder->getPos());
+  // pHelga->executar();
+  pSkjolder->debug.setPosition(pSkjolder->getHitbox().getPosition());
+  pPlataforma->debug.setPosition(pPlataforma->getHitbox().getPosition());
   pGG->getJanela()->draw(pPlataforma->debug);
   pGG->getJanela()->draw(pSkjolder->debug);
   pGG->desenharEnte(static_cast<Ente *>(pPlataforma));
   pGG->desenharEnte(static_cast<Ente *>(pSkjolder));
-  pGG->desenharEnte(static_cast<Ente *>(pHelga));
+  // pGG->desenharEnte(static_cast<Ente *>(pHelga));
 
   // Sempre deixar display antes de clear
   pGG->display();
