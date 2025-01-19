@@ -15,16 +15,18 @@ Skjolder::Skjolder() : Jogador(), stamina(100.0f), furia(0) {
   sf::Vector2f posInicial(400, 400);
   setPos(posInicial);
   pSprite->setPosition(posInicial);
-  sf::FloatRect hitbox({0.f, 0.f, 16.f, 16.f});
+  sf::FloatRect hitbox({0, 0, 27.f, 20.f});
+  pSprite->setTextureRect({41, 39, 27, 20});
   setHitbox(hitbox);
 
   sf::Vector2f velInicial(0.f, 0.f);
   setVel(velInicial);
-  debug.setSize(getSize());
-  debug.setPosition(pSprite->getPosition());
-  debug.setTexture(pTexture);
-  debug.setTextureRect(sf::IntRect(0, 0, 100, 100));
-  debug.setScale(1.f / 8.f, 1.f);
+  debug.setSize(hitbox.getSize());
+  debug.setPosition(hitbox.getPosition());
+  debug.setOutlineThickness(1);
+  debug.setOutlineColor(sf::Color::Red);
+  debug.setFillColor(sf::Color::Transparent);
+  debug.setScale(1.f, 1.f);
 }
 
 Skjolder::~Skjolder() {}

@@ -1,4 +1,5 @@
 #include "Entidades/Obstaculos/Plataforma.h"
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 
@@ -12,15 +13,18 @@ Plataforma::Plataforma(const bool ehFlut)
   sf::Vector2f posInicial(400, 900);
   setPos(posInicial);
   pSprite->setPosition(posInicial);
+  sf::FloatRect hitbox({0.f, 0.f, 171.f, 18.f});
+  pSprite->setTextureRect({2, 11, 171, 18});
+  setHitbox(hitbox);
 
   sf::Vector2f velInicial(0.f, 0.f);
   setVel(velInicial);
-  debug.setSize(getSize());
-  debug.setPosition(pSprite->getPosition());
-  debug.setOutlineColor(sf::Color::Blue);
+  debug.setSize(hitbox.getSize());
+  debug.setPosition(hitbox.getPosition());
   debug.setOutlineThickness(1);
+  debug.setOutlineColor(sf::Color::Blue);
   debug.setFillColor(sf::Color::Transparent);
-  pGG->getJanela()->draw(debug);
+  debug.setScale(1, 1);
 }
 
 Plataforma::~Plataforma() {}
