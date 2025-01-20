@@ -12,19 +12,19 @@ class Gerenciador_Colisoes;
 
 namespace Fases {
 
-class Fase {
-private:
+class Fase : public Ente {
+protected:
   Gerenciadores::Gerenciador_Colisoes *pGC;
-  std::vector<Entidades::Personagens::Jogador> vecJog;
-  Listas::ListaEntidades listaEnt;
+  Listas::ListaEntidades listaObstaculos;
+  Listas::ListaEntidades listaPersonagens;
 
 public:
   Fase();
   ~Fase();
 
   virtual void executar();
-  void criarPlataformas();
-  void criarCenario();
+  virtual void criarObstaculos() = 0;
+  virtual void criarInimigos() = 0;
   virtual void criarEntidades();
 };
 
