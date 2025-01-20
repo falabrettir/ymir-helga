@@ -1,6 +1,10 @@
 #pragma once
 
-// Segunda fase
+/*
+  Segunda Fase:
+  Criar um numero aleatorio de instancias de cada tipo de inimigo e obstaculo,
+  respeitando os valores minimo e maximo
+*/
 
 #include "Fase.h"
 
