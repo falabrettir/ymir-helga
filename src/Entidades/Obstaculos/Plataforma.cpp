@@ -19,12 +19,6 @@ Plataforma::Plataforma(const bool ehFlut)
 
   sf::Vector2f velInicial(0.f, 0.f);
   setVel(velInicial);
-  debug.setSize(hitbox.getSize());
-  debug.setPosition(hitbox.getPosition());
-  debug.setOutlineThickness(1);
-  debug.setOutlineColor(sf::Color::Blue);
-  debug.setFillColor(sf::Color::Transparent);
-  debug.setScale(1, 1);
 }
 
 Plataforma::~Plataforma() {}

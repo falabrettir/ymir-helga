@@ -13,6 +13,9 @@ Helga::Helga() : Jogador(), numFlechas(10) {
   sf::Vector2f posInicial(400, 400);
   setPos(posInicial);
   pSprite->setPosition(posInicial);
+  sf::FloatRect hitbox({0, 0, 27.f, 18.f});
+  pSprite->setTextureRect({41, 39, 27, 20});
+  setHitbox(hitbox);
 
   sf::Vector2f velInicial(0.f, 0.f);
   setVel(velInicial);

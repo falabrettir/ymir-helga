@@ -29,33 +29,6 @@ Gerenciador_Colisoes *Gerenciador_Colisoes::getInstancia() {
 sf::Vector2f Gerenciador_Colisoes::verificaColisao(Entidades::Entidade *e1,
                                                    Entidades::Entidade *e2) {
 
-  //     sf::FloatRect h2 = e2->getHitbox();
-  //
-  //     float sbesq = (h1.left + h1.width) - h2.left;
-  //     float sbdireita = (h2.left + h2.width) - h1.left;
-  //     float sbcima = (h1.top + h1.height) - h2.top;
-  //     float sbbaixo = (h2.top + h2.height) - h1.top;
-  //
-  //     bool daesq = std::abs(sbesq) < std::abs(sbdireita);
-  //     bool decima = std::abs(sbcima) < std::abs(sbbaixo);
-  //
-  //     float sbX = daesq ? sbesq : sbdireita;
-  //     float sbY = decima ? sbcima : sbbaixo;
-  //
-  //     if (std::abs(sbX) < std::abs(sbY)) {
-  //       sf::Vector2f pos(e2->getPos().x + sbX * (daesq ? -1 : 1),
-  //       e2->getPos().y); e2->setPos(pos);
-  //     } else {
-  //       if (decima) {
-  //         sf::Vector2f pos(e2->getPos().x, e2->getPos().y + sbY * -1);
-  //         e2->setNoChao(true);
-  //       } else {
-  //         sf::Vector2f pos(e2->getPos().x, e2->getPos().y + sbY);
-  //       }
-  //       e2->setVelY(0);
-  //     }
-  //   }
-  // }
   sf::Vector2f p1 = e1->getHitbox().getPosition();
   sf::Vector2f p2 = e2->getHitbox().getPosition();
 
