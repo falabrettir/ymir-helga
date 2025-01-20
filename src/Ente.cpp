@@ -32,7 +32,6 @@ void Ente::setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *ppGG) {
 void Ente::atualizaSprite(sf::Texture *pTexture) {
   std::clog << "funcao Ente::atualizaSprite" << std::endl;
   pSprite->setTexture(*pTexture);
-  pSprite->setTextureRect(sf::IntRect(0, 0, 100, 100));
   pSprite->setScale(3.f, 3.f);
 }
 
