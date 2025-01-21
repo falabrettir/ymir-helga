@@ -15,16 +15,16 @@ Jogo::Jogo() {
   Ente::setGerenciadorGrafico(pGG);
 
   // TODO: Colocar Entidades em uma lista dentro da fase
-  pSkjolder = new Entidades::Personagens::Skjolder();
-  pHelga = new Entidades::Personagens::Helga();
+  pJog1 = new Entidades::Personagens::Jogador();
+  pJog2 = new Entidades::Personagens::Jogador(false);
   pPlataforma = new Entidades::Obstaculos::Plataforma();
 
-  pGC->incluirPers(pSkjolder);
-  pGC->incluirPers(pHelga);
+  pGC->incluirPers(pJog1);
+  pGC->incluirPers(pJog2);
   pGC->incluirObst(pPlataforma);
 
-  pGI->inscrever(pSkjolder->getControlador());
-  pGI->inscrever(pHelga->getControlador());
+  pGI->inscrever(pJog1->getControlador());
+  pGI->inscrever(pJog2->getControlador());
 
   pGE->setGG(pGG);
   pGE->setGI(pGI);
@@ -40,13 +40,11 @@ void Jogo::atualizar() {
 
   pGC->executar();
 
-  pSkjolder->executar();
-  pHelga->executar();
-  pGG->getJanela()->draw(pPlataforma->debug);
-  pGG->getJanela()->draw(pSkjolder->debug);
+  pJog1->executar();
+  pJog2->executar();
   pGG->desenharEnte(static_cast<Ente *>(pPlataforma));
-  pGG->desenharEnte(static_cast<Ente *>(pSkjolder));
-  pGG->desenharEnte(static_cast<Ente *>(pHelga));
+  pGG->desenharEnte(static_cast<Ente *>(pJog1));
+  pGG->desenharEnte(static_cast<Ente *>(pJog2));
 
   // Sempre deixar display antes de clear
   pGG->display();

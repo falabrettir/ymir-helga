@@ -19,7 +19,7 @@ protected:
   Controladores::Controlador_Jogador *pContr;
 
 public:
-  Jogador();
+  Jogador(const bool ehPrimeiroJogador = true);
   ~Jogador();
 
   void setPrimeiroJog(bool ehPrimeiroJogador);
@@ -30,8 +30,8 @@ public:
   void naoAndar();
   void pular();
   void mover();
-  virtual void atacar() = 0;
-  virtual void executar();
+  void atacar();
+  void executar();
   Controladores::Controlador_Jogador *getControlador() const;
 };
 
