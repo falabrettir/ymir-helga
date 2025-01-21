@@ -2,33 +2,34 @@
 
 namespace Fases {
 
-Caverna::Caverna() {
-  criarEntidades();
-  criarInimigos();
-}
+Caverna::Caverna() : Fase() {}
 
 Caverna::~Caverna() {}
 
-void Caverna::executar() {
-  // TODO: Chamar as funcoes 'executar' de todas as entidades
+void Caverna::executar() { Fase::executar(); }
+
+void Caverna::criarEntidade(char tipoEntidade, const sf::Vector2f &pos) {
+  switch (tipoEntidade) {
+  case 'E':
+    criarEsqueleto();
+    break;
+  case 'S':
+    criarSlime();
+    break;
+  case 'P':
+    criarPedra();
+    break;
+  case 'M':
+    criarMadeira();
+    break;
+  case 'G':
+    criarGosma();
+    break;
+  default:
+    break;
+  }
 }
 
-void Caverna::criarObstaculos() {
-  // TODO: passar como parametro o tipo de obstaculo e posicao
-}
-
-void Caverna::criarInimigos() {
-  criarSlimes();
-  criarEsqueletos();
-}
-
-void Caverna::criarSlimes() {}
-
-void Caverna::criarEsqueletos() {}
-
-void Caverna::criarEntidades() {
-  criarObstaculos();
-  criarInimigos();
-}
+void Caverna::criarSlime(const sf::Vector2f &pos) {}
 
 }; // namespace Fases

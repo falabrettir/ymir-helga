@@ -1,10 +1,7 @@
 #pragma once
 
 #include "Listas/ListaEntidades.h"
-
-namespace Entidades::Personagens {
-class Jogador;
-} // namespace Entidades::Personagens
+#include <SFML/System/Vector2.hpp>
 
 namespace Gerenciadores {
 class Gerenciador_Colisoes;
@@ -23,9 +20,9 @@ public:
   ~Fase();
 
   virtual void executar();
-  virtual void criarObstaculos() = 0;
-  virtual void criarInimigos() = 0;
-  virtual void criarEntidades();
+  void criarMapa(const std::string path);
+  void criarJogador(sf::Vector2f &pos, bool primeiroJogador = true);
+  virtual void criarEntidade(char tipoEntidade, const sf::Vector2f &pos) = 0;
 };
 
 } // namespace Fases

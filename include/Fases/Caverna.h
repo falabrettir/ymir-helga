@@ -22,11 +22,12 @@ public:
   ~Caverna();
 
   void executar();
-  void criarObstaculos();
-  void criarInimigos();
-  void criarSlimes();
-  void criarEsqueletos();
-  void criarEntidades();
+  void criarEntidade(char tipoEntidade, const sf::Vector2f &pos);
+  void criarSlime(const sf::Vector2f &pos);
+  void criarEsqueleto(const sf::Vector2f &pos);
+  void criarPedra(const sf::Vector2f &pos);
+  void criarMadeira(const sf::Vector2f &pos);
+  void criarGosma(const sf::Vector2f &pos);
 };
 
 } // namespace Fases

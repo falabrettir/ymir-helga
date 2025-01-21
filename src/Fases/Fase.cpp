@@ -1,48 +1,52 @@
-
 #include "Fases/Fase.h"
-#include "Entidades/Entidade.h"
-#include "Entidades/Obstaculos/Plataforma.h"
-#include "Entidades/Personagens/Helga.h"
-#include "Entidades/Personagens/Jogador.h"
-#include "Entidades/Personagens/Personagem.h"
-#include "Entidades/Personagens/Skjolder.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
-#include "Listas/Lista.h"
-#include "Listas/ListaEntidades.h"
+#include <SFML/System/Vector2.hpp>
+#include <fstream>
+#include <iostream>
+#include <string>
 
 namespace Fases {
 
 Fase::Fase() {
-  vecJog.clear();
-  listaEnt.limpar();
-
   pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
-
-  criarEntidades();
-
-  criarPlataformas();
-  criarCenario();
-
-  executar();
+  listaObstaculos.limpar();
+  listaPersonagens.limpar();
 }
 
 Fase::~Fase() {
-  vecJog.clear();
-  listaEnt.limpar();
+  pGC = nullptr;
+  listaObstaculos.limpar();
+  listaPersonagens.limpar();
 }
 
-void Fase::executar() {}
-
-void Fase::criarPlataformas() {}
-
-void Fase::criarCenario() {}
-
-void Fase::criarEntidades() {
-  listaEnt.incluir(new Entidades::Personagens::Helga());
-  listaEnt.incluir(new Entidades::Personagens::Skjolder());
-
-  // TODO: Para cara entidade, inserir em listaEnt
-  Listas::Lista<Entidades::Entidade *>::Iterator it = listaEnt.begin();
+void Fase::executar() {
+  listaObstaculos.percorrer();
+  listaPersonagens.percorrer();
 }
+
+void Fase::criarMapa(const std::string path) {
+  std::ifstream arquivoMapa;
+  std::string filePath = ROOT;
+  filePath += path;
+
+  arquivoMapa.open(filePath);
+  if (!arquivoMapa.is_open()) {
+    std::cout << "Erro ao abrir arquivo de mapa" << std::endl;
+    exit(1);
+  }
+
+  std::string linha;
+  for (int j = 0; std::getline(arquivoMapa, linha); j++) {
+    for (int i = 0; i < linha.size(); i++) {
+      if (linha[i] != ' ') {
+        criarEntidade(linha[i], sf::Vector2f(i, j));
+      }
+    }
+  }
+
+  arquivoMapa.close();
+}
+
+void Fase::criarJogador(sf::Vector2f &pos, bool primeiroJogador) {}
 
 } // namespace Fases
