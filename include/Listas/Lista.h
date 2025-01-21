@@ -1,4 +1,5 @@
 #pragma once
+
 namespace Listas {
 
 template <typename TL> class Lista {
@@ -123,4 +124,5 @@ public:
   Iterator begin() const { return Iterator(pPrimeiro); }
   Iterator end() const { return Iterator(pUltimo); }
 };
+
 } // namespace Listas
