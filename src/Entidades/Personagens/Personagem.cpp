@@ -1,4 +1,5 @@
 #include "Entidades/Personagens/Personagem.h"
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 
 using namespace Entidades::Personagens;
@@ -16,4 +17,10 @@ void Personagem::mover() {
 
 void Personagem::setOlhandoEsquerda(bool olhandoEsquerda) {
   this->olhandoEsquerda = olhandoEsquerda;
+}
+
+void Personagem::inverteSprite() {
+  sf::IntRect novo = this->getSprite().getTextureRect();
+  novo.width *= -1;
+  this->getSprite().setTextureRect(novo);
 }

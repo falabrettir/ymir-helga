@@ -1,6 +1,8 @@
 #include "Controladores/ControladorJogador.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Observer.h"
+#include <SFML/Graphics/Rect.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
@@ -76,15 +78,19 @@ void Controlador_Jogador::controlarJogador() {
   if (pJog) {
 
     // Controla movimento na horizontal
-    if (teclasPressionadas[direita])
+    if (teclasPressionadas[direita]) {
       pJog->andarDireita();
-    else if (teclasPressionadas[esquerda])
+      pJog->inverteSprite();
+    } else if (teclasPressionadas[esquerda]) {
       pJog->andarEsquerda();
-    else
+      pJog->inverteSprite();
+    } else {
       pJog->naoAndar();
+    }
 
-    if (teclasPressionadas[pulo])
+    if (teclasPressionadas[pulo]) {
       pJog->pular();
+    }
   }
 }
 

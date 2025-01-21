@@ -15,6 +15,7 @@ private:
 
 public:
   Personagem();
+  void inverteSprite();
   virtual ~Personagem();
 
   virtual void mover();
