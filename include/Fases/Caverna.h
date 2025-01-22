@@ -14,8 +14,11 @@ class Caverna : public Fase {
 private:
   const int minEsqueletos = 3;
   const int maxEsqueletos = 5;
+  int contEsqueletos;
+
   const int minSlimes = 3;
   const int maxSlimes = 5;
+  int contSlimes;
 
 public:
   Caverna();
