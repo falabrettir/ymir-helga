@@ -13,7 +13,7 @@ private:
   bool ehFlutuante;
 
 public:
-  Plataforma(const bool ehFlut = false);
+  Plataforma(int id, const bool ehFlut = false);
   sf::RectangleShape debug;
   ~Plataforma();
   void executar();

@@ -15,9 +15,9 @@ Jogo::Jogo() {
   Ente::setGerenciadorGrafico(pGG);
 
   // TODO: Colocar Entidades em uma lista dentro da fase
-  pJog1 = new Entidades::Personagens::Jogador();
-  pJog2 = new Entidades::Personagens::Jogador(false);
-  pPlataforma = new Entidades::Obstaculos::Plataforma();
+  pJog1 = new Entidades::Personagens::Jogador(1);
+  pJog2 = new Entidades::Personagens::Jogador(1, false);
+  pPlataforma = new Entidades::Obstaculos::Plataforma(2);
 
   pGC->incluirPers(pJog1);
   pGC->incluirPers(pJog2);

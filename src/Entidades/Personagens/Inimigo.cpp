@@ -1,10 +1,11 @@
 #include "../include/Entidades/Personagens/Inimigo.h"
+#include "Entidades/Personagens/Personagem.h"
 #include <SFML/System/Vector2.hpp>
 
 using namespace Entidades;
 
-Personagens::Inimigos::Inimigo::Inimigo()
-    : visada(0.f), nivelMadade(0), pJ(nullptr) {}
+Personagens::Inimigos::Inimigo::Inimigo(int id)
+    : Personagem(id), visada(0.f), nivelMadade(0), pJ(nullptr) {}
 Personagens::Inimigos::Inimigo::~Inimigo() {}
 void Personagens::Inimigos::Inimigo::salvarDataBuffer() {}
 void Personagens::Inimigos::Inimigo::persegue() {

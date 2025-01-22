@@ -15,7 +15,7 @@ protected:
   Entidades::Personagens::Jogador *pJ;
 
 public:
-  Inimigo();
+  Inimigo(int id);
   virtual ~Inimigo();
   void persegue();
   void salvarDataBuffer();

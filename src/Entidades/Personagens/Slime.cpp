@@ -4,8 +4,8 @@
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 
-Inimigos::Slime::Slime()
-    : Entidades::Personagens::Inimigos::Inimigo(), lentidao(0) {
+Inimigos::Slime::Slime(int id)
+    : Entidades::Personagens::Inimigos::Inimigo(id), lentidao(0) {
   setTexture("/assets/Characters(100x100)/Slime/Slime/Slime-Idle.png");
 }
 Inimigos::Slime::~Slime() {}

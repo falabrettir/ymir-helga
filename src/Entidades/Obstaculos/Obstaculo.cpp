@@ -4,8 +4,8 @@
 
 namespace Entidades {
 namespace Obstaculos {
-Obstaculo::Obstaculo(const bool danoso)
-    : Entidade(), pJog(nullptr), danoso(danoso) {}
+Obstaculo::Obstaculo(int id, const bool danoso)
+    : Entidade(id), pJog(nullptr), danoso(danoso) {}
 Obstaculo::~Obstaculo() {
   pJog = nullptr;
   delete pJog;

@@ -6,11 +6,9 @@
 #include <iostream>
 #include <string>
 
-int Ente::cont(0);
-
 Gerenciadores::Gerenciador_Grafico *Ente::pGG(nullptr);
 
-Ente::Ente() : id(cont++) {
+Ente::Ente(int id) : id(id) {
   pSprite = new sf::Sprite();
   pTexture = new sf::Texture();
   setTarget();
@@ -20,7 +18,6 @@ Ente::~Ente() {
   delete pSprite;
   delete pTexture;
   delete pAlvo;
-  cont--;
 }
 
 void Ente::setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *ppGG) {
@@ -64,3 +61,4 @@ void Ente::desenhar() {
     std::clog << "Nullptr em desenharEnte" << std::endl;
   }
 }
+const int Ente::getId() const { return this->id; }

@@ -19,7 +19,7 @@ protected:
   sf::FloatRect hitbox;
 
 public:
-  Entidade();
+  Entidade(int id);
   virtual ~Entidade();
 
   void setVel(sf::Vector2f novaVel);

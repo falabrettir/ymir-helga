@@ -14,8 +14,8 @@ private:
   bool olhandoEsquerda;
 
 public:
-  Personagem();
-  void inverteSprite();
+  Personagem(int id);
+  void atualizaOrientacao();
   virtual ~Personagem();
 
   virtual void mover();

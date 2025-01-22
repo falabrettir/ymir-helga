@@ -19,7 +19,7 @@ protected:
   Controladores::Controlador_Jogador *pContr;
 
 public:
-  Jogador(const bool ehPrimeiroJogador = true);
+  Jogador(int id, const bool ehPrimeiroJogador = true);
   ~Jogador();
 
   void setPrimeiroJog(bool ehPrimeiroJogador);

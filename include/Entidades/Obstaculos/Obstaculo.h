@@ -9,7 +9,7 @@ protected:
   Personagens::Jogador *pJog;
 
 public:
-  Obstaculo(const bool danoso = false);
+  Obstaculo(int id, const bool danoso = false);
   virtual ~Obstaculo();
   virtual void executar() = 0;
   virtual void obstacular(Entidade *pEnt) = 0;

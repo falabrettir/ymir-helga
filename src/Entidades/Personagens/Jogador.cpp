@@ -6,8 +6,8 @@
 
 using namespace Entidades::Personagens;
 
-Jogador::Jogador(const bool ehPrimeiroJogador)
-    : Personagem(), pContr(nullptr), podePular(true),
+Jogador::Jogador(int id, const bool ehPrimeiroJogador)
+    : Personagem(id), pContr(nullptr), podePular(true),
       ehPrimeiroJogador(ehPrimeiroJogador) {
 
   pContr = new Controladores::Controlador_Jogador();
@@ -35,9 +35,17 @@ void Jogador::setPrimeiroJog(bool ehPrimeiroJogador) {
 
 bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
-void Jogador::andarDireita() { setVelX(VEL); }
+void Jogador::andarDireita() {
+  setVelX(VEL);
+  setOlhandoEsquerda(false);
+  atualizaOrientacao();
+}
 
-void Jogador::andarEsquerda() { setVelX(-VEL); }
+void Jogador::andarEsquerda() {
+  setVelX(-VEL);
+  setOlhandoEsquerda(true);
+  atualizaOrientacao();
+}
 
 void Jogador::naoAndar() { setVelX(0); }
 

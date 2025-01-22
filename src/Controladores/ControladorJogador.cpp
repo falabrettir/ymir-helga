@@ -80,10 +80,8 @@ void Controlador_Jogador::controlarJogador() {
     // Controla movimento na horizontal
     if (teclasPressionadas[direita]) {
       pJog->andarDireita();
-      pJog->inverteSprite();
     } else if (teclasPressionadas[esquerda]) {
       pJog->andarEsquerda();
-      pJog->inverteSprite();
     } else {
       pJog->naoAndar();
     }

@@ -5,8 +5,8 @@
 
 namespace Entidades::Obstaculos {
 
-Plataforma::Plataforma(const bool ehFlut)
-    : Obstaculo(), altura(540.f), ehFlutuante(ehFlut), empuxo(0.f, 0.f) {
+Plataforma::Plataforma(int id, const bool ehFlut)
+    : Obstaculo(id), altura(540.f), ehFlutuante(ehFlut), empuxo(0.f, 0.f) {
 
   setTexture("/assets/Prataforma.png");
 
