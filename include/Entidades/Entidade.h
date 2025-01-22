@@ -1,15 +1,15 @@
+#pragma once
+
 #include "Ente.h"
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 
 namespace Entidades {
 
-const float gravidade = 5;
-
 class Entidade : public Ente {
 private:
   sf::Vector2f pos;
-  const sf::Vector2f gravidade;
+  sf::Vector2f gravidade;
   sf::Vector2f tamanho;
   bool noChao;
   std::ostream *buffer;

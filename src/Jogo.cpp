@@ -28,6 +28,23 @@ Jogo::Jogo() {
 
   pGE->setGG(pGG);
   pGE->setGI(pGI);
+
+  // TODO: Colocar GC dentro da fase
+  pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
+
+  Ente::setGerenciadorGrafico(pGG);
+
+  // TODO: Colocar Entidades em uma lista dentro da fase
+  pSkjolder = new Entidades::Personagens::Skjolder();
+  pHelga = new Entidades::Personagens::Helga();
+  pPlataforma = new Entidades::Obstaculos::Plataforma();
+
+  pGC->incluirPers(pSkjolder);
+  pGC->incluirPers(pHelga);
+  pGC->incluirObst(pPlataforma);
+
+  pGI->inscrever(pSkjolder->getControlador());
+  pGI->inscrever(pHelga->getControlador());
 }
 
 Jogo::~Jogo() {}

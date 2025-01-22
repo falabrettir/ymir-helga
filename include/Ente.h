@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Gerenciadores/GerenciadorGrafico.h"
 #include "IDs.h"
 #include <SFML/Graphics/RenderTarget.hpp>
