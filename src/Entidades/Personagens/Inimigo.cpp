@@ -29,12 +29,13 @@ void Inimigo::perseguir(Jogador *pJog) {
     setVel(novaVel);
   }
 }
-void colidir(Entidade *pEnt,
-             sf::Vector2f ds) { // nesse caso, entidade há de ser outro inimigo
-                                // ou então um jogador
+const int Inimigo::getDano() const { return dano; }
+void Inimigo::colidir(Entidade *pEnt,
+                      sf::Vector2f ds) { // nesse caso, entidade há de ser outro
+                                         // inimigo ou então um jogador
   if (ds.x < 0 && ds.y < 0) {
-    if (pEnt->getId() == ID::IDjogador)
-      dynamic_cast<Personagem *>(pEnt)->tomarDano(dano);
+    if (pEnt != nullptr && pEnt->getId() == ID::IDjogador)
+      dynamic_cast<Personagem *>(pEnt)->tomarDano(getDano());
   }
 }
 } // namespace Inimigos
