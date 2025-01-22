@@ -13,32 +13,24 @@ void Caverna::criarEntidade(char tipoEntidade, const sf::Vector2f &pos) {
   case 'E':
     criarEsqueleto(pos);
     break;
-
   case 'S':
     criarSlime(pos);
     break;
-
   case 'P':
     criarPedra(pos);
     break;
-
   case 'M':
     criarMadeira(pos);
     break;
-
   case 'G':
     criarGosma(pos);
     break;
-
   case 'J':
     criarJogador(pos);
     break;
-
   default:
     break;
   }
 }
-
-void Caverna::criarSlime(const sf::Vector2f &pos) {}
 
 }; // namespace Fases

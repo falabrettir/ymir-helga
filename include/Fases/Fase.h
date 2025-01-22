@@ -23,6 +23,7 @@ public:
   virtual void executar();
   void criarMapa(const std::string path);
   void criarJogador(const sf::Vector2f &pos);
+  void criarEsqueleto(const sf::Vector2f &pos);
   virtual void criarEntidade(char tipoEntidade, const sf::Vector2f &pos) = 0;
 };
 
