@@ -1,5 +1,6 @@
 #include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Personagens/Personagem.h"
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 
@@ -18,7 +19,7 @@ Jogador::Jogador(const bool ehPrimeiroJogador)
   sf::Vector2f posInicial(400, 400);
   setPos(posInicial);
   pSprite->setPosition(posInicial);
-  sf::FloatRect hitbox({0, 0, 18.f, 18.f});
+  sf::FloatRect hitbox({0, 0, 18.f, 17.f});
   pSprite->setTextureRect({40, 40, 27, 20});
   setHitbox(hitbox);
 

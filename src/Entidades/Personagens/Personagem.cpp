@@ -1,6 +1,7 @@
 #include "Entidades/Personagens/Personagem.h"
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
 
 using namespace Entidades::Personagens;
 
@@ -20,7 +21,16 @@ void Personagem::setOlhandoEsquerda(bool olhandoEsquerda) {
 }
 
 void Personagem::inverteSprite() {
-  sf::IntRect novo = this->getSprite().getTextureRect();
-  novo.width *= -1;
-  this->getSprite().setTextureRect(novo);
+  sf::IntRect rect = getSprite().getTextureRect(); // left, top, width, height
+  std::cerr << "CHAMEI A FUNCAO" << '\n';
+  if (this->getVel().x < 0) {
+    rect.left = rect.width;
+    rect.width *= -1;
+  } else {
+    if (rect.width < 0) {
+      rect.width *= -1;
+      rect.left -= rect.width;
+    }
+  }
+  getSprite().setTextureRect(rect);
 }
