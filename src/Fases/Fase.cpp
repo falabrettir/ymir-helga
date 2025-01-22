@@ -7,7 +7,7 @@
 
 namespace Fases {
 
-Fase::Fase() {
+Fase::Fase() : ehPrimeiroJogador(true) {
   pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
   listaObstaculos.limpar();
   listaPersonagens.limpar();
@@ -47,6 +47,6 @@ void Fase::criarMapa(const std::string path) {
   arquivoMapa.close();
 }
 
-void Fase::criarJogador(sf::Vector2f &pos, bool primeiroJogador) {}
+void Fase::criarJogador(const sf::Vector2f &pos) { ehPrimeiroJogador = false; }
 
 } // namespace Fases

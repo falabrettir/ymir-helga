@@ -14,6 +14,7 @@ protected:
   Gerenciadores::Gerenciador_Colisoes *pGC;
   Listas::ListaEntidades listaObstaculos;
   Listas::ListaEntidades listaPersonagens;
+  bool ehPrimeiroJogador;
 
 public:
   Fase();
@@ -21,7 +22,7 @@ public:
 
   virtual void executar();
   void criarMapa(const std::string path);
-  void criarJogador(sf::Vector2f &pos, bool primeiroJogador = true);
+  void criarJogador(const sf::Vector2f &pos);
   virtual void criarEntidade(char tipoEntidade, const sf::Vector2f &pos) = 0;
 };
 
