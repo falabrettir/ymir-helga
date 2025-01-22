@@ -3,7 +3,9 @@
 
 namespace Fases {
 
-Planicie::Planicie() : Fase(), contOrc(0), contSlime(0) {}
+Planicie::Planicie() : Fase(), contOrc(0), contSlime(0) {
+  criarMapa("assets/Mapas/planicie.txt");
+}
 
 Planicie::~Planicie() {}
 
@@ -26,9 +28,28 @@ void Planicie::criarEntidade(char tipoEntidade, const sf::Vector2f &pos) {
   case 'P':
     criarEspinho(pos);
     break;
+  case 'J':
+    criarJogador(pos);
+    break;
   default:
     break;
   }
+}
+
+void Planicie::criarOrc(const sf::Vector2f &pos) {
+  // TODO: Implementar
+}
+
+void Planicie::criarGrama(const sf::Vector2f &pos) {
+  // TODO: Implementar
+}
+
+void Planicie::criarMadeira(const sf::Vector2f &pos) {
+  // TODO: Implementar
+}
+
+void Planicie::criarEspinho(const sf::Vector2f &pos) {
+  // TODO: Implementar
 }
 
 } // namespace Fases
