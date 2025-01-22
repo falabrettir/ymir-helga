@@ -2,7 +2,7 @@
 
 namespace Fases {
 
-Caverna::Caverna() : Fase() {}
+Caverna::Caverna() : Fase(), contEsqueletos(0), contSlimes(0) {}
 
 Caverna::~Caverna() {}
 
@@ -11,20 +11,29 @@ void Caverna::executar() { Fase::executar(); }
 void Caverna::criarEntidade(char tipoEntidade, const sf::Vector2f &pos) {
   switch (tipoEntidade) {
   case 'E':
-    criarEsqueleto();
+    criarEsqueleto(pos);
     break;
+
   case 'S':
-    criarSlime();
+    criarSlime(pos);
     break;
+
   case 'P':
-    criarPedra();
+    criarPedra(pos);
     break;
+
   case 'M':
-    criarMadeira();
+    criarMadeira(pos);
     break;
+
   case 'G':
-    criarGosma();
+    criarGosma(pos);
     break;
+
+  case 'J':
+    criarJogador(pos);
+    break;
+
   default:
     break;
   }
