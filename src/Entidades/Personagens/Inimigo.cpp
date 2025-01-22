@@ -1,33 +1,42 @@
-#include "../include/Entidades/Personagens/Inimigo.h"
+#include "Entidades/Personagens/Inimigo.h"
 #include "Entidades/Personagens/Personagem.h"
 #include <SFML/System/Vector2.hpp>
+#include <cmath>
 
-using namespace Entidades;
+namespace Entidades {
+namespace Personagens {
+namespace Inimigos {
+Inimigo::Inimigo(ID id, float visada, int dano)
+    : Personagem(id), visada(visada), dano(dano) {}
+Inimigo::~Inimigo() {}
 
-Personagens::Inimigos::Inimigo::Inimigo(int id)
-    : Personagem(id), visada(0.f), nivelMadade(0), pJ(nullptr) {}
-Personagens::Inimigos::Inimigo::~Inimigo() {}
-void Personagens::Inimigos::Inimigo::salvarDataBuffer() {}
-void Personagens::Inimigos::Inimigo::persegue() {
-  sf::Vector2<float> pos = getPos();
-  sf::Vector2<float> posJ = pJ->getPos();
-  sf::Vector2<float> vel = getVel();
-  sf::Vector2<float> mov;
-  mov.x = 0.0;
-  mov.y = 0.0;
-  if (pos.x <= posJ.x) {
-    mov.x = vel.x;
-  }
-  if (pos.x >= posJ.x) {
-    mov.x = -vel.x;
-  }
-  if (pos.y >= posJ.y) {
-    mov.y = -vel.y;
-  }
-  if (pos.y <= posJ.y) {
-    mov.y = vel.y;
-  }
-  mov.x -= 0.05;
-  mov.y -= 0.05;
-  // mover(mov);
+bool Inimigo::visando(Jogador *pJog) {
+  return fabs(pJog->getPos().x - this->getPos().x) <= visada;
 }
+
+void Inimigo::perseguir(Jogador *pJog) {
+  if (visando(pJog)) {
+    sf::Vector2f pos = this->getPos();
+    sf::Vector2f jogpos = pJog->getPos();
+
+    sf::Vector2f direcao = pos - jogpos;
+    float abs = std::sqrt(direcao.x * direcao.x);
+
+    if (abs != 0)
+      direcao /= abs;
+    sf::Vector2f novaVel = sf::Vector2f({0, 0});
+    novaVel.x = direcao.x * getVel().x;
+    setVel(novaVel);
+  }
+}
+void colidir(Entidade *pEnt,
+             sf::Vector2f ds) { // nesse caso, entidade há de ser outro inimigo
+                                // ou então um jogador
+  if (ds.x < 0 && ds.y < 0) {
+    if (pEnt->getId() == ID::IDjogador)
+      dynamic_cast<Personagem *>(pEnt)->tomarDano(dano);
+  }
+}
+} // namespace Inimigos
+} // namespace Personagens
+} // namespace Entidades

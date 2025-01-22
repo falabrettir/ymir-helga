@@ -8,7 +8,7 @@
 
 Gerenciadores::Gerenciador_Grafico *Ente::pGG(nullptr);
 
-Ente::Ente(int id) : id(id) {
+Ente::Ente(ID id) : id(id) {
   pSprite = new sf::Sprite();
   pTexture = new sf::Texture();
   setTarget();
@@ -61,4 +61,4 @@ void Ente::desenhar() {
     std::clog << "Nullptr em desenharEnte" << std::endl;
   }
 }
-const int Ente::getId() const { return this->id; }
+const ID Ente::getId() const { return this->id; }

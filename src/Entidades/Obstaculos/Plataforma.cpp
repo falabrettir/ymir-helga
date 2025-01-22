@@ -31,7 +31,6 @@ void Plataforma::obstacular(Entidades::Entidade *pEnt) {
 
 void Plataforma::colidir(Entidades::Entidade *pEnt, sf::Vector2f ds) {
   sf::Vector2f posEnt = pEnt->getPos();
-  sf::Vector2f tamEnt = pEnt->getSize();
   sf::Vector2f velEnt = pEnt->getVel();
 
   if (ds.x < 0.f && ds.y < 0.f) { // colidiu

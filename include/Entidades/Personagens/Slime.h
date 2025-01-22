@@ -10,7 +10,7 @@ private:
   int lentidao;
 
 public:
-  Slime(int id);
+  Slime(ID id);
   ~Slime();
   void danificar(Entidades::Personagens::Jogador *pJog);
   void executar();

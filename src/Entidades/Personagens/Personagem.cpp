@@ -4,8 +4,7 @@
 
 using namespace Entidades::Personagens;
 
-Personagem::Personagem(int id)
-    : Entidade(id), hp(100), numVidas(3), olhandoEsquerda(false) {}
+Personagem::Personagem(ID id) : Entidade(id), hp(100), olhandoEsquerda(false) {}
 
 Personagem::~Personagem() {}
 
@@ -28,3 +27,4 @@ void Personagem::atualizaOrientacao() {
     pSprite->setOrigin(0, 0);
   }
 }
+void Personagem::tomarDano(int dano) { hp -= dano; }

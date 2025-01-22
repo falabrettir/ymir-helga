@@ -6,7 +6,7 @@
 
 using namespace Entidades::Personagens;
 
-Jogador::Jogador(int id, const bool ehPrimeiroJogador)
+Jogador::Jogador(ID id, const bool ehPrimeiroJogador)
     : Personagem(id), pContr(nullptr), podePular(true),
       ehPrimeiroJogador(ehPrimeiroJogador) {
 

@@ -10,15 +10,15 @@ namespace Personagens {
 class Personagem : public Entidades::Entidade {
 private:
   int hp;
-  int numVidas;
   bool olhandoEsquerda;
 
 public:
-  Personagem(int id);
+  Personagem(ID id);
   void atualizaOrientacao();
   virtual ~Personagem();
 
   virtual void mover();
+  void tomarDano(int dano);
 
   void setOlhandoEsquerda(bool olhandoEsquerda);
 };

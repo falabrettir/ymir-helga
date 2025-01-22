@@ -1,5 +1,6 @@
 #pragma once
 #include "Gerenciadores/GerenciadorGrafico.h"
+#include "IDs.h"
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
@@ -8,18 +9,18 @@
 
 class Ente {
 protected:
-  int id;
+  const ID id;
   static Gerenciadores::Gerenciador_Grafico *pGG;
   sf::RenderTarget *pAlvo;
   sf::Texture *pTexture;
   sf::Sprite *pSprite;
 
 public:
-  Ente(int id);
+  Ente(ID id);
   virtual ~Ente();
 
   static void setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *ppGG);
-  const int getId() const;
+  const ID getId() const;
   bool setTexture(const std::string &path);
   void atualizaSprite(sf::Texture *pTexture);
   sf::Sprite getSprite();

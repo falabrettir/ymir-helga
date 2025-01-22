@@ -3,7 +3,7 @@
 
 using namespace Entidades;
 
-Entidade::Entidade(int id)
+Entidade::Entidade(ID id)
     : Ente(id), pos(0, 0), velocidade(0, 0), gravidade(0, 0.1), tamanho(0, 0),
       noChao(false), buffer(nullptr){};
 

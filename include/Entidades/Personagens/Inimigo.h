@@ -8,19 +8,21 @@ namespace Entidades {
 namespace Personagens {
 namespace Inimigos {
 
-class Inimigo : public Entidades::Personagens::Personagem {
+class Inimigo : public Personagem {
 protected:
-  int nivelMadade;
   float visada;
-  Entidades::Personagens::Jogador *pJ;
+  int dano;
 
 public:
-  Inimigo(int id);
+  Inimigo(ID id, float visada, int dano);
   virtual ~Inimigo();
-  void persegue();
-  void salvarDataBuffer();
+
+  bool visando(Jogador *pJog);
+  void perseguir(Jogador *pJog);
+  void colidir(Entidade *pEnt, sf::Vector2f ds = sf::Vector2f({0.f, 0.f}));
+
+  virtual void atacar() = 0;
   // virtual void executar() = 0;
-  // virtual void danificar(Entidades::Personagens::Jogador *pJog) = 0;
 };
 
 } // namespace Inimigos
