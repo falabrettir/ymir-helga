@@ -37,6 +37,8 @@ bin/
 
 # Configuração do clangd
 .clangd
+.clang-format
 .cache/
+
 # PDF's e imagens
 *.pdf
