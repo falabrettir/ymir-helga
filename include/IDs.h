@@ -1,6 +1,5 @@
 #pragma once
 
-namespace IDs {
 enum class ID {
   IDjogador,   // 0
   IDslime,     // 1
@@ -12,5 +11,3 @@ enum class ID {
   IDgrama,     // 7
   IDfase,      // 8
 };
-}
-using namespace IDs;
