@@ -3,10 +3,7 @@
 #include "Jogador.h"
 #include <SFML/System/Vector2.hpp>
 
-namespace Entidades {
-
-namespace Personagens {
-namespace Inimigos {
+namespace Entidades::Personagens::Inimigos {
 
 class Inimigo : public Personagem {
 protected:
@@ -26,6 +23,4 @@ public:
   // virtual void executar() = 0;
 };
 
-} // namespace Inimigos
-} // namespace Personagens
-} // namespace Entidades
+} // namespace Entidades::Personagens::Inimigos
