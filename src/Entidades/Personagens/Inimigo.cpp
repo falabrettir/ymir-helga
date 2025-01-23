@@ -3,11 +3,11 @@
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
 
-namespace Entidades {
-namespace Personagens {
-namespace Inimigos {
+namespace Entidades::Personagens::Inimigos {
+
 Inimigo::Inimigo(ID id, float visada, int dano)
     : Personagem(id), visada(visada), dano(dano) {}
+
 Inimigo::~Inimigo() {}
 
 bool Inimigo::visando(Jogador *pJog) {
@@ -29,7 +29,9 @@ void Inimigo::perseguir(Jogador *pJog) {
     setVel(novaVel);
   }
 }
+
 const int Inimigo::getDano() const { return dano; }
+
 void Inimigo::colidir(Entidade *pEnt,
                       sf::Vector2f ds) { // nesse caso, entidade há de ser outro
                                          // inimigo ou então um jogador
@@ -38,6 +40,5 @@ void Inimigo::colidir(Entidade *pEnt,
       dynamic_cast<Personagem *>(pEnt)->tomarDano(getDano());
   }
 }
-} // namespace Inimigos
-} // namespace Personagens
-} // namespace Entidades
+
+} // namespace Entidades::Personagens::Inimigos
