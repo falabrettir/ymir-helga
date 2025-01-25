@@ -4,8 +4,9 @@
 #include "Inimigo.h"
 #include <SFML/System/Vector2.hpp>
 
-namespace Entidades::Personagens::Inimigos {
-
+namespace Entidades {
+namespace Personagens {
+namespace Inimigos {
 class Slime : public Inimigo {
 private:
   int lentidao;
@@ -16,5 +17,6 @@ public:
   void danificar(Entidades::Personagens::Jogador *pJog);
   void executar();
 };
-
-} // namespace Entidades::Personagens::Inimigos
+} // namespace Inimigos
+} // namespace Personagens
+} // namespace Entidades

@@ -16,8 +16,7 @@ public:
   Personagem(ID id);
   void atualizaOrientacao();
   virtual ~Personagem();
-
-  virtual void mover();
+  void mover();
   void tomarDano(int dano);
 
   void setOlhandoEsquerda(bool olhandoEsquerda);
