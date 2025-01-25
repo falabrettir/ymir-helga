@@ -54,12 +54,16 @@ void Fase::criarMapa(const std::string path) {
 }
 
 void Fase::criarJogador(const sf::Vector2f &pos) {
-  // TODO: Terminar
-  Personagens::Jogador *novoJog = new Personagens::Jogador();
+  Personagens::Jogador *novoJog = new Personagens::Jogador(ehPrimeiroJogador);
+  novoJog->setPos(pos);
+
+  listaPersonagens.incluir(novoJog);
+
+  ehPrimeiroJogador = false;
 }
 
 void Fase::criarEsqueleto(const sf::Vector2f &pos) {
-  // TODO: Implementar
+  // TODO: Implementar depois de terminar a classe esqueleto
 }
 
 }  // namespace Fases

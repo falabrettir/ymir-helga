@@ -49,20 +49,24 @@ void Caverna::criarSlime(const sf::Vector2f &pos) {
 
 void Caverna::criarPedra(const sf::Vector2f &pos) {
   Obstaculos::Plataforma *novaPlataforma = new Obstaculos::Plataforma(ID::IDpedra);
+
   // TODO: Adicionar caminho para a sprite de pedra
   novaPlataforma->setTexture("");
+
   listaObstaculos.incluir(novaPlataforma);
 }
 
 void Caverna::criarMadeira(const sf::Vector2f &pos) {
   Obstaculos::Plataforma *novaPlataforma = new Obstaculos::Plataforma(ID::IDmadeira1);
+
   // TODO: Adicionar caminho para a sprite de madeira1
   novaPlataforma->setTexture("");
+
   listaObstaculos.incluir(novaPlataforma);
 }
 
 void Caverna::criarGosma(const sf::Vector2f &pos) {
-  // TODO: Implementar
+  // TODO: Implementar depois de criar Gosma
 }
 
 };  // namespace Fases
