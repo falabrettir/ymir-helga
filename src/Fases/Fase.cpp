@@ -1,14 +1,19 @@
 #include "Fases/Fase.h"
-#include "Gerenciadores/GerenciadorColisoes.h"
-#include "IDs.h"
+
 #include <SFML/System/Vector2.hpp>
 #include <fstream>
 #include <iostream>
 #include <string>
 
+#include "Entidades/Personagens/Jogador.h"
+#include "Gerenciadores/GerenciadorColisoes.h"
+#include "IDs.h"
+
+using namespace Entidades;
+
 namespace Fases {
 
-Fase::Fase() : Ente(IDs::ID::IDfase), ehPrimeiroJogador(true) {
+Fase::Fase() : Ente(ID::IDfase), ehPrimeiroJogador(true) {
   pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
   listaObstaculos.limpar();
   listaPersonagens.limpar();
@@ -49,12 +54,12 @@ void Fase::criarMapa(const std::string path) {
 }
 
 void Fase::criarJogador(const sf::Vector2f &pos) {
-  ehPrimeiroJogador = false;
   // TODO: Terminar
+  Personagens::Jogador *novoJog = new Personagens::Jogador();
 }
 
 void Fase::criarEsqueleto(const sf::Vector2f &pos) {
   // TODO: Implementar
 }
 
-} // namespace Fases
+}  // namespace Fases

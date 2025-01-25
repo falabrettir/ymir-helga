@@ -1,24 +1,27 @@
 #include "Entidades/Personagens/Jogador.h"
-#include "Entidades/Personagens/Personagem.h"
+
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 
+#include "Entidades/Personagens/Personagem.h"
+
 using namespace Entidades::Personagens;
 
-Jogador::Jogador(ID id, const bool ehPrimeiroJogador)
-    : Personagem(id), pContr(nullptr), podePular(true),
-      ehPrimeiroJogador(ehPrimeiroJogador) {
-
+Jogador::Jogador(const bool ehPrimeiroJogador)
+    : Personagem(ID::IDjogador), pContr(nullptr), podePular(true), ehPrimeiroJogador(ehPrimeiroJogador) {
   pContr = new Controladores::Controlador_Jogador();
   pContr->setJog(this);
+
   if (ehPrimeiroJogador)
     setTexture("/assets/Characters(100x100)/Archer/Archer/Archer-Idle.png");
   else
     setTexture("/assets/Characters(100x100)/Archer/Archer/Player2.png");
+
   sf::Vector2f posInicial(400, 400);
   setPos(posInicial);
   pSprite->setPosition(posInicial);
+
   sf::FloatRect hitbox({0, 0, 18.f, 17.f});
   pSprite->setTextureRect({40, 40, 27, 20});
   setHitbox(hitbox);
@@ -29,9 +32,7 @@ Jogador::Jogador(ID id, const bool ehPrimeiroJogador)
 
 Jogador::~Jogador() {}
 
-void Jogador::setPrimeiroJog(bool ehPrimeiroJogador) {
-  this->ehPrimeiroJogador = ehPrimeiroJogador;
-}
+void Jogador::setPrimeiroJog(bool ehPrimeiroJogador) { this->ehPrimeiroJogador = ehPrimeiroJogador; }
 
 bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
@@ -63,16 +64,12 @@ void Jogador::mover() {
   pSprite->setPosition(novaPos);
 }
 
-Controladores::Controlador_Jogador *Jogador::getControlador() const {
-  return pContr;
-}
+Controladores::Controlador_Jogador *Jogador::getControlador() const { return pContr; }
 
 void Jogador::executar() {
-
   pContr->controlarJogador();
 
-  if (!getNoChao())
-    cair();
+  if (!getNoChao()) cair();
 
   mover();
 }

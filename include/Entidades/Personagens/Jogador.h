@@ -1,25 +1,26 @@
 #pragma once
 
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/System/Vector2.hpp>
+
 #include "Controladores/ControladorJogador.h"
 #include "Entidades/Personagens/Personagem.h"
 #include "Gerenciadores/GerenciadorEventos.h"
-#include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/System/Vector2.hpp>
 
 namespace Entidades::Personagens {
 
 #define VEL 0.3
 
 class Jogador : public Personagem {
-private:
+ private:
   bool ehPrimeiroJogador;
 
-protected:
+ protected:
   bool podePular;
   Controladores::Controlador_Jogador *pContr;
 
-public:
-  Jogador(ID id, const bool ehPrimeiroJogador = true);
+ public:
+  Jogador(const bool ehPrimeiroJogador = true);
   ~Jogador();
 
   void setPrimeiroJog(bool ehPrimeiroJogador);
@@ -35,4 +36,4 @@ public:
   Controladores::Controlador_Jogador *getControlador() const;
 };
 
-} // namespace Entidades::Personagens
+}  // namespace Entidades::Personagens

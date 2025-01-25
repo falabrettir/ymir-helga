@@ -1,24 +1,25 @@
 #pragma once
 
-#include "Ente.h"
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
+
+#include "Ente.h"
 
 namespace Entidades {
 
 class Entidade : public Ente {
-private:
+ private:
   sf::Vector2f pos;
   sf::Vector2f gravidade;
   sf::Vector2f tamanho;
   bool noChao;
   std::ostream *buffer;
 
-protected:
+ protected:
   sf::Vector2f velocidade;
   sf::FloatRect hitbox;
 
-public:
+ public:
   Entidade(ID id);
   virtual ~Entidade();
 
@@ -36,6 +37,8 @@ public:
   sf::FloatRect getHitbox() const;
 
   void cair();
+
+  virtual void executar() = 0;
 };
 
-} // namespace Entidades
+}  // namespace Entidades

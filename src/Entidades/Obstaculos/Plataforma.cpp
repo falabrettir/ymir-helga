@@ -1,13 +1,12 @@
 #include "Entidades/Obstaculos/Plataforma.h"
+
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 
 namespace Entidades::Obstaculos {
 
-Plataforma::Plataforma(int id, const bool ehFlut)
-    : Obstaculo(id), altura(540.f), ehFlutuante(ehFlut), empuxo(0.f, 0.f) {
-
+Plataforma::Plataforma(ID id, const bool ehFlut) : Obstaculo(id), altura(540.f), ehFlutuante(ehFlut), empuxo(0.f, 0.f) {
   setTexture("/assets/Prataforma.png");
 
   sf::Vector2f posInicial(400, 900);
@@ -25,15 +24,13 @@ Plataforma::~Plataforma() {}
 
 void Plataforma::executar() { std::cout << "Executando obst"; }
 
-void Plataforma::obstacular(Entidades::Entidade *pEnt) {
-  std::cout << "obstaculando";
-}
+void Plataforma::obstacular(Entidades::Entidade *pEnt) { std::cout << "obstaculando"; }
 
 void Plataforma::colidir(Entidades::Entidade *pEnt, sf::Vector2f ds) {
   sf::Vector2f posEnt = pEnt->getPos();
   sf::Vector2f velEnt = pEnt->getVel();
 
-  if (ds.x < 0.f && ds.y < 0.f) { // colidiu
+  if (ds.x < 0.f && ds.y < 0.f) {  // colidiu
     if (ds.x > ds.y) {
       if (posEnt.x < this->getPos().x)
         posEnt.x += ds.x;
@@ -55,4 +52,4 @@ void Plataforma::colidir(Entidades::Entidade *pEnt, sf::Vector2f ds) {
   pEnt->setVel(velEnt);
 }
 
-} // namespace Entidades::Obstaculos
+}  // namespace Entidades::Obstaculos
