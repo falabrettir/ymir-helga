@@ -1,5 +1,6 @@
 #include "Entidades/Personagens/Inimigo.h"
 #include "Entidades/Personagens/Personagem.h"
+#include "IDs.h"
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
 
@@ -36,8 +37,15 @@ void Inimigo::colidir(Entidade *pEnt,
                       sf::Vector2f ds) { // nesse caso, entidade há de ser outro
                                          // inimigo ou então um jogador
   if (ds.x < 0 && ds.y < 0) {
-    if (pEnt != nullptr && pEnt->getId() == ID::IDjogador)
-      dynamic_cast<Personagem *>(pEnt)->tomarDano(getDano());
+    if (pEnt->getId() == ID::IDjogador) {
+      dynamic_cast<Jogador *>(pEnt)->tomarDano(dano);
+      // TODO:
+      // dar um jumpsons p tras??
+    } else if (pEnt->getId() == ID::projetil) {
+      if (pEnt->getDono() == ID::IDjogador) {
+        tomarDano(pEnt->getDano());
+      }
+    }
   }
 }
 

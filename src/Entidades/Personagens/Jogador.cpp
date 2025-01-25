@@ -57,14 +57,9 @@ void Jogador::pular() {
   }
 }
 
-void Jogador::mover() {
-  sf::Vector2f novaPos = getPos() + getVel() * pGG->getDeltaTempo();
-
-  setPos(novaPos);
-  pSprite->setPosition(novaPos);
+Controladores::Controlador_Jogador *Jogador::getControlador() const {
+  return pContr;
 }
-
-Controladores::Controlador_Jogador *Jogador::getControlador() const { return pContr; }
 
 void Jogador::executar() {
   pContr->controlarJogador();

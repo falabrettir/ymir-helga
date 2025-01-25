@@ -30,7 +30,6 @@ class Jogador : public Personagem {
   void andarEsquerda();
   void naoAndar();
   void pular();
-  void mover();
   void atacar();
   void executar();
   Controladores::Controlador_Jogador *getControlador() const;
