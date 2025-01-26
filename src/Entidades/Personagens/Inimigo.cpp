@@ -8,25 +8,26 @@
 
 namespace Entidades::Personagens::Inimigos {
 
-Inimigo::Inimigo(ID id, float visada, int dano)
+Inimigo::Inimigo(ID id, float visada, int dano, bool visando)
     : Personagem(id), visada(visada), dano(dano), pJogs() {
   pJogs.clear();
 }
 
 Inimigo::~Inimigo() { pJogs.clear(); }
 
-float Inimigo::visando(Jogador *pJog) { return fabs(pJog->getPos().x - this->getPos().x); }
+float Inimigo::calculaDistancia(Jogador *pJog) { return fabs(pJog->getPos().x - this->getPos().x); }
 
 void Inimigo::perseguir() {
   std::set<Jogador *>::iterator it = pJogs.begin();
   Jogador *aux = nullptr;
-  float atual, min = std::numeric_limits<float>::max();
+  float atual, min = visada;
   while (it != pJogs.end()) {
-    atual = visando(*it);
-    if (atual < min) {
+    atual = calculaDistancia(*it);
+    if (atual <= min) {
       min = atual;
       aux = *it;
     }
+    ++it;
   }
   sf::Vector2f pos = this->getPos();
   sf::Vector2f jogpos = aux->getPos();
