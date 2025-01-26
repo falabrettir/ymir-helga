@@ -1,15 +1,16 @@
 #pragma once
 
+#include "Entidades/Projetil.h"
 #include "Inimigo.h"
 
 namespace Entidades::Personagens::Inimigos {
 class Esqueleto : public Inimigo {
  private:
-  float força;
-  unsigned short int numFlechas;
+  float forca;
+  Projetil* flecha;
 
  public:
-  Esqueleto(ID id, float visada, int dano, int numflechas = 10);
+  Esqueleto(ID id, float visada, int dano);
   ~Esqueleto();
   void atacar();
   void executar();

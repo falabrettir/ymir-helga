@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include "Entidades/Personagens/Personagem.h"
+#include "Entidades/Projetil.h"
 #include "IDs.h"
 
 namespace Entidades::Personagens::Inimigos {
@@ -25,6 +26,7 @@ void Inimigo::perseguir() {
     if (atual <= min) {
       min = atual;
       aux = *it;
+      visando = true;
     }
     ++it;
   }
@@ -40,16 +42,18 @@ void Inimigo::perseguir() {
   setVel(novaVel);
 }
 
+const bool Inimigo::getVisando() const { return visando; }
+
 void Inimigo::colidir(Entidade *pEnt,
                       sf::Vector2f ds) {  // nesse caso, entidade há de ser outro
                                           // inimigo ou então um jogador
   if (ds.x < 0 && ds.y < 0) {
     if (pEnt->getId() == ID::IDjogador) {
-      dynamic_cast<Jogador *>(pEnt)->tomarDano(dano);
+      dynamic_cast<Jogador *>(pEnt)->tomarDano(getDano());
       // TODO:
       // dar um jumpsons p tras??
     } else if (pEnt->getId() == ID::IDprojetil) {
-      if (dynamic_cast<Projetil *>(pEnt)->getDono()->getId == ID::IDjogador) {
+      if (dynamic_cast<Projetil *>(pEnt)->getDono()->getId() == ID::IDjogador) {
         tomarDano(dynamic_cast<Projetil *>(pEnt)->getDano());
       }
     }

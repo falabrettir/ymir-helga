@@ -49,8 +49,6 @@ void Jogador::andarDireita() {
   } else {
     setVelX(MAXVEL);
   }
-  setOlhandoEsquerda(false);
-  atualizaOrientacao();
 }
 
 void Jogador::andarEsquerda() {
@@ -61,8 +59,6 @@ void Jogador::andarEsquerda() {
   } else {
     setVelX(-MAXVEL);
   }
-  setOlhandoEsquerda(true);
-  atualizaOrientacao();
 }
 
 void Jogador::naoAndar() { setVelX(0); }

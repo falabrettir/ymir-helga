@@ -16,6 +16,13 @@ Personagem::Personagem(ID id) : Entidade(id), hp(100), olhandoEsquerda(false), d
 Personagem::~Personagem() {}
 
 void Personagem::mover() {
+  if (velocidade.x > 0) {
+    setOlhandoEsquerda(false);
+    atualizaOrientacao();
+  } else {
+    setOlhandoEsquerda(true);
+    atualizaOrientacao();
+  }
   sf::Vector2f novaPos = getPos() + (velocidade * pGG->getDeltaTempo());
   setPos(novaPos);
   pSprite->setPosition(novaPos);
@@ -35,5 +42,7 @@ void Personagem::atualizaOrientacao() {
   }
 }
 void Personagem::tomarDano(int dano) { hp -= dano; }
+
+void Personagem::setDano(const int dano) { this->dano = dano; }
 
 const int Personagem::getDano() const { return dano; }

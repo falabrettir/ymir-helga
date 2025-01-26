@@ -10,10 +10,10 @@ namespace Entidades {
 class Projetil : public Entidade {
  private:
   Personagens::Personagem *pPersDono;
-  int dano;
+  int impulso;
 
  public:
-  Projetil(Personagens::Personagem *pPersDono);
+  Projetil(Personagens::Personagem *pPersDono, int impulso = 0);
   Projetil();
   ~Projetil();
 

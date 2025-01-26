@@ -19,7 +19,7 @@ class Inimigo : public Personagem {
   float calculaDistancia(Jogador *pJogs);
   void perseguir();
   virtual void colidir(Entidade *pEnt, sf::Vector2f ds = sf::Vector2f({0.f, 0.f}));
-  const int getDano() const;
+  const bool getVisando() const;
 
   virtual void atacar() = 0;
   virtual void executar() = 0;

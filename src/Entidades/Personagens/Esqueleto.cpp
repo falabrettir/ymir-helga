@@ -4,19 +4,24 @@
 
 #include <limits>
 
-#include "Entidades/Projetil.h"
-
 namespace Entidades::Personagens::Inimigos {
-Esqueleto::Esqueleto(ID id, float visada, int dano, int numFlechas)
-    : Inimigo(id, visada, dano), força(0.0) {
+Esqueleto::Esqueleto(ID id, float visada, int dano)
+    : Inimigo(id, visada, dano), forca(0.0), flecha(nullptr) {
   srand((unsigned int)time(NULL));
 }
-Esqueleto::~Esqueleto() {}
+Esqueleto::~Esqueleto() {
+  flecha = nullptr;
+  delete flecha;
+}
 
 void Esqueleto::atacar() {
-  força = static_cast<float>(rand()) / std::numeric_limits<float>::max();
-  // TODO:
-  // criar projetil e implementar um timeout pros ataques;
-  numFlechas--;
+  forca = static_cast<float>(rand()) / std::numeric_limits<float>::max();
+  flecha = new Projetil(this, forca);
+}
+void Esqueleto::executar() {
+  // draw
+  perseguir();
+  mover();
+  if (getVisando() && flecha == nullptr) atacar();
 }
 }  // namespace Entidades::Personagens::Inimigos

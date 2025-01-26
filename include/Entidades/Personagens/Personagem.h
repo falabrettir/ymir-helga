@@ -22,6 +22,7 @@ class Personagem : public Entidades::Entidade {
   void mover();
   void tomarDano(int dano);
   const int getDano() const;
+  void setDano(const int dano);
 
   void setOlhandoEsquerda(bool olhandoEsquerda);
 };
