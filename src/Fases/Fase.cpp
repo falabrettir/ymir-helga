@@ -45,7 +45,7 @@ void Fase::criarMapa(const std::string path) {
   for (int j = 0; std::getline(arquivoMapa, linha); j++) {
     for (int i = 0; i < linha.size(); i++) {
       if (linha[i] != ' ') {
-        criarEntidade(linha[i], sf::Vector2f(i, j));
+        criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
       }
     }
   }
@@ -55,6 +55,8 @@ void Fase::criarMapa(const std::string path) {
 
 void Fase::criarJogador(const sf::Vector2f &pos) {
   Personagens::Jogador *novoJog = new Personagens::Jogador(ehPrimeiroJogador);
+
+  // Multiplicar posicao em X e Y pelo tamanho do grid ex. 16x16
   novoJog->setPos(pos);
 
   listaPersonagens.incluir(novoJog);
