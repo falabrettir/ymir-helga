@@ -37,13 +37,21 @@ void Jogador::setPrimeiroJog(bool ehPrimeiroJogador) { this->ehPrimeiroJogador =
 bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
 void Jogador::andarDireita() {
-  setVelX(VEL);
+  if (getVel().x < MAXVEL) {
+    sf::Vector2f vel = getVel();
+    vel.x += ACEL;
+  }
+  setVelX(MAXVEL);
   setOlhandoEsquerda(false);
   atualizaOrientacao();
 }
 
 void Jogador::andarEsquerda() {
-  setVelX(-VEL);
+  if (getVel().x > -MAXVEL) {
+    sf::Vector2f vel = getVel();
+    vel.x -= ACEL;
+  }
+  setVelX(-MAXVEL);
   setOlhandoEsquerda(true);
   atualizaOrientacao();
 }
