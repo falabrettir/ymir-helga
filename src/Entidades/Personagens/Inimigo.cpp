@@ -8,8 +8,7 @@
 
 namespace Entidades::Personagens::Inimigos {
 
-Inimigo::Inimigo(ID id, float visada, int dano, bool visando)
-    : Personagem(id), visada(visada), dano(dano), pJogs() {
+Inimigo::Inimigo(ID id, float visada, bool visando) : Personagem(id), visada(visada), pJogs() {
   pJogs.clear();
 }
 
@@ -40,8 +39,6 @@ void Inimigo::perseguir() {
   novaVel.x = direcao.x * getVel().x;
   setVel(novaVel);
 }
-
-const int Inimigo::getDano() const { return dano; }
 
 void Inimigo::colidir(Entidade *pEnt,
                       sf::Vector2f ds) {  // nesse caso, entidade há de ser outro

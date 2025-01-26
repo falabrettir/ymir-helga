@@ -80,8 +80,6 @@ void Jogador::aplicaLentidao(float viscosidade) {
   setVel(vel);
 }
 
-Controladores::Controlador_Jogador *Jogador::getControlador() const { return pContr; }
-
 void Jogador::executar() {
   pContr->controlarJogador();
 

@@ -1,10 +1,11 @@
 #include "Entidades/Personagens/Personagem.h"
+
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 
 using namespace Entidades::Personagens;
 
-Personagem::Personagem(ID id) : Entidade(id), hp(100), olhandoEsquerda(false) {}
+Personagem::Personagem(ID id) : Entidade(id), hp(100), olhandoEsquerda(false), dano(dano) {}
 
 Personagem::~Personagem() {}
 
@@ -28,3 +29,5 @@ void Personagem::atualizaOrientacao() {
   }
 }
 void Personagem::tomarDano(int dano) { hp -= dano; }
+
+const int Personagem::getDano() const { return dano; }

@@ -9,12 +9,11 @@ namespace Entidades::Personagens::Inimigos {
 class Inimigo : public Personagem {
  protected:
   float visada;
-  int dano;
   std::set<Jogador *> pJogs;
   bool visando;
 
  public:
-  Inimigo(ID id, float visada, int dano, bool visando = false);
+  Inimigo(ID id, float visada, bool visando = false);
   virtual ~Inimigo();
 
   float calculaDistancia(Jogador *pJogs);
