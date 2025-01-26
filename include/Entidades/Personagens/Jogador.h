@@ -9,7 +9,8 @@
 
 namespace Entidades::Personagens {
 
-#define VEL 0.3
+#define MAXVEL 0.3
+#define ACEL 0.3
 
 class Jogador : public Personagem {
  private:
