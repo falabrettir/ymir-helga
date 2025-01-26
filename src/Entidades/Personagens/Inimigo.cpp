@@ -9,9 +9,7 @@
 
 namespace Entidades::Personagens::Inimigos {
 
-Inimigo::Inimigo(ID id, float visada, bool visando) : Personagem(id), visada(visada), pJogs() {
-  pJogs.clear();
-}
+Inimigo::Inimigo(ID id) : Personagem(id), visada(100.f), visando(false), pJogs() { pJogs.clear(); }
 
 Inimigo::~Inimigo() { pJogs.clear(); }
 
@@ -50,8 +48,7 @@ void Inimigo::colidir(Entidade *pEnt,
   if (ds.x < 0 && ds.y < 0) {
     if (pEnt->getId() == ID::IDjogador) {
       dynamic_cast<Jogador *>(pEnt)->tomarDano(getDano());
-      // TODO:
-      // dar um jumpsons p tras??
+      // TODO: Dar um jumpsons p tras??
     } else if (pEnt->getId() == ID::IDprojetil) {
       if (dynamic_cast<Projetil *>(pEnt)->getDono()->getId() == ID::IDjogador) {
         tomarDano(dynamic_cast<Projetil *>(pEnt)->getDano());

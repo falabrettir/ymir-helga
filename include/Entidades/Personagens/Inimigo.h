@@ -13,7 +13,7 @@ class Inimigo : public Personagem {
   bool visando;
 
  public:
-  Inimigo(ID id, float visada, bool visando = false);
+  Inimigo(ID id);
   virtual ~Inimigo();
 
   float calculaDistancia(Jogador *pJogs);

@@ -9,9 +9,13 @@
 
 namespace Entidades::Personagens::Inimigos {
 
-Slime::Slime(ID id, float visada, int dano)
-    : Inimigo(ID::IDslime, visada, dano), viscosidade(0.60) {
+Slime::Slime(const sf::Vector2f& pos) : Inimigo(ID::IDslime) {
   setTexture("/assets/Characters(100x100)/Slime/Slime/Slime-Idle.png");
+
+  // TODO: Alterar dano do Slime
+  setDano(100);
+
+  setPos(pos);
 }
 
 Slime::~Slime() {}
@@ -32,4 +36,7 @@ void Slime::executar() {
   perseguir();
   mover();
 }
+
+void Slime::atacar() {}
+
 }  // namespace Entidades::Personagens::Inimigos
