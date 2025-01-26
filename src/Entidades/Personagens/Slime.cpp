@@ -13,6 +13,8 @@ Slime::Slime(ID id, float visada, int dano)
   setTexture("/assets/Characters(100x100)/Slime/Slime/Slime-Idle.png");
 }
 
+Slime::~Slime() {}
+
 void Slime::colidir(Entidade* pEnt, sf::Vector2f ds) {
   if (ds.x < 0 && ds.y < 0) {
     if (pEnt->getId() == ID::IDjogador) {
@@ -25,5 +27,8 @@ void Slime::colidir(Entidade* pEnt, sf::Vector2f ds) {
     }
   }
 }
-void Slime::executar() { perseguir(); }
+void Slime::executar() {
+  perseguir();
+  mover();
+}
 }  // namespace Entidades::Personagens::Inimigos

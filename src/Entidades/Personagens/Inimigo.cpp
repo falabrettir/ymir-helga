@@ -2,7 +2,6 @@
 
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
-#include <limits>
 
 #include "Entidades/Personagens/Personagem.h"
 #include "IDs.h"
@@ -14,7 +13,7 @@ Inimigo::Inimigo(ID id, float visada, int dano)
   pJogs.clear();
 }
 
-Inimigo::~Inimigo() {}
+Inimigo::~Inimigo() { pJogs.clear(); }
 
 float Inimigo::visando(Jogador *pJog) { return fabs(pJog->getPos().x - this->getPos().x); }
 

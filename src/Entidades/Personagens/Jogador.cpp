@@ -43,15 +43,24 @@ bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
 void Jogador::andarDireita() {
   if (getVel().x < MAXVEL) {
-    sf::Vector2f vel = getVel() + ACEL * pGG->getDeltaTempo();
+    sf::Vector2f vel = getVel();
+    vel.x += ACEL;
+    setVel(vel);
+  } else {
+    setVelX(MAXVEL);
   }
-  setVelX(MAXVEL);
   setOlhandoEsquerda(false);
   atualizaOrientacao();
 }
 
 void Jogador::andarEsquerda() {
-  setVelX(-MAXVEL);
+  if (getVel().x > -MAXVEL) {
+    sf::Vector2f vel = getVel();
+    vel.x -= ACEL;
+    setVel(vel);
+  } else {
+    setVelX(-MAXVEL);
+  }
   setOlhandoEsquerda(true);
   atualizaOrientacao();
 }
