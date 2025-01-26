@@ -1,7 +1,8 @@
-#include "Controladores/ControladorJogador.h"
-#include "Entidades/Personagens/Skjolder.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <catch2/catch.hpp>
+
+#include "Controladores/ControladorJogador.h"
+#include "Entidades/Personagens/Skjolder.h"
 
 TEST_CASE("ControladorJogador Testes") {
   Entidades::Personagens::Skjolder jogador;

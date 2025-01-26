@@ -6,7 +6,8 @@
 
 namespace Entidades::Obstaculos {
 
-Plataforma::Plataforma(ID id, const bool ehFlut) : Obstaculo(id), altura(540.f), ehFlutuante(ehFlut), empuxo(0.f, 0.f) {
+Plataforma::Plataforma(ID id, const bool ehFlut)
+    : Obstaculo(id), altura(540.f), ehFlutuante(ehFlut), empuxo(0.f, 0.f) {
   setTexture("/assets/Prataforma.png");
 
   sf::Vector2f posInicial(400, 900);
@@ -30,19 +31,19 @@ void Plataforma::colidir(Entidades::Entidade *pEnt, sf::Vector2f ds) {
   sf::Vector2f posEnt = pEnt->getPos();
   sf::Vector2f velEnt = pEnt->getVel();
 
-  if (ds.x < 0.f && ds.y < 0.f) {  // colidiu
-    if (ds.x > ds.y) {
+  if (ds.x < 0.f && ds.y < 0.f) {  // Colidiu
+    if (ds.x > ds.y) {             // Colisao em X
       if (posEnt.x < this->getPos().x)
         posEnt.x += ds.x;
       else
         posEnt.x -= ds.x;
       velEnt.x = 0.0f;
 
-    } else {
-      if (posEnt.y < this->getPos().y) {
+    } else {                              // Colisao em Y
+      if (posEnt.y < this->getPos().y) {  // Colidiu por cima
         posEnt.y += ds.y;
         pEnt->setNoChao(true);
-      } else {
+      } else {  // Colidiu por baixo
         posEnt.y -= ds.y;
       }
       velEnt.y = 0.0f;
