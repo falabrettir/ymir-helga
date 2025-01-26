@@ -16,8 +16,9 @@ class Personagem : public Entidades::Entidade {
 
  public:
   Personagem(ID id);
-  void atualizaOrientacao();
   virtual ~Personagem();
+
+  void atualizaOrientacao();
   void mover();
   void tomarDano(int dano);
   const int getDano() const;

@@ -28,29 +28,30 @@ void Plataforma::executar() { std::cout << "Executando obst"; }
 void Plataforma::obstacular(Entidades::Entidade *pEnt) { std::cout << "obstaculando"; }
 
 void Plataforma::colidir(Entidades::Entidade *pEnt, sf::Vector2f ds) {
-  sf::Vector2f posEnt = pEnt->getPos();
-  sf::Vector2f velEnt = pEnt->getVel();
+  sf::Vector2f posEntidade = pEnt->getPos();
+  sf::Vector2f velEntidade = pEnt->getVel();
 
   if (ds.x < 0.f && ds.y < 0.f) {  // Colidiu
     if (ds.x > ds.y) {             // Colisao em X
-      if (posEnt.x < this->getPos().x)
-        posEnt.x += ds.x;
+      if (posEntidade.x < this->getPos().x)
+        posEntidade.x += ds.x;
       else
-        posEnt.x -= ds.x;
-      velEnt.x = 0.0f;
+        posEntidade.x -= ds.x;
+      velEntidade.x = 0.0f;
 
-    } else {                              // Colisao em Y
-      if (posEnt.y < this->getPos().y) {  // Colidiu por cima
-        posEnt.y += ds.y;
+    } else {                                   // Colisao em Y
+      if (posEntidade.y < this->getPos().y) {  // Colidiu por cima
+        posEntidade.y += ds.y;
         pEnt->setNoChao(true);
       } else {  // Colidiu por baixo
-        posEnt.y -= ds.y;
+        posEntidade.y -= ds.y;
       }
-      velEnt.y = 0.0f;
+      velEntidade.y = 0.0f;
     }
   }
-  pEnt->setPos(posEnt);
-  pEnt->setVel(velEnt);
+
+  pEnt->setPos(posEntidade);
+  pEnt->setVel(velEntidade);
 }
 
 }  // namespace Entidades::Obstaculos

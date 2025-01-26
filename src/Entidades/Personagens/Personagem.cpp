@@ -5,7 +5,13 @@
 
 using namespace Entidades::Personagens;
 
-Personagem::Personagem(ID id) : Entidade(id), hp(100), olhandoEsquerda(false), dano(dano) {}
+Personagem::Personagem(ID id) : Entidade(id), hp(100), olhandoEsquerda(false), dano(0) {
+  setDano();
+}
+
+{
+  danificar(pPers) { pPers.danificar(getDano() * forca); }
+}
 
 Personagem::~Personagem() {}
 
