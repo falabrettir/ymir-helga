@@ -9,7 +9,8 @@
 
 namespace Entidades::Personagens {
 
-#define VEL 0.3
+#define MAXVEL 0.3
+#define ACEL 0.05;
 
 class Jogador : public Personagem {
  private:
@@ -32,6 +33,7 @@ class Jogador : public Personagem {
   void pular();
   void atacar();
   void executar();
+  void aplicaLentidao(float viscosidade);
   Controladores::Controlador_Jogador *getControlador() const;
 };
 

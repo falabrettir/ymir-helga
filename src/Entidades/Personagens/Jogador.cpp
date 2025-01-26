@@ -9,7 +9,10 @@
 using namespace Entidades::Personagens;
 
 Jogador::Jogador(const bool ehPrimeiroJogador)
-    : Personagem(ID::IDjogador), pContr(nullptr), podePular(true), ehPrimeiroJogador(ehPrimeiroJogador) {
+    : Personagem(ID::IDjogador),
+      pContr(nullptr),
+      podePular(true),
+      ehPrimeiroJogador(ehPrimeiroJogador) {
   pContr = new Controladores::Controlador_Jogador();
   pContr->setJog(this);
 
@@ -32,18 +35,23 @@ Jogador::Jogador(const bool ehPrimeiroJogador)
 
 Jogador::~Jogador() {}
 
-void Jogador::setPrimeiroJog(bool ehPrimeiroJogador) { this->ehPrimeiroJogador = ehPrimeiroJogador; }
+void Jogador::setPrimeiroJog(bool ehPrimeiroJogador) {
+  this->ehPrimeiroJogador = ehPrimeiroJogador;
+}
 
 bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
 void Jogador::andarDireita() {
-  setVelX(VEL);
+  if (getVel().x < MAXVEL) {
+    sf::Vector2f vel = getVel() + ACEL * pGG->getDeltaTempo();
+  }
+  setVelX(MAXVEL);
   setOlhandoEsquerda(false);
   atualizaOrientacao();
 }
 
 void Jogador::andarEsquerda() {
-  setVelX(-VEL);
+  setVelX(-MAXVEL);
   setOlhandoEsquerda(true);
   atualizaOrientacao();
 }
@@ -52,14 +60,18 @@ void Jogador::naoAndar() { setVelX(0); }
 
 void Jogador::pular() {
   if (podePular) {
-    setVelY(-2 * VEL);
+    setVelY(-2 * MAXVEL);
     setNoChao(false);
   }
 }
 
-Controladores::Controlador_Jogador *Jogador::getControlador() const {
-  return pContr;
+void Jogador::aplicaLentidao(float viscosidade) {
+  sf::Vector2f vel = getVel();
+  vel *= viscosidade;
+  setVel(vel);
 }
+
+Controladores::Controlador_Jogador *Jogador::getControlador() const { return pContr; }
 
 void Jogador::executar() {
   pContr->controlarJogador();

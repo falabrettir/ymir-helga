@@ -1,26 +1,28 @@
 #pragma once
+#include <SFML/System/Vector2.hpp>
+
 #include "Entidades/Personagens/Personagem.h"
 #include "Jogador.h"
-#include <SFML/System/Vector2.hpp>
 
 namespace Entidades::Personagens::Inimigos {
 
 class Inimigo : public Personagem {
-protected:
+ protected:
   float visada;
   int dano;
+  std::set<Jogador *> pJogs;
 
-public:
+ public:
   Inimigo(ID id, float visada, int dano);
   virtual ~Inimigo();
 
-  bool visando(Jogador *pJog);
-  void perseguir(Jogador *pJog);
-  void colidir(Entidade *pEnt, sf::Vector2f ds = sf::Vector2f({0.f, 0.f}));
+  float visando(Jogador *pJog);
+  void perseguir();
+  virtual void colidir(Entidade *pEnt, sf::Vector2f ds = sf::Vector2f({0.f, 0.f}));
   const int getDano() const;
 
   virtual void atacar() = 0;
   // virtual void executar() = 0;
 };
 
-} // namespace Entidades::Personagens::Inimigos
+}  // namespace Entidades::Personagens::Inimigos

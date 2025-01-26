@@ -1,22 +1,22 @@
 #pragma once
 
-#include "Entidades/Personagens/Jogador.h"
-#include "Inimigo.h"
 #include <SFML/System/Vector2.hpp>
+
+#include "Inimigo.h"
 
 namespace Entidades {
 namespace Personagens {
 namespace Inimigos {
 class Slime : public Inimigo {
-private:
-  int lentidao;
+ private:
+  double viscosidade;
 
-public:
-  Slime();
+ public:
+  Slime(ID id, float visada, int dano);
   ~Slime();
-  void danificar(Entidades::Personagens::Jogador *pJog);
   void executar();
+  void colidir(Entidade* pEnt, sf::Vector2f ds = {0, 0});
 };
-} // namespace Inimigos
-} // namespace Personagens
-} // namespace Entidades
+}  // namespace Inimigos
+}  // namespace Personagens
+}  // namespace Entidades

@@ -1,27 +1,29 @@
 #include "../include/Entidades/Personagens/Slime.h"
+
+#include <SFML/System/Vector2.hpp>
+
 #include "Entidades/Personagens/Inimigo.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "IDs.h"
-#include <SFML/System/Vector2.hpp>
-#include <iostream>
 
 namespace Entidades::Personagens::Inimigos {
 
-// FIX: Construtora de Inimigo
-Slime::Slime() : Inimigo(ID::IDslime), lentidao(0) {
+Slime::Slime(ID id, float visada, int dano)
+    : Inimigo(ID::IDslime, visada, dano), viscosidade(0.60) {
   setTexture("/assets/Characters(100x100)/Slime/Slime/Slime-Idle.png");
 }
 
-Slime::~Slime() {}
-void Inimigos::Slime::danificar(Entidades::Personagens::Jogador *pJog) {
-  std::cout << "Danificando!" << std::endl;
-}
-
-void Slime::executar() {
-  // FIX: undeclared identifier pJ
-  if (pJ->getPos().x > this->getPos().x) {
-    std::cout << "Perseguindo!" << std::endl;
+void Slime::colidir(Entidade* pEnt, sf::Vector2f ds) {
+  if (ds.x < 0 && ds.y < 0) {
+    if (pEnt->getId() == ID::IDjogador) {
+      dynamic_cast<Jogador*>(pEnt)->aplicaLentidao(viscosidade);
+      dynamic_cast<Jogador*>(pEnt)->tomarDano(dano);
+    } else if (pEnt->getId() == ID::IDprojetil) {
+      if (dynamic_cast<Projetil*>(pEnt)->getDono()->getId() == ID::IDjogador) {
+        tomarDano(dynamic_cast<Projetil*>(pEnt)->getDano());
+      }
+    }
   }
 }
-
-} // namespace Entidades::Personagens::Inimigos
+void Slime::executar() { perseguir(); }
+}  // namespace Entidades::Personagens::Inimigos
