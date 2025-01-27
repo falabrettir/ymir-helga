@@ -25,6 +25,8 @@ Ente::~Ente() {
 void Ente::setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *ppGG) {
   if (ppGG != nullptr) {
     pGG = ppGG;
+  } else {
+    std::cerr << "Erro em setGerenciadorGrafico: pGG == NULL\n";
   }
 }
 
