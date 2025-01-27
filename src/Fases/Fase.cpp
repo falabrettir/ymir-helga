@@ -5,7 +5,6 @@
 #include <iostream>
 #include <string>
 
-#include "Entidades/Obstaculos/Obstaculo.h"
 #include "Entidades/Personagens/Esqueleto.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
@@ -17,7 +16,7 @@ using namespace Entidades;
 
 namespace Fases {
 
-Fase::Fase() : Ente(ID::IDfase), ehPrimeiroJogador(true) {
+Fase::Fase() : Ente(ID::IDfase), ehPrimeiroJogador(true), listaObstaculos(), listaPersonagens() {
   pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
   pGI = Gerenciadores::Gerenciador_Input::getInstancia();
 
@@ -37,26 +36,18 @@ void Fase::executar() {
   listaPersonagens.percorrer();
 
   pGC->executar();
-
-  Listas::Lista<Entidades::Entidade *>::Iterator it;
-  for (it = listaObstaculos.begin(); it != listaObstaculos.end(); it.operator++())
-    (*it)->desenhar();
-
-  for (it = listaPersonagens.begin(); it != listaPersonagens.end(); it.operator++())
-    (*it)->desenhar();
 }
 
 void Fase::incluirNoColisor() {
   Listas::Lista<Entidades::Entidade *>::Iterator it;
 
-  // Inclui obstaculos na lista de obstaculos do GC
-  for (it = listaObstaculos.begin(); it != listaObstaculos.end(); it.operator++()) {
-    pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(*it));
+  for (it = listaObstaculos.begin(); it != listaObstaculos.end(); ++it) {
+    pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(*(*it)));
   }
 
   // Inclui personagens na lista de personagens do GC
-  for (it = listaPersonagens.begin(); it != listaPersonagens.end(); it.operator++()) {
-    pGC->incluirPers(dynamic_cast<Entidades::Personagens::Personagem *>(*it));
+  for (it = listaPersonagens.begin(); it != listaPersonagens.end(); ++it) {
+    pGC->incluirPers(dynamic_cast<Entidades::Personagens::Personagem *>(*(*it)));
   }
 }
 

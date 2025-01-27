@@ -3,6 +3,7 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "Gerenciadores/GerenciadorInput.h"
+#include "Listas/Lista.h"
 #include "Listas/ListaEntidades.h"
 
 namespace Gerenciadores {

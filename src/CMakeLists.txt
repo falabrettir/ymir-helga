@@ -22,12 +22,29 @@ add_library(jogo
 
   # Diretorio Entidades
   Entidades/Entidade.cpp
-  Entidades/Personagens/Jogador.cpp
-  Entidades/Personagens/Personagem.cpp
+  Entidades/Projetil.cpp
+
+  # Entidades::Personagens
+  Entidades/Personagens/Esqueleto.cpp
   Entidades/Personagens/Inimigo.cpp
+  Entidades/Personagens/Jogador.cpp
+  Entidades/Personagens/Mago.cpp
+  Entidades/Personagens/Personagem.cpp
   Entidades/Personagens/Slime.cpp
+
+  # Entidades::Obstaculos
   Entidades/Obstaculos/Obstaculo.cpp
   Entidades/Obstaculos/Plataforma.cpp
+  Entidades/Obstaculos/Espinho.cpp
+  Entidades/Obstaculos/Gosma.cpp
+
+  # Fases
+  Fases/Caverna.cpp
+  Fases/Fase.cpp
+  Fases/Planicie.cpp
+
+  # Listas
+  Listas/ListaEntidade.cpp
 )
 
 target_link_libraries(jogo

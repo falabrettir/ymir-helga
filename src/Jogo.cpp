@@ -25,6 +25,8 @@ void Jogo::atualizar() {
 
   pGG->atualizaDeltaTempo();
 
+  caverna.executar();
+
   // Sempre deixar display antes de clear
   pGG->display();
   pGG->clear();

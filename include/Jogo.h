@@ -1,22 +1,19 @@
 #pragma once
 
-#include "Entidades/Obstaculos/Plataforma.h"
-#include "Gerenciadores/GerenciadorColisoes.h"
-#include "Gerenciadores/GerenciadorEventos.h"
-#include "Gerenciadores/GerenciadorGrafico.h"
 #include <SFML/Graphics/Color.hpp>
 
+#include "Fases/Caverna.h"
+#include "Gerenciadores/GerenciadorEventos.h"
+#include "Gerenciadores/GerenciadorGrafico.h"
+
 class Jogo {
-private:
+ private:
   Gerenciadores::Gerenciador_Grafico *pGG;
   Gerenciadores::Gerenciador_Eventos *pGE;
   Gerenciadores::Gerenciador_Input *pGI;
-  Gerenciadores::Gerenciador_Colisoes *pGC;
-  Entidades::Personagens::Jogador *pJog1;
-  Entidades::Personagens::Jogador *pJog2;
-  Entidades::Obstaculos::Plataforma *pPlataforma;
+  Fases::Caverna caverna;
 
-public:
+ public:
   Jogo();
   ~Jogo();
   void atualizar();

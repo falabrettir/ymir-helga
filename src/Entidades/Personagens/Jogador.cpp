@@ -79,4 +79,7 @@ void Jogador::executar() {
 
   mover();
 }
+
 void Jogador::atacar() { std::cout << "ataquei" << '\n'; }
+
+Controladores::Controlador_Jogador *Jogador::getControlador() const { return pContr; }
