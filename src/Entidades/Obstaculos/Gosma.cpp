@@ -6,8 +6,7 @@ namespace Entidades::Obstaculos {
 Gosma::Gosma(const sf::Vector2f &pos)
     : Obstaculo(ID::IDgosma, pos), pegajosidade(0.6) {
   // TODO: aplicar texturas e posicao
-  setTextura("");
-  setPos();
+  setTextura("/assets/Obstaculos/Gosma.png");
 }
 Gosma::~Gosma() {}
 
