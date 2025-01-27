@@ -13,6 +13,7 @@ Gerenciadores::Gerenciador_Grafico *Ente::pGG(nullptr);
 Ente::Ente(ID id) : id(id) {
   pSprite = new sf::Sprite();
   pTexture = new sf::Texture();
+  // pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
   setTarget();
 }
 
@@ -52,6 +53,7 @@ bool Ente::setTextura(const std::string &path) {
 sf::Sprite Ente::getSprite() { return *pSprite; }
 
 void Ente::setTarget() {
+  printf("%p\n", pGG);
   if (pGG) {
     pAlvo = pGG->getJanela();
   } else {
