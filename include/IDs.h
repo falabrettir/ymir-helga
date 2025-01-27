@@ -10,5 +10,6 @@ enum class ID {
   IDpedra,     // 6
   IDgrama,     // 7
   IDfase,      // 8
-  IDprojetil   // 9
+  IDprojetil,  // 9
+  IDgosma      // 10
 };
