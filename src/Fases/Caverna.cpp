@@ -43,27 +43,17 @@ void Caverna::criarEntidade(char tipoEntidade, const sf::Vector2f &pos) {
 }
 
 void Caverna::criarSlime(const sf::Vector2f &pos) {
-  // FIX: Slime abstratato
-  Personagens::Inimigos::Slime *novoSlime = new Personagens::Inimigos::Slime();
-  novoSlime->setPos(pos);
+  Personagens::Inimigos::Slime *novoSlime = new Personagens::Inimigos::Slime(pos);
   listaPersonagens.incluir(novoSlime);
 }
 
 void Caverna::criarPedra(const sf::Vector2f &pos) {
-  Obstaculos::Plataforma *novaPlataforma = new Obstaculos::Plataforma(ID::IDpedra);
-
-  // TODO: Adicionar caminho para a sprite de pedra
-  novaPlataforma->setTexture("");
-
+  Obstaculos::Plataforma *novaPlataforma = new Obstaculos::Plataforma(ID::IDpedra, pos);
   listaObstaculos.incluir(novaPlataforma);
 }
 
 void Caverna::criarMadeira(const sf::Vector2f &pos) {
-  Obstaculos::Plataforma *novaPlataforma = new Obstaculos::Plataforma(ID::IDmadeira1);
-
-  // TODO: Adicionar caminho para a sprite de madeira1
-  novaPlataforma->setTexture("");
-
+  Obstaculos::Plataforma *novaPlataforma = new Obstaculos::Plataforma(ID::IDmadeira1, pos);
   listaObstaculos.incluir(novaPlataforma);
 }
 

@@ -5,7 +5,11 @@
 namespace Entidades {
 namespace Obstaculos {
 
-Obstaculo::Obstaculo(ID id, const bool danoso) : Entidade(id), pJog(nullptr), danoso(danoso) {}
+Obstaculo::Obstaculo(ID id, const sf::Vector2f &pos, const bool danoso)
+    : Entidade(id), pJog(nullptr), danoso(danoso) {
+  setPos(pos);
+  pSprite->setPosition(pos);
+}
 Obstaculo::~Obstaculo() {
   pJog = nullptr;
   delete pJog;

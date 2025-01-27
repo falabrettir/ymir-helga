@@ -10,7 +10,7 @@
 namespace Entidades::Personagens::Inimigos {
 
 Slime::Slime(const sf::Vector2f& pos) : Inimigo(ID::IDslime) {
-  setTexture("/assets/Characters(100x100)/Slime/Slime/Slime-Idle.png");
+  setTextura("/assets/Characters(100x100)/Slime/Slime/Slime-Idle.png");
 
   // TODO: Alterar dano do Slime
   setDano(100);

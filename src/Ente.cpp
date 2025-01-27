@@ -1,10 +1,12 @@
 #include "Ente.h"
-#include "Gerenciadores/GerenciadorGrafico.h"
+
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <iostream>
 #include <string>
+
+#include "Gerenciadores/GerenciadorGrafico.h"
 
 Gerenciadores::Gerenciador_Grafico *Ente::pGG(nullptr);
 
@@ -32,7 +34,7 @@ void Ente::atualizaSprite(sf::Texture *pTexture) {
   pSprite->setScale(3.f, 3.f);
 }
 
-bool Ente::setTexture(const std::string &path) {
+bool Ente::setTextura(const std::string &path) {
   std::string filePath = ROOT;
   filePath += path;
   if (pTexture->loadFromFile(filePath)) {

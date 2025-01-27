@@ -10,8 +10,9 @@ class Obstaculo : public Entidade {
   Personagens::Jogador *pJog;
 
  public:
-  Obstaculo(ID id, const bool danoso = false);
+  Obstaculo(ID id, const sf::Vector2f &pos, const bool danoso = false);
   virtual ~Obstaculo();
+
   virtual void executar() = 0;
   virtual void obstacular(Entidade *pEnt) = 0;
   virtual void colidir(Entidades::Entidade *pEnt, sf::Vector2f ds = sf::Vector2f(0.0f, 0.0f)) = 0;

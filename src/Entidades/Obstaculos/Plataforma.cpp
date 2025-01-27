@@ -6,19 +6,37 @@
 
 namespace Entidades::Obstaculos {
 
-Plataforma::Plataforma(ID id, const bool ehFlut)
-    : Obstaculo(id), altura(540.f), ehFlutuante(ehFlut), empuxo(0.f, 0.f) {
-  setTexture("/assets/Prataforma.png");
+// TODO: Refatorar (atributo altura)
+Plataforma::Plataforma(ID id, const sf::Vector2f &pos)
+    : Obstaculo(id, pos), altura(540.f), empuxo(0.f, 0.f) {
+  switch (id) {
+    case (ID::IDmadeira1):
+      setTextura("");  // TODO: Adicionar caminho para sprite madeira1
+      ehFlutuante = true;
+      break;
 
-  sf::Vector2f posInicial(400, 900);
-  setPos(posInicial);
-  pSprite->setPosition(posInicial);
+    case (ID::IDmadeira2):
+      setTextura("");  // TODO: Adicionar caminho para sprite madeira2
+      ehFlutuante = true;
+      break;
+
+    case (ID::IDpedra):
+      setTextura("");  // TODO:: Adicionar caminho para sprite pedra
+      ehFlutuante = false;
+      break;
+
+    case (ID::IDgrama):
+      setTextura("");  // TODO:: Adicionar caminho para sprite grama
+      ehFlutuante = false;
+      break;
+
+    default:
+      break;
+  }
+
   sf::FloatRect hitbox({0.f, 0.f, 171.f, 18.f});
   pSprite->setTextureRect({2, 11, 171, 18});
   setHitbox(hitbox);
-
-  sf::Vector2f velInicial(0.f, 0.f);
-  setVel(velInicial);
 }
 
 Plataforma::~Plataforma() {}
