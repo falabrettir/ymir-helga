@@ -37,7 +37,13 @@ void Fase::executar() {
 // TODO:
 // Percorrer a lista de obstaculos e personagens adicionando eles ao GC
 // Tambem inscrever os jogadores no gerenciador de input
-void Fase::inicializar() {}
+void Fase::inicializar() {
+  Listas::Lista<Entidades::Entidade *>::Iterator it;
+  for (it = listaObstaculos.begin(); it != listaObstaculos.end();
+       it.operator++()) {
+    pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(*it));
+  }
+}
 
 void Fase::criarMapa(const std::string path) {
   std::ifstream arquivoMapa;
@@ -63,7 +69,8 @@ void Fase::criarMapa(const std::string path) {
 }
 
 void Fase::criarJogador(const sf::Vector2f &pos) {
-  Personagens::Jogador *novoJog = new Personagens::Jogador(pos, ehPrimeiroJogador);
+  Personagens::Jogador *novoJog =
+      new Personagens::Jogador(pos, ehPrimeiroJogador);
   listaPersonagens.incluir(novoJog);
   ehPrimeiroJogador = false;
 }
@@ -72,4 +79,4 @@ void Fase::criarEsqueleto(const sf::Vector2f &pos) {
   // TODO: Implementar depois de terminar a classe esqueleto
 }
 
-}  // namespace Fases
+} // namespace Fases
