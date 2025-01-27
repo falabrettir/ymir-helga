@@ -9,25 +9,20 @@
 
 namespace Entidades::Personagens::Inimigos {
 
-Slime::Slime(const sf::Vector2f& pos) : Inimigo(ID::IDslime) {
-  setTextura("/assets/Characters(100x100)/Slime/Slime/Slime-Idle.png");
-
-  // TODO: Alterar dano do Slime
-  setDano(100);
-
-  setPos(pos);
+Slime::Slime(const sf::Vector2f &pos) : Inimigo(ID::IDslime) {
+  setTextura("/assets/Personagens/Slime.png");
 }
 
 Slime::~Slime() {}
 
-void Slime::colidir(Entidade* pEnt, sf::Vector2f ds) {
+void Slime::colidir(Entidade *pEnt, sf::Vector2f ds) {
   if (ds.x < 0 && ds.y < 0) {
     if (pEnt->getId() == ID::IDjogador) {
-      dynamic_cast<Jogador*>(pEnt)->aplicaLentidao(viscosidade);
-      dynamic_cast<Jogador*>(pEnt)->tomarDano(getDano());
+      dynamic_cast<Jogador *>(pEnt)->aplicaLentidao(viscosidade);
+      dynamic_cast<Jogador *>(pEnt)->tomarDano(getDano());
     } else if (pEnt->getId() == ID::IDprojetil) {
-      if (dynamic_cast<Projetil*>(pEnt)->getDono()->getId() == ID::IDjogador) {
-        tomarDano(dynamic_cast<Projetil*>(pEnt)->getDano());
+      if (dynamic_cast<Projetil *>(pEnt)->getDono()->getId() == ID::IDjogador) {
+        tomarDano(dynamic_cast<Projetil *>(pEnt)->getDano());
       }
     }
   }
@@ -39,4 +34,4 @@ void Slime::executar() {
 
 void Slime::atacar() {}
 
-}  // namespace Entidades::Personagens::Inimigos
+} // namespace Entidades::Personagens::Inimigos

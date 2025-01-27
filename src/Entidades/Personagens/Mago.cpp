@@ -2,7 +2,9 @@
 #include <SFML/System/Vector2.hpp>
 namespace Entidades::Personagens::Inimigos {
 Mago::Mago(const sf::Vector2f &pos)
-    : Inimigo(ID::IDmago), poder(1.05), bolaDeFogo(nullptr) {}
+    : Inimigo(ID::IDmago), poder(1.05), bolaDeFogo(nullptr) {
+  setTextura("/assets/Personagens/Mago.png");
+}
 Mago::~Mago() {
   bolaDeFogo = nullptr;
   delete bolaDeFogo;

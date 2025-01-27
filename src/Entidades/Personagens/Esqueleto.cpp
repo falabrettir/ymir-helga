@@ -9,6 +9,7 @@ namespace Entidades::Personagens::Inimigos {
 Esqueleto::Esqueleto(const sf::Vector2f &pos)
     : Inimigo(ID::IDesqueleto), forca(0.0), flecha(nullptr) {
   srand((unsigned int)time(NULL));
+  setTextura("/assets/Personagens/Esqueleto.png");
 }
 Esqueleto::~Esqueleto() {
   flecha = nullptr;

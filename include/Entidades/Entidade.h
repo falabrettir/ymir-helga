@@ -8,18 +8,18 @@
 namespace Entidades {
 
 class Entidade : public Ente {
- private:
+private:
   sf::Vector2f pos;
   sf::Vector2f gravidade;
   sf::Vector2f tamanho;
   bool noChao;
   std::ostream *buffer;
 
- protected:
+protected:
   sf::Vector2f velocidade;
   sf::FloatRect hitbox;
 
- public:
+public:
   Entidade(ID id);
   virtual ~Entidade();
 
@@ -35,10 +35,11 @@ class Entidade : public Ente {
   bool getNoChao() const;
   sf::Vector2f getSize() const;
   sf::FloatRect getHitbox() const;
+  const bool ehPlataforma() const;
 
   void cair();
 
   virtual void executar() = 0;
 };
 
-}  // namespace Entidades
+} // namespace Entidades

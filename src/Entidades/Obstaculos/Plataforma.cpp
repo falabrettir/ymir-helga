@@ -12,28 +12,30 @@ Plataforma::Plataforma(ID id, const sf::Vector2f &pos)
     : Obstaculo(id, pos), empuxo(0.f, 0.f) {
   switch (id) {
   case (ID::IDmadeira1):
-    setTextura(""); // TODO: Adicionar caminho para sprite madeira1
+    setTextura(
+        "/assets/Obstaculos/plataformafase1.png"); // TODO: Adicionar caminho
+                                                   // para sprite madeira1
     break;
 
   case (ID::IDmadeira2):
-    setTextura(""); // TODO: Adicionar caminho para sprite madeira2
+    setTextura(
+        "/assets/Obstaculos/plataformafase2.png"); // TODO: Adicionar caminho
+                                                   // para sprite madeira2
     break;
 
   case (ID::IDpedra):
-    setTextura(""); // TODO:: Adicionar caminho para sprite pedra
+    setTextura("/assets/Obstaculos/chaofase1.png"); // TODO:: Adicionar caminho
+                                                    // para sprite pedra
     break;
 
   case (ID::IDgrama):
-    setTextura(""); // TODO:: Adicionar caminho para sprite grama
+    setTextura("/assets/Obstaculos/chaofase2.png"); // TODO:: Adicionar caminho
+                                                    // para sprite grama
     break;
 
   default:
     break;
   }
-
-  sf::FloatRect hitbox({0.f, 0.f, 171.f, 18.f});
-  pSprite->setTextureRect({2, 11, 171, 18});
-  setHitbox(hitbox);
 }
 
 Plataforma::~Plataforma() {}
