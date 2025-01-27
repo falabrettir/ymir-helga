@@ -26,7 +26,6 @@ Jogador::Jogador(const sf::Vector2f &pos, const bool ehPrimeiroJogador)
 
   // TODO: Mudar a hitbox para a classe entidade
   sf::FloatRect hitbox({16, 16, 16.f, 16.f});
-  pSprite->setTextureRect({0, 0, 48, 48});
   setHitbox(hitbox);
 }
 

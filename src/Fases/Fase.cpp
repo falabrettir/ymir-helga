@@ -5,12 +5,12 @@
 #include <iostream>
 #include <string>
 
-#include "Entidades/Entidade.h"
 #include "Entidades/Obstaculos/Obstaculo.h"
+#include "Entidades/Personagens/Esqueleto.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
+#include "Gerenciadores/GerenciadorInput.h"
 #include "IDs.h"
-#include "Listas/Lista.h"
 #include "Listas/ListaEntidades.h"
 
 using namespace Entidades;
@@ -19,12 +19,15 @@ namespace Fases {
 
 Fase::Fase() : Ente(ID::IDfase), ehPrimeiroJogador(true) {
   pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
+  pGI = Gerenciadores::Gerenciador_Input::getInstancia();
+
   listaObstaculos.limpar();
   listaPersonagens.limpar();
 }
 
 Fase::~Fase() {
   pGC = nullptr;
+  pGI = nullptr;
   listaObstaculos.limpar();
   listaPersonagens.limpar();
 }
@@ -32,16 +35,28 @@ Fase::~Fase() {
 void Fase::executar() {
   listaObstaculos.percorrer();
   listaPersonagens.percorrer();
+
+  pGC->executar();
+
+  Listas::Lista<Entidades::Entidade *>::Iterator it;
+  for (it = listaObstaculos.begin(); it != listaObstaculos.end(); it.operator++())
+    (*it)->desenhar();
+
+  for (it = listaPersonagens.begin(); it != listaPersonagens.end(); it.operator++())
+    (*it)->desenhar();
 }
 
-// TODO:
-// Percorrer a lista de obstaculos e personagens adicionando eles ao GC
-// Tambem inscrever os jogadores no gerenciador de input
-void Fase::inicializar() {
+void Fase::incluirNoColisor() {
   Listas::Lista<Entidades::Entidade *>::Iterator it;
-  for (it = listaObstaculos.begin(); it != listaObstaculos.end();
-       it.operator++()) {
+
+  // Inclui obstaculos na lista de obstaculos do GC
+  for (it = listaObstaculos.begin(); it != listaObstaculos.end(); it.operator++()) {
     pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(*it));
+  }
+
+  // Inclui personagens na lista de personagens do GC
+  for (it = listaPersonagens.begin(); it != listaPersonagens.end(); it.operator++()) {
+    pGC->incluirPers(dynamic_cast<Entidades::Personagens::Personagem *>(*it));
   }
 }
 
@@ -66,17 +81,23 @@ void Fase::criarMapa(const std::string path) {
   }
 
   arquivoMapa.close();
+
+  incluirNoColisor();
 }
 
 void Fase::criarJogador(const sf::Vector2f &pos) {
-  Personagens::Jogador *novoJog =
-      new Personagens::Jogador(pos, ehPrimeiroJogador);
+  Personagens::Jogador *novoJog = new Personagens::Jogador(pos, ehPrimeiroJogador);
+
+  pGI->inscrever(novoJog->getControlador());
+
   listaPersonagens.incluir(novoJog);
+
   ehPrimeiroJogador = false;
 }
 
 void Fase::criarEsqueleto(const sf::Vector2f &pos) {
-  // TODO: Implementar depois de terminar a classe esqueleto
+  Personagens::Inimigos::Esqueleto *novoEsq = new Personagens::Inimigos::Esqueleto(pos);
+  listaPersonagens.incluir(novoEsq);
 }
 
-} // namespace Fases
+}  // namespace Fases

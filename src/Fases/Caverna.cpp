@@ -2,6 +2,7 @@
 
 #include <SFML/System/Vector2.hpp>
 
+#include "Entidades/Obstaculos/Gosma.h"
 #include "Entidades/Obstaculos/Plataforma.h"
 #include "Entidades/Personagens/Slime.h"
 
@@ -10,7 +11,9 @@ using namespace Entidades;
 namespace Fases {
 
 Caverna::Caverna() : Fase(), contEsqueletos(0), contSlimes(0) {
-  criarMapa("assets/Mapas/caverna.txt");
+  criarMapa("/assets/Mapas/caverna.txt");
+
+  executar();
 }
 
 Caverna::~Caverna() {}
@@ -21,9 +24,11 @@ void Caverna::criarEntidade(char tipoEntidade, const sf::Vector2f &pos) {
   switch (tipoEntidade) {
     case 'E':
       criarEsqueleto(pos);
+      contEsqueletos++;
       break;
     case 'S':
       criarSlime(pos);
+      contSlimes++;
       break;
     case 'P':
       criarPedra(pos);
@@ -58,7 +63,8 @@ void Caverna::criarMadeira(const sf::Vector2f &pos) {
 }
 
 void Caverna::criarGosma(const sf::Vector2f &pos) {
-  // TODO: Implementar depois de criar Gosma
+  Obstaculos::Gosma *novaGosma = new Obstaculos::Gosma(pos);
+  listaObstaculos.incluir(novaGosma);
 }
 
 };  // namespace Fases

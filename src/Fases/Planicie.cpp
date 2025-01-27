@@ -19,7 +19,7 @@ void Planicie::criarEntidade(char tipoEntidade, const sf::Vector2f &pos) {
     case 'E':
       criarEsqueleto(pos);
       break;
-    case 'A':
+    case 'W':
       criarMago(pos);
       break;
     case 'G':
@@ -28,7 +28,7 @@ void Planicie::criarEntidade(char tipoEntidade, const sf::Vector2f &pos) {
     case 'M':
       criarMadeira(pos);
       break;
-    case 'P':
+    case 'S':
       criarEspinho(pos);
       break;
     case 'J':
