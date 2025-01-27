@@ -6,13 +6,14 @@
   respeitando os valores minimo e maximo
 */
 
-#include "Fase.h"
 #include <SFML/System/Vector2.hpp>
+
+#include "Fase.h"
 
 namespace Fases {
 
 class Planicie : public Fase {
-private:
+ private:
   const int minOrc = 3;
   const int maxOrc = 5;
   int contOrc;
@@ -21,16 +22,16 @@ private:
   const int maxSlimes = 5;
   int contSlime;
 
-public:
+ public:
   Planicie();
   ~Planicie();
 
   void executar();
   void criarEntidade(char tipoEntidade, const sf::Vector2f &pos);
-  void criarOrc(const sf::Vector2f &pos);
+  void criarMago(const sf::Vector2f &pos);
   void criarGrama(const sf::Vector2f &pos);
   void criarMadeira(const sf::Vector2f &pos);
   void criarEspinho(const sf::Vector2f &pos);
 };
 
-} // namespace Fases
+}  // namespace Fases

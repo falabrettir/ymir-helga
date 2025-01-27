@@ -15,13 +15,11 @@ const int ListaEntidades::getSize() const { return LEs.getSize(); }
 
 void ListaEntidades::limpar() { LEs.limpar(); }
 
-const Listas::Lista<Entidades::Entidade *>::Iterator
-ListaEntidades::begin() const {
+const Listas::Lista<Entidades::Entidade *>::Iterator ListaEntidades::begin() const {
   return this->begin();
 }
 
-const Listas::Lista<Entidades::Entidade *>::Iterator
-ListaEntidades::end() const {
+const Listas::Lista<Entidades::Entidade *>::Iterator ListaEntidades::end() const {
   return this->end();
 }
 
@@ -33,4 +31,4 @@ void ListaEntidades::percorrer() {
   }
 }
 
-} // namespace Listas
+}  // namespace Listas

@@ -2,16 +2,17 @@
 
 namespace Listas {
 
-template <typename TL> class Lista {
-private:
+template <typename TL>
+class Lista {
+ private:
   // Classe Elemento aninhada
-  template <typename TE> class Elemento {
-
-  private:
+  template <typename TE>
+  class Elemento {
+   private:
     Elemento<TE> *pProx;
     TE *pInfo;
 
-  public:
+   public:
     Elemento() : pProx(nullptr), pInfo(nullptr) {}
     ~Elemento() {
       pProx = nullptr;
@@ -26,17 +27,15 @@ private:
   Elemento<TL> *pUltimo;
   int tamanho;
 
-public:
+ public:
   Lista();
   ~Lista();
 
   Elemento<TL> *getpPrimeiro() const {
-    if (pPrimeiro)
-      return pPrimeiro;
+    if (pPrimeiro) return pPrimeiro;
   }
   Elemento<TL> *getpUltimo() const {
-    if (pUltimo)
-      return pUltimo;
+    if (pUltimo) return pUltimo;
   }
 
   void incluir(TL *p) {
@@ -95,12 +94,12 @@ public:
   }
   int getSize() const { return tamanho; }
 
-public:
+ public:
   class Iterator {
-  private:
+   private:
     Elemento<TL> *pAtual;
 
-  public:
+   public:
     Iterator() : pAtual(nullptr) {}
     Iterator(Elemento<TL> *pElem) : pAtual(pElem) {}
     ~Iterator() { pAtual = nullptr; }
@@ -111,18 +110,22 @@ public:
       }
       return *this;
     }
-    Iterator &operator=(Iterator &outro) {
+
+    Iterator &operator=(const Iterator &outro) {
       if (&outro != this) {
         pAtual = outro.pAtual;
       }
       return *this;
     }
-    bool &operator!=(const Iterator &outro) const {
-      return this->pAtual != outro.pAtual;
-    }
+
+    bool &operator!=(const Iterator &outro) const { return this->pAtual != outro.pAtual; }
+
+    Elemento<TL> *getAtual() { return pAtual; }
   };
+
   Iterator begin() const { return Iterator(pPrimeiro); }
+
   Iterator end() const { return Iterator(pUltimo); }
 };
 
-} // namespace Listas
+}  // namespace Listas

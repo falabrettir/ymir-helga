@@ -19,8 +19,8 @@ void Planicie::criarEntidade(char tipoEntidade, const sf::Vector2f &pos) {
     case 'E':
       criarEsqueleto(pos);
       break;
-    case 'O':
-      criarOrc(pos);
+    case 'A':
+      criarMago(pos);
       break;
     case 'G':
       criarGrama(pos);
@@ -39,25 +39,17 @@ void Planicie::criarEntidade(char tipoEntidade, const sf::Vector2f &pos) {
   }
 }
 
-void Planicie::criarOrc(const sf::Vector2f &pos) {
-  // TODO: Implementar depois de criar Orc
+void Planicie::criarMago(const sf::Vector2f &pos) {
+  // TODO: Implementar depois de criar Mago
 }
 
 void Planicie::criarGrama(const sf::Vector2f &pos) {
-  Obstaculos::Plataforma *novaPlataforma = new Obstaculos::Plataforma(ID::IDgrama);
-
-  // TODO: Adicionar caminho para a sprite de grama
-  novaPlataforma->setTexture("");
-
+  Obstaculos::Plataforma *novaPlataforma = new Obstaculos::Plataforma(ID::IDgrama, pos);
   listaObstaculos.incluir(novaPlataforma);
 }
 
 void Planicie::criarMadeira(const sf::Vector2f &pos) {
-  Obstaculos::Plataforma *novaPlataforma = new Obstaculos::Plataforma(ID::IDmadeira2);
-
-  // TODO: Adicionar caminho para a sprite de madeira2
-  novaPlataforma->setTexture("");
-
+  Obstaculos::Plataforma *novaPlataforma = new Obstaculos::Plataforma(ID::IDmadeira2, pos);
   listaObstaculos.incluir(novaPlataforma);
 }
 

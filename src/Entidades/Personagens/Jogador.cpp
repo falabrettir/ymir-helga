@@ -9,7 +9,9 @@
 using namespace Entidades::Personagens;
 
 Jogador::Jogador(const sf::Vector2f &pos, const bool ehPrimeiroJogador)
-    : Personagem(ID::IDjogador), pContr(nullptr), podePular(true),
+    : Personagem(ID::IDjogador),
+      pContr(nullptr),
+      podePular(true),
       ehPrimeiroJogador(ehPrimeiroJogador) {
   pContr = new Controladores::Controlador_Jogador();
   pContr->setJog(this);
@@ -22,6 +24,7 @@ Jogador::Jogador(const sf::Vector2f &pos, const bool ehPrimeiroJogador)
   setPos(pos);
   pSprite->setPosition(pos);
 
+  // TODO: Mudar a hitbox para a classe entidade
   sf::FloatRect hitbox({16, 16, 16.f, 16.f});
   pSprite->setTextureRect({0, 0, 48, 48});
   setHitbox(hitbox);
@@ -73,8 +76,7 @@ void Jogador::aplicaLentidao(float viscosidade) {
 void Jogador::executar() {
   pContr->controlarJogador();
 
-  if (!getNoChao())
-    cair();
+  if (!getNoChao()) cair();
 
   mover();
 }

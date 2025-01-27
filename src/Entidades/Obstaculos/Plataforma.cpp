@@ -7,6 +7,7 @@
 namespace Entidades::Obstaculos {
 
 // TODO: Refatorar (atributo altura)
+// FIX: Tirar ehFlutuante
 Plataforma::Plataforma(ID id, const sf::Vector2f &pos)
     : Obstaculo(id, pos), empuxo(0.f, 0.f) {
   switch (id) {

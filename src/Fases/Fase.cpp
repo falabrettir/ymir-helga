@@ -5,9 +5,13 @@
 #include <iostream>
 #include <string>
 
+#include "Entidades/Entidade.h"
+#include "Entidades/Obstaculos/Obstaculo.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
 #include "IDs.h"
+#include "Listas/Lista.h"
+#include "Listas/ListaEntidades.h"
 
 using namespace Entidades;
 
@@ -29,6 +33,11 @@ void Fase::executar() {
   listaObstaculos.percorrer();
   listaPersonagens.percorrer();
 }
+
+// TODO:
+// Percorrer a lista de obstaculos e personagens adicionando eles ao GC
+// Tambem inscrever os jogadores no gerenciador de input
+void Fase::inicializar() {}
 
 void Fase::criarMapa(const std::string path) {
   std::ifstream arquivoMapa;
@@ -54,13 +63,8 @@ void Fase::criarMapa(const std::string path) {
 }
 
 void Fase::criarJogador(const sf::Vector2f &pos) {
-  Personagens::Jogador *novoJog = new Personagens::Jogador(ehPrimeiroJogador);
-
-  // Multiplicar posicao em X e Y pelo tamanho do grid ex. 16x16
-  novoJog->setPos(pos);
-
+  Personagens::Jogador *novoJog = new Personagens::Jogador(pos, ehPrimeiroJogador);
   listaPersonagens.incluir(novoJog);
-
   ehPrimeiroJogador = false;
 }
 
