@@ -8,10 +8,17 @@
 
 namespace Entidades {
 
-Projetil::Projetil() : Entidade(ID::IDprojetil), pPersDono(nullptr), impulso(0) {}
+Projetil::Projetil()
+    : Entidade(ID::IDprojetil), pPersDono(nullptr), impulso(0) {}
 
 Projetil::Projetil(Personagens::Personagem *pPersDono, int impulso)
     : Entidade(ID::IDprojetil), pPersDono(pPersDono), impulso(impulso) {
+  if (pPersDono->getId() == ID::IDesqueleto ||
+      pPersDono->getId() == ID::IDjogador) {
+    setTextura("/assets/Projeteis/Flecha.png");
+  } else if (pPersDono->getId() == ID::IDmago) {
+    setTextura("/assets/Projeteis/BolaDeFogo.png");
+  }
   sf::Vector2f vel;
   vel.x = MAXVEL;
   vel.x += vel.x * impulso;
@@ -28,7 +35,7 @@ void Projetil::colidir(Entidade *pE, sf::Vector2f ds) {
   sf::Vector2f posEntidade = pE->getPos();
   sf::Vector2f velEntidade = pE->getVel();
 
-  if (ds.x < 0.f && ds.y < 0.f) {  // Colidiu
+  if (ds.x < 0.f && ds.y < 0.f) { // Colidiu
     // Colidiu com plataforma -> deletar
     // Colidiu com um personagem -> danificar e deletar
   }
@@ -36,4 +43,4 @@ void Projetil::colidir(Entidade *pE, sf::Vector2f ds) {
 
 void Projetil::executar() {}
 
-}  // namespace Entidades
+} // namespace Entidades
