@@ -8,29 +8,23 @@
 
 using namespace Entidades::Personagens;
 
-Jogador::Jogador(const bool ehPrimeiroJogador)
-    : Personagem(ID::IDjogador),
-      pContr(nullptr),
-      podePular(true),
+Jogador::Jogador(const sf::Vector2f &pos, const bool ehPrimeiroJogador)
+    : Personagem(ID::IDjogador), pContr(nullptr), podePular(true),
       ehPrimeiroJogador(ehPrimeiroJogador) {
   pContr = new Controladores::Controlador_Jogador();
   pContr->setJog(this);
 
   if (ehPrimeiroJogador)
-    setTextura("/assets/Characters(100x100)/Archer/Archer/Archer-Idle.png");
+    setTextura("/assets/Personagens/Ymir.png");
   else
-    setTextura("/assets/Characters(100x100)/Archer/Archer/Player2.png");
+    setTextura("/assets/Personagens/Helga.png");
 
-  sf::Vector2f posInicial(400, 400);
-  setPos(posInicial);
-  pSprite->setPosition(posInicial);
+  setPos(pos);
+  pSprite->setPosition(pos);
 
-  sf::FloatRect hitbox({0, 0, 18.f, 17.f});
-  pSprite->setTextureRect({40, 40, 27, 20});
+  sf::FloatRect hitbox({16, 16, 16.f, 16.f});
+  pSprite->setTextureRect({0, 0, 48, 48});
   setHitbox(hitbox);
-
-  sf::Vector2f velInicial(0.f, 0.f);
-  setVel(velInicial);
 }
 
 Jogador::~Jogador() {}
@@ -79,7 +73,8 @@ void Jogador::aplicaLentidao(float viscosidade) {
 void Jogador::executar() {
   pContr->controlarJogador();
 
-  if (!getNoChao()) cair();
+  if (!getNoChao())
+    cair();
 
   mover();
 }

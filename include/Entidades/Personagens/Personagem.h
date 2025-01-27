@@ -9,12 +9,12 @@ namespace Entidades {
 namespace Personagens {
 
 class Personagem : public Entidades::Entidade {
- private:
+private:
   int dano;
   int hp;
   bool olhandoEsquerda;
 
- public:
+public:
   Personagem(ID id);
   virtual ~Personagem();
 
@@ -27,6 +27,6 @@ class Personagem : public Entidades::Entidade {
   void setOlhandoEsquerda(bool olhandoEsquerda);
 };
 
-}  // namespace Personagens
+} // namespace Personagens
 
-}  // namespace Entidades
+} // namespace Entidades

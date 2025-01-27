@@ -1,6 +1,8 @@
 #include "Entidades/Personagens/Mago.h"
+#include <SFML/System/Vector2.hpp>
 namespace Entidades::Personagens::Inimigos {
-Mago::Mago() : Inimigo(ID::IDmago), poder(1.05), bolaDeFogo(nullptr) {}
+Mago::Mago(const sf::Vector2f &pos)
+    : Inimigo(ID::IDmago), poder(1.05), bolaDeFogo(nullptr) {}
 Mago::~Mago() {
   bolaDeFogo = nullptr;
   delete bolaDeFogo;

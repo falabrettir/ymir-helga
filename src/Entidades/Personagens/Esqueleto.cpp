@@ -1,12 +1,13 @@
 #include "Entidades/Personagens/Esqueleto.h"
 
+#include <SFML/System/Vector2.hpp>
 #include <time.h>
 
 #include <limits>
 
 namespace Entidades::Personagens::Inimigos {
-Esqueleto::Esqueleto(ID id, float visada, int dano)
-    : Inimigo(id, visada, dano), forca(0.0), flecha(nullptr) {
+Esqueleto::Esqueleto(const sf::Vector2f &pos)
+    : Inimigo(ID::IDesqueleto), forca(0.0), flecha(nullptr) {
   srand((unsigned int)time(NULL));
 }
 Esqueleto::~Esqueleto() {
@@ -22,6 +23,7 @@ void Esqueleto::executar() {
   // draw
   perseguir();
   mover();
-  if (getVisando() && flecha == nullptr) atacar();
+  if (getVisando() && flecha == nullptr)
+    atacar();
 }
-}  // namespace Entidades::Personagens::Inimigos
+} // namespace Entidades::Personagens::Inimigos
