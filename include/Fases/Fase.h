@@ -30,7 +30,6 @@ class Fase : public Ente {
   virtual void executar();
   void incluirNoColisor();
   void criarMapa(const std::string path);
-  virtual void criarEntidade(char tipoEntidade, const sf::Vector2f &pos) = 0;
 };
 
 }  // namespace Fases

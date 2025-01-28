@@ -72,7 +72,9 @@ void Fase::criarMapa(const std::string path) {
   for (int j = 0; std::getline(arquivoMapa, linha); j++) {
     for (int i = 0; i < linha.size(); i++) {
       if (linha[i] != ' ') {
-        criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
+        pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
+        // TODO: Adicionar entidades criadas nas listas (personagens e
+        // obstaculos)
       }
     }
   }
