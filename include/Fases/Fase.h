@@ -16,8 +16,8 @@ protected:
   Gerenciadores::Gerenciador_Colisoes *pGC;
   Gerenciadores::Gerenciador_Input *pGI;
 
-  Listas::ListaEntidades listaObstaculos;
-  Listas::ListaEntidades listaPersonagens;
+  Listas::ListaEntidades *listaObstaculos;
+  Listas::ListaEntidades *listaPersonagens;
 
   bool ehPrimeiroJogador;
 

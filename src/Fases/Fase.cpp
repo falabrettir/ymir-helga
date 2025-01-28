@@ -17,40 +17,40 @@ using namespace Entidades;
 namespace Fases {
 
 Fase::Fase()
-    : Ente(ID::IDfase), ehPrimeiroJogador(true), listaObstaculos(),
-      listaPersonagens(),
+    : Ente(ID::IDfase), ehPrimeiroJogador(true),
+      listaObstaculos(new Listas::ListaEntidades()),
+      listaPersonagens(new Listas::ListaEntidades),
       pGC(Gerenciadores::Gerenciador_Colisoes::getInstancia()),
       pGI(Gerenciadores::Gerenciador_Input::getInstancia()) {
 
-  listaObstaculos.limpar();
-  listaPersonagens.limpar();
+  listaObstaculos->limpar();
+  listaPersonagens->limpar();
 }
 
 Fase::~Fase() {
   pGC = nullptr;
   pGI = nullptr;
-  listaObstaculos.limpar();
-  listaPersonagens.limpar();
+  listaObstaculos->limpar();
+  listaPersonagens->limpar();
 }
 
 void Fase::executar() {
-  listaObstaculos.executar();
-  listaPersonagens.executar();
+  listaObstaculos->executar();
+  listaPersonagens->executar();
 
   pGC->executar();
 }
 
 void Fase::incluirNoColisor() {
-  Listas::Lista<Entidades::Entidade *>::Iterator it;
+  Listas::Lista<Entidades::Entidade>::Iterator it;
 
-  for (it = listaObstaculos.begin(); it != listaObstaculos.end(); ++it) {
-    pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(*(*it)));
+  for (it = listaObstaculos->begin(); it != listaObstaculos->end(); ++it) {
+    pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(*it));
   }
 
   // Inclui personagens na lista de personagens do GC
-  for (it = listaPersonagens.begin(); it != listaPersonagens.end(); ++it) {
-    pGC->incluirPers(
-        dynamic_cast<Entidades::Personagens::Personagem *>(*(*it)));
+  for (it = listaPersonagens->begin(); it != listaPersonagens->end(); ++it) {
+    pGC->incluirPers(dynamic_cast<Entidades::Personagens::Personagem *>(*it));
   }
 }
 
@@ -85,7 +85,7 @@ void Fase::criarJogador(const sf::Vector2f &pos) {
 
   pGI->inscrever(novoJog->getControlador());
 
-  listaPersonagens.incluir(novoJog);
+  listaPersonagens->incluir(novoJog);
 
   ehPrimeiroJogador = false;
 }
@@ -93,7 +93,7 @@ void Fase::criarJogador(const sf::Vector2f &pos) {
 void Fase::criarEsqueleto(const sf::Vector2f &pos) {
   Personagens::Inimigos::Esqueleto *novoEsq =
       new Personagens::Inimigos::Esqueleto(pos);
-  listaPersonagens.incluir(novoEsq);
+  listaPersonagens->incluir(novoEsq);
 }
 
 } // namespace Fases

@@ -7,22 +7,25 @@ ListaEntidades::ListaEntidades() : LEs() {}
 
 ListaEntidades::~ListaEntidades() { limpar(); }
 
-void ListaEntidades::incluir(Entidades::Entidade *e) { LEs.incluir(e); }
+void ListaEntidades::incluir(Entidades::Entidade *e) {
+  if (e != nullptr)
+    LEs.incluir(e);
+}
 
-void ListaEntidades::deletar(Entidades::Entidade *e) { LEs.remover(e); }
+void ListaEntidades::deletar(Entidades::Entidade *e) {
+  if (e != nullptr)
+    LEs.remover(e);
+}
 
 const int ListaEntidades::getSize() const { return LEs.getSize(); }
 
 void ListaEntidades::limpar() { LEs.limpar(); }
 
-const Listas::Lista<Entidades::Entidade *>::Iterator
-ListaEntidades::begin() const {
-  return this->begin();
+Listas::Lista<Entidades::Entidade>::Iterator ListaEntidades::begin() {
+  return LEs.begin();
 }
-
-const Listas::Lista<Entidades::Entidade *>::Iterator
-ListaEntidades::end() const {
-  return this->end();
+Listas::Lista<Entidades::Entidade>::Iterator ListaEntidades::end() {
+  return LEs.end();
 }
 
 void ListaEntidades::executar() {

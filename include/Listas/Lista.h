@@ -3,7 +3,7 @@
 namespace Listas {
 
 template <class TL> class Lista {
-private:
+public:
   // Classe Elemento aninhada
   template <class TE> class Elemento {
   private:
@@ -12,6 +12,7 @@ private:
 
   public:
     Elemento() : pProx(nullptr), pInfo(nullptr) {}
+    Elemento(TE *info) : pInfo(info), pProx(nullptr) {}
     ~Elemento() {
       pProx = nullptr;
       pInfo = nullptr;
@@ -21,6 +22,8 @@ private:
     Elemento<TE> *getProximo() const { return pProx; }
     TE *getInfo() const { return pInfo; }
   };
+
+private:
   Elemento<TL> *pPrimeiro;
   Elemento<TL> *pUltimo;
   int tamanho;
@@ -39,17 +42,19 @@ public:
   }
 
   void incluir(TL *p) {
-    Elemento<TL> *node = new Elemento<TL>();
-    if (node != nullptr) {
-      node->incluir(p);
-      if (pUltimo != nullptr) {
-        pUltimo->setProx(node);
-        pUltimo = node;
-      } else {
-        pPrimeiro = node;
-        pUltimo = node;
+    if (p != nullptr) {
+      Elemento<TL> *node = new Elemento<TL>();
+      if (node != nullptr) {
+        node->incluir(p);
+        if (pUltimo != nullptr) {
+          pUltimo->setProx(node);
+          pUltimo = node;
+        } else {
+          pPrimeiro = node;
+          pUltimo = node;
+        }
+        tamanho++;
       }
-      tamanho++;
     }
   }
   void remover(TL *p) {
@@ -60,7 +65,7 @@ public:
       node = node->getProximo();
       if (node->getInfo() == p) {
         if (node == pPrimeiro) {
-          pPrimeiro = node->getProximo();
+          pPrimeiro = pPrimeiro->getProximo();
         } else if (node == pUltimo) {
           pUltimo = anterior;
         } else {
@@ -78,9 +83,9 @@ public:
   void limpar() {
     Elemento<TL> *node = pPrimeiro;
     while (node != nullptr) {
-      Elemento<TL> *anterior = node;
-      node = node->getProximo();
-      delete anterior;
+      pPrimeiro = pPrimeiro->getProximo();
+      delete node;
+      node = pPrimeiro;
     }
     pUltimo = nullptr;
     tamanho = 0;
@@ -115,7 +120,7 @@ public:
 
     Iterator &operator=(const Iterator &outro) {
       if (&outro != this) {
-        pAtual = outro.pAtual;
+        this->pAtual = outro.pAtual;
       }
       return *this;
     }
@@ -129,7 +134,7 @@ public:
 
   Iterator begin() { return Iterator(pPrimeiro); }
 
-  Iterator end() { return Iterator(pUltimo); }
+  Iterator end() { return Iterator(nullptr); }
 };
 
 } // namespace Listas
