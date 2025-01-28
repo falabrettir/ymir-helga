@@ -8,17 +8,17 @@
 
 using namespace Entidades::Personagens;
 
-Jogador::Jogador(const sf::Vector2f &pos, const bool ehPrimeiroJogador)
-    : Personagem(ID::IDjogador),
-      pContr(nullptr),
-      podePular(true),
-      ehPrimeiroJogador(ehPrimeiroJogador) {
+bool Jogador::ehPrimeiroJogador = true;
+
+Jogador::Jogador(const sf::Vector2f &pos)
+    : Personagem(ID::IDjogador), pContr(nullptr), podePular(true) {
   pContr = new Controladores::Controlador_Jogador();
   pContr->setJog(this);
 
-  if (ehPrimeiroJogador)
+  if (ehPrimeiroJogador) {
     setTextura("/assets/Personagens/Ymir.png");
-  else
+    this->ehPrimeiroJogador = false;
+  } else
     setTextura("/assets/Personagens/Helga.png");
 
   setPos(pos);
@@ -82,4 +82,6 @@ void Jogador::executar() {
 
 void Jogador::atacar() { std::cout << "ataquei" << '\n'; }
 
-Controladores::Controlador_Jogador *Jogador::getControlador() const { return pContr; }
+Controladores::Controlador_Jogador *Jogador::getControlador() const {
+  return pContr;
+}
