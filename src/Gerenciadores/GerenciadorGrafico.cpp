@@ -1,15 +1,17 @@
 #include "Gerenciadores/GerenciadorGrafico.h"
-#include "Ente.h"
+
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <iostream>
 
+#include "Ente.h"
+
 namespace Gerenciadores {
 
-Gerenciador_Grafico *Gerenciador_Grafico::instancia = nullptr;
+GerenciadorGrafico *GerenciadorGrafico::instancia = nullptr;
 
-Gerenciador_Grafico::Gerenciador_Grafico() : deltaTempo(0.f) {
+GerenciadorGrafico::GerenciadorGrafico() : deltaTempo(0.f) {
   pJanela = new sf::RenderWindow(sf::VideoMode(sf::VideoMode::getDesktopMode()),
                                  "Skjolder e Helga", sf::Style::Fullscreen);
   pJanela->setVerticalSyncEnabled(true);
@@ -22,28 +24,26 @@ Gerenciador_Grafico::Gerenciador_Grafico() : deltaTempo(0.f) {
   relogio.restart();
 }
 
-Gerenciador_Grafico::~Gerenciador_Grafico() {
+GerenciadorGrafico::~GerenciadorGrafico() {
   pJanela = nullptr;
   instancia = nullptr;
 }
 
-Gerenciador_Grafico *Gerenciador_Grafico::getInstancia() {
-  if (instancia == nullptr) {
-    instancia = new Gerenciador_Grafico();
-    printf("Hello World!\n");
-    printf("%p\n", instancia);
+GerenciadorGrafico *GerenciadorGrafico::getInstancia() {
+  if (!instancia) {
+    instancia = new GerenciadorGrafico();
+    std::clog << "Gerenciador_Grafico criado\n";
   }
-  printf("Hello World!\n");
   return instancia;
 }
 
-bool Gerenciador_Grafico::janelaAberta() { return pJanela->isOpen(); }
+bool GerenciadorGrafico::janelaAberta() { return pJanela->isOpen(); }
 
-void Gerenciador_Grafico::display() { pJanela->display(); }
+void GerenciadorGrafico::display() { pJanela->display(); }
 
-void Gerenciador_Grafico::clear() { pJanela->clear(); }
+void GerenciadorGrafico::clear() { pJanela->clear(); }
 
-void Gerenciador_Grafico::desenharEnte(Ente *pE) {
+void GerenciadorGrafico::desenharEnte(Ente *pE) {
   if (pJanela && pE) {
     pJanela->draw(pE->getSprite());
   } else {
@@ -51,12 +51,12 @@ void Gerenciador_Grafico::desenharEnte(Ente *pE) {
   }
 }
 
-void Gerenciador_Grafico::fecharJanela() {
+void GerenciadorGrafico::fecharJanela() {
   pJanela->close();
   pJanela = nullptr;
 }
 
-sf::Texture Gerenciador_Grafico::carregarTex(const std::string &path) {
+sf::Texture GerenciadorGrafico::carregarTex(const std::string &path) {
   sf::Texture textura;
   std::string filePath = ROOT;
   filePath += path;
@@ -66,19 +66,17 @@ sf::Texture Gerenciador_Grafico::carregarTex(const std::string &path) {
   return textura;
 }
 
-sf::RenderWindow *Gerenciador_Grafico::getJanela() const { return pJanela; }
+sf::RenderWindow *GerenciadorGrafico::getJanela() const { return pJanela; }
 
-void Gerenciador_Grafico::atualizaDeltaTempo() {
+void GerenciadorGrafico::atualizaDeltaTempo() {
   deltaTempo = relogio.restart().asMilliseconds();
 }
 
-const float Gerenciador_Grafico::getDeltaTempo() const { return deltaTempo; }
+const float GerenciadorGrafico::getDeltaTempo() const { return deltaTempo; }
 
-const float Gerenciador_Grafico::getLarguraJanela() const {
+const float GerenciadorGrafico::getLarguraJanela() const {
   return larguraJanela;
 }
-const float Gerenciador_Grafico::getAlturaJanela() const {
-  return alturaJanela;
-}
+const float GerenciadorGrafico::getAlturaJanela() const { return alturaJanela; }
 
-} // namespace Gerenciadores
+}  // namespace Gerenciadores

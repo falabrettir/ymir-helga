@@ -12,7 +12,7 @@
 class Ente {
  protected:
   const ID id;
-  static Gerenciadores::Gerenciador_Grafico *pGG;
+  static Gerenciadores::GerenciadorGrafico *pGG;
   sf::RenderTarget *pAlvo;
   sf::Texture *pTexture;
   sf::Sprite *pSprite;
@@ -21,7 +21,7 @@ class Ente {
   Ente(ID id);
   virtual ~Ente();
 
-  static void setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *ppGG);
+  static void setGerenciadorGrafico(Gerenciadores::GerenciadorGrafico *ppGG);
   const ID getId() const;
   bool setTextura(const std::string &path);
   void atualizaSprite(sf::Texture *pTexture);

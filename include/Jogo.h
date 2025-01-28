@@ -8,7 +8,7 @@
 
 class Jogo {
  private:
-  Gerenciadores::Gerenciador_Grafico *pGG;
+  Gerenciadores::GerenciadorGrafico *pGG;
   Gerenciadores::Gerenciador_Eventos *pGE;
   Gerenciadores::Gerenciador_Input *pGI;
   Fases::Caverna caverna;

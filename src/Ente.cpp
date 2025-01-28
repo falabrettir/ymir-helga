@@ -8,7 +8,7 @@
 
 #include "Gerenciadores/GerenciadorGrafico.h"
 
-Gerenciadores::Gerenciador_Grafico *Ente::pGG(nullptr);
+Gerenciadores::GerenciadorGrafico *Ente::pGG(nullptr);
 
 Ente::Ente(ID id) : id(id) {
   pSprite = new sf::Sprite();
@@ -23,7 +23,7 @@ Ente::~Ente() {
   delete pAlvo;
 }
 
-void Ente::setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *ppGG) {
+void Ente::setGerenciadorGrafico(Gerenciadores::GerenciadorGrafico *ppGG) {
   if (ppGG != nullptr) {
     pGG = ppGG;
   } else {
