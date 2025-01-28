@@ -3,13 +3,7 @@ find_package(Catch2 REQUIRED)
 
 # Executável dos testes
 add_executable(tests
-  main_tests.cpp
-
-  # Adicionar aqui todos os arquivos de teste
-  gg_tests.cpp
-  gi_tests.cpp
-  ge_tests.cpp
-  controlador_jog_tests.cpp
+  MainTests.cpp
 )
 
 # Adiciona o diretorio 'include/'
