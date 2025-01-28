@@ -1,8 +1,10 @@
 #include "Gerenciadores/GerenciadorInput.h"
-#include "Subject.h"
+
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Window.hpp>
 #include <iostream>
+
+#include "Subject.h"
 
 namespace Gerenciadores {
 
@@ -103,4 +105,4 @@ void Gerenciador_Input::ProcessaTeclaSolta(sf::Keyboard::Key tecla) {
   }
 }
 
-} // namespace Gerenciadores
+}  // namespace Gerenciadores

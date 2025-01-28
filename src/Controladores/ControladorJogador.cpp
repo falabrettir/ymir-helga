@@ -1,12 +1,14 @@
 #include "Controladores/ControladorJogador.h"
-#include "Entidades/Personagens/Jogador.h"
-#include "Observer.h"
+
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 #include <utility>
+
+#include "Entidades/Personagens/Jogador.h"
+#include "Observer.h"
 
 namespace Controladores {
 
@@ -31,7 +33,6 @@ void Controlador_Jogador::setJog(Entidades::Personagens::Jogador *pJog) {
 }
 
 void Controlador_Jogador::setControles() {
-
   if (pJog->getPrimeiroJog()) {
     direita = sf::Keyboard::D;
     esquerda = sf::Keyboard::A;
@@ -57,7 +58,6 @@ bool Controlador_Jogador::acharTecla(Key tecla) {
 
 void Controlador_Jogador::atualizarTeclasPressionadas(Key tecla) {
   if (acharTecla(tecla)) {
-
     teclasPressionadas[tecla] = true;
 
     // Considerar que a ultima tecla de novaVelimento apertada tem prioridade
@@ -76,7 +76,6 @@ void Controlador_Jogador::atualizarTeclasSoltas(Key tecla) {
 
 void Controlador_Jogador::controlarJogador() {
   if (pJog) {
-
     // Controla movimento na horizontal
     if (teclasPressionadas[direita]) {
       pJog->andarDireita();
@@ -92,4 +91,4 @@ void Controlador_Jogador::controlarJogador() {
   }
 }
 
-} // namespace Controladores
+}  // namespace Controladores
