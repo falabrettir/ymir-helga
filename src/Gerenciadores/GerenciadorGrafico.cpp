@@ -30,10 +30,8 @@ Gerenciador_Grafico::~Gerenciador_Grafico() {
 Gerenciador_Grafico *Gerenciador_Grafico::getInstancia() {
   if (instancia == nullptr) {
     instancia = new Gerenciador_Grafico();
-    printf("Hello World!\n");
-    printf("%p\n", instancia);
+    std::cerr << instancia << '\n';
   }
-  printf("Hello World!\n");
   return instancia;
 }
 

@@ -20,7 +20,7 @@ public:
   const Listas::Lista<Entidades::Entidade *>::Iterator begin() const;
   const Listas::Lista<Entidades::Entidade *>::Iterator end() const;
 
-  void percorrer();
+  void executar();
 };
 
 } // namespace Listas

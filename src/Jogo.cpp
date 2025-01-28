@@ -2,21 +2,19 @@
 
 #include <SFML/System/Vector2.hpp>
 
+#include "Fases/Caverna.h"
 #include "Gerenciadores/GerenciadorEventos.h"
 #include "Gerenciadores/GerenciadorGrafico.h"
 #include "Gerenciadores/GerenciadorInput.h"
-#include <iostream>
 
-Jogo::Jogo() {
+Jogo::Jogo()
+    : pGG(Gerenciadores::Gerenciador_Grafico::getInstancia()),
+      pGE(Gerenciadores::Gerenciador_Eventos::getInstancia()),
+      pGI(Gerenciadores::Gerenciador_Input::getInstancia()) {
   // TODO: Encapsular inicializacao dos gerenciadores em uma funcao
-  std::cerr << "Hello World!\n";
-  printf("Hello World!\n");
-  pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
-  pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
-  pGI = Gerenciadores::Gerenciador_Input::getInstancia();
-  Ente::setGerenciadorGrafico(pGG);
   pGE->setGG(pGG);
   pGE->setGI(pGI);
+  caverna = new Fases::Caverna();
 }
 
 Jogo::~Jogo() {}
@@ -25,8 +23,7 @@ void Jogo::atualizar() {
   pGE->processaEventos();
 
   pGG->atualizaDeltaTempo();
-
-  caverna.executar();
+  caverna->executar();
 
   // Sempre deixar display antes de clear
   pGG->display();

@@ -22,43 +22,46 @@ void Caverna::executar() { Fase::executar(); }
 
 void Caverna::criarEntidade(char tipoEntidade, const sf::Vector2f &pos) {
   switch (tipoEntidade) {
-    case 'E':
-      criarEsqueleto(pos);
-      contEsqueletos++;
-      break;
-    case 'S':
-      criarSlime(pos);
-      contSlimes++;
-      break;
-    case 'P':
-      criarPedra(pos);
-      break;
-    case 'M':
-      criarMadeira(pos);
-      break;
-    case 'G':
-      criarGosma(pos);
-      break;
-    case 'J':
-      criarJogador(pos);
-      break;
-    default:
-      break;
+  case 'E':
+    criarEsqueleto(pos);
+    contEsqueletos++;
+    break;
+  case 'S':
+    criarSlime(pos);
+    contSlimes++;
+    break;
+  case 'P':
+    criarPedra(pos);
+    break;
+  case 'M':
+    criarMadeira(pos);
+    break;
+  case 'G':
+    criarGosma(pos);
+    break;
+  case 'J':
+    criarJogador(pos);
+    break;
+  default:
+    break;
   }
 }
 
 void Caverna::criarSlime(const sf::Vector2f &pos) {
-  Personagens::Inimigos::Slime *novoSlime = new Personagens::Inimigos::Slime(pos);
+  Personagens::Inimigos::Slime *novoSlime =
+      new Personagens::Inimigos::Slime(pos);
   listaPersonagens.incluir(novoSlime);
 }
 
 void Caverna::criarPedra(const sf::Vector2f &pos) {
-  Obstaculos::Plataforma *novaPlataforma = new Obstaculos::Plataforma(ID::IDpedra, pos);
+  Obstaculos::Plataforma *novaPlataforma =
+      new Obstaculos::Plataforma(ID::IDpedra, pos);
   listaObstaculos.incluir(novaPlataforma);
 }
 
 void Caverna::criarMadeira(const sf::Vector2f &pos) {
-  Obstaculos::Plataforma *novaPlataforma = new Obstaculos::Plataforma(ID::IDmadeira1, pos);
+  Obstaculos::Plataforma *novaPlataforma =
+      new Obstaculos::Plataforma(ID::IDmadeira1, pos);
   listaObstaculos.incluir(novaPlataforma);
 }
 
@@ -67,4 +70,4 @@ void Caverna::criarGosma(const sf::Vector2f &pos) {
   listaObstaculos.incluir(novaGosma);
 }
 
-};  // namespace Fases
+}; // namespace Fases

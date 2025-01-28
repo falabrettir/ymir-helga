@@ -16,9 +16,11 @@ using namespace Entidades;
 
 namespace Fases {
 
-Fase::Fase() : Ente(ID::IDfase), ehPrimeiroJogador(true), listaObstaculos(), listaPersonagens() {
-  pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
-  pGI = Gerenciadores::Gerenciador_Input::getInstancia();
+Fase::Fase()
+    : Ente(ID::IDfase), ehPrimeiroJogador(true), listaObstaculos(),
+      listaPersonagens(),
+      pGC(Gerenciadores::Gerenciador_Colisoes::getInstancia()),
+      pGI(Gerenciadores::Gerenciador_Input::getInstancia()) {
 
   listaObstaculos.limpar();
   listaPersonagens.limpar();
@@ -32,8 +34,8 @@ Fase::~Fase() {
 }
 
 void Fase::executar() {
-  listaObstaculos.percorrer();
-  listaPersonagens.percorrer();
+  listaObstaculos.executar();
+  listaPersonagens.executar();
 
   pGC->executar();
 }
@@ -47,7 +49,8 @@ void Fase::incluirNoColisor() {
 
   // Inclui personagens na lista de personagens do GC
   for (it = listaPersonagens.begin(); it != listaPersonagens.end(); ++it) {
-    pGC->incluirPers(dynamic_cast<Entidades::Personagens::Personagem *>(*(*it)));
+    pGC->incluirPers(
+        dynamic_cast<Entidades::Personagens::Personagem *>(*(*it)));
   }
 }
 
@@ -77,7 +80,8 @@ void Fase::criarMapa(const std::string path) {
 }
 
 void Fase::criarJogador(const sf::Vector2f &pos) {
-  Personagens::Jogador *novoJog = new Personagens::Jogador(pos, ehPrimeiroJogador);
+  Personagens::Jogador *novoJog =
+      new Personagens::Jogador(pos, ehPrimeiroJogador);
 
   pGI->inscrever(novoJog->getControlador());
 
@@ -87,8 +91,9 @@ void Fase::criarJogador(const sf::Vector2f &pos) {
 }
 
 void Fase::criarEsqueleto(const sf::Vector2f &pos) {
-  Personagens::Inimigos::Esqueleto *novoEsq = new Personagens::Inimigos::Esqueleto(pos);
+  Personagens::Inimigos::Esqueleto *novoEsq =
+      new Personagens::Inimigos::Esqueleto(pos);
   listaPersonagens.incluir(novoEsq);
 }
 
-}  // namespace Fases
+} // namespace Fases

@@ -7,13 +7,13 @@
 #include "Gerenciadores/GerenciadorGrafico.h"
 
 class Jogo {
- private:
+private:
   Gerenciadores::Gerenciador_Grafico *pGG;
   Gerenciadores::Gerenciador_Eventos *pGE;
   Gerenciadores::Gerenciador_Input *pGI;
-  Fases::Caverna caverna;
+  Fases::Caverna *caverna;
 
- public:
+public:
   Jogo();
   ~Jogo();
   void atualizar();

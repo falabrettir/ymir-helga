@@ -3,17 +3,16 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "Gerenciadores/GerenciadorInput.h"
-#include "Listas/Lista.h"
 #include "Listas/ListaEntidades.h"
 
 namespace Gerenciadores {
 class Gerenciador_Colisoes;
-}  // namespace Gerenciadores
+} // namespace Gerenciadores
 
 namespace Fases {
 
 class Fase : public Ente {
- protected:
+protected:
   Gerenciadores::Gerenciador_Colisoes *pGC;
   Gerenciadores::Gerenciador_Input *pGI;
 
@@ -22,7 +21,7 @@ class Fase : public Ente {
 
   bool ehPrimeiroJogador;
 
- public:
+public:
   Fase();
   ~Fase();
 
@@ -34,4 +33,4 @@ class Fase : public Ente {
   virtual void criarEntidade(char tipoEntidade, const sf::Vector2f &pos) = 0;
 };
 
-}  // namespace Fases
+} // namespace Fases
