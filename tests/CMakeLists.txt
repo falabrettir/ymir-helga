@@ -6,6 +6,7 @@ add_executable(
   tests
   MainTest.cpp
   JogoTest.cpp
+  CavernaTest.cpp
 )
 
 # Adiciona o diretorio 'include/'
