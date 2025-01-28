@@ -1,17 +1,17 @@
 #include "Jogo.h"
 
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
 
 #include "Gerenciadores/GerenciadorEventos.h"
 #include "Gerenciadores/GerenciadorGrafico.h"
 #include "Gerenciadores/GerenciadorInput.h"
-#include <iostream>
 
 Jogo::Jogo() {
   // TODO: Encapsular inicializacao dos gerenciadores em uma funcao
   std::cerr << "Hello World!\n";
   printf("Hello World!\n");
-  pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
+  pGG = Gerenciadores::GerenciadorGrafico::getInstancia();
   pGE = Gerenciadores::Gerenciador_Eventos::getInstancia();
   pGI = Gerenciadores::Gerenciador_Input::getInstancia();
   Ente::setGerenciadorGrafico(pGG);
@@ -34,6 +34,5 @@ void Jogo::atualizar() {
 }
 
 void Jogo::executar() {
-  while (pGG->janelaAberta())
-    atualizar();
+  while (pGG->janelaAberta()) atualizar();
 }

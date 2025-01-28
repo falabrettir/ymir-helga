@@ -1,10 +1,12 @@
 #include "Gerenciadores/GerenciadorEventos.h"
-#include "Gerenciadores/GerenciadorGrafico.h"
-#include "Gerenciadores/GerenciadorInput.h"
+
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Window.hpp>
 #include <iostream>
+
+#include "Gerenciadores/GerenciadorGrafico.h"
+#include "Gerenciadores/GerenciadorInput.h"
 
 namespace Gerenciadores {
 Gerenciador_Eventos *Gerenciador_Eventos::instancia = nullptr;
@@ -25,7 +27,7 @@ Gerenciador_Eventos *Gerenciador_Eventos::getInstancia() {
   return instancia;
 }
 
-void Gerenciador_Eventos::setGG(Gerenciador_Grafico *pGG) {
+void Gerenciador_Eventos::setGG(GerenciadorGrafico *pGG) {
   if (pGG) {
     this->pGG = pGG;
     pJanela = pGG->getJanela();
@@ -44,11 +46,9 @@ void Gerenciador_Eventos::setGI(Gerenciador_Input *pGI) {
 
 void Gerenciador_Eventos::processaEventos() {
   if (pJanela && pGG) {
-
     sf::Event evento;
 
     while (pJanela->pollEvent(evento)) {
-
       // windowClose ou ESC para fechar a janela
       if (evento.type == sf::Event::Closed ||
           sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
@@ -68,4 +68,4 @@ void Gerenciador_Eventos::processaEventos() {
                  "nullptr || pJanela == nullptr\n";
   }
 }
-} // namespace Gerenciadores
+}  // namespace Gerenciadores
