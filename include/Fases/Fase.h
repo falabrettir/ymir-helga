@@ -2,8 +2,8 @@
 
 #include <SFML/System/Vector2.hpp>
 
+#include "Fabrica/FabricaEntidades.h"
 #include "Gerenciadores/GerenciadorInput.h"
-#include "Listas/Lista.h"
 #include "Listas/ListaEntidades.h"
 
 namespace Gerenciadores {
@@ -16,6 +16,7 @@ class Fase : public Ente {
  protected:
   Gerenciadores::Gerenciador_Colisoes *pGC;
   Gerenciadores::Gerenciador_Input *pGI;
+  Fabricas::FabricaEntidades *pFE;
 
   Listas::ListaEntidades listaObstaculos;
   Listas::ListaEntidades listaPersonagens;
@@ -29,8 +30,6 @@ class Fase : public Ente {
   virtual void executar();
   void incluirNoColisor();
   void criarMapa(const std::string path);
-  void criarJogador(const sf::Vector2f &pos);
-  void criarEsqueleto(const sf::Vector2f &pos);
   virtual void criarEntidade(char tipoEntidade, const sf::Vector2f &pos) = 0;
 };
 

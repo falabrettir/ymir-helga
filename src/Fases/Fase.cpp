@@ -16,7 +16,12 @@ using namespace Entidades;
 
 namespace Fases {
 
-Fase::Fase() : Ente(ID::IDfase), ehPrimeiroJogador(true), listaObstaculos(), listaPersonagens() {
+Fase::Fase()
+    : Ente(ID::IDfase),
+      ehPrimeiroJogador(true),
+      listaObstaculos(),
+      listaPersonagens(),
+      pFE(nullptr) {
   pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
   pGI = Gerenciadores::Gerenciador_Input::getInstancia();
 
@@ -47,7 +52,8 @@ void Fase::incluirNoColisor() {
 
   // Inclui personagens na lista de personagens do GC
   for (it = listaPersonagens.begin(); it != listaPersonagens.end(); ++it) {
-    pGC->incluirPers(dynamic_cast<Entidades::Personagens::Personagem *>(*(*it)));
+    pGC->incluirPers(
+        dynamic_cast<Entidades::Personagens::Personagem *>(*(*it)));
   }
 }
 
@@ -76,9 +82,14 @@ void Fase::criarMapa(const std::string path) {
   incluirNoColisor();
 }
 
+// WARNING: Quando tirar a criarJogador daqui, nao teremos mais acesso ao pGI
+// TODO: Talvez passar parametros para a construcao do jogador?
+// o att ehPrimrioJogador ja existe na classe Jogador, deixar ele estatico la
 void Fase::criarJogador(const sf::Vector2f &pos) {
-  Personagens::Jogador *novoJog = new Personagens::Jogador(pos, ehPrimeiroJogador);
+  Personagens::Jogador *novoJog =
+      new Personagens::Jogador(pos, ehPrimeiroJogador);
 
+  // TODO: Talvez alterar a construtora de jogador para receber ponteiro pro GI
   pGI->inscrever(novoJog->getControlador());
 
   listaPersonagens.incluir(novoJog);
@@ -86,8 +97,10 @@ void Fase::criarJogador(const sf::Vector2f &pos) {
   ehPrimeiroJogador = false;
 }
 
+// TODO: Refatorar considerando Factory
 void Fase::criarEsqueleto(const sf::Vector2f &pos) {
-  Personagens::Inimigos::Esqueleto *novoEsq = new Personagens::Inimigos::Esqueleto(pos);
+  Personagens::Inimigos::Esqueleto *novoEsq =
+      new Personagens::Inimigos::Esqueleto(pos);
   listaPersonagens.incluir(novoEsq);
 }
 
