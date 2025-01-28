@@ -1,25 +1,38 @@
-# Procurar Catch2 (necessário para testes)
-find_package(Catch2 REQUIRED)
+find_package(GTest REQUIRED)
+find_package(Threads REQUIRED)
 
 # Executável dos testes
-add_executable(tests
-  MainTests.cpp
+add_executable(
+  tests
+  MainTest.cpp
+  JogoTest.cpp
 )
 
 # Adiciona o diretorio 'include/'
-target_include_directories(tests
+target_include_directories(
+  tests
   PRIVATE
   ${PROJECT_INCLUDE_DIR}
+  ${GTEST_INCLUDE_DIRS}
 )
 
 # Linka todos os arquivos de implementacao do jogo aos testes
-target_link_libraries(tests
+target_link_libraries(
+  tests
   PUBLIC
+  GTest::GTest
+  GTest::Main
+  ${CMAKE_THREAD_LIBS_INIT}
   jogo
-  Catch2::Catch2
 )
 
-# Descoberta automática de testes
-include(CTest)
-include(Catch)
-catch_discover_tests(tests)
+target_compile_options(
+tests
+PRIVATE
+        $<$<CXX_COMPILER_ID:GNU>:-Wall -Wextra -Wpedantic>
+        $<$<CXX_COMPILER_ID:Clang>:-Wall -Wextra -Wpedantic>
+        $<$<CXX_COMPILER_ID:MSVC>:/W4>
+)
+
+include(GoogleTest)
+gtest_discover_tests(tests)
