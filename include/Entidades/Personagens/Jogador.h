@@ -6,6 +6,7 @@
 #include "Controladores/ControladorJogador.h"
 #include "Entidades/Personagens/Personagem.h"
 #include "Gerenciadores/GerenciadorEventos.h"
+#include "Gerenciadores/GerenciadorInput.h"
 
 namespace Entidades::Personagens {
 
@@ -15,6 +16,7 @@ namespace Entidades::Personagens {
 class Jogador : public Personagem {
  private:
   static bool ehPrimeiroJogador;
+  static Gerenciadores::Gerenciador_Input *pGI;
 
  protected:
   bool podePular;
@@ -34,7 +36,7 @@ class Jogador : public Personagem {
   void atacar();
   void executar();
   void aplicaLentidao(float viscosidade);
-  Controladores::Controlador_Jogador *getControlador() const;
+  void setGI();
 };
 
 }  // namespace Entidades::Personagens

@@ -5,16 +5,22 @@
 #include <iostream>
 
 #include "Entidades/Personagens/Personagem.h"
+#include "Gerenciadores/GerenciadorInput.h"
 
 using namespace Entidades::Personagens;
 
 // Flag inicialmente definida como true
 bool Jogador::ehPrimeiroJogador = true;
 
+Gerenciadores::Gerenciador_Input *Jogador::pGI =
+    Gerenciadores::Gerenciador_Input::getInstancia();
+
 Jogador::Jogador(const sf::Vector2f &pos)
     : Personagem(ID::IDjogador), pContr(nullptr), podePular(true) {
   pContr = new Controladores::Controlador_Jogador();
   pContr->setJog(this);
+
+  pGI->inscrever(pContr);
 
   if (ehPrimeiroJogador) {
     setTextura("/assets/Personagens/Ymir.png");
@@ -82,7 +88,3 @@ void Jogador::executar() {
 }
 
 void Jogador::atacar() { std::cout << "ataquei" << '\n'; }
-
-Controladores::Controlador_Jogador *Jogador::getControlador() const {
-  return pContr;
-}
