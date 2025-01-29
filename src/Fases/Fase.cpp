@@ -75,6 +75,7 @@ void Fase::criarMapa(const std::string path) {
         pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
         // TODO: Adicionar entidades criadas nas listas (personagens e
         // obstaculos)
+        // Talvez armazenar o retorno em uma variavel e inserir na lista
       }
     }
   }
