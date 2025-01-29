@@ -2,7 +2,9 @@
 
 #include <iostream>
 
+#include "Entidades/Obstaculos/Plataforma.h"
 #include "Fabrica/FabricaEntidades.h"
+#include "IDs.h"
 
 using namespace Entidades;
 
@@ -23,15 +25,42 @@ FabEntCaverna *FabEntCaverna::getInstancia() {
 }
 
 Obstaculos::Plataforma *FabEntCaverna::criarMadeira(const sf::Vector2f &pos) {
-  // TODO: Criar plataforma de madeira1
+  Obstaculos::Plataforma *novaPlat =
+      new Obstaculos::Plataforma(ID::IDmadeira1, pos);
+  return novaPlat;
 }
 
-Obstaculos::Plataforma *criarChao(const sf::Vector2f &pos) {
-  // TODO: Criar chao de pedra
+Obstaculos::Plataforma *FabEntCaverna::criarChao(const sf::Vector2f &pos) {
+  Obstaculos::Plataforma *novaPlat =
+      new Obstaculos::Plataforma(ID::IDpedra, pos);
+  return novaPlat;
 }
 
-void criarEntidade(char tipoEntidade, const sf::Vector2f &pos) {
-  // TODO: Switch case para criar entidades
+void FabEntCaverna::criarEntidade(char tipoEntidade, const sf::Vector2f &pos) {
+  switch (tipoEntidade) {
+    case 'E':
+      // TODO: somar a quantidade de esqueletos na fase
+      criarEsqueleto(pos);
+      break;
+    case 'S':
+      // TODO: somar a quantidade de slimes na fase
+      criarSlime(pos);
+      break;
+    case 'P':
+      criarChao(pos);
+      break;
+    case 'M':
+      criarMadeira(pos);
+      break;
+    case 'G':
+      criarGosma(pos);
+      break;
+    case 'J':
+      criarJogador(pos);
+      break;
+    default:
+      break;
+  }
 }
 
 }  // namespace Fabricas

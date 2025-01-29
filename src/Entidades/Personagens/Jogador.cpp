@@ -8,6 +8,7 @@
 
 using namespace Entidades::Personagens;
 
+// Flag inicialmente definida como true
 bool Jogador::ehPrimeiroJogador = true;
 
 Jogador::Jogador(const sf::Vector2f &pos)
