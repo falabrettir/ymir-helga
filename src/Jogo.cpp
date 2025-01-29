@@ -10,11 +10,14 @@
 Jogo::Jogo()
     : pGG(Gerenciadores::Gerenciador_Grafico::getInstancia()),
       pGE(Gerenciadores::Gerenciador_Eventos::getInstancia()),
-      pGI(Gerenciadores::Gerenciador_Input::getInstancia()) {
+      pGI(Gerenciadores::Gerenciador_Input::getInstancia()),
+      pGS(Gerenciadores::Gerenciador_Estados::getInstancia()) {
   // TODO: Encapsular inicializacao dos gerenciadores em uma funcao
   pGE->setGG(pGG);
   pGE->setGI(pGI);
   caverna = new Fases::Caverna();
+  pGS->pushEstado(caverna);
+  // pGS->pushEstado(new MenuPrincipal());
 }
 
 Jogo::~Jogo() {}
@@ -23,7 +26,7 @@ void Jogo::atualizar() {
   pGE->processaEventos();
 
   pGG->atualizaDeltaTempo();
-  caverna->executar();
+  pGS->executar();
 
   // Sempre deixar display antes de clear
   pGG->display();
@@ -31,6 +34,5 @@ void Jogo::atualizar() {
 }
 
 void Jogo::executar() {
-  while (pGG->janelaAberta())
-    atualizar();
+  while (pGG->janelaAberta()) atualizar();
 }

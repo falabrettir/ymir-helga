@@ -18,6 +18,7 @@ namespace Fases {
 
 Fase::Fase()
     : Ente(ID::IDfase),
+      States::State(),
       ehPrimeiroJogador(true),
       listaObstaculos(new Listas::ListaEntidades()),
       listaPersonagens(new Listas::ListaEntidades),

@@ -6,7 +6,7 @@
 #include "Gerenciadores/GerenciadorColisoes.h"
 
 using namespace Entidades;
-Gerenciadores::Gerenciador_Colisoes* Entidade::pColisao(nullptr);
+Gerenciadores::Gerenciador_Colisoes* Entidade::pGC(nullptr);
 
 Entidade::Entidade(ID id)
     : Ente(id),
@@ -16,7 +16,7 @@ Entidade::Entidade(ID id)
       tamanho(0, 0),
       noChao(false),
       buffer(nullptr) {
-  if (pColisao == nullptr) pColisao = Gerenciadores::Gerenciador_Colisoes::getInstancia();
+  if (pGC == nullptr) pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
   if (ehPlataforma()) {
     sf::FloatRect hitbox(0.f, 0.f, 128.f, 16.f);
     setHitbox(hitbox);

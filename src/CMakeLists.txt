@@ -10,12 +10,14 @@ add_library(jogo
   Ente.cpp
   Observer.cpp
   Subject.cpp
+  State.cpp
 
   # Diretorio Gerenciadores
   Gerenciadores/GerenciadorGrafico.cpp
   Gerenciadores/GerenciadorEventos.cpp
   Gerenciadores/GerenciadorInput.cpp
   Gerenciadores/GerenciadorColisoes.cpp
+  Gerenciadores/GerenciadorEstados.cpp
 
   # Diretorio Controladores
   Controladores/ControladorJogador.cpp

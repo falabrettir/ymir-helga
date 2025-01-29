@@ -4,15 +4,16 @@
 
 #include "Gerenciadores/GerenciadorInput.h"
 #include "Listas/ListaEntidades.h"
+#include "State.h"
 
 namespace Gerenciadores {
 class Gerenciador_Colisoes;
-} // namespace Gerenciadores
+}  // namespace Gerenciadores
 
 namespace Fases {
 
-class Fase : public Ente {
-protected:
+class Fase : public Ente, public States::State {
+ protected:
   Gerenciadores::Gerenciador_Colisoes *pGC;
   Gerenciadores::Gerenciador_Input *pGI;
 
@@ -21,7 +22,7 @@ protected:
 
   bool ehPrimeiroJogador;
 
-public:
+ public:
   Fase();
   ~Fase();
 
@@ -33,4 +34,4 @@ public:
   virtual void criarEntidade(char tipoEntidade, const sf::Vector2f &pos) = 0;
 };
 
-} // namespace Fases
+}  // namespace Fases

@@ -21,7 +21,7 @@ class Entidade : public Ente {
  protected:
   sf::Vector2f velocidade;
   sf::FloatRect hitbox;
-  static Gerenciadores::Gerenciador_Colisoes *pColisao;
+  static Gerenciadores::Gerenciador_Colisoes *pGC;
 
  public:
   Entidade(ID id);

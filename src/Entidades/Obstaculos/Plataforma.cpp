@@ -41,7 +41,7 @@ Plataforma::~Plataforma() {}
 
 void Plataforma::executar() {
   std::cout << "Executando obst";
-  pColisao->notificaColisao(this);
+  pGC->notificaColisao(this);
 }
 
 void Plataforma::obstacular(Entidades::Entidade *pEnt) {}

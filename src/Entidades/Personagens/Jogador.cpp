@@ -77,7 +77,7 @@ void Jogador::executar() {
   pContr->controlarJogador();
 
   if (!getNoChao()) cair();
-  pColisao->notificaColisao(this);
+  pGC->notificaColisao(this);
   mover();
 }
 
