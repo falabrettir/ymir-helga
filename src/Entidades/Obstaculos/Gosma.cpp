@@ -1,11 +1,12 @@
 #include "Entidades/Obstaculos/Gosma.h"
-#include "Entidades/Obstaculos/Obstaculo.h"
+
 #include <SFML/System/Vector2.hpp>
+
+#include "Entidades/Obstaculos/Obstaculo.h"
 
 namespace Entidades::Obstaculos {
 Gosma::Gosma(const sf::Vector2f &pos)
     : Obstaculo(ID::IDgosma, pos), pegajosidade(0.6) {
-  // TODO: aplicar texturas e posicao
   setTextura("/assets/Obstaculos/Gosma.png");
 }
 Gosma::~Gosma() {}
@@ -20,4 +21,4 @@ void Gosma::colidir(Entidade *pEnt, sf::Vector2f ds) {
     }
   }
 }
-} // namespace Entidades::Obstaculos
+}  // namespace Entidades::Obstaculos

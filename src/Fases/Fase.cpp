@@ -85,6 +85,8 @@ void Fase::criarMapa(const std::string path) {
   incluirNoColisor();
 }
 
+// adicionar pGI estatico na classe jogador
+
 // WARNING: Quando tirar a criarJogador daqui, nao teremos mais acesso ao pGI
 // TODO: Talvez passar parametros para a construcao do jogador?
 // o att ehPrimrioJogador ja existe na classe Jogador, deixar ele estatico la

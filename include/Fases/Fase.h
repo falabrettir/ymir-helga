@@ -21,8 +21,6 @@ class Fase : public Ente {
   Listas::ListaEntidades listaObstaculos;
   Listas::ListaEntidades listaPersonagens;
 
-  bool ehPrimeiroJogador;
-
  public:
   Fase();
   ~Fase();

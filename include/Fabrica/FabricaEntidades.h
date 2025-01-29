@@ -21,7 +21,9 @@ class FabricaEntidades {
  public:
   FabricaEntidades();
   virtual ~FabricaEntidades();
+  virtual void criarEntidade(char tipoEntidade, const sf::Vector2f &pos) = 0;
 
+ protected:
   Personagens::Jogador *criarJogador(const sf::Vector2f &pos);
   Personagens::Inimigos::Esqueleto *criarEsqueleto(const sf::Vector2f &pos);
   Personagens::Inimigos::Slime *criarSlime(const sf::Vector2f &pos);
@@ -30,7 +32,6 @@ class FabricaEntidades {
   Obstaculos::Espinho *criarEspinho(const sf::Vector2f &pos);
   virtual Obstaculos::Plataforma *criarMadeira(const sf::Vector2f &pos) = 0;
   virtual Obstaculos::Plataforma *criarChao(const sf::Vector2f &pos) = 0;
-  virtual void criarEntidade(char tipoEntidade, const sf::Vector2f &pos) = 0;
 };
 
 }  // namespace Fabricas
