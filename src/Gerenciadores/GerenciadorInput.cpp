@@ -8,9 +8,9 @@
 
 namespace Gerenciadores {
 
-Gerenciador_Input *Gerenciador_Input::instancia = nullptr;
+GerenciadorInput *GerenciadorInput::instancia = nullptr;
 
-Gerenciador_Input::Gerenciador_Input() : Subject() {
+GerenciadorInput::GerenciadorInput() : Subject() {
   keyMap.clear();
   keyMap[sf::Keyboard::A] = "A";
   keyMap[sf::Keyboard::B] = "B";
@@ -74,16 +74,16 @@ Gerenciador_Input::Gerenciador_Input() : Subject() {
   keyMap[sf::Keyboard::Tab] = "Tab";
 }
 
-Gerenciador_Input::~Gerenciador_Input() { keyMap.clear(); }
+GerenciadorInput::~GerenciadorInput() { keyMap.clear(); }
 
-Gerenciador_Input *Gerenciador_Input::getInstancia() {
+GerenciadorInput *GerenciadorInput::getInstancia() {
   if (instancia == nullptr) {
-    instancia = new Gerenciador_Input();
+    instancia = new GerenciadorInput();
   }
   return instancia;
 }
 
-void Gerenciador_Input::ProcessaTeclaPressionada(sf::Keyboard::Key tecla) {
+void GerenciadorInput::ProcessaTeclaPressionada(sf::Keyboard::Key tecla) {
   // Notificar a tecla pressionada para o Observer (Controlador Jogador)
   if (observadores) {
     std::clog << "log: Notificando tecla " << keyMap[tecla] << " pressionada\n";
@@ -94,7 +94,7 @@ void Gerenciador_Input::ProcessaTeclaPressionada(sf::Keyboard::Key tecla) {
   }
 }
 
-void Gerenciador_Input::ProcessaTeclaSolta(sf::Keyboard::Key tecla) {
+void GerenciadorInput::ProcessaTeclaSolta(sf::Keyboard::Key tecla) {
   // Notificar a tecla solta para o Observer (Controlador Jogador)
   if (observadores) {
     std::clog << "log: Notificando tecla " << keyMap[tecla] << " solta\n";

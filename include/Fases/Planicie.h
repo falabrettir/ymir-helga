@@ -27,7 +27,6 @@ class Planicie : public Fase {
   ~Planicie();
 
   void executar();
-  void criarEntidade(char tipoEntidade, const sf::Vector2f &pos);
   void criarMago(const sf::Vector2f &pos);
   void criarGrama(const sf::Vector2f &pos);
   void criarMadeira(const sf::Vector2f &pos);

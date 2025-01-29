@@ -1,7 +1,6 @@
 #include "Jogo.h"
 
 #include <SFML/System/Vector2.hpp>
-#include <iostream>
 
 #include "Fases/Caverna.h"
 #include "Gerenciadores/GerenciadorEventos.h"
@@ -9,10 +8,10 @@
 #include "Gerenciadores/GerenciadorInput.h"
 
 Jogo::Jogo()
-    : pGG(Gerenciadores::Gerenciador_Grafico::getInstancia()),
-      pGE(Gerenciadores::Gerenciador_Eventos::getInstancia()),
-      pGI(Gerenciadores::Gerenciador_Input::getInstancia()),
-      pGS(Gerenciadores::Gerenciador_Estados::getInstancia()) {
+    : pGG(Gerenciadores::GerenciadorGrafico::getInstancia()),
+      pGE(Gerenciadores::GerenciadorEventos::getInstancia()),
+      pGI(Gerenciadores::GerenciadorInput::getInstancia()),
+      pGS(Gerenciadores::GerenciadorEstados::getInstancia()) {
   // TODO: Encapsular inicializacao dos gerenciadores em uma funcao
   pGE->setGG(pGG);
   pGE->setGI(pGI);

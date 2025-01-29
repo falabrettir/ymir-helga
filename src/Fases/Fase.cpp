@@ -17,8 +17,8 @@ Fase::Fase()
     : Ente(ID::IDfase),
       States::State(),
       listaObstaculos(new Listas::ListaEntidades()),
-      listaPersonagens(new Listas::ListaEntidades),
-      pGC(Gerenciadores::Gerenciador_Colisoes::getInstancia()) {
+      listaPersonagens(new Listas::ListaEntidades()),
+      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()) {
   listaObstaculos->limpar();
   listaPersonagens->limpar();
 }

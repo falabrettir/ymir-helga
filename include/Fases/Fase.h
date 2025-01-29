@@ -7,14 +7,14 @@
 #include "State.h"
 
 namespace Gerenciadores {
-class Gerenciador_Colisoes;
+class GerenciadorColisoes;
 }  // namespace Gerenciadores
 
 namespace Fases {
 
 class Fase : public Ente, public States::State {
  protected:
-  Gerenciadores::Gerenciador_Colisoes *pGC;
+  Gerenciadores::GerenciadorColisoes *pGC;
   Fabricas::FabricaEntidades *pFE;
 
   Listas::ListaEntidades *listaObstaculos;

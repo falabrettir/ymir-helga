@@ -10,9 +10,9 @@
 class Jogo {
  private:
   Gerenciadores::GerenciadorGrafico *pGG;
-  Gerenciadores::Gerenciador_Eventos *pGE;
-  Gerenciadores::Gerenciador_Input *pGI;
-  Gerenciadores::Gerenciador_Estados *pGS;
+  Gerenciadores::GerenciadorEventos *pGE;
+  Gerenciadores::GerenciadorInput *pGI;
+  Gerenciadores::GerenciadorEstados *pGS;
   Fases::Caverna *caverna;
 
  public:

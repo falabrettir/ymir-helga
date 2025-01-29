@@ -1,29 +1,29 @@
 #include "Gerenciadores/GerenciadorEstados.h"
 namespace Gerenciadores {
-Gerenciador_Estados* Gerenciador_Estados::instancia = nullptr;
+GerenciadorEstados* GerenciadorEstados::instancia = nullptr;
 
-Gerenciador_Estados::Gerenciador_Estados() : pilhaEstados() {}
+GerenciadorEstados::GerenciadorEstados() : pilhaEstados() {}
 
-Gerenciador_Estados::~Gerenciador_Estados() {}
+GerenciadorEstados::~GerenciadorEstados() {}
 
-Gerenciador_Estados* Gerenciador_Estados::getInstancia() {
+GerenciadorEstados* GerenciadorEstados::getInstancia() {
   if (instancia == nullptr) {
-    instancia = new Gerenciador_Estados();
+    instancia = new GerenciadorEstados();
   }
   return instancia;
 }
 
-States::State* Gerenciador_Estados::topEstado() { return pilhaEstados.top(); }
+States::State* GerenciadorEstados::topEstado() { return pilhaEstados.top(); }
 
-void Gerenciador_Estados::executar() {
+void GerenciadorEstados::executar() {
   if (!pilhaEstados.empty()) {
     topEstado()->executar();
   }
 }
 
-void Gerenciador_Estados::pushEstado(States::State* s) { pilhaEstados.push(s); }
+void GerenciadorEstados::pushEstado(States::State* s) { pilhaEstados.push(s); }
 
-void Gerenciador_Estados::popEstado() {
+void GerenciadorEstados::popEstado() {
   delete topEstado();
   pilhaEstados.pop();
 }

@@ -16,7 +16,7 @@ namespace Entidades::Personagens {
 class Jogador : public Personagem {
  private:
   static bool ehPrimeiroJogador;
-  static Gerenciadores::Gerenciador_Input *pGI;
+  static Gerenciadores::GerenciadorInput *pGI;
 
  protected:
   bool podePular;

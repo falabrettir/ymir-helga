@@ -1,5 +1,7 @@
 #include "Entidades/Personagens/Jogador.h"
 
+#include <Gerenciadores/GerenciadorColisoes.h>
+
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
@@ -12,8 +14,8 @@ using namespace Entidades::Personagens;
 // Flag inicialmente definida como true
 bool Jogador::ehPrimeiroJogador = true;
 
-Gerenciadores::Gerenciador_Input *Jogador::pGI =
-    Gerenciadores::Gerenciador_Input::getInstancia();
+Gerenciadores::GerenciadorInput *Jogador::pGI =
+    Gerenciadores::GerenciadorInput::getInstancia();
 
 Jogador::Jogador(const sf::Vector2f &pos)
     : Personagem(ID::IDjogador), pContr(nullptr), podePular(true) {
@@ -97,5 +99,3 @@ void Jogador::colidir(Entidade *pEnt, sf::Vector2f ds) {
     }
   }
 }
-
-Controladores::Controlador_Jogador *Jogador::getControlador() const { return pContr; }

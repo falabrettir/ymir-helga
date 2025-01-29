@@ -13,25 +13,25 @@ class Jogador;
 
 namespace Gerenciadores {
 
-class Gerenciador_Eventos {
+class GerenciadorEventos {
  private:
-  static Gerenciador_Eventos *instancia;
+  static GerenciadorEventos *instancia;
 
   sf::Window *pJanela;
   GerenciadorGrafico *pGG;
-  Gerenciador_Input *pGI;
+  GerenciadorInput *pGI;
 
  private:
-  Gerenciador_Eventos();
-  ~Gerenciador_Eventos();
-  Gerenciador_Eventos(const Gerenciador_Eventos &) = delete;
-  Gerenciador_Eventos &operator=(const Gerenciador_Eventos &) = delete;
+  GerenciadorEventos();
+  ~GerenciadorEventos();
+  GerenciadorEventos(const GerenciadorEventos &) = delete;
+  GerenciadorEventos &operator=(const GerenciadorEventos &) = delete;
 
  public:
-  static Gerenciador_Eventos *getInstancia();
+  static GerenciadorEventos *getInstancia();
 
   void setGG(GerenciadorGrafico *pGG);
-  void setGI(Gerenciador_Input *pGI);
+  void setGI(GerenciadorInput *pGI);
   void processaEventos();
 };
 

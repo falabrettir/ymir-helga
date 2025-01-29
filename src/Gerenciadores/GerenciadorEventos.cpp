@@ -9,25 +9,25 @@
 #include "Gerenciadores/GerenciadorInput.h"
 
 namespace Gerenciadores {
-Gerenciador_Eventos *Gerenciador_Eventos::instancia = nullptr;
+GerenciadorEventos *GerenciadorEventos::instancia = nullptr;
 
-Gerenciador_Eventos::Gerenciador_Eventos()
+GerenciadorEventos::GerenciadorEventos()
     : pJanela(nullptr), pGG(nullptr), pGI(nullptr) {}
 
-Gerenciador_Eventos::~Gerenciador_Eventos() {
+GerenciadorEventos::~GerenciadorEventos() {
   pJanela = nullptr;
   pGG = nullptr;
   pGI = nullptr;
 }
 
-Gerenciador_Eventos *Gerenciador_Eventos::getInstancia() {
+GerenciadorEventos *GerenciadorEventos::getInstancia() {
   if (instancia == nullptr) {
-    instancia = new Gerenciador_Eventos();
+    instancia = new GerenciadorEventos();
   }
   return instancia;
 }
 
-void Gerenciador_Eventos::setGG(GerenciadorGrafico *pGG) {
+void GerenciadorEventos::setGG(GerenciadorGrafico *pGG) {
   if (pGG) {
     this->pGG = pGG;
     pJanela = pGG->getJanela();
@@ -36,7 +36,7 @@ void Gerenciador_Eventos::setGG(GerenciadorGrafico *pGG) {
   }
 }
 
-void Gerenciador_Eventos::setGI(Gerenciador_Input *pGI) {
+void GerenciadorEventos::setGI(GerenciadorInput *pGI) {
   if (pGI) {
     this->pGI = pGI;
   } else {
@@ -44,7 +44,7 @@ void Gerenciador_Eventos::setGI(Gerenciador_Input *pGI) {
   }
 }
 
-void Gerenciador_Eventos::processaEventos() {
+void GerenciadorEventos::processaEventos() {
   if (pJanela && pGG) {
     sf::Event evento;
 

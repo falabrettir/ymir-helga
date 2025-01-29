@@ -17,25 +17,25 @@
 
 namespace Gerenciadores {
 
-Gerenciador_Colisoes *Gerenciador_Colisoes::instancia = nullptr;
+GerenciadorColisoes *GerenciadorColisoes::instancia = nullptr;
 
-Gerenciador_Colisoes::Gerenciador_Colisoes() : vecPers(), listObst(), setProj() {
+GerenciadorColisoes::GerenciadorColisoes() : vecPers(), listObst(), setProj() {
   vecPers.clear();
   listObst.clear();
   setProj.clear();
 }
 
-Gerenciador_Colisoes::~Gerenciador_Colisoes() {}
+GerenciadorColisoes::~GerenciadorColisoes() {}
 
-Gerenciador_Colisoes *Gerenciador_Colisoes::getInstancia() {
+GerenciadorColisoes *GerenciadorColisoes::getInstancia() {
   if (!instancia) {
-    instancia = new Gerenciador_Colisoes();
+    instancia = new GerenciadorColisoes();
   }
   return instancia;
 }
 
-sf::Vector2f Gerenciador_Colisoes::verificaColisao(Entidades::Entidade *e1,
-                                                   Entidades::Entidade *e2) {
+sf::Vector2f GerenciadorColisoes::verificaColisao(Entidades::Entidade *e1,
+                                                  Entidades::Entidade *e2) {
   sf::Vector2f p1 = e1->getHitbox().getPosition();
   sf::Vector2f p2 = e2->getHitbox().getPosition();
 
@@ -55,19 +55,20 @@ sf::Vector2f Gerenciador_Colisoes::verificaColisao(Entidades::Entidade *e1,
   return ds;
 }
 
-void Gerenciador_Colisoes::incluirPers(Entidades::Personagens::Personagem *pPers) {
+void GerenciadorColisoes::incluirPers(
+    Entidades::Personagens::Personagem *pPers) {
   if (pPers) vecPers.push_back(pPers);
 }
 
-void Gerenciador_Colisoes::incluirObst(Entidades::Obstaculos::Obstaculo *pObst) {
+void GerenciadorColisoes::incluirObst(Entidades::Obstaculos::Obstaculo *pObst) {
   if (pObst) listObst.push_back(pObst);
 }
 
-void Gerenciador_Colisoes::incluirProj(Entidades::Projetil *pProj) {
+void GerenciadorColisoes::incluirProj(Entidades::Projetil *pProj) {
   if (pProj) setProj.insert(pProj);
 }
 
-void Gerenciador_Colisoes::notificaColisao(Entidades::Entidade *sender) {
+void GerenciadorColisoes::notificaColisao(Entidades::Entidade *sender) {
   if (sender->getId() == ID::IDprojetil) {
     // colisao projeteis-personagens
     std::vector<Entidades::Personagens::Personagem *>::iterator itPers;

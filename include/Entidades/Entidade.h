@@ -6,7 +6,7 @@
 #include "Ente.h"
 
 namespace Gerenciadores {
-class Gerenciador_Colisoes;
+class GerenciadorColisoes;
 }
 namespace Entidades {
 
@@ -21,7 +21,7 @@ class Entidade : public Ente {
  protected:
   sf::Vector2f velocidade;
   sf::FloatRect hitbox;
-  static Gerenciadores::Gerenciador_Colisoes *pGC;
+  static Gerenciadores::GerenciadorColisoes *pGC;
 
  public:
   Entidade(ID id);

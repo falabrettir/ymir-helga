@@ -4,19 +4,19 @@
 #include "State.h"
 
 namespace Gerenciadores {
-class Gerenciador_Estados {
+class GerenciadorEstados {
  private:
   std::stack<States::State *> pilhaEstados;
-  static Gerenciador_Estados *instancia;
+  static GerenciadorEstados *instancia;
 
  private:
-  Gerenciador_Estados();
-  ~Gerenciador_Estados();
-  Gerenciador_Estados(const Gerenciador_Estados &) = delete;
-  Gerenciador_Estados &operator=(const Gerenciador_Estados &) = delete;
+  GerenciadorEstados();
+  ~GerenciadorEstados();
+  GerenciadorEstados(const GerenciadorEstados &) = delete;
+  GerenciadorEstados &operator=(const GerenciadorEstados &) = delete;
 
  public:
-  static Gerenciador_Estados *getInstancia();
+  static GerenciadorEstados *getInstancia();
   void executar();
   void pushEstado(States::State *s);
   States::State *topEstado();

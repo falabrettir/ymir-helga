@@ -13,8 +13,7 @@ Gerenciadores::GerenciadorGrafico *Ente::pGG(nullptr);
 Ente::Ente(ID id) : id(id) {
   pSprite = new sf::Sprite();
   pTexture = new sf::Texture();
-  if (pGG == nullptr)
-    pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
+  if (pGG == nullptr) pGG = Gerenciadores::GerenciadorGrafico::getInstancia();
   setTarget();
 }
 

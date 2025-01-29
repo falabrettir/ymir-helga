@@ -11,7 +11,7 @@
 namespace Fases {
 
 class Caverna : public Fase {
-private:
+ private:
   const int minEsqueletos = 3;
   const int maxEsqueletos = 5;
   int contEsqueletos;
@@ -20,16 +20,15 @@ private:
   const int maxSlimes = 5;
   int contSlimes;
 
-public:
+ public:
   Caverna();
   ~Caverna();
 
   void executar();
-  void criarEntidade(char tipoEntidade, const sf::Vector2f &pos);
   void criarSlime(const sf::Vector2f &pos);
   void criarPedra(const sf::Vector2f &pos);
   void criarMadeira(const sf::Vector2f &pos);
   void criarGosma(const sf::Vector2f &pos);
 };
 
-} // namespace Fases
+}  // namespace Fases
