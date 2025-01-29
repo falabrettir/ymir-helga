@@ -5,7 +5,7 @@ find_package(Threads REQUIRED)
 add_executable(
   tests
   MainTest.cpp
-  JogoTest.cpp
+  IDTest.cpp
 )
 
 # Adiciona o diretorio 'include/'
