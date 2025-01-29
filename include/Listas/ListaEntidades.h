@@ -17,10 +17,10 @@ public:
   void deletar(Entidades::Entidade *pE);
   const int getSize() const;
   void limpar();
-  const Listas::Lista<Entidades::Entidade *>::Iterator begin() const;
-  const Listas::Lista<Entidades::Entidade *>::Iterator end() const;
+  Listas::Lista<Entidades::Entidade>::Iterator begin();
+  Listas::Lista<Entidades::Entidade>::Iterator end();
 
-  void percorrer();
+  void executar();
 };
 
 } // namespace Listas

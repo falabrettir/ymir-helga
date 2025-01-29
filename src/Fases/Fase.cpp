@@ -14,11 +14,15 @@ using namespace Entidades;
 namespace Fases {
 
 Fase::Fase()
-    : Ente(ID::IDfase), listaObstaculos(), listaPersonagens(), pFE(nullptr) {
-  pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
-
-  listaObstaculos.limpar();
-  listaPersonagens.limpar();
+    : Ente(ID::IDfase),
+      States::State(),
+      ehPrimeiroJogador(true),
+      listaObstaculos(new Listas::ListaEntidades()),
+      listaPersonagens(new Listas::ListaEntidades),
+      pGC(Gerenciadores::Gerenciador_Colisoes::getInstancia()),
+      pGI(Gerenciadores::Gerenciador_Input::getInstancia()) {
+  listaObstaculos->limpar();
+  listaPersonagens->limpar();
 }
 
 Fase::~Fase() {
@@ -28,23 +32,20 @@ Fase::~Fase() {
 }
 
 void Fase::executar() {
-  listaObstaculos.percorrer();
-  listaPersonagens.percorrer();
-
-  pGC->executar();
+  listaObstaculos->executar();
+  listaPersonagens->executar();
 }
 
 void Fase::incluirNoColisor() {
-  Listas::Lista<Entidades::Entidade *>::Iterator it;
+  Listas::Lista<Entidades::Entidade>::Iterator it;
 
-  for (it = listaObstaculos.begin(); it != listaObstaculos.end(); ++it) {
-    pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(*(*it)));
+  for (it = listaObstaculos->begin(); it != listaObstaculos->end(); ++it) {
+    pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(*it));
   }
 
   // Inclui personagens na lista de personagens do GC
-  for (it = listaPersonagens.begin(); it != listaPersonagens.end(); ++it) {
-    pGC->incluirPers(
-        dynamic_cast<Entidades::Personagens::Personagem *>(*(*it)));
+  for (it = listaPersonagens->begin(); it != listaPersonagens->end(); ++it) {
+    pGC->incluirPers(dynamic_cast<Entidades::Personagens::Personagem *>(*it));
   }
 }
 

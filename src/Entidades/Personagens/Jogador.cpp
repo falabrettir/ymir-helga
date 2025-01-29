@@ -83,8 +83,19 @@ void Jogador::executar() {
   pContr->controlarJogador();
 
   if (!getNoChao()) cair();
-
+  pGC->notificaColisao(this);
   mover();
 }
 
 void Jogador::atacar() { std::cout << "ataquei" << '\n'; }
+
+void Jogador::colidir(Entidade *pEnt, sf::Vector2f ds) {
+  if (ds.x < 0 && ds.y < 0) {
+    if (pEnt->getId() == ID::IDesqueleto || pEnt->getId() == ID::IDmago ||
+        pEnt->getId() == ID::IDslime) {
+      this->tomarDano(dynamic_cast<Personagem *>(pEnt)->getDano());
+    }
+  }
+}
+
+Controladores::Controlador_Jogador *Jogador::getControlador() const { return pContr; }

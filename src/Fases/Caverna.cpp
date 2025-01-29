@@ -15,5 +15,4 @@ Caverna::Caverna() : Fase(), contEsqueletos(0), contSlimes(0) {
 Caverna::~Caverna() {}
 
 void Caverna::executar() { Fase::executar(); }
-
 };  // namespace Fases

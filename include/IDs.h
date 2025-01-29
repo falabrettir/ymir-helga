@@ -1,6 +1,7 @@
 #pragma once
 
 enum class ID {
+  unknown = -1,
   IDjogador,    // 0
   IDslime,      // 1
   IDesqueleto,  // 2

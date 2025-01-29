@@ -4,6 +4,7 @@
 
 #include "Fabrica/FabricaEntidades.h"
 #include "Listas/ListaEntidades.h"
+#include "State.h"
 
 namespace Gerenciadores {
 class Gerenciador_Colisoes;
@@ -11,13 +12,13 @@ class Gerenciador_Colisoes;
 
 namespace Fases {
 
-class Fase : public Ente {
+class Fase : public Ente, public States::State {
  protected:
   Gerenciadores::Gerenciador_Colisoes *pGC;
   Fabricas::FabricaEntidades *pFE;
 
-  Listas::ListaEntidades listaObstaculos;
-  Listas::ListaEntidades listaPersonagens;
+  Listas::ListaEntidades *listaObstaculos;
+  Listas::ListaEntidades *listaPersonagens;
 
  public:
   Fase();

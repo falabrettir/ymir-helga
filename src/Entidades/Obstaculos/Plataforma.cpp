@@ -4,6 +4,8 @@
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 
+#include "Gerenciadores/GerenciadorColisoes.h"
+
 namespace Entidades::Obstaculos {
 
 // TODO: Refatorar (atributo altura)
@@ -34,7 +36,10 @@ Plataforma::Plataforma(ID id, const sf::Vector2f &pos)
 
 Plataforma::~Plataforma() {}
 
-void Plataforma::executar() { std::cout << "Executando obst"; }
+void Plataforma::executar() {
+  std::cout << "Executando obst";
+  pGC->notificaColisao(this);
+}
 
 void Plataforma::obstacular(Entidades::Entidade *pEnt) {}
 

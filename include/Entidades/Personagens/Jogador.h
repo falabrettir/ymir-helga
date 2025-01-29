@@ -29,6 +29,7 @@ class Jogador : public Personagem {
   void setPrimeiroJog(bool ehPrimeiroJogador);
   bool getPrimeiroJog() const;
 
+  void colidir(Entidade *pEnt, sf::Vector2f ds = {0, 0});
   void andarDireita();
   void andarEsquerda();
   void naoAndar();
