@@ -5,10 +5,7 @@
 #include <iostream>
 #include <string>
 
-#include "Entidades/Personagens/Esqueleto.h"
-#include "Entidades/Personagens/Jogador.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
-#include "Gerenciadores/GerenciadorInput.h"
 #include "IDs.h"
 #include "Listas/ListaEntidades.h"
 
@@ -17,13 +14,8 @@ using namespace Entidades;
 namespace Fases {
 
 Fase::Fase()
-    : Ente(ID::IDfase),
-      ehPrimeiroJogador(true),
-      listaObstaculos(),
-      listaPersonagens(),
-      pFE(nullptr) {
+    : Ente(ID::IDfase), listaObstaculos(), listaPersonagens(), pFE(nullptr) {
   pGC = Gerenciadores::Gerenciador_Colisoes::getInstancia();
-  pGI = Gerenciadores::Gerenciador_Input::getInstancia();
 
   listaObstaculos.limpar();
   listaPersonagens.limpar();
@@ -31,7 +23,6 @@ Fase::Fase()
 
 Fase::~Fase() {
   pGC = nullptr;
-  pGI = nullptr;
   listaObstaculos.limpar();
   listaPersonagens.limpar();
 }
@@ -83,30 +74,6 @@ void Fase::criarMapa(const std::string path) {
   arquivoMapa.close();
 
   incluirNoColisor();
-}
-
-// adicionar pGI estatico na classe jogador
-
-// WARNING: Quando tirar a criarJogador daqui, nao teremos mais acesso ao pGI
-// TODO: Talvez passar parametros para a construcao do jogador?
-// o att ehPrimrioJogador ja existe na classe Jogador, deixar ele estatico la
-void Fase::criarJogador(const sf::Vector2f &pos) {
-  Personagens::Jogador *novoJog =
-      new Personagens::Jogador(pos, ehPrimeiroJogador);
-
-  // TODO: Talvez alterar a construtora de jogador para receber ponteiro pro GI
-  pGI->inscrever(novoJog->getControlador());
-
-  listaPersonagens.incluir(novoJog);
-
-  ehPrimeiroJogador = false;
-}
-
-// TODO: Refatorar considerando Factory
-void Fase::criarEsqueleto(const sf::Vector2f &pos) {
-  Personagens::Inimigos::Esqueleto *novoEsq =
-      new Personagens::Inimigos::Esqueleto(pos);
-  listaPersonagens.incluir(novoEsq);
 }
 
 }  // namespace Fases

@@ -8,7 +8,6 @@ FabricaEntidades::FabricaEntidades() : ativo(true) {}
 
 FabricaEntidades::~FabricaEntidades() { ativo = false; }
 
-// TODO: Recozer criarJogador (inscrever controlador no pGI e ehPrimeiroJog)
 Personagens::Jogador *FabricaEntidades::criarJogador(const sf::Vector2f &pos) {
   return new Personagens::Jogador(pos);
 }
