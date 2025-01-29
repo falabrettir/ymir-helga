@@ -4,7 +4,6 @@
 #include <cmath>
 
 #include "Entidades/Personagens/Personagem.h"
-#include "Entidades/Projetil.h"
 #include "IDs.h"
 
 namespace Entidades::Personagens::Inimigos {
@@ -48,11 +47,6 @@ void Inimigo::colidir(Entidade *pEnt,
   if (ds.x < 0 && ds.y < 0) {
     if (pEnt->getId() == ID::IDjogador) {
       dynamic_cast<Jogador *>(pEnt)->tomarDano(getDano());
-      // TODO: Dar um jumpsons p tras??
-    } else if (pEnt->getId() == ID::IDprojetil) {
-      if (dynamic_cast<Projetil *>(pEnt)->getDono()->getId() == ID::IDjogador) {
-        tomarDano(dynamic_cast<Projetil *>(pEnt)->getDano());
-      }
     }
   }
 }

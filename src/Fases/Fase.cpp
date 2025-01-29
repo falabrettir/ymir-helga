@@ -17,12 +17,12 @@ using namespace Entidades;
 namespace Fases {
 
 Fase::Fase()
-    : Ente(ID::IDfase), ehPrimeiroJogador(true),
+    : Ente(ID::IDfase),
+      ehPrimeiroJogador(true),
       listaObstaculos(new Listas::ListaEntidades()),
       listaPersonagens(new Listas::ListaEntidades),
       pGC(Gerenciadores::Gerenciador_Colisoes::getInstancia()),
       pGI(Gerenciadores::Gerenciador_Input::getInstancia()) {
-
   listaObstaculos->limpar();
   listaPersonagens->limpar();
 }
@@ -37,8 +37,6 @@ Fase::~Fase() {
 void Fase::executar() {
   listaObstaculos->executar();
   listaPersonagens->executar();
-
-  pGC->executar();
 }
 
 void Fase::incluirNoColisor() {
@@ -80,8 +78,7 @@ void Fase::criarMapa(const std::string path) {
 }
 
 void Fase::criarJogador(const sf::Vector2f &pos) {
-  Personagens::Jogador *novoJog =
-      new Personagens::Jogador(pos, ehPrimeiroJogador);
+  Personagens::Jogador *novoJog = new Personagens::Jogador(pos, ehPrimeiroJogador);
 
   pGI->inscrever(novoJog->getControlador());
 
@@ -91,9 +88,8 @@ void Fase::criarJogador(const sf::Vector2f &pos) {
 }
 
 void Fase::criarEsqueleto(const sf::Vector2f &pos) {
-  Personagens::Inimigos::Esqueleto *novoEsq =
-      new Personagens::Inimigos::Esqueleto(pos);
+  Personagens::Inimigos::Esqueleto *novoEsq = new Personagens::Inimigos::Esqueleto(pos);
   listaPersonagens->incluir(novoEsq);
 }
 
-} // namespace Fases
+}  // namespace Fases

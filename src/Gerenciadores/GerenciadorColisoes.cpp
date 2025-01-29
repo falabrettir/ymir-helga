@@ -13,6 +13,7 @@
 #include "Entidades/Obstaculos/Obstaculo.h"
 #include "Entidades/Personagens/Personagem.h"
 #include "Entidades/Projetil.h"
+#include "IDs.h"
 
 namespace Gerenciadores {
 
@@ -66,30 +67,30 @@ void Gerenciador_Colisoes::incluirProj(Entidades::Projetil *pProj) {
   if (pProj) setProj.insert(pProj);
 }
 
-void Gerenciador_Colisoes::executar() {
-  std::vector<Entidades::Personagens::Personagem *>::iterator itPers;
-  std::list<Entidades::Obstaculos::Obstaculo *>::iterator itObst;
-  std::set<Entidades::Projetil *>::iterator itProj;
-
-  // Colisao personagem - obstaculos
-  for (itPers = vecPers.begin(); itPers != vecPers.end(); itPers++) {
-    for (itObst = listObst.begin(); itObst != listObst.end(); itObst++) {
-      (*itObst)->colidir((*itPers), verificaColisao((*itPers), (*itObst)));
+void Gerenciador_Colisoes::notificaColisao(Entidades::Entidade *sender) {
+  if (sender->getId() == ID::IDprojetil) {
+    // colisao projeteis-personagens
+    std::vector<Entidades::Personagens::Personagem *>::iterator itPers;
+    for (itPers = vecPers.begin(); itPers != vecPers.end(); ++itPers) {
+      sender->colidir(*itPers, verificaColisao(sender, *itPers));
     }
-  }
-
-  // Colisao projetil - (obstaculos + personagens)
-  for (itProj = setProj.begin(); itProj != setProj.end(); itProj++) {
-    for (itPers = vecPers.begin(); itPers != vecPers.end(); itPers++) {
-      (*itProj)->colidir((*itProj), verificaColisao((*itProj), (*itPers)));
+    // colisao projeteis-obstaculos
+    std::list<Entidades::Obstaculos::Obstaculo *>::iterator itObst;
+    for (itObst = listObst.begin(); itObst != listObst.end(); ++itObst) {
+      sender->colidir(*itObst, verificaColisao(sender, *itObst));
     }
-  }
-
-  for (itProj = setProj.begin(); itProj != setProj.end(); itProj++) {
-    for (itObst = listObst.begin(); itObst != listObst.end(); itObst++) {
-      (*itProj)->colidir((*itProj), verificaColisao((*itProj), (*itObst)));
+  } else if (sender->ehPlataforma() || sender->getId() == ID::IDespinho ||
+             sender->getId() == ID::IDgosma) {
+    // colisao obstaculos-personagens
+    std::vector<Entidades::Personagens::Personagem *>::iterator itPers;
+    for (itPers = vecPers.begin(); itPers != vecPers.end(); ++itPers) {
+      sender->colidir((*itPers), verificaColisao(sender, *itPers));
+    }
+  } else {
+    std::vector<Entidades::Personagens::Personagem *>::iterator itPers;
+    for (itPers = vecPers.begin(); itPers != vecPers.end(); ++itPers) {
+      sender->colidir(*itPers, verificaColisao(sender, *itPers));
     }
   }
 }
-
 }  // namespace Gerenciadores

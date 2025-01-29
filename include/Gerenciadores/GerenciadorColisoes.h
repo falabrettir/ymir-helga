@@ -31,8 +31,7 @@ class Gerenciador_Colisoes {
   void incluirPers(Entidades::Personagens::Personagem *pPers);
   void incluirObst(Entidades::Obstaculos::Obstaculo *pObst);
   void incluirProj(Entidades::Projetil *pProj);
-
-  void executar();
+  void notificaColisao(Entidades::Entidade *sender);
 };
 
 }  // namespace Gerenciadores

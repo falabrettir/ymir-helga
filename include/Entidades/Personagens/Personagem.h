@@ -9,12 +9,12 @@ namespace Entidades {
 namespace Personagens {
 
 class Personagem : public Entidades::Entidade {
-private:
+ private:
   int dano;
   int hp;
   bool olhandoEsquerda;
 
-public:
+ public:
   Personagem(ID id);
   virtual ~Personagem();
 
@@ -23,10 +23,11 @@ public:
   void tomarDano(int dano);
   const int getDano() const;
   void setDano(const int dano);
+  virtual void colidir(Entidade* pEnt, sf::Vector2f ds = {0, 0}) = 0;
 
   void setOlhandoEsquerda(bool olhandoEsquerda);
 };
 
-} // namespace Personagens
+}  // namespace Personagens
 
-} // namespace Entidades
+}  // namespace Entidades

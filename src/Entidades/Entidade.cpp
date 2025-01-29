@@ -1,12 +1,22 @@
 #include "Entidades/Entidade.h"
+
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 
+#include "Gerenciadores/GerenciadorColisoes.h"
+
 using namespace Entidades;
+Gerenciadores::Gerenciador_Colisoes* Entidade::pColisao(nullptr);
 
 Entidade::Entidade(ID id)
-    : Ente(id), pos(0, 0), velocidade(0, 0), gravidade(0, 0.1), tamanho(0, 0),
-      noChao(false), buffer(nullptr) {
+    : Ente(id),
+      pos(0, 0),
+      velocidade(0, 0),
+      gravidade(0, 0.1),
+      tamanho(0, 0),
+      noChao(false),
+      buffer(nullptr) {
+  if (pColisao == nullptr) pColisao = Gerenciadores::Gerenciador_Colisoes::getInstancia();
   if (ehPlataforma()) {
     sf::FloatRect hitbox(0.f, 0.f, 128.f, 16.f);
     setHitbox(hitbox);
@@ -39,15 +49,12 @@ sf::Vector2<float> Entidade::getSize() const {
 }
 
 void Entidade::cair() { setVel(getVel() + gravidade); }
-void Entidade::setHitbox(sf::FloatRect &hitbox) { this->hitbox = hitbox; }
-sf::FloatRect Entidade::getHitbox() const {
-  return pSprite->getTransform().transformRect(hitbox);
-}
+void Entidade::setHitbox(sf::FloatRect& hitbox) { this->hitbox = hitbox; }
+sf::FloatRect Entidade::getHitbox() const { return pSprite->getTransform().transformRect(hitbox); }
 
 const bool Entidade::ehPlataforma() const {
   ID id = this->getId();
-  if (id == ID::IDmadeira1 || id == ID::IDmadeira2 || id == ID::IDpedra ||
-      id == ID::IDgrama) {
+  if (id == ID::IDmadeira1 || id == ID::IDmadeira2 || id == ID::IDpedra || id == ID::IDgrama) {
     return true;
   }
   return false;

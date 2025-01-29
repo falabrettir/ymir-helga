@@ -13,20 +13,21 @@ namespace Entidades::Personagens {
 #define ACEL 0.05;
 
 class Jogador : public Personagem {
-private:
+ private:
   bool ehPrimeiroJogador;
 
-protected:
+ protected:
   bool podePular;
   Controladores::Controlador_Jogador *pContr;
 
-public:
+ public:
   Jogador(const sf::Vector2f &pos, const bool ehPrimeiroJogador = true);
   ~Jogador();
 
   void setPrimeiroJog(bool ehPrimeiroJogador);
   bool getPrimeiroJog() const;
 
+  void colidir(Entidade *pEnt, sf::Vector2f ds = {0, 0});
   void andarDireita();
   void andarEsquerda();
   void naoAndar();
@@ -34,7 +35,8 @@ public:
   void atacar();
   void executar();
   void aplicaLentidao(float viscosidade);
+
   Controladores::Controlador_Jogador *getControlador() const;
 };
 
-} // namespace Entidades::Personagens
+}  // namespace Entidades::Personagens
