@@ -3,7 +3,6 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "Fabrica/FabricaEntidades.h"
-#include "Gerenciadores/GerenciadorInput.h"
 #include "Listas/ListaEntidades.h"
 
 namespace Gerenciadores {
@@ -15,7 +14,6 @@ namespace Fases {
 class Fase : public Ente {
  protected:
   Gerenciadores::Gerenciador_Colisoes *pGC;
-  Gerenciadores::Gerenciador_Input *pGI;
   Fabricas::FabricaEntidades *pFE;
 
   Listas::ListaEntidades listaObstaculos;
