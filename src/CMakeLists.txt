@@ -8,6 +8,7 @@ add_library(jogo
   # Raiz do projeto
   Jogo.cpp
   Ente.cpp
+  State.cpp
 
   # Diretorio Observer
   Observer/Observer.cpp

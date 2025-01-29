@@ -16,19 +16,17 @@ namespace Fases {
 Fase::Fase()
     : Ente(ID::IDfase),
       States::State(),
-      ehPrimeiroJogador(true),
       listaObstaculos(new Listas::ListaEntidades()),
       listaPersonagens(new Listas::ListaEntidades),
-      pGC(Gerenciadores::Gerenciador_Colisoes::getInstancia()),
-      pGI(Gerenciadores::Gerenciador_Input::getInstancia()) {
+      pGC(Gerenciadores::Gerenciador_Colisoes::getInstancia()) {
   listaObstaculos->limpar();
   listaPersonagens->limpar();
 }
 
 Fase::~Fase() {
   pGC = nullptr;
-  listaObstaculos.limpar();
-  listaPersonagens.limpar();
+  listaObstaculos->limpar();
+  listaPersonagens->limpar();
 }
 
 void Fase::executar() {
