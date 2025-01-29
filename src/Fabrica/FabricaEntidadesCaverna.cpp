@@ -25,14 +25,12 @@ FabEntCaverna *FabEntCaverna::getInstancia() {
 }
 
 Obstaculos::Plataforma *FabEntCaverna::criarMadeira(const sf::Vector2f &pos) {
-  Obstaculos::Plataforma *novaPlat =
-      new Obstaculos::Plataforma(ID::IDmadeira1, pos);
+  Obstaculos::Plataforma *novaPlat = new Obstaculos::Plataforma(ID::IDmadeira1, pos);
   return novaPlat;
 }
 
 Obstaculos::Plataforma *FabEntCaverna::criarChao(const sf::Vector2f &pos) {
-  Obstaculos::Plataforma *novaPlat =
-      new Obstaculos::Plataforma(ID::IDpedra, pos);
+  Obstaculos::Plataforma *novaPlat = new Obstaculos::Plataforma(ID::IDpedra, pos);
   return novaPlat;
 }
 
