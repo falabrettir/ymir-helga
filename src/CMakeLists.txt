@@ -8,8 +8,10 @@ add_library(jogo
   # Raiz do projeto
   Jogo.cpp
   Ente.cpp
-  Observer.cpp
-  Subject.cpp
+
+  # Diretorio Observer
+  Observer/Observer.cpp
+  Observer/Subject.cpp
 
   # Diretorio Gerenciadores
   Gerenciadores/GerenciadorGrafico.cpp
@@ -38,13 +40,18 @@ add_library(jogo
   Entidades/Obstaculos/Espinho.cpp
   Entidades/Obstaculos/Gosma.cpp
 
-  # Fases
+  # Diretorio Fases
   Fases/Caverna.cpp
   Fases/Fase.cpp
   Fases/Planicie.cpp
 
-  # Listas
+  # Diretorio Listas
   Listas/ListaEntidade.cpp
+
+  # Diretorio Fabrica
+  Fabrica/FabricaEntidades.cpp
+  Fabrica/FabricaEntidadesCaverna.cpp
+  Fabrica/FabricaEntidadesPlanicie.cpp
 )
 
 target_link_libraries(jogo
