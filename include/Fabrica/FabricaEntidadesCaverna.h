@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Entidades/Entidade.h"
 #include "Fabrica/FabricaEntidades.h"
 
 namespace Fabricas {
@@ -19,7 +20,8 @@ class FabEntCaverna : public FabricaEntidades {
 
   Obstaculos::Plataforma *criarMadeira(const sf::Vector2f &pos);
   Obstaculos::Plataforma *criarChao(const sf::Vector2f &pos);
-  void criarEntidade(char tipoEntidade, const sf::Vector2f &pos);
+  Entidades::Entidade *criarEntidade(char tipoEntidade,
+                                     const sf::Vector2f &pos);
 };
 
 }  // namespace Fabricas

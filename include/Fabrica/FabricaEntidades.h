@@ -21,7 +21,8 @@ class FabricaEntidades {
  public:
   FabricaEntidades();
   virtual ~FabricaEntidades();
-  virtual void criarEntidade(char tipoEntidade, const sf::Vector2f &pos) = 0;
+  virtual Entidade *criarEntidade(char tipoEntidade,
+                                  const sf::Vector2f &pos) = 0;
 
  protected:
   Personagens::Jogador *criarJogador(const sf::Vector2f &pos);

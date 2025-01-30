@@ -34,30 +34,25 @@ Obstaculos::Plataforma *FabEntPlanicie::criarChao(const sf::Vector2f &pos) {
   return novaPlat;
 }
 
-void FabEntPlanicie::criarEntidade(char tipoEntidade, const sf::Vector2f &pos) {
+Entidade *FabEntPlanicie::criarEntidade(char tipoEntidade,
+                                        const sf::Vector2f &pos) {
   switch (tipoEntidade) {
     case 'E':
       // TODO: somar a quantidade de esqueletos na fase
-      criarEsqueleto(pos);
-      break;
+      return criarEsqueleto(pos);
     case 'S':
       // TODO: somar a quantidade de magos na fase
-      criarMago(pos);
-      break;
+      return criarMago(pos);
     case 'P':
-      criarChao(pos);
-      break;
+      return criarChao(pos);
     case 'M':
-      criarMadeira(pos);
-      break;
+      return criarMadeira(pos);
     case 'G':
-      criarGosma(pos);
-      break;
+      return criarGosma(pos);
     case 'J':
-      criarJogador(pos);
-      break;
+      return criarJogador(pos);
     default:
-      break;
+      return nullptr;
   }
 }
 
