@@ -32,7 +32,23 @@ inline bool ehInimigo(ID id) {
 
 inline bool ehPlataforma(ID id) {
   switch (id) {
+    case ID::IDgrama:
     case ID::IDpedra:
+    case ID::IDmadeira1:
+    case ID::IDmadeira2:
+      return true;
+
+    default:
+      return false;
+  }
+}
+
+inline bool ehObstaculo(ID id) {
+  switch (id) {
+    case ID::IDpedra:
+    case ID::IDespinho:
+    case ID::IDgosma:
+    case ID::IDgrama:
     case ID::IDmadeira1:
     case ID::IDmadeira2:
       return true;
