@@ -18,7 +18,8 @@ class Fase : public Ente, public States::State {
   Fabricas::FabricaEntidades *pFE;
 
   Listas::ListaEntidades *listaObstaculos;
-  Listas::ListaEntidades *listaPersonagens;
+  Listas::ListaEntidades *listaInimigos;
+  Listas::ListaEntidades *listaJogadores;
 
  public:
   Fase();

@@ -1,10 +1,12 @@
 #include "Fases/Fase.h"
 
 #include <SFML/System/Vector2.hpp>
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <string>
 
+#include "Entidades/Entidade.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
 #include "IDs.h"
 #include "Listas/ListaEntidades.h"
@@ -16,33 +18,42 @@ namespace Fases {
 Fase::Fase()
     : Ente(ID::IDfase), States::State(),
       listaObstaculos(new Listas::ListaEntidades()),
-      listaPersonagens(new Listas::ListaEntidades()),
+      listaJogadores(new Listas::ListaEntidades()),
+      listaInimigos(new Listas::ListaEntidades()),
       pGC(Gerenciadores::GerenciadorColisoes::getInstancia()) {
   listaObstaculos->limpar();
-  listaPersonagens->limpar();
+  listaJogadores->limpar();
+  listaInimigos->limpar();
 }
 
 Fase::~Fase() {
   pGC = nullptr;
   listaObstaculos->limpar();
-  listaPersonagens->limpar();
+  listaJogadores->limpar();
+  listaInimigos->limpar();
 }
 
 void Fase::executar() {
   listaObstaculos->executar();
-  listaPersonagens->executar();
+  listaJogadores->executar();
+  listaInimigos->executar();
 }
 
 void Fase::incluirNoColisor() {
-  Listas::Lista<Entidades::Entidade>::Iterator it;
+  Listas::Lista<Entidade>::Iterator it;
 
   for (it = listaObstaculos->begin(); it != listaObstaculos->end(); ++it) {
     pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(*it));
   }
 
-  // Inclui personagens na lista de personagens do GC
-  for (it = listaPersonagens->begin(); it != listaPersonagens->end(); ++it) {
-    pGC->incluirPers(dynamic_cast<Entidades::Personagens::Personagem *>(*it));
+  // Inclui jogadores na lista de personagens do GC
+  for (it = listaJogadores->begin(); it != listaJogadores->end(); ++it) {
+    pGC->incluirPers(dynamic_cast<Personagens::Personagem *>(*it));
+  }
+
+  // Inclui inimigos na lista de personagens do GC
+  for (it = listaInimigos->begin(); it != listaInimigos->end(); ++it) {
+    pGC->incluirPers(dynamic_cast<Personagens::Personagem *>(*it));
   }
 }
 
@@ -54,17 +65,25 @@ void Fase::criarMapa(const std::string path) {
   arquivoMapa.open(filePath);
   if (!arquivoMapa.is_open()) {
     std::cout << "Erro ao abrir arquivo de mapa" << std::endl;
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   std::string linha;
+  Entidade *novaEntidade;
   for (int j = 0; std::getline(arquivoMapa, linha); j++) {
     for (int i = 0; i < linha.size(); i++) {
       if (linha[i] != ' ') {
-        pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
-        // TODO: Adicionar entidades criadas nas listas (personagens e
-        // obstaculos)
-        // Talvez armazenar o retorno em uma variavel e inserir na lista
+        novaEntidade =
+            pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
+
+        ID id = novaEntidade->getId();
+        if (ehJogador(id)) {
+          listaJogadores->incluir(novaEntidade);
+        } else if (ehInimigo(id)) {
+          listaInimigos->incluir(novaEntidade);
+        } else if (ehObstaculo(id)) {
+          listaObstaculos->incluir(novaEntidade);
+        }
       }
     }
   }
