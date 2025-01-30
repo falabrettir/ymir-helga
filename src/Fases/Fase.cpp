@@ -14,8 +14,7 @@ using namespace Entidades;
 namespace Fases {
 
 Fase::Fase()
-    : Ente(ID::IDfase),
-      States::State(),
+    : Ente(ID::IDfase), States::State(),
       listaObstaculos(new Listas::ListaEntidades()),
       listaPersonagens(new Listas::ListaEntidades()),
       pGC(Gerenciadores::GerenciadorColisoes::getInstancia()) {
@@ -75,4 +74,4 @@ void Fase::criarMapa(const std::string path) {
   incluirNoColisor();
 }
 
-}  // namespace Fases
+} // namespace Fases
