@@ -40,6 +40,7 @@ Fase::~Fase() {
 }
 
 void Fase::executar() {
+  std::clog << "Executando fase.\n";
   listaObstaculos.executar();
   listaJogadores.executar();
   listaInimigos.executar();
@@ -81,11 +82,15 @@ void Fase::incluirNaLista(Entidade *novaEntidade) {
 }
 
 void Fase::criarMapa(const std::string path) {
+  std::clog << "Criando mapa da fase.\n" << path << "\n";
+
   std::ifstream arquivoMapa;
   std::string filePath = ROOT;
   filePath += path;
 
+  // FIX: segfault aqui, ja chequei a variavel filePath, ela esta correta
   arquivoMapa.open(filePath);
+
   if (!arquivoMapa.is_open()) {
     std::cerr << "erro: arquivoMapa.open()\n";
     exit(EXIT_FAILURE);
