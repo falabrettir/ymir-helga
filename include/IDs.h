@@ -57,3 +57,16 @@ inline bool ehObstaculo(ID id) {
       return false;
   }
 }
+
+inline bool ehPersonagem(ID id) {
+  switch (id) {
+    case ID::IDesqueleto:
+    case ID::IDjogador:
+    case ID::IDmago:
+    case ID::IDslime:
+      return true;
+
+    default:
+      return false;
+  }
+}

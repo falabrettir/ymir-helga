@@ -16,7 +16,6 @@ namespace Gerenciadores {
 class GerenciadorEventos {
  private:
   static GerenciadorEventos *instancia;
-
   sf::Window *pJanela;
   GerenciadorGrafico *pGG;
   GerenciadorInput *pGI;
@@ -30,8 +29,6 @@ class GerenciadorEventos {
  public:
   static GerenciadorEventos *getInstancia();
 
-  void setGG(GerenciadorGrafico *pGG);
-  void setGI(GerenciadorInput *pGI);
   void processaEventos();
 };
 

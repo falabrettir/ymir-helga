@@ -16,19 +16,16 @@ namespace Entidades::Personagens {
 
 class Jogador : public Personagem {
  private:
-  static bool ehPrimeiroJogador;
   static Gerenciadores::GerenciadorInput *pGI;
   static Fabricas::FabricaProjeteis *fabProj;
-
- protected:
-  bool podePular;
   Controladores::Controlador_Jogador *pContr;
+  static bool ehPrimeiroJogador;
+  bool podePular;
 
  public:
   Jogador(const sf::Vector2f &pos);
   ~Jogador();
 
-  void setPrimeiroJog(bool ehPrimeiroJogador);
   bool getPrimeiroJog() const;
 
   void colidir(Entidade *pEnt, sf::Vector2f ds = {0, 0});
@@ -39,7 +36,6 @@ class Jogador : public Personagem {
   void atacar();
   void executar();
   void aplicaLentidao(float viscosidade);
-  void setGI();
 };
 
 }  // namespace Entidades::Personagens

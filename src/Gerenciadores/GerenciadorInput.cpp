@@ -2,6 +2,7 @@
 
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Window.hpp>
+#include <cstdlib>
 #include <iostream>
 
 #include "Subject.h"
@@ -72,12 +73,19 @@ GerenciadorInput::GerenciadorInput() : Subject() {
   keyMap[sf::Keyboard::RShift] = "RShift";
   keyMap[sf::Keyboard::Hyphen] = "-";
   keyMap[sf::Keyboard::Tab] = "Tab";
+
+  std::clog << "GerenciadorInput criado.\n";
 }
 
-GerenciadorInput::~GerenciadorInput() { keyMap.clear(); }
+GerenciadorInput::~GerenciadorInput() {
+  std::clog << "Destruindo GerenciadorInput.\n";
+
+  keyMap.clear();
+  delete instancia;
+}
 
 GerenciadorInput *GerenciadorInput::getInstancia() {
-  if (instancia == nullptr) {
+  if (!instancia) {
     instancia = new GerenciadorInput();
   }
   return instancia;
@@ -91,6 +99,7 @@ void GerenciadorInput::ProcessaTeclaPressionada(sf::Keyboard::Key tecla) {
   } else {
     std::cerr << "erro: em Gerenciador_Input::ProcessaTeclaPressionada() "
                  "observadores == nullptr\n";
+    exit(EXIT_FAILURE);
   }
 }
 
@@ -102,6 +111,7 @@ void GerenciadorInput::ProcessaTeclaSolta(sf::Keyboard::Key tecla) {
   } else {
     std::cerr << "erro: em Gerenciador_Input::ProcessaTeclaSolta observadores "
                  "== nullptr\n";
+    exit(EXIT_FAILURE);
   }
 }
 

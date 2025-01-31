@@ -21,7 +21,6 @@ class Ente {
   Ente(ID id);
   virtual ~Ente();
 
-  static void setGerenciadorGrafico(Gerenciadores::GerenciadorGrafico *ppGG);
   const ID getId() const;
   bool setTextura(const std::string &path);
   void atualizaSprite(sf::Texture *pTexture);

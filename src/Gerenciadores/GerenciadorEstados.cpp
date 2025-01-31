@@ -1,13 +1,22 @@
 #include "Gerenciadores/GerenciadorEstados.h"
+
+#include <iostream>
+
 namespace Gerenciadores {
+
 GerenciadorEstados* GerenciadorEstados::instancia = nullptr;
 
-GerenciadorEstados::GerenciadorEstados() : pilhaEstados() {}
+GerenciadorEstados::GerenciadorEstados() : pilhaEstados() {
+  std::clog << "GerenciadorEstados criado.\n";
+}
 
-GerenciadorEstados::~GerenciadorEstados() {}
+GerenciadorEstados::~GerenciadorEstados() {
+  std::clog << "Destruindo GerenciadorEstados.\n";
+  delete instancia;
+}
 
 GerenciadorEstados* GerenciadorEstados::getInstancia() {
-  if (instancia == nullptr) {
+  if (!instancia) {
     instancia = new GerenciadorEstados();
   }
   return instancia;
@@ -27,4 +36,5 @@ void GerenciadorEstados::popEstado() {
   delete topEstado();
   pilhaEstados.pop();
 }
+
 }  // namespace Gerenciadores

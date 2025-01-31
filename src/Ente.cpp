@@ -3,12 +3,14 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <cstdlib>
 #include <iostream>
 #include <string>
 
 #include "Gerenciadores/GerenciadorGrafico.h"
 
-Gerenciadores::GerenciadorGrafico *Ente::pGG(nullptr);
+Gerenciadores::GerenciadorGrafico *Ente::pGG(
+    Gerenciadores::GerenciadorGrafico::getInstancia());
 
 Ente::Ente(ID id) : id(id) {
   pSprite = new sf::Sprite();
@@ -23,16 +25,7 @@ Ente::~Ente() {
   delete pAlvo;
 }
 
-void Ente::setGerenciadorGrafico(Gerenciadores::GerenciadorGrafico *ppGG) {
-  if (ppGG != nullptr) {
-    pGG = ppGG;
-  } else {
-    std::cerr << "Erro em setGerenciadorGrafico: pGG == NULL\n";
-  }
-}
-
 void Ente::atualizaSprite(sf::Texture *pTexture) {
-  std::clog << "funcao Ente::atualizaSprite" << std::endl;
   pSprite->setTexture(*pTexture);
   // pSprite->setTextureRect({0, 0, 48, 48});
   pSprite->setScale(3.f, 3.f);
@@ -45,19 +38,19 @@ bool Ente::setTextura(const std::string &path) {
     atualizaSprite(pTexture);
     return true;
   } else {
-    std::cerr << "Erro em loadFromFile" << std::endl;
-    return false;
+    std::cerr << "erro: loadFromFile()\n";
+    exit(EXIT_FAILURE);
   }
 }
 
 sf::Sprite Ente::getSprite() { return *pSprite; }
 
 void Ente::setTarget() {
-  std::cerr << pGG << "\n";
   if (pGG) {
     pAlvo = pGG->getJanela();
   } else {
-    std::cerr << "Erro em setTarget" << std::endl;
+    std::cerr << "erro: Ente::setTarget() => pGG == nullptr\n";
+    exit(EXIT_FAILURE);
   }
 }
 
@@ -65,7 +58,8 @@ void Ente::desenhar() {
   if (pGG)
     pGG->desenharEnte(this);
   else {
-    std::clog << "Nullptr em desenharEnte" << std::endl;
+    std::cerr << "erro: Ente::desenhar() => pGG == nullptr";
+    exit(EXIT_FAILURE);
   }
 }
 const ID Ente::getId() const { return this->id; }

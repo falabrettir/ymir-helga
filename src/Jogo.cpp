@@ -12,9 +12,6 @@ Jogo::Jogo()
       pGE(Gerenciadores::GerenciadorEventos::getInstancia()),
       pGI(Gerenciadores::GerenciadorInput::getInstancia()),
       pGS(Gerenciadores::GerenciadorEstados::getInstancia()) {
-  // TODO: Encapsular inicializacao dos gerenciadores em uma funcao
-  pGE->setGG(pGG);
-  pGE->setGI(pGI);
   caverna = new Fases::Caverna();
   pGS->pushEstado(caverna);
   // pGS->pushEstado(new MenuPrincipal());

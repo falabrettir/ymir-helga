@@ -39,10 +39,6 @@ Jogador::Jogador(const sf::Vector2f &pos)
 
 Jogador::~Jogador() {}
 
-void Jogador::setPrimeiroJog(bool ehPrimeiroJogador) {
-  this->ehPrimeiroJogador = ehPrimeiroJogador;
-}
-
 bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
 void Jogador::andarDireita() {

@@ -12,36 +12,24 @@ namespace Gerenciadores {
 GerenciadorEventos *GerenciadorEventos::instancia = nullptr;
 
 GerenciadorEventos::GerenciadorEventos()
-    : pJanela(nullptr), pGG(nullptr), pGI(nullptr) {}
+    : pGG(GerenciadorGrafico::getInstancia()),
+      pGI(GerenciadorInput::getInstancia()) {
+  pJanela = pGG->getJanela();
+}
 
 GerenciadorEventos::~GerenciadorEventos() {
   pJanela = nullptr;
   pGG = nullptr;
   pGI = nullptr;
+  delete instancia;
 }
 
 GerenciadorEventos *GerenciadorEventos::getInstancia() {
-  if (instancia == nullptr) {
+  if (!instancia) {
     instancia = new GerenciadorEventos();
+    std::clog << "GerenciadorEvenos criado\n";
   }
   return instancia;
-}
-
-void GerenciadorEventos::setGG(GerenciadorGrafico *pGG) {
-  if (pGG) {
-    this->pGG = pGG;
-    pJanela = pGG->getJanela();
-  } else {
-    std::cerr << "erro: em Gerenciador_Eventos::setGG(), pGG == nullptr\n";
-  }
-}
-
-void GerenciadorEventos::setGI(GerenciadorInput *pGI) {
-  if (pGI) {
-    this->pGI = pGI;
-  } else {
-    std::cerr << "erro: em Gerenciador_Eventos::setGI(), pGI == nullptr\n";
-  }
 }
 
 void GerenciadorEventos::processaEventos() {
@@ -64,8 +52,9 @@ void GerenciadorEventos::processaEventos() {
       }
     }
   } else {
-    std::cerr << "erro: em Gerenciador_Eventos::processaEventos(), pGG == "
+    std::cerr << "erro: Gerenciador_Eventos::processaEventos(), pGG == "
                  "nullptr || pJanela == nullptr\n";
+    exit(EXIT_FAILURE);
   }
 }
 }  // namespace Gerenciadores

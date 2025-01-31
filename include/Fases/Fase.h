@@ -2,6 +2,7 @@
 
 #include <SFML/System/Vector2.hpp>
 
+#include "Entidades/Entidade.h"
 #include "Fabrica/FabricaEntidades.h"
 #include "Listas/ListaEntidades.h"
 #include "State.h"
@@ -27,8 +28,8 @@ class Fase : public Ente, public States::State {
   ~Fase();
 
   virtual void executar();
-  void incluirNoColisor();
-  void incluirNasListas(Entidades::Entidade *novaEntidade);
+  void incluirNoGC(Entidades::Entidade *novaEntidade);
+  void incluirNaLista(Entidades::Entidade *novaEntidade);
   void criarMapa(const std::string path);
 };
 

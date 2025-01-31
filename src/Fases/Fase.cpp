@@ -7,6 +7,8 @@
 #include <string>
 
 #include "Entidades/Entidade.h"
+#include "Entidades/Obstaculos/Obstaculo.h"
+#include "Entidades/Personagens/Personagem.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
 #include "IDs.h"
 #include "Listas/ListaEntidades.h"
@@ -44,31 +46,35 @@ void Fase::executar() {
   // TODO: listaProjeteis.executar() ???
 }
 
-void Fase::incluirNoColisor() {
-  Listas::Lista<Entidade>::Iterator it;
-
-  // Inclui obstaculos na lista de obstaculos do GC
-  for (it = listaObstaculos.begin(); it != listaObstaculos.end(); ++it) {
-    pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(*it));
+void Fase::incluirNoGC(Entidade *novaEntidade) {
+  if (!novaEntidade) {
+    std::cerr << "erro: Fase::incluirNoGC() => novaEntidade == nullptr\n";
+    exit(EXIT_FAILURE);
   }
 
-  // Inclui jogadores na lista de personagens do GC
-  for (it = listaJogadores.begin(); it != listaJogadores.end(); ++it) {
-    pGC->incluirPers(dynamic_cast<Personagens::Personagem *>(*it));
-  }
+  ID id = novaEntidade->getId();
 
-  // Inclui inimigos na lista de personagens do GC
-  for (it = listaInimigos.begin(); it != listaInimigos.end(); ++it) {
-    pGC->incluirPers(dynamic_cast<Personagens::Personagem *>(*it));
+  if (ehObstaculo(id)) {
+    pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(novaEntidade));
+  } else if (ehPersonagem(id)) {
+    pGC->incluirPers(dynamic_cast<Personagens::Personagem *>(novaEntidade));
   }
 }
 
-void Fase::incluirNasListas(Entidade *novaEntidade) {
+void Fase::incluirNaLista(Entidade *novaEntidade) {
+  if (!novaEntidade) {
+    std::cerr << "erro: Fase::incluirNaLista() => novaEntidade == nullptr\n";
+    exit(EXIT_FAILURE);
+  }
+
   ID id = novaEntidade->getId();
+
   if (ehJogador(id)) {
     listaJogadores.incluir(novaEntidade);
+
   } else if (ehInimigo(id)) {
     listaInimigos.incluir(novaEntidade);
+
   } else if (ehObstaculo(id)) {
     listaObstaculos.incluir(novaEntidade);
   }
@@ -81,7 +87,7 @@ void Fase::criarMapa(const std::string path) {
 
   arquivoMapa.open(filePath);
   if (!arquivoMapa.is_open()) {
-    std::cout << "Erro ao abrir arquivo de mapa" << std::endl;
+    std::cerr << "erro: arquivoMapa.open()\n";
     exit(EXIT_FAILURE);
   }
 
@@ -92,14 +98,13 @@ void Fase::criarMapa(const std::string path) {
       if (linha[i] != ' ') {
         novaEntidade =
             pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
-        incluirNasListas(novaEntidade);
+        incluirNaLista(novaEntidade);
+        incluirNoGC(novaEntidade);
       }
     }
   }
 
   arquivoMapa.close();
-
-  incluirNoColisor();
 }
 
 }  // namespace Fases

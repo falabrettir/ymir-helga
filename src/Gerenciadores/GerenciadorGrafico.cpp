@@ -22,17 +22,20 @@ GerenciadorGrafico::GerenciadorGrafico() : deltaTempo(0.f) {
   alturaJanela = pJanela->getSize().y;
 
   relogio.restart();
+
+  std::clog << "GerenciadorGrafico criado\n";
 }
 
 GerenciadorGrafico::~GerenciadorGrafico() {
+  std::clog << "Destruindo GerenciadorGrafico\n";
+
   pJanela = nullptr;
-  instancia = nullptr;
+  delete instancia;
 }
 
 GerenciadorGrafico *GerenciadorGrafico::getInstancia() {
   if (!instancia) {
     instancia = new GerenciadorGrafico();
-    std::clog << "Gerenciador_Grafico criado\n";
   }
   return instancia;
 }
@@ -47,7 +50,9 @@ void GerenciadorGrafico::desenharEnte(Ente *pE) {
   if (pJanela && pE) {
     pJanela->draw(pE->getSprite());
   } else {
-    std::cerr << "parametro invalido: Gerenciador_Grafico::desenharEnte()\n";
+    std::cerr
+        << "erro: parametro invalido: Gerenciador_Grafico::desenharEnte()\n";
+    exit(EXIT_FAILURE);
   }
 }
 
@@ -61,7 +66,8 @@ sf::Texture GerenciadorGrafico::carregarTex(const std::string &path) {
   std::string filePath = ROOT;
   filePath += path;
   if (!textura.loadFromFile(path)) {
-    std::cerr << "Erro em loadFromFile" << std::endl;
+    std::cerr << "Erro em loadFromFile\n";
+    exit(EXIT_FAILURE);
   }
   return textura;
 }

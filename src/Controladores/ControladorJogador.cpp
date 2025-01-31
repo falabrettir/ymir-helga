@@ -4,6 +4,7 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <cstdlib>
 #include <iostream>
 #include <utility>
 
@@ -29,9 +30,12 @@ void Controlador_Jogador::setJog(Entidades::Personagens::Jogador *pJog) {
   } else {
     std::cerr << "error: parametro invalido em Controlador_Jogador::setJog(), "
                  "pJog == nullptr\n";
+    exit(EXIT_FAILURE);
   }
 }
 
+// TODO: Talvez ser singleton e mover cada jogador de acordo com suas teclas
+// de controle
 void Controlador_Jogador::setControles() {
   if (pJog->getPrimeiroJog()) {
     direita = sf::Keyboard::D;
