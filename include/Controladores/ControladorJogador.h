@@ -13,7 +13,6 @@ class Jogador;
 
 namespace Controladores {
 
-// TODO: Talvez deva ser Singleton?
 class Controlador_Jogador : public Observer {
  private:
   Entidades::Personagens::Jogador *pJog;
