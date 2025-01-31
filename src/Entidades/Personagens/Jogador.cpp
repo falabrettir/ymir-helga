@@ -88,7 +88,12 @@ void Jogador::executar() {
   mover();
 }
 
-void Jogador::atacar() { std::cout << "ataquei" << '\n'; }
+void Jogador::atacar() {
+  if (fabProj) {
+    std::clog << "Atacando\n";
+  } else
+    exit(EXIT_FAILURE);
+}
 
 void Jogador::colidir(Entidade *pEnt, sf::Vector2f ds) {
   if (ds.x < 0 && ds.y < 0) {

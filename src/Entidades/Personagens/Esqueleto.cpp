@@ -3,6 +3,7 @@
 #include <time.h>
 
 #include <SFML/System/Vector2.hpp>
+#include <cstdlib>
 #include <limits>
 
 #include "Fabrica/FabricaFlechas.h"
@@ -23,8 +24,12 @@ Esqueleto::~Esqueleto() {
 }
 
 void Esqueleto::atacar() {
-  forca = static_cast<float>(rand()) / std::numeric_limits<float>::max();
-  flecha = fabProj->criarProjetil(this, forca);
+  if (fabProj) {
+    forca = static_cast<float>(rand()) / std::numeric_limits<float>::max();
+    flecha = fabProj->criarProjetil(this, forca);
+  } else {
+    exit(EXIT_FAILURE);
+  }
 }
 void Esqueleto::executar() {
   // draw
