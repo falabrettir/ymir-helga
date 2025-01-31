@@ -16,44 +16,61 @@ using namespace Entidades;
 namespace Fases {
 
 Fase::Fase()
-    : Ente(ID::IDfase), States::State(),
-      listaObstaculos(new Listas::ListaEntidades()),
-      listaJogadores(new Listas::ListaEntidades()),
-      listaInimigos(new Listas::ListaEntidades()),
+    : Ente(ID::IDfase),
+      States::State(),
+      listaObstaculos(),
+      listaJogadores(),
+      listaInimigos(),
+      listaProjeteis(),
       pGC(Gerenciadores::GerenciadorColisoes::getInstancia()) {
-  listaObstaculos->limpar();
-  listaJogadores->limpar();
-  listaInimigos->limpar();
+  listaObstaculos.limpar();
+  listaJogadores.limpar();
+  listaInimigos.limpar();
+  listaProjeteis.limpar();
 }
 
 Fase::~Fase() {
   pGC = nullptr;
-  listaObstaculos->limpar();
-  listaJogadores->limpar();
-  listaInimigos->limpar();
+  listaObstaculos.limpar();
+  listaJogadores.limpar();
+  listaInimigos.limpar();
+  listaProjeteis.limpar();
 }
 
 void Fase::executar() {
-  listaObstaculos->executar();
-  listaJogadores->executar();
-  listaInimigos->executar();
+  listaObstaculos.executar();
+  listaJogadores.executar();
+  listaInimigos.executar();
+  // TODO: listaProjeteis.executar() ???
 }
 
 void Fase::incluirNoColisor() {
   Listas::Lista<Entidade>::Iterator it;
 
-  for (it = listaObstaculos->begin(); it != listaObstaculos->end(); ++it) {
+  // Inclui obstaculos na lista de obstaculos do GC
+  for (it = listaObstaculos.begin(); it != listaObstaculos.end(); ++it) {
     pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(*it));
   }
 
   // Inclui jogadores na lista de personagens do GC
-  for (it = listaJogadores->begin(); it != listaJogadores->end(); ++it) {
+  for (it = listaJogadores.begin(); it != listaJogadores.end(); ++it) {
     pGC->incluirPers(dynamic_cast<Personagens::Personagem *>(*it));
   }
 
   // Inclui inimigos na lista de personagens do GC
-  for (it = listaInimigos->begin(); it != listaInimigos->end(); ++it) {
+  for (it = listaInimigos.begin(); it != listaInimigos.end(); ++it) {
     pGC->incluirPers(dynamic_cast<Personagens::Personagem *>(*it));
+  }
+}
+
+void Fase::incluirNasListas(Entidade *novaEntidade) {
+  ID id = novaEntidade->getId();
+  if (ehJogador(id)) {
+    listaJogadores.incluir(novaEntidade);
+  } else if (ehInimigo(id)) {
+    listaInimigos.incluir(novaEntidade);
+  } else if (ehObstaculo(id)) {
+    listaObstaculos.incluir(novaEntidade);
   }
 }
 
@@ -75,15 +92,7 @@ void Fase::criarMapa(const std::string path) {
       if (linha[i] != ' ') {
         novaEntidade =
             pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
-
-        ID id = novaEntidade->getId();
-        if (ehJogador(id)) {
-          listaJogadores->incluir(novaEntidade);
-        } else if (ehInimigo(id)) {
-          listaInimigos->incluir(novaEntidade);
-        } else if (ehObstaculo(id)) {
-          listaObstaculos->incluir(novaEntidade);
-        }
+        incluirNasListas(novaEntidade);
       }
     }
   }
@@ -93,4 +102,4 @@ void Fase::criarMapa(const std::string path) {
   incluirNoColisor();
 }
 
-} // namespace Fases
+}  // namespace Fases

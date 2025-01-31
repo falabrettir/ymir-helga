@@ -5,6 +5,7 @@
 
 #include "Controladores/ControladorJogador.h"
 #include "Entidades/Personagens/Personagem.h"
+#include "Fabrica/FabricaProjeteis.h"
 #include "Gerenciadores/GerenciadorEventos.h"
 #include "Gerenciadores/GerenciadorInput.h"
 
@@ -17,6 +18,7 @@ class Jogador : public Personagem {
  private:
   static bool ehPrimeiroJogador;
   static Gerenciadores::GerenciadorInput *pGI;
+  static Fabricas::FabricaProjeteis *fabProj;
 
  protected:
   bool podePular;

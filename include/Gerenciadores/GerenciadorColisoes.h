@@ -29,6 +29,7 @@ class GerenciadorColisoes {
 
   sf::Vector2f verificaColisao(Entidades::Entidade *e1,
                                Entidades::Entidade *e2);
+
   void incluirPers(Entidades::Personagens::Personagem *pPers);
   void incluirObst(Entidades::Obstaculos::Obstaculo *pObst);
   void incluirProj(Entidades::Projetil *pProj);

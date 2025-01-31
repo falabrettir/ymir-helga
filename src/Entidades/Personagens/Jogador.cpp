@@ -1,13 +1,9 @@
 #include "Entidades/Personagens/Jogador.h"
 
-#include <Gerenciadores/GerenciadorColisoes.h>
-
-#include <SFML/Graphics/Rect.hpp>
-#include <SFML/System/Vector2.hpp>
 #include <iostream>
 
-#include "Entidades/Personagens/Personagem.h"
-#include "Gerenciadores/GerenciadorInput.h"
+#include "Fabrica/FabricaFlechas.h"
+#include "Gerenciadores/GerenciadorColisoes.h"
 
 using namespace Entidades::Personagens;
 
@@ -16,6 +12,9 @@ bool Jogador::ehPrimeiroJogador = true;
 
 Gerenciadores::GerenciadorInput *Jogador::pGI =
     Gerenciadores::GerenciadorInput::getInstancia();
+
+Fabricas::FabricaProjeteis *Jogador::fabProj =
+    Fabricas::FabricaFlechas::getInstancia();
 
 Jogador::Jogador(const sf::Vector2f &pos)
     : Personagem(ID::IDjogador), pContr(nullptr), podePular(true) {

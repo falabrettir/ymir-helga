@@ -1,18 +1,21 @@
-#include "Entidades/Projetil.h"
-#include "Inimigo.h"
 #include <SFML/System/Vector2.hpp>
 
+#include "Entidades/Projetil.h"
+#include "Inimigo.h"
+
 namespace Entidades::Personagens::Inimigos {
+
 class Mago : public Inimigo {
-private:
+ private:
   float poder;
   Projetil *bolaDeFogo;
+  static Fabricas::FabricaProjeteis *fabProj;
 
-public:
+ public:
   Mago(const sf::Vector2f &pos);
   ~Mago();
   void atacar();
   void executar();
   void aumentarPoder();
 };
-} // namespace Entidades::Personagens::Inimigos
+}  // namespace Entidades::Personagens::Inimigos

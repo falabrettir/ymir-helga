@@ -17,9 +17,10 @@ class Fase : public Ente, public States::State {
   Gerenciadores::GerenciadorColisoes *pGC;
   Fabricas::FabricaEntidades *pFE;
 
-  Listas::ListaEntidades *listaObstaculos;
-  Listas::ListaEntidades *listaInimigos;
-  Listas::ListaEntidades *listaJogadores;
+  Listas::ListaEntidades listaObstaculos;
+  Listas::ListaEntidades listaInimigos;
+  Listas::ListaEntidades listaJogadores;
+  Listas::ListaEntidades listaProjeteis;
 
  public:
   Fase();
@@ -27,6 +28,7 @@ class Fase : public Ente, public States::State {
 
   virtual void executar();
   void incluirNoColisor();
+  void incluirNasListas(Entidades::Entidade *novaEntidade);
   void criarMapa(const std::string path);
 };
 
