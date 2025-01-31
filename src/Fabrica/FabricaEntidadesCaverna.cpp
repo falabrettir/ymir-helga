@@ -13,7 +13,7 @@ namespace Fabricas {
 FabEntCaverna *FabEntCaverna::instancia = nullptr;
 
 FabEntCaverna::FabEntCaverna() : FabricaEntidades() {
-  std::clog << "FabEntCaverna criado\n";
+  std::clog << "Criando FabEntPlanicie\n";
 }
 
 FabEntCaverna::~FabEntCaverna() { std::clog << "Destruindo FabEntCaverna\n"; }

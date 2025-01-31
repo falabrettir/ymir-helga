@@ -7,7 +7,7 @@ namespace Gerenciadores {
 GerenciadorEstados* GerenciadorEstados::instancia = nullptr;
 
 GerenciadorEstados::GerenciadorEstados() : pilhaEstados() {
-  std::clog << "GerenciadorEstados criado.\n";
+  std::clog << "GerenciadorEstados criado\n";
 }
 
 GerenciadorEstados::~GerenciadorEstados() {

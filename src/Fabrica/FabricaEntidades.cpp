@@ -1,12 +1,19 @@
 #include "Fabrica/FabricaEntidades.h"
 
+#include <iostream>
+
 using namespace Entidades;
 
 namespace Fabricas {
 
-FabricaEntidades::FabricaEntidades() : ativo(true) {}
+FabricaEntidades::FabricaEntidades() : ativo(true) {
+  std::clog << "Criando FabricaEntidades\n";
+}
 
-FabricaEntidades::~FabricaEntidades() { ativo = false; }
+FabricaEntidades::~FabricaEntidades() {
+  std::clog << "Destruindo FabricaEntidades\n";
+  ativo = false;
+}
 
 Personagens::Jogador *FabricaEntidades::criarJogador(const sf::Vector2f &pos) {
   return new Personagens::Jogador(pos);

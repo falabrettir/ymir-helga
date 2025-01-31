@@ -23,7 +23,7 @@ GerenciadorGrafico::GerenciadorGrafico() : deltaTempo(0.f) {
 
   relogio.restart();
 
-  std::clog << "GerenciadorGrafico criado.\n";
+  std::clog << "GerenciadorGrafico criado\n";
 }
 
 GerenciadorGrafico::~GerenciadorGrafico() {

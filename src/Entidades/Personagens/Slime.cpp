@@ -1,6 +1,7 @@
 #include "Entidades/Personagens/Slime.h"
 
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
 
 #include "Entidades/Personagens/Inimigo.h"
 #include "Entidades/Personagens/Jogador.h"
@@ -10,6 +11,8 @@
 namespace Entidades::Personagens::Inimigos {
 
 Slime::Slime(const sf::Vector2f &pos) : Inimigo(ID::IDslime) {
+  std::clog << "Criando novo slime\n";
+
   setTextura("/assets/Personagens/Slime.png");
 }
 
@@ -28,10 +31,12 @@ void Slime::colidir(Entidade *pEnt, sf::Vector2f ds) {
   }
 }
 void Slime::executar() {
-  perseguir();
+  // FIX: segfault no metodo perseguir
+  // (O seg fault acontece por que a classe inimigo nao tem os ponteiros para
+  // jogadores inicializados) perseguir();
   mover();
 }
 
 void Slime::atacar() {}
 
-} // namespace Entidades::Personagens::Inimigos
+}  // namespace Entidades::Personagens::Inimigos

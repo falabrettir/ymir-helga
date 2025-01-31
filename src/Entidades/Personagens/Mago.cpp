@@ -1,6 +1,7 @@
 #include "Entidades/Personagens/Mago.h"
 
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
 
 #include "Fabrica/FabricaFireball.h"
 
@@ -11,6 +12,8 @@ Fabricas::FabricaProjeteis *Mago::fabProj =
 
 Mago::Mago(const sf::Vector2f &pos)
     : Inimigo(ID::IDmago), poder(1.05), bolaDeFogo(nullptr) {
+  std::clog << "Criando novo mago\n";
+
   setTextura("/assets/Personagens/Mago.png");
 }
 

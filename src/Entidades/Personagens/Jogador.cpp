@@ -18,6 +18,8 @@ Fabricas::FabricaProjeteis *Jogador::fabProj =
 
 Jogador::Jogador(const sf::Vector2f &pos)
     : Personagem(ID::IDjogador), pContr(nullptr), podePular(true) {
+  std::clog << "Criando novo jogador\n";
+
   pContr = new Controladores::Controlador_Jogador();
   pContr->setJog(this);
 
@@ -41,6 +43,7 @@ Jogador::~Jogador() {}
 
 bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
+// TODO: Recozer movimentos, o jogador ta meio devagaroso lesmo
 void Jogador::andarDireita() {
   if (getVel().x < MAXVEL) {
     sf::Vector2f vel = getVel();
@@ -64,7 +67,7 @@ void Jogador::andarEsquerda() {
 void Jogador::naoAndar() { setVelX(0); }
 
 void Jogador::pular() {
-  if (podePular) {
+  if (getNoChao()) {
     setVelY(-2 * MAXVEL);
     setNoChao(false);
   }
@@ -79,8 +82,11 @@ void Jogador::aplicaLentidao(float viscosidade) {
 void Jogador::executar() {
   pContr->controlarJogador();
 
+  // FIX: Arrumar
   if (!getNoChao()) cair();
+
   pGC->notificaColisao(this);
+
   mover();
 }
 

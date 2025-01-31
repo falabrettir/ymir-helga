@@ -4,6 +4,7 @@
 
 #include <SFML/System/Vector2.hpp>
 #include <cstdlib>
+#include <iostream>
 #include <limits>
 
 #include "Fabrica/FabricaFlechas.h"
@@ -15,6 +16,8 @@ Fabricas::FabricaProjeteis *Esqueleto::fabProj =
 
 Esqueleto::Esqueleto(const sf::Vector2f &pos)
     : Inimigo(ID::IDesqueleto), forca(0.0), flecha(nullptr) {
+  std::clog << "Criando novo esqueleto\n";
+
   srand((unsigned int)time(NULL));
   setTextura("/assets/Personagens/Esqueleto.png");
 }

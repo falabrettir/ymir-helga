@@ -27,7 +27,7 @@ GerenciadorEventos::~GerenciadorEventos() {
 GerenciadorEventos *GerenciadorEventos::getInstancia() {
   if (!instancia) {
     instancia = new GerenciadorEventos();
-    std::clog << "GerenciadorEventos criado.\n";
+    std::clog << "GerenciadorEventos criado\n";
   }
   return instancia;
 }

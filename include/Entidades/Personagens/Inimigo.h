@@ -9,7 +9,6 @@ namespace Entidades::Personagens::Inimigos {
 class Inimigo : public Personagem {
  protected:
   float visada;
-  std::set<Jogador *> pJogs;
   bool visando;
 
  public:

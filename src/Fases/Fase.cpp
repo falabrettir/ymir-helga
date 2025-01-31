@@ -24,6 +24,7 @@ Fase::Fase()
       listaJogadores(),
       listaInimigos(),
       listaProjeteis(),
+      pFE(nullptr),
       pGC(Gerenciadores::GerenciadorColisoes::getInstancia()) {
   listaObstaculos.limpar();
   listaJogadores.limpar();
@@ -40,7 +41,6 @@ Fase::~Fase() {
 }
 
 void Fase::executar() {
-  std::clog << "Executando fase.\n";
   listaObstaculos.executar();
   listaJogadores.executar();
   listaInimigos.executar();
@@ -82,19 +82,24 @@ void Fase::incluirNaLista(Entidade *novaEntidade) {
 }
 
 void Fase::criarMapa(const std::string path) {
-  std::clog << "Criando mapa da fase.\n" << path << "\n";
+  if (!pFE) {
+    std::cerr << "erro: Fase::criarMapa() => pFE == nullptr\n";
+    exit(EXIT_FAILURE);
+  }
+  std::clog << "Criando mapa da fase\n";
 
   std::ifstream arquivoMapa;
   std::string filePath = ROOT;
   filePath += path;
 
-  // FIX: segfault aqui, ja chequei a variavel filePath, ela esta correta
+  std::clog << "Abrindo arquivo: " << filePath << "\n";
   arquivoMapa.open(filePath);
 
   if (!arquivoMapa.is_open()) {
     std::cerr << "erro: arquivoMapa.open()\n";
     exit(EXIT_FAILURE);
   }
+  std::clog << "Arquivo aberto com sucesso\n";
 
   std::string linha;
   Entidade *novaEntidade;

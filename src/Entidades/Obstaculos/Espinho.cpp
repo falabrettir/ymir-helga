@@ -1,12 +1,19 @@
 #include "Entidades/Obstaculos/Espinho.h"
-#include "Entidades/Personagens/Jogador.h"
+
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
+
+#include "Entidades/Personagens/Jogador.h"
 
 namespace Entidades::Obstaculos {
+
 Espinho::Espinho(const sf::Vector2f &pos)
     : Obstaculo(ID::IDespinho, pos, true), dano(10) {
+  std::clog << "Criando novo espinho\n";
+
   setTextura("/assets/Obstaculos/Espinho.png");
 }
+
 Espinho::~Espinho() {}
 
 const int Espinho::getDano() const { return dano; }
@@ -18,4 +25,5 @@ void Espinho::colidir(Entidade *pEnt, sf::Vector2f ds) {
     dynamic_cast<Personagens::Jogador *>(pEnt)->tomarDano(getDano());
   }
 }
-} // namespace Entidades::Obstaculos
+
+}  // namespace Entidades::Obstaculos

@@ -15,11 +15,11 @@ add_library(jogo
   Observer/Subject.cpp
 
   # Diretorio Gerenciadores
-  Gerenciadores/GerenciadorGrafico.cpp
-  Gerenciadores/GerenciadorEventos.cpp
-  Gerenciadores/GerenciadorInput.cpp
   Gerenciadores/GerenciadorColisoes.cpp
   Gerenciadores/GerenciadorEstados.cpp
+  Gerenciadores/GerenciadorEventos.cpp
+  Gerenciadores/GerenciadorGrafico.cpp
+  Gerenciadores/GerenciadorInput.cpp
 
   # Diretorio Controladores
   Controladores/ControladorJogador.cpp
@@ -36,11 +36,19 @@ add_library(jogo
   Entidades/Personagens/Personagem.cpp
   Entidades/Personagens/Slime.cpp
 
+  # Diretorio Fabrica
+  Fabrica/FabricaEntidadesCaverna.cpp
+  Fabrica/FabricaEntidades.cpp
+  Fabrica/FabricaEntidadesPlanicie.cpp
+  Fabrica/FabricaFireball.cpp
+  Fabrica/FabricaFlechas.cpp
+  Fabrica/FabricaProjeteis.cpp
+
   # Entidades::Obstaculos
-  Entidades/Obstaculos/Obstaculo.cpp
-  Entidades/Obstaculos/Plataforma.cpp
   Entidades/Obstaculos/Espinho.cpp
   Entidades/Obstaculos/Gosma.cpp
+  Entidades/Obstaculos/Obstaculo.cpp
+  Entidades/Obstaculos/Plataforma.cpp
 
   # Diretorio Fases
   Fases/Caverna.cpp
@@ -49,11 +57,6 @@ add_library(jogo
 
   # Diretorio Listas
   Listas/ListaEntidade.cpp
-
-  # Diretorio Fabrica
-  Fabrica/FabricaEntidades.cpp
-  Fabrica/FabricaEntidadesCaverna.cpp
-  Fabrica/FabricaEntidadesPlanicie.cpp
 )
 
 target_link_libraries(jogo
