@@ -13,7 +13,8 @@ enum class ID {
   IDfase,       // 8
   IDprojetil,   // 9
   IDgosma,      // 10
-  IDespinho     // 11
+  IDespinho,    // 11
+  IDbotao       // 12
 };
 
 inline bool ehJogador(ID id) { return id == ID::IDjogador; }
