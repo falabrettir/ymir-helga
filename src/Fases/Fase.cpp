@@ -8,6 +8,8 @@
 
 #include "Entidades/Entidade.h"
 #include "Entidades/Obstaculos/Obstaculo.h"
+#include "Entidades/Personagens/Inimigo.h"
+#include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Personagens/Personagem.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
 #include "IDs.h"
@@ -57,6 +59,7 @@ void Fase::incluirNoGC(Entidade *novaEntidade) {
 
   if (ehObstaculo(id)) {
     pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(novaEntidade));
+
   } else if (ehPersonagem(id)) {
     pGC->incluirPers(dynamic_cast<Personagens::Personagem *>(novaEntidade));
   }
@@ -72,6 +75,8 @@ void Fase::incluirNaLista(Entidade *novaEntidade) {
 
   if (ehJogador(id)) {
     listaJogadores.incluir(novaEntidade);
+    Personagens::Inimigos::Inimigo::adicionarJogador(
+        dynamic_cast<Personagens::Jogador *>(novaEntidade));
 
   } else if (ehInimigo(id)) {
     listaInimigos.incluir(novaEntidade);
@@ -86,6 +91,7 @@ void Fase::criarMapa(const std::string path) {
     std::cerr << "erro: Fase::criarMapa() => pFE == nullptr\n";
     exit(EXIT_FAILURE);
   }
+
   std::clog << "Criando mapa da fase\n";
 
   std::ifstream arquivoMapa;

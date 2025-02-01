@@ -12,6 +12,7 @@ namespace Gerenciadores {
 GerenciadorGrafico *GerenciadorGrafico::instancia = nullptr;
 
 GerenciadorGrafico::GerenciadorGrafico() : deltaTempo(0.f) {
+  std::clog << "Criando GerenciadorGrafico\n";
   pJanela = new sf::RenderWindow(sf::VideoMode(sf::VideoMode::getDesktopMode()),
                                  "Skjolder e Helga", sf::Style::Fullscreen);
   pJanela->setVerticalSyncEnabled(true);
@@ -22,8 +23,6 @@ GerenciadorGrafico::GerenciadorGrafico() : deltaTempo(0.f) {
   alturaJanela = pJanela->getSize().y;
 
   relogio.restart();
-
-  std::clog << "GerenciadorGrafico criado\n";
 }
 
 GerenciadorGrafico::~GerenciadorGrafico() {

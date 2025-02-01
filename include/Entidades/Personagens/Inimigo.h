@@ -10,6 +10,7 @@ class Inimigo : public Personagem {
  protected:
   float visada;
   bool visando;
+  static std::set<Jogador *> setJogadores;
 
  public:
   Inimigo(ID id);
@@ -20,6 +21,8 @@ class Inimigo : public Personagem {
   virtual void colidir(Entidade *pEnt,
                        sf::Vector2f ds = sf::Vector2f({0.f, 0.f}));
   const bool getVisando() const;
+
+  static void adicionarJogador(Jogador *pJog);
 
   virtual void atacar() = 0;
   virtual void executar() = 0;

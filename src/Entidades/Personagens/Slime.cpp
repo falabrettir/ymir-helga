@@ -31,9 +31,7 @@ void Slime::colidir(Entidade *pEnt, sf::Vector2f ds) {
   }
 }
 void Slime::executar() {
-  // FIX: segfault no metodo perseguir
-  // (O seg fault acontece por que a classe inimigo nao tem os ponteiros para
-  // jogadores inicializados) perseguir();
+  perseguir();
   mover();
 }
 
