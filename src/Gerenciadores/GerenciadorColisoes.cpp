@@ -1,5 +1,5 @@
 /*
- * Código adaptado do então monitor Giovane Nero, disponível em:
+ * Código adaptado do então monitor Giovane Salvi, disponível em:
  * github.com/Giovanenero/JogoPlataforma2D-Jungle
  */
 
@@ -55,8 +55,7 @@ sf::Vector2f GerenciadorColisoes::verificaColisao(Entidades::Entidade *e1,
   return ds;
 }
 
-void GerenciadorColisoes::incluirPers(
-    Entidades::Personagens::Personagem *pPers) {
+void GerenciadorColisoes::incluirPers(Entidades::Personagens::Personagem *pPers) {
   if (pPers) vecPers.push_back(pPers);
 }
 
@@ -85,7 +84,7 @@ void GerenciadorColisoes::notificaColisao(Entidades::Entidade *sender) {
     // colisao obstaculos-personagens
     std::vector<Entidades::Personagens::Personagem *>::iterator itPers;
     for (itPers = vecPers.begin(); itPers != vecPers.end(); ++itPers) {
-      sender->colidir((*itPers), verificaColisao(sender, *itPers));
+      sf::Vector2f ds = verificaColisao(sender, *itPers);
     }
   } else {
     std::vector<Entidades::Personagens::Personagem *>::iterator itPers;

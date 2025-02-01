@@ -73,13 +73,9 @@ GerenciadorInput::GerenciadorInput() : Subject() {
   keyMap[sf::Keyboard::RShift] = "RShift";
   keyMap[sf::Keyboard::Hyphen] = "-";
   keyMap[sf::Keyboard::Tab] = "Tab";
-
-  std::clog << "GerenciadorInput criado\n";
 }
 
 GerenciadorInput::~GerenciadorInput() {
-  std::clog << "Destruindo GerenciadorInput.\n";
-
   keyMap.clear();
   delete instancia;
 }
@@ -94,7 +90,6 @@ GerenciadorInput *GerenciadorInput::getInstancia() {
 void GerenciadorInput::ProcessaTeclaPressionada(sf::Keyboard::Key tecla) {
   // Notificar a tecla pressionada para o Observer (Controlador Jogador)
   if (observadores) {
-    std::clog << "Notificando tecla " << keyMap[tecla] << " pressionada\n";
     notificarTeclaPressionada(tecla);
   } else {
     std::cerr << "erro: em Gerenciador_Input::ProcessaTeclaPressionada() "
@@ -106,7 +101,6 @@ void GerenciadorInput::ProcessaTeclaPressionada(sf::Keyboard::Key tecla) {
 void GerenciadorInput::ProcessaTeclaSolta(sf::Keyboard::Key tecla) {
   // Notificar a tecla solta para o Observer (Controlador Jogador)
   if (observadores) {
-    std::clog << "Notificando tecla " << keyMap[tecla] << " solta\n";
     notificarTeclaSolta(tecla);
   } else {
     std::cerr << "erro: em Gerenciador_Input::ProcessaTeclaSolta observadores "
