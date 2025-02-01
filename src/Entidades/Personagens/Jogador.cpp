@@ -10,11 +10,9 @@ using namespace Entidades::Personagens;
 // Flag inicialmente definida como true
 bool Jogador::ehPrimeiroJogador = true;
 
-Gerenciadores::GerenciadorInput *Jogador::pGI =
-    Gerenciadores::GerenciadorInput::getInstancia();
+Gerenciadores::GerenciadorInput *Jogador::pGI = Gerenciadores::GerenciadorInput::getInstancia();
 
-Fabricas::FabricaProjeteis *Jogador::fabProj =
-    Fabricas::FabricaFlechas::getInstancia();
+Fabricas::FabricaProjeteis *Jogador::fabProj = Fabricas::FabricaFlechas::getInstancia();
 
 Jogador::Jogador(const sf::Vector2f &pos)
     : Personagem(ID::IDjogador), pContr(nullptr), podePular(true) {
@@ -33,10 +31,6 @@ Jogador::Jogador(const sf::Vector2f &pos)
 
   setPos(pos);
   pSprite->setPosition(pos);
-
-  // TODO: Mudar a hitbox para a classe entidade
-  sf::FloatRect hitbox({16, 16, 16.f, 16.f});
-  setHitbox(hitbox);
 }
 
 Jogador::~Jogador() {}

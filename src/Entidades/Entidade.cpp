@@ -50,14 +50,11 @@ sf::Vector2<float> Entidade::getSize() const {
 
 void Entidade::cair() { setVel(getVel() + gravidade); }
 void Entidade::setHitbox(sf::FloatRect& hitbox) { this->hitbox = hitbox; }
-sf::FloatRect Entidade::getHitbox() const {
-  return pSprite->getTransform().transformRect(hitbox);
-}
+sf::FloatRect Entidade::getHitbox() const { return pSprite->getTransform().transformRect(hitbox); }
 
 const bool Entidade::ehPlataforma() const {
   ID id = this->getId();
-  if (id == ID::IDmadeira1 || id == ID::IDmadeira2 || id == ID::IDpedra ||
-      id == ID::IDgrama) {
+  if (id == ID::IDmadeira1 || id == ID::IDmadeira2 || id == ID::IDpedra || id == ID::IDgrama) {
     return true;
   }
   return false;

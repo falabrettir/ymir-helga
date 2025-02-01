@@ -11,13 +11,11 @@ namespace Entidades::Personagens::Inimigos {
 
 std::set<Jogador *> Inimigo::setJogadores{};
 
-Inimigo::Inimigo(ID id) : Personagem(id), visada(100.f), visando(false) {}
+Inimigo::Inimigo(ID id) : Personagem(id), visada(500.f), visando(false) {}
 
 Inimigo::~Inimigo() {}
 
-float Inimigo::calculaDistancia(Jogador *pJog) {
-  return fabs(pJog->getPos().x - this->getPos().x);
-}
+float Inimigo::calculaDistancia(Jogador *pJog) { return fabs(pJog->getPos().x - this->getPos().x); }
 
 void Inimigo::adicionarJogador(Jogador *pJog) { setJogadores.insert(pJog); }
 
@@ -35,18 +33,21 @@ void Inimigo::perseguir() {
     }
     ++it;
   }
-  sf::Vector2f pos = this->getPos();
-  sf::Vector2f jogpos = aux->getPos();
+  setVelX(MAXVEL * 0.5);
+  if (aux != nullptr) {
+    sf::Vector2f pos = this->getPos();
+    sf::Vector2f jogpos = aux->getPos();
 
-  sf::Vector2f direcao = pos - jogpos;
-  float abs = std::sqrt(direcao.x * direcao.x);
+    sf::Vector2f direcao = jogpos - pos;  // Fix direction
+    float magnitude = std::sqrt(direcao.x * direcao.x + direcao.y * direcao.y);
 
-  if (abs != 0) direcao /= abs;
-  sf::Vector2f novaVel = sf::Vector2f({0, 0});
-  novaVel.x = direcao.x * getVel().x;
-  setVel(novaVel);
+    if (magnitude != 0) direcao /= magnitude;  // Normalize correctly
+
+    sf::Vector2f novaVel;
+    novaVel.x = direcao.x * getVel().x;
+    setVelX(novaVel.x);
+  }
 }
-
 const bool Inimigo::getVisando() const { return visando; }
 
 void Inimigo::colidir(Entidade *pEnt,

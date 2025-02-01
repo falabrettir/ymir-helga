@@ -33,6 +33,7 @@ void Slime::colidir(Entidade *pEnt, sf::Vector2f ds) {
 void Slime::executar() {
   perseguir();
   mover();
+  if (!getNoChao()) cair();
 }
 
 void Slime::atacar() {}
