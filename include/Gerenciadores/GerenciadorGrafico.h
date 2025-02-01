@@ -9,7 +9,8 @@ class Ente;
 namespace Gerenciadores {
 
 class GerenciadorGrafico {
- private:
+private:
+  sf::Font *superPixel;
   sf::RenderWindow *pJanela;
   float alturaJanela;
   float larguraJanela;
@@ -17,15 +18,16 @@ class GerenciadorGrafico {
   float deltaTempo;
   static GerenciadorGrafico *instancia;
 
- private:
+private:
   GerenciadorGrafico();
   ~GerenciadorGrafico();
   GerenciadorGrafico(const GerenciadorGrafico &) = delete;
   GerenciadorGrafico &operator=(const GerenciadorGrafico &) = delete;
 
- public:
+public:
   static GerenciadorGrafico *getInstancia();
-  sf::Texture carregarTex(const std::string &path);
+  void carregarFonte(const std::string &path);
+  sf::Font *getFonte() const;
   sf::RenderWindow *getJanela() const;
   void desenharEnte(Ente *pE);
   bool janelaAberta();
@@ -38,4 +40,4 @@ class GerenciadorGrafico {
   const float getAlturaJanela() const;
 };
 
-}  // namespace Gerenciadores
+} // namespace Gerenciadores
