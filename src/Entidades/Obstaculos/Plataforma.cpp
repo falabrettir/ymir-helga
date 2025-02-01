@@ -65,4 +65,5 @@ void Plataforma::colidir(Entidades::Entidade *pEnt, sf::Vector2f ds) {
   pEnt->setPos(posEntidade);
   pEnt->setVel(velEntidade);
 }
+
 }  // namespace Entidades::Obstaculos

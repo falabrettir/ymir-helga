@@ -17,9 +17,11 @@ Entidade::Entidade(ID id)
       noChao(false),
       buffer(nullptr) {
   if (pGC == nullptr) pGC = Gerenciadores::GerenciadorColisoes::getInstancia();
+
   if (ehPlataforma()) {
     sf::FloatRect hitbox(0.f, 0.f, 128.f, 16.f);
     setHitbox(hitbox);
+
   } else {
     sf::FloatRect hitbox(16.f, 16.f, 16.f, 16.f);
     setHitbox(hitbox);
@@ -49,6 +51,7 @@ sf::Vector2<float> Entidade::getSize() const {
 }
 
 void Entidade::cair() { setVel(getVel() + gravidade); }
+
 void Entidade::setHitbox(sf::FloatRect& hitbox) { this->hitbox = hitbox; }
 sf::FloatRect Entidade::getHitbox() const { return pSprite->getTransform().transformRect(hitbox); }
 
