@@ -55,16 +55,20 @@ sf::Vector2f GerenciadorColisoes::verificaColisao(Entidades::Entidade *e1,
   return ds;
 }
 
-void GerenciadorColisoes::incluirPers(Entidades::Personagens::Personagem *pPers) {
-  if (pPers) vecPers.push_back(pPers);
+void GerenciadorColisoes::incluirPers(
+    Entidades::Personagens::Personagem *pPers) {
+  if (pPers)
+    vecPers.push_back(pPers);
 }
 
 void GerenciadorColisoes::incluirObst(Entidades::Obstaculos::Obstaculo *pObst) {
-  if (pObst) listObst.push_back(pObst);
+  if (pObst)
+    listObst.push_back(pObst);
 }
 
 void GerenciadorColisoes::incluirProj(Entidades::Projetil *pProj) {
-  if (pProj) setProj.insert(pProj);
+  if (pProj)
+    setProj.insert(pProj);
 }
 
 void GerenciadorColisoes::notificaColisao(Entidades::Entidade *sender) {
@@ -84,7 +88,7 @@ void GerenciadorColisoes::notificaColisao(Entidades::Entidade *sender) {
     // colisao obstaculos-personagens
     std::vector<Entidades::Personagens::Personagem *>::iterator itPers;
     for (itPers = vecPers.begin(); itPers != vecPers.end(); ++itPers) {
-      sf::Vector2f ds = verificaColisao(sender, *itPers);
+      sender->colidir(*itPers, verificaColisao(sender, *itPers));
     }
   } else {
     std::vector<Entidades::Personagens::Personagem *>::iterator itPers;
@@ -93,4 +97,4 @@ void GerenciadorColisoes::notificaColisao(Entidades::Entidade *sender) {
     }
   }
 }
-}  // namespace Gerenciadores
+} // namespace Gerenciadores
