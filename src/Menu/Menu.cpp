@@ -13,7 +13,9 @@ Menu::Menu(ID id) : Ente(id), States::State(), listaBotoes(), itBotao() {
   pSprite->setScale(1.f, 1.f);
   pSprite->setPosition(0.f, 0.f);
   listaBotoes.clear();
-  addBotao("Ymir e Helga", ID::IDbotaonovojogo, {960, 540});
+  addBotao("Ymir e Helga", ID::IDbotaonovojogo, {960, 216});
+  addBotao("Testoso", ID::IDbotaonovojogo, {960, 432});
+  addBotao("Marcha", ID::IDbotaonovojogo, {960, 648});
 }
 Menu::~Menu() {
   itBotao = listaBotoes.begin();

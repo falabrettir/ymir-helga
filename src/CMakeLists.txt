@@ -55,6 +55,10 @@ add_library(jogo
   Fases/Fase.cpp
   Fases/Planicie.cpp
 
+  #Diretorio Menu
+  Menu/Menu.cpp
+  Menu/Botao.cpp
+
   # Diretorio Listas
   Listas/ListaEntidade.cpp
 )
