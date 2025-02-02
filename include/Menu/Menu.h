@@ -1,19 +1,21 @@
 #pragma once
-#include "Menu/Botao.h"
-#include "State.h"
 #include <SFML/System/Vector2.hpp>
 #include <list>
 
+#include "Menu/Botao.h"
+#include "State.h"
+
 namespace Menus {
 class Menu : public Ente, public States::State {
-private:
+ private:
   std::list<Botao *> listaBotoes;
   std::list<Botao *>::iterator itBotao;
 
-public:
+ public:
   Menu(ID id);
   ~Menu();
-  void addBotao(std::string &texto, const ID id);
+  void addBotao(const std::string &texto, const ID id, sf::Vector2f pos);
   void alterarSelecao();
+  void executar();
 };
-} // namespace Menus
+}  // namespace Menus
