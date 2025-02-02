@@ -7,14 +7,19 @@ namespace Fabricas {
 
 class FabricaProjeteis {
  private:
-  bool ativo;
+  static FabricaProjeteis *instancia;
+
+ private:
+  FabricaProjeteis();
+  ~FabricaProjeteis();
+  FabricaProjeteis(const FabricaProjeteis &) = delete;
+  FabricaProjeteis &operator=(const FabricaProjeteis &) = delete;
 
  public:
-  FabricaProjeteis();
-  virtual ~FabricaProjeteis();
+  static FabricaProjeteis *getInstancia();
 
-  virtual Entidades::Projetil *criarProjetil(
-      Entidades::Personagens::Personagem *pPersDono, int impulso = 0) = 0;
+  Entidades::Projetil *criarProjetil(
+      Entidades::Personagens::Personagem *pPersDono, int impulso = 0);
 };
 
 }  // namespace Fabricas

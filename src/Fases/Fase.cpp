@@ -46,7 +46,7 @@ void Fase::executar() {
   listaObstaculos.executar();
   listaJogadores.executar();
   listaInimigos.executar();
-  // TODO: listaProjeteis.executar() ???
+  listaProjeteis.executar();
 }
 
 void Fase::incluirNoGC(Entidade *novaEntidade) {

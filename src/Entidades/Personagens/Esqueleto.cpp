@@ -7,12 +7,12 @@
 #include <iostream>
 #include <limits>
 
-#include "Fabrica/FabricaFlechas.h"
+#include "Fabrica/FabricaProjeteis.h"
 
 namespace Entidades::Personagens::Inimigos {
 
 Fabricas::FabricaProjeteis *Esqueleto::fabProj =
-    Fabricas::FabricaFlechas::getInstancia();
+    Fabricas::FabricaProjeteis::getInstancia();
 
 Esqueleto::Esqueleto(const sf::Vector2f &pos)
     : Inimigo(ID::IDesqueleto), forca(0.0), flecha(nullptr) {

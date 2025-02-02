@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "Fabrica/FabricaFlechas.h"
+#include "Fabrica/FabricaProjeteis.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
 
 using namespace Entidades::Personagens;
@@ -10,9 +10,11 @@ using namespace Entidades::Personagens;
 // Flag inicialmente definida como true
 bool Jogador::ehPrimeiroJogador = true;
 
-Gerenciadores::GerenciadorInput *Jogador::pGI = Gerenciadores::GerenciadorInput::getInstancia();
+Gerenciadores::GerenciadorInput *Jogador::pGI =
+    Gerenciadores::GerenciadorInput::getInstancia();
 
-Fabricas::FabricaProjeteis *Jogador::fabProj = Fabricas::FabricaFlechas::getInstancia();
+Fabricas::FabricaProjeteis *Jogador::fabProj =
+    Fabricas::FabricaProjeteis::getInstancia();
 
 Jogador::Jogador(const sf::Vector2f &pos)
     : Personagem(ID::IDjogador), pContr(nullptr), podePular(true) {
@@ -76,19 +78,23 @@ void Jogador::aplicaLentidao(float viscosidade) {
 void Jogador::executar() {
   pContr->controlarJogador();
 
-  // FIX: Arrumar
-  if (!getNoChao()) cair();
-
   pGC->notificaColisao(this);
+
+  if (!getNoChao()) cair();
 
   mover();
 }
 
 void Jogador::atacar() {
   if (fabProj) {
+    // TODO: Criar projetil atraves da fabrica e usar callback pra retornar o
+    // projetil para a fase
     std::clog << "Atacando\n";
-  } else
+
+  } else {
+    std::clog << "erro: Jogador::atacar() => fabProj == nullptr\n";
     exit(EXIT_FAILURE);
+  }
 }
 
 void Jogador::colidir(Entidade *pEnt, sf::Vector2f ds) {

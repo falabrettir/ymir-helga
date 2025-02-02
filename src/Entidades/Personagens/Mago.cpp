@@ -3,12 +3,12 @@
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 
-#include "Fabrica/FabricaFireball.h"
+#include "Fabrica/FabricaProjeteis.h"
 
 namespace Entidades::Personagens::Inimigos {
 
 Fabricas::FabricaProjeteis *Mago::fabProj =
-    Fabricas::FabricaFireball::getInstancia();
+    Fabricas::FabricaProjeteis::getInstancia();
 
 Mago::Mago(const sf::Vector2f &pos)
     : Inimigo(ID::IDmago), poder(1.05), bolaDeFogo(nullptr) {
