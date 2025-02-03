@@ -8,8 +8,30 @@
 #include "Gerenciadores/GerenciadorGrafico.h"
 
 namespace Menus {
-Botao::Botao(const std::string &text, ID id, sf::Vector2f pos)
+Botao::Botao(const std::string& text, ID id, sf::Vector2f pos)
     : Ente(id), selecionado(false), texto() {
+  inicializa(text, pos);
+}
+Botao::~Botao() {
+  delete pSprite;
+  pSprite = nullptr;
+}
+void Botao::executar() {
+  desenhar();
+  if (pAlvo == nullptr) {
+    std::cerr << "Erro em Botao::executar() => pAlvo == nullptr!\n";
+    exit(EXIT_FAILURE);
+  }
+  if (selecionado) {
+    texto.setFillColor(sf::Color::Yellow);
+  } else {
+    texto.setFillColor(sf::Color::White);
+  }
+  pAlvo->draw(texto);
+}
+void Botao::setSelecionado(const bool selecionado) { this->selecionado = selecionado; }
+const bool Botao::getSelecionado() const { return selecionado; }
+void Botao::inicializa(const std::string& text, sf::Vector2f pos) {
   texto.setFont(*Gerenciadores::GerenciadorGrafico::getInstancia()->getFonte());
   texto.setString(text);
   texto.setScale(1.f, 1.f);
@@ -31,17 +53,13 @@ Botao::Botao(const std::string &text, ID id, sf::Vector2f pos)
 
   texto.setFillColor(sf::Color::White);
   texto.setOutlineColor(sf::Color::Black);
+  texto.setOutlineThickness(2.f);
 }
-Botao::~Botao() {
-  delete pSprite;
-  pSprite = nullptr;
-}
-void Botao::executar() {
-  desenhar();
-  if (pAlvo == nullptr) {
-    std::cerr << "Erro em Botao::executar() => pAlvo == nullptr!\n";
-    exit(EXIT_FAILURE);
+void Botao::mudaFase(bool fase2) {
+  if (fase2) {
+    texto.setString("Planicie");
+  } else {
+    texto.setString("Caverna");
   }
-  pAlvo->draw(texto);
 }
 }  // namespace Menus

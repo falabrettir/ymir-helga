@@ -64,7 +64,7 @@ void Controlador_Jogador::atualizarTeclasPressionadas(Key tecla) {
   if (acharTecla(tecla)) {
     teclasPressionadas[tecla] = true;
 
-    // Considerar que a ultima tecla de novaVelimento apertada tem prioridade
+    // Considerar que a ultima tecla apertada tem prioridade
     if (tecla == direita)
       teclasPressionadas[esquerda] = false;
     else if (tecla == esquerda)

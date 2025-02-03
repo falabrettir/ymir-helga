@@ -10,7 +10,7 @@ enum class ID {
   IDmadeira2,           // 5
   IDpedra,              // 6
   IDgrama,              // 7
-  IDfase,               // 8
+  IDcaverna,            // 8
   IDprojetil,           // 9
   IDgosma,              // 10
   IDespinho,            // 11
@@ -20,7 +20,10 @@ enum class ID {
   IDbotaosair,          // 15
   IDbotaocontinuar,     // 16
   IDmenuprincipal,      // 17
-  IDmenuopcao           // 18
+  IDmenuopcao,          // 18
+  IDbotaomultijogador,  // 19
+  IDbotaofase,          // 20
+  IDplanicie            // 21
 
 };
 

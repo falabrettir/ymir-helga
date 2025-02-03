@@ -21,7 +21,7 @@ using namespace Entidades;
 namespace Fases {
 
 Fase::Fase()
-    : Ente(ID::IDfase),
+    : Ente(ID::IDcaverna),
       States::State(),
       listaObstaculos(),
       listaJogadores(),
@@ -133,8 +133,7 @@ void Fase::criarMapa(const std::string path) {
   for (int j = 0; std::getline(arquivoMapa, linha); j++) {
     for (int i = 0; i < linha.size(); i++) {
       if (linha[i] != ' ') {
-        novaEntidade =
-            pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
+        novaEntidade = pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
         incluirNaLista(novaEntidade);
         incluirNoGC(novaEntidade);
       }
