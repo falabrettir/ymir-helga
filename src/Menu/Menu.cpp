@@ -8,7 +8,9 @@
 #include "State.h"
 
 namespace Menus {
-Menu::Menu(ID id) : Ente(id), States::State(), listaBotoes(), itBotao() { listaBotoes.clear(); }
+Menu::Menu(ID id) : Ente(id), States::State(), listaBotoes(), itBotao() {
+  listaBotoes.clear();
+}
 Menu::~Menu() {
   itBotao = listaBotoes.begin();
   while (itBotao != listaBotoes.end()) {
@@ -31,13 +33,13 @@ void Menu::inicializarIt() {
   try {
     itBotao = listaBotoes.begin();
     (*itBotao)->setSelecionado(true);
-  } catch (const std::exception& e) {
+  } catch (const std::exception &e) {
     std::cerr << e.what() << '\n';
     exit(1);
   }
 }
 void Menu::cima() {
-  Menus::Botao* botao = *itBotao;
+  Menus::Botao *botao = *itBotao;
   botao->setSelecionado(false);
   if (itBotao == listaBotoes.begin()) {
     itBotao = listaBotoes.end();
@@ -47,7 +49,7 @@ void Menu::cima() {
   botao->setSelecionado(true);
 }
 void Menu::baixo() {
-  Menus::Botao* botao = *itBotao;
+  Menus::Botao *botao = *itBotao;
   botao->setSelecionado(false);
   itBotao++;
   if (itBotao == listaBotoes.end()) {
@@ -56,5 +58,6 @@ void Menu::baixo() {
   botao = *itBotao;
   botao->setSelecionado(true);
 }
+const ID Menu::getIdSelecionado() const { return (*itBotao)->getId(); }
 
-}  // namespace Menus
+} // namespace Menus
