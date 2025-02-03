@@ -28,7 +28,8 @@ Fase::Fase()
       listaInimigos(),
       listaProjeteis(),
       pFE(nullptr),
-      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()) {
+      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()),
+      fundo(nullptr) {
   listaObstaculos.limpar();
   listaJogadores.limpar();
   listaInimigos.limpar();
@@ -73,7 +74,7 @@ void Fase::incluirNoGC(Entidade *novaEntidade) {
 
 void Fase::incluirNaLista(Entidade *novaEntidade) {
   if (!novaEntidade) {
-    std::cerr << "erro: Fase::incluirNaLista() => novaEntidade == nullptr\n";
+    std::cerr << "erro: Fase::incluirNaLista(...) => novaEntidade == nullptr\n";
     exit(EXIT_FAILURE);
   }
 
@@ -97,7 +98,7 @@ void Fase::incluirNaLista(Entidade *novaEntidade) {
 
 void Fase::adicionarProjetil(Entidades::Projetil *novoProjetil) {
   if (!novoProjetil) {
-    std::clog
+    std::cerr
         << "erro: Fase::adicionarProjetil(...) => novoProjetil == nullptr\n";
     exit(EXIT_FAILURE);
   }

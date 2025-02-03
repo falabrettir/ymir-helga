@@ -16,7 +16,7 @@ Personagem::~Personagem() {}
 
 void Personagem::setFase(Fases::Fase* fase) {
   if (!fase) {
-    std::clog << "erro: Personagem::setFase(...) => fase == nullptr\n";
+    std::cerr << "erro: Personagem::setFase(...) => fase == nullptr\n";
     exit(EXIT_FAILURE);
   }
   pFase = fase;

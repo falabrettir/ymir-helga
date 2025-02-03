@@ -8,6 +8,7 @@
 #include <limits>
 
 #include "Fabrica/FabricaProjeteis.h"
+#include "Fases/Fase.h"
 
 namespace Entidades::Personagens::Inimigos {
 
@@ -27,11 +28,19 @@ Esqueleto::~Esqueleto() {
 }
 
 void Esqueleto::atacar() {
-  if (fabProj) {
+  if (!fabProj) {
+    std::cerr << "erro: Esqueleto::atacar() => fabProj == nullptr\n";
+    exit(EXIT_FAILURE);
+  }
+  if (!pFase) {
+    std::cerr << "erro: Esqueleto::atacar() => pFase == nullptr\n";
+    exit(EXIT_FAILURE);
+  }
+
+  if (!flecha) {
     forca = static_cast<float>(rand()) / std::numeric_limits<float>::max();
     flecha = fabProj->criarProjetil(this, forca);
-  } else {
-    exit(EXIT_FAILURE);
+    pFase->adicionarProjetil(flecha);
   }
 }
 void Esqueleto::executar() {

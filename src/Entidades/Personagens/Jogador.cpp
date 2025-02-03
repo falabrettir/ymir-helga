@@ -95,16 +95,18 @@ void Jogador::executar() {
 
 void Jogador::atacar() {
   if (!fabProj) {
-    std::clog << "erro: Jogador::atacar() => fabProj == nullptr\n";
+    std::cerr << "erro: Jogador::atacar() => fabProj == nullptr\n";
     exit(EXIT_FAILURE);
   }
-  pProj = fabProj->criarProjetil(this);
-
   if (!pFase) {
-    std::clog << "erro: Jogador::atacar() => pFase == nullptr\n";
+    std::cerr << "erro: Jogador::atacar() => pFase == nullptr\n";
     exit(EXIT_FAILURE);
   }
-  pFase->adicionarProjetil(pProj);
+
+  if (!pProj) {
+    pProj = fabProj->criarProjetil(this);
+    pFase->adicionarProjetil(pProj);
+  }
 }
 
 void Jogador::colidir(Entidade *pEnt, sf::Vector2f ds) {
