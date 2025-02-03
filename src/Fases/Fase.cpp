@@ -33,6 +33,8 @@ Fase::Fase()
   listaJogadores.limpar();
   listaInimigos.limpar();
   listaProjeteis.limpar();
+
+  Entidades::Personagens::Personagem::setFase(this);
 }
 
 Fase::~Fase() {
@@ -94,6 +96,12 @@ void Fase::incluirNaLista(Entidade *novaEntidade) {
 }
 
 void Fase::adicionarProjetil(Entidades::Projetil *novoProjetil) {
+  if (!novoProjetil) {
+    std::clog
+        << "erro: Fase::adicionarProjetil(...) => novoProjetil == nullptr\n";
+    exit(EXIT_FAILURE);
+  }
+
   incluirNaLista(novoProjetil);
   incluirNoGC(novoProjetil);
 }

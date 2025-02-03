@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <cstdlib>
 #include <iostream>
 
 namespace Entidades::Personagens {
@@ -14,10 +15,11 @@ Personagem::Personagem(ID id)
 Personagem::~Personagem() {}
 
 void Personagem::setFase(Fases::Fase* fase) {
-  if (fase)
-    pFase = fase;
-  else
+  if (!fase) {
     std::clog << "erro: Personagem::setFase(...) => fase == nullptr\n";
+    exit(EXIT_FAILURE);
+  }
+  pFase = fase;
 }
 
 void Personagem::mover() {
