@@ -14,8 +14,10 @@ class Menu : public Ente, public States::State {
  public:
   Menu(ID id);
   ~Menu();
-  void addBotao(const std::string &texto, const ID id, sf::Vector2f pos);
-  void alterarSelecao();
+  virtual void addBotao(const std::string &texto, const ID id, sf::Vector2f pos) = 0;
+  void cima();
+  void baixo();
+  void inicializarIt();
   void executar();
 };
 }  // namespace Menus
