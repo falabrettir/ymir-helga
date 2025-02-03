@@ -2,13 +2,23 @@
 
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
 
-using namespace Entidades::Personagens;
+namespace Entidades::Personagens {
+
+Fases::Fase* Personagem::pFase = nullptr;
 
 Personagem::Personagem(ID id)
     : Entidade(id), hp(100), olhandoEsquerda(false), dano(0) {}
 
 Personagem::~Personagem() {}
+
+void Personagem::setFase(Fases::Fase* fase) {
+  if (fase)
+    pFase = fase;
+  else
+    std::clog << "erro: Personagem::setFase(...) => fase == nullptr\n";
+}
 
 void Personagem::mover() {
   if (velocidade.x >= 0) {
@@ -41,3 +51,5 @@ void Personagem::tomarDano(int dano) { hp -= dano; }
 void Personagem::setDano(const int dano) { this->dano = dano; }
 
 const int Personagem::getDano() const { return dano; }
+
+}  // namespace Entidades::Personagens

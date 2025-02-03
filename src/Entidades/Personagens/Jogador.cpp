@@ -1,5 +1,7 @@
 #include "Entidades/Personagens/Jogador.h"
 
+#include <Fases/Fase.h>
+
 #include <iostream>
 
 #include "Fabrica/FabricaProjeteis.h"
@@ -17,7 +19,10 @@ Fabricas::FabricaProjeteis *Jogador::fabProj =
     Fabricas::FabricaProjeteis::getInstancia();
 
 Jogador::Jogador(const sf::Vector2f &pos)
-    : Personagem(ID::IDjogador), pContr(nullptr), podePular(true) {
+    : Personagem(ID::IDjogador),
+      pContr(nullptr),
+      podePular(true),
+      pProj(nullptr) {
   std::clog << "Criando novo jogador\n";
 
   pContr = new Controladores::Controlador_Jogador();
@@ -35,7 +40,10 @@ Jogador::Jogador(const sf::Vector2f &pos)
   pSprite->setPosition(pos);
 }
 
-Jogador::~Jogador() {}
+Jogador::~Jogador() {
+  delete pProj;
+  delete pContr;
+}
 
 bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
@@ -87,9 +95,9 @@ void Jogador::executar() {
 
 void Jogador::atacar() {
   if (fabProj) {
-    // TODO: Criar projetil atraves da fabrica e usar callback pra retornar o
-    // projetil para a fase
     std::clog << "Atacando\n";
+    pProj = fabProj->criarProjetil(this);
+    pFase->adicionarProjetil(pProj);
 
   } else {
     std::clog << "erro: Jogador::atacar() => fabProj == nullptr\n";
