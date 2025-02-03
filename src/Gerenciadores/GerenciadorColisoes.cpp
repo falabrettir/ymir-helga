@@ -57,18 +57,15 @@ sf::Vector2f GerenciadorColisoes::verificaColisao(Entidades::Entidade *e1,
 
 void GerenciadorColisoes::incluirPers(
     Entidades::Personagens::Personagem *pPers) {
-  if (pPers)
-    vecPers.push_back(pPers);
+  if (pPers) vecPers.push_back(pPers);
 }
 
 void GerenciadorColisoes::incluirObst(Entidades::Obstaculos::Obstaculo *pObst) {
-  if (pObst)
-    listObst.push_back(pObst);
+  if (pObst) listObst.push_back(pObst);
 }
 
 void GerenciadorColisoes::incluirProj(Entidades::Projetil *pProj) {
-  if (pProj)
-    setProj.insert(pProj);
+  if (pProj) setProj.insert(pProj);
 }
 
 void GerenciadorColisoes::notificaColisao(Entidades::Entidade *sender) {
@@ -83,6 +80,7 @@ void GerenciadorColisoes::notificaColisao(Entidades::Entidade *sender) {
     for (itObst = listObst.begin(); itObst != listObst.end(); ++itObst) {
       sender->colidir(*itObst, verificaColisao(sender, *itObst));
     }
+    // FIX: Alterar de acordo com ID.h
   } else if (sender->ehPlataforma() || sender->getId() == ID::IDespinho ||
              sender->getId() == ID::IDgosma) {
     // colisao obstaculos-personagens
@@ -97,4 +95,5 @@ void GerenciadorColisoes::notificaColisao(Entidades::Entidade *sender) {
     }
   }
 }
-} // namespace Gerenciadores
+
+}  // namespace Gerenciadores

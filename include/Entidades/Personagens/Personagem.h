@@ -16,7 +16,6 @@ class Personagem : public Entidades::Entidade {
  private:
   int dano;
   int hp;
-  bool olhandoEsquerda;
 
  protected:
   static Fases::Fase* pFase;
@@ -25,15 +24,11 @@ class Personagem : public Entidades::Entidade {
   Personagem(ID id);
   virtual ~Personagem();
 
-  void atualizaOrientacao();
-  void mover();
   void tomarDano(int dano);
   const int getDano() const;
   void setDano(const int dano);
   static void setFase(Fases::Fase* fase);
   virtual void colidir(Entidade* pEnt, sf::Vector2f ds = {0, 0}) = 0;
-
-  void setOlhandoEsquerda(bool olhandoEsquerda);
 };
 
 }  // namespace Personagens

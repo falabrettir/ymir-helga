@@ -9,8 +9,7 @@ namespace Entidades::Personagens {
 
 Fases::Fase* Personagem::pFase = nullptr;
 
-Personagem::Personagem(ID id)
-    : Entidade(id), hp(100), olhandoEsquerda(false), dano(0) {}
+Personagem::Personagem(ID id) : Entidade(id), hp(100), dano(0) {}
 
 Personagem::~Personagem() {}
 
