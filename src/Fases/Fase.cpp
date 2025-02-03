@@ -11,6 +11,7 @@
 #include "Entidades/Personagens/Inimigo.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Personagens/Personagem.h"
+#include "Entidades/Projetil.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
 #include "IDs.h"
 #include "Listas/ListaEntidades.h"
@@ -62,6 +63,9 @@ void Fase::incluirNoGC(Entidade *novaEntidade) {
 
   } else if (ehPersonagem(id)) {
     pGC->incluirPers(dynamic_cast<Personagens::Personagem *>(novaEntidade));
+
+  } else if (ehProjetil(id)) {
+    pGC->incluirProj(dynamic_cast<Entidades::Projetil *>(novaEntidade));
   }
 }
 
@@ -83,7 +87,15 @@ void Fase::incluirNaLista(Entidade *novaEntidade) {
 
   } else if (ehObstaculo(id)) {
     listaObstaculos.incluir(novaEntidade);
+
+  } else if (ehProjetil(id)) {
+    listaProjeteis.incluir(novaEntidade);
   }
+}
+
+void Fase::adicionarProjetil(Entidades::Projetil *novoProjetil) {
+  incluirNaLista(novoProjetil);
+  incluirNoGC(novoProjetil);
 }
 
 void Fase::criarMapa(const std::string path) {

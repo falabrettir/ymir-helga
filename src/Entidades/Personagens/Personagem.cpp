@@ -5,7 +5,8 @@
 
 using namespace Entidades::Personagens;
 
-Personagem::Personagem(ID id) : Entidade(id), hp(100), olhandoEsquerda(false), dano(0) {}
+Personagem::Personagem(ID id)
+    : Entidade(id), hp(100), olhandoEsquerda(false), dano(0) {}
 
 Personagem::~Personagem() {}
 
