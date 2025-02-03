@@ -3,12 +3,13 @@
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 
-#include "Fabrica/FabricaFireball.h"
+#include "Fabrica/FabricaProjeteis.h"
+#include "Fases/Fase.h"
 
 namespace Entidades::Personagens::Inimigos {
 
 Fabricas::FabricaProjeteis *Mago::fabProj =
-    Fabricas::FabricaFireball::getInstancia();
+    Fabricas::FabricaProjeteis::getInstancia();
 
 Mago::Mago(const sf::Vector2f &pos)
     : Inimigo(ID::IDmago), poder(1.05), bolaDeFogo(nullptr) {
@@ -17,17 +18,24 @@ Mago::Mago(const sf::Vector2f &pos)
   setTextura("/assets/Personagens/Mago.png");
 }
 
-Mago::~Mago() {
-  delete bolaDeFogo;
-  bolaDeFogo = nullptr;
-}
+Mago::~Mago() { delete bolaDeFogo; }
 
 void Mago::atacar() {
-  if (fabProj) {
-    bolaDeFogo = fabProj->criarProjetil(this, poder);
-    aumentarPoder();
-  } else {
+  if (!fabProj) {
+    std::cerr << "erro: Mago::atacar() => fabProj == nullptr\n";
     exit(EXIT_FAILURE);
+  }
+  if (!pFase) {
+    std::cerr << "erro: Mago::atacar() => pFase == nullptr\n";
+    exit(EXIT_FAILURE);
+  }
+
+  // Ataca apenas se a ultima bola de fogo ja colidiu
+  if (!bolaDeFogo) {
+    bolaDeFogo = fabProj->criarProjetil(this, poder);
+    pFase->adicionarProjetil(bolaDeFogo);
+
+    aumentarPoder();
   }
 }
 
@@ -36,7 +44,7 @@ void Mago::aumentarPoder() { poder *= poder; }
 void Mago::executar() {
   perseguir();
   mover();
-  if (getVisando() && bolaDeFogo) atacar();
+  if (getVisando()) atacar();
 }
 
 }  // namespace Entidades::Personagens::Inimigos

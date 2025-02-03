@@ -1,8 +1,10 @@
 #include "Entidades/Personagens/Jogador.h"
 
+#include <Fases/Fase.h>
+
 #include <iostream>
 
-#include "Fabrica/FabricaFlechas.h"
+#include "Fabrica/FabricaProjeteis.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
 
 using namespace Entidades::Personagens;
@@ -10,12 +12,17 @@ using namespace Entidades::Personagens;
 // Flag inicialmente definida como true
 bool Jogador::ehPrimeiroJogador = true;
 
-Gerenciadores::GerenciadorInput *Jogador::pGI = Gerenciadores::GerenciadorInput::getInstancia();
+Gerenciadores::GerenciadorInput *Jogador::pGI =
+    Gerenciadores::GerenciadorInput::getInstancia();
 
-Fabricas::FabricaProjeteis *Jogador::fabProj = Fabricas::FabricaFlechas::getInstancia();
+Fabricas::FabricaProjeteis *Jogador::fabProj =
+    Fabricas::FabricaProjeteis::getInstancia();
 
 Jogador::Jogador(const sf::Vector2f &pos)
-    : Personagem(ID::IDjogador), pContr(nullptr), podePular(true) {
+    : Personagem(ID::IDjogador),
+      pContr(nullptr),
+      podePular(true),
+      pProj(nullptr) {
   std::clog << "Criando novo jogador\n";
 
   pContr = new Controladores::Controlador_Jogador();
@@ -33,7 +40,10 @@ Jogador::Jogador(const sf::Vector2f &pos)
   pSprite->setPosition(pos);
 }
 
-Jogador::~Jogador() {}
+Jogador::~Jogador() {
+  delete pProj;
+  delete pContr;
+}
 
 bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
@@ -76,19 +86,27 @@ void Jogador::aplicaLentidao(float viscosidade) {
 void Jogador::executar() {
   pContr->controlarJogador();
 
-  // FIX: Arrumar
-  if (!getNoChao()) cair();
-
   pGC->notificaColisao(this);
+
+  if (!getNoChao()) cair();
 
   mover();
 }
 
 void Jogador::atacar() {
-  if (fabProj) {
-    std::clog << "Atacando\n";
-  } else
+  if (!fabProj) {
+    std::cerr << "erro: Jogador::atacar() => fabProj == nullptr\n";
     exit(EXIT_FAILURE);
+  }
+  if (!pFase) {
+    std::cerr << "erro: Jogador::atacar() => pFase == nullptr\n";
+    exit(EXIT_FAILURE);
+  }
+
+  if (!pProj) {
+    pProj = fabProj->criarProjetil(this);
+    pFase->adicionarProjetil(pProj);
+  }
 }
 
 void Jogador::colidir(Entidade *pEnt, sf::Vector2f ds) {

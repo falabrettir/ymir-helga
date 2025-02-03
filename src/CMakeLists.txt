@@ -40,8 +40,6 @@ add_library(jogo
   Fabrica/FabricaEntidadesCaverna.cpp
   Fabrica/FabricaEntidades.cpp
   Fabrica/FabricaEntidadesPlanicie.cpp
-  Fabrica/FabricaFireball.cpp
-  Fabrica/FabricaFlechas.cpp
   Fabrica/FabricaProjeteis.cpp
 
   # Entidades::Obstaculos
