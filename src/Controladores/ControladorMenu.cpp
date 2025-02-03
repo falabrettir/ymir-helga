@@ -4,8 +4,10 @@
 #include <iostream>
 
 #include "Fases/Caverna.h"
+#include "Fases/Planicie.h"
 #include "Gerenciadores/GerenciadorEstados.h"
 #include "IDs.h"
+#include "Menu/MenuPrincipal.h"
 #include "Observer.h"
 
 namespace Controladores {
@@ -41,16 +43,32 @@ void ControladorMenu::controlarMenu() {
   if (menuAtual) {
     if (teclasPressionadas[cima]) {
       menuAtual->cima();
+      teclasPressionadas[cima] = false;
     } else if (teclasPressionadas[baixo]) {
       menuAtual->baixo();
+      teclasPressionadas[baixo] = false;
     } else if (teclasPressionadas[selecionar]) {
-      // TODO: lógica de selecao
       ID id = menuAtual->getIdSelecionado();
+      teclasPressionadas[selecionar] = false;
       switch (id) {
+        case (ID::IDbotaofase): {
+          dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->setFase(menuAtual->getBotao());
+        } break;
+
         case (ID::IDbotaonovojogo): {
           std::cerr << "Marcha no menuAtual\n";
-          pGS->pushEstado(new Fases::Caverna());
+          bool fase = dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->getFase();
+          if (fase) {
+            pGS->pushEstado(new Fases::Planicie());
+          } else {
+            pGS->pushEstado(new Fases::Caverna());
+          }
         } break;
+
+        case (ID::IDbotaosair): {
+          pGS->popEstado();
+        }
+
         default:
           break;
       }

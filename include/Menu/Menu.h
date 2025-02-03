@@ -26,5 +26,6 @@ class Menu : public Ente, public States::State {
   void baixo();
   void inicializarIt();
   virtual void executar() = 0;
+  Botao *getBotao();
 };
 }  // namespace Menus

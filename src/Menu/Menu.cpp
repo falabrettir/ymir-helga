@@ -56,5 +56,6 @@ const ID Menu::getIdSelecionado() const { return (*itBotao)->getId(); }
 void Menu::addBotao(const std::string &texto, const ID id, sf::Vector2f pos) {
   listaBotoes.push_back(new Botao(texto, id, pos));
 }
+Botao *Menu::getBotao() { return *itBotao; }
 
 }  // namespace Menus

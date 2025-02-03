@@ -55,4 +55,11 @@ void Botao::inicializa(const std::string& text, sf::Vector2f pos) {
   texto.setOutlineColor(sf::Color::Black);
   texto.setOutlineThickness(2.f);
 }
+void Botao::mudaFase(bool fase2) {
+  if (fase2) {
+    texto.setString("Planicie");
+  } else {
+    texto.setString("Caverna");
+  }
+}
 }  // namespace Menus
