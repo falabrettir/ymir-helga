@@ -42,6 +42,15 @@ void Botao::executar() {
     std::cerr << "Erro em Botao::executar() => pAlvo == nullptr!\n";
     exit(EXIT_FAILURE);
   }
+  if (selecionado) {
+    texto.setFillColor(sf::Color::Yellow);
+  } else {
+    texto.setFillColor(sf::Color::White);
+  }
   pAlvo->draw(texto);
 }
-}  // namespace Menus
+void Botao::setSelecionado(const bool selecionado) {
+  this->selecionado = selecionado;
+}
+const bool Botao::getSelecionado() const { return selecionado; }
+} // namespace Menus

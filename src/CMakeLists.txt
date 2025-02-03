@@ -23,6 +23,7 @@ add_library(jogo
 
   # Diretorio Controladores
   Controladores/ControladorJogador.cpp
+  Controladores/ControladorMenu.cpp
 
   # Diretorio Entidades
   Entidades/Entidade.cpp

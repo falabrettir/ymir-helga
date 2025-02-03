@@ -2,24 +2,29 @@
 #include <SFML/System/Vector2.hpp>
 #include <list>
 
+#include "Gerenciadores/GerenciadorInput.h"
 #include "Menu/Botao.h"
 #include "State.h"
+namespace Controladores {
+class ControladorMenu;
+}
 
 namespace Menus {
 class Menu : public Ente, public States::State {
 private:
   std::list<Botao *> listaBotoes;
   std::list<Botao *>::iterator itBotao;
+  Controladores::ControladorMenu *pContr;
+  Gerenciadores::GerenciadorInput *pGI;
 
 public:
   Menu(ID id);
   ~Menu();
-  virtual void addBotao(const std::string &texto, const ID id,
-                        sf::Vector2f pos) = 0;
+  void addBotao(const std::string &texto, const ID id, sf::Vector2f pos);
   const ID getIdSelecionado() const;
   void cima();
   void baixo();
   void inicializarIt();
-  void executar() = 0;
+  void executar();
 };
 } // namespace Menus
