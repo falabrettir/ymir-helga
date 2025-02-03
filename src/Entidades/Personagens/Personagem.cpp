@@ -10,10 +10,10 @@ Personagem::Personagem(ID id) : Entidade(id), hp(100), olhandoEsquerda(false), d
 Personagem::~Personagem() {}
 
 void Personagem::mover() {
-  if (velocidade.x >= 0) {
+  if (velocidade.x > 0) {
     atualizaOrientacao();
     setOlhandoEsquerda(false);
-  } else {
+  } else if (velocidade.x < 0) {
     atualizaOrientacao();
     setOlhandoEsquerda(true);
   }
