@@ -80,8 +80,7 @@ void GerenciadorColisoes::notificaColisao(Entidades::Entidade *sender) {
     for (itObst = listObst.begin(); itObst != listObst.end(); ++itObst) {
       sender->colidir(*itObst, verificaColisao(sender, *itObst));
     }
-    // FIX: Alterar de acordo com ID.h
-  } else if (sender->ehPlataforma() || sender->getId() == ID::IDespinho ||
+  } else if (ehObstaculo(sender->getId()) || sender->getId() == ID::IDespinho ||
              sender->getId() == ID::IDgosma) {
     // colisao obstaculos-personagens
     std::vector<Entidades::Personagens::Personagem *>::iterator itPers;

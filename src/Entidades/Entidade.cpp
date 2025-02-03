@@ -45,6 +45,20 @@ void Entidade::mover() {
   pSprite->setPosition(novaPos);
 }
 
+void Entidade::setOlhandoEsquerda(bool olhandoEsquerda) {
+  this->olhandoEsquerda = olhandoEsquerda;
+}
+
+void Entidade::atualizaOrientacao() {
+  if (olhandoEsquerda) {
+    pSprite->setScale(-3.f, 3.f);
+    pSprite->setOrigin(pSprite->getLocalBounds().width, 0);
+  } else {
+    pSprite->setScale(3.f, 3.f);
+    pSprite->setOrigin(0, 0);
+  }
+}
+
 void Entidade::setPos(sf::Vector2f novaPos) { pos = novaPos; }
 
 void Entidade::setVel(sf::Vector2f novaVel) { velocidade = novaVel; }

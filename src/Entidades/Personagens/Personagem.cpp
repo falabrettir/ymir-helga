@@ -20,33 +20,6 @@ void Personagem::setFase(Fases::Fase* fase) {
   }
   pFase = fase;
 }
-
-void Personagem::mover() {
-  if (velocidade.x >= 0) {
-    atualizaOrientacao();
-    setOlhandoEsquerda(false);
-  } else {
-    atualizaOrientacao();
-    setOlhandoEsquerda(true);
-  }
-  sf::Vector2f novaPos = getPos() + (velocidade * pGG->getDeltaTempo());
-  setPos(novaPos);
-  pSprite->setPosition(novaPos);
-}
-
-void Personagem::setOlhandoEsquerda(bool olhandoEsquerda) {
-  this->olhandoEsquerda = olhandoEsquerda;
-}
-
-void Personagem::atualizaOrientacao() {
-  if (olhandoEsquerda) {
-    pSprite->setScale(-3.f, 3.f);
-    pSprite->setOrigin(pSprite->getLocalBounds().width, 0);
-  } else {
-    pSprite->setScale(3.f, 3.f);
-    pSprite->setOrigin(0, 0);
-  }
-}
 void Personagem::tomarDano(int dano) { hp -= dano; }
 
 void Personagem::setDano(const int dano) { this->dano = dano; }
