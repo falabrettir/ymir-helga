@@ -14,8 +14,8 @@ Menu::Menu(ID id) : Ente(id), States::State(), listaBotoes(), itBotao() {
   pSprite->setPosition(0.f, 0.f);
   listaBotoes.clear();
   addBotao("Ymir e Helga", ID::IDbotaonovojogo, {960, 216});
-  addBotao("Testoso", ID::IDbotaonovojogo, {960, 432});
-  addBotao("Marcha", ID::IDbotaonovojogo, {960, 648});
+  addBotao("Novo jogo", ID::IDbotaonovojogo, {960, 432});
+  addBotao("Carregar jogo", ID::IDbotaonovojogo, {960, 648});
 }
 Menu::~Menu() {
   itBotao = listaBotoes.begin();
@@ -26,7 +26,7 @@ Menu::~Menu() {
   }
   listaBotoes.clear();
 }
-void Menu::addBotao(const std::string& texto, const ID id, sf::Vector2f pos) {
+void Menu::addBotao(const std::string &texto, const ID id, sf::Vector2f pos) {
   listaBotoes.push_back(new Botao(texto, id, pos));
 }
 void Menu::executar() {
@@ -39,4 +39,4 @@ void Menu::executar() {
   }
 }
 
-}  // namespace Menus
+} // namespace Menus

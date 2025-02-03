@@ -17,7 +17,6 @@ Jogo::Jogo()
   // caverna = new Fases::Caverna();
   // pGS->pushEstado(caverna);
   pGS->pushEstado(new Menus::Menu(ID::IDmenuprincipal));
-  // pGS->pushEstado(new MenuPrincipal());
 }
 
 Jogo::~Jogo() {}
@@ -34,5 +33,6 @@ void Jogo::atualizar() {
 }
 
 void Jogo::executar() {
-  while (pGG->janelaAberta()) atualizar();
+  while (pGG->janelaAberta())
+    atualizar();
 }
