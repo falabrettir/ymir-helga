@@ -1,25 +1,21 @@
 #include "Controladores/ControladorMenu.h"
 
 #include <SFML/Window/Keyboard.hpp>
+#include <iostream>
 
 #include "Fases/Caverna.h"
 #include "Gerenciadores/GerenciadorEstados.h"
 #include "IDs.h"
 #include "Observer.h"
-#include <iostream>
 
 namespace Controladores {
 ControladorMenu::ControladorMenu(Menus::Menu *menu)
-    : Observer(), menuAtual(menu),
+    : Observer(),
+      menuAtual(menu),
       pGS(Gerenciadores::GerenciadorEstados::getInstancia()),
       teclasPressionadas() {
   teclasPressionadas.clear();
-  cima = sf::Keyboard::W;
-  baixo = sf::Keyboard::S;
-  selecionar = sf::Keyboard::Enter;
-  teclasPressionadas.insert(std::pair<Key, bool>(selecionar, false));
-  teclasPressionadas.insert(std::pair<Key, bool>(cima, false));
-  teclasPressionadas.insert(std::pair<Key, bool>(baixo, false));
+  setTeclas();
 }
 ControladorMenu::~ControladorMenu() {
   delete menuAtual;
@@ -51,14 +47,22 @@ void ControladorMenu::controlarMenu() {
       // TODO: lógica de selecao
       ID id = menuAtual->getIdSelecionado();
       switch (id) {
-      case (ID::IDbotaonovojogo): {
-        std::cerr << "Marcha no menuAtual\n";
-        pGS->pushEstado(new Fases::Caverna());
-      } break;
-      default:
-        break;
+        case (ID::IDbotaonovojogo): {
+          std::cerr << "Marcha no menuAtual\n";
+          pGS->pushEstado(new Fases::Caverna());
+        } break;
+        default:
+          break;
       }
     }
   }
 }
-} // namespace Controladores
+void ControladorMenu::setTeclas() {
+  cima = sf::Keyboard::W;
+  baixo = sf::Keyboard::S;
+  selecionar = sf::Keyboard::Enter;
+  teclasPressionadas.insert(std::pair<Key, bool>(selecionar, false));
+  teclasPressionadas.insert(std::pair<Key, bool>(cima, false));
+  teclasPressionadas.insert(std::pair<Key, bool>(baixo, false));
+}
+}  // namespace Controladores

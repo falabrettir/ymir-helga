@@ -17,5 +17,6 @@ class Botao : public Ente {
   void executar();
   void setSelecionado(const bool);
   const bool getSelecionado() const;
+  void inicializa(const std::string &text, sf::Vector2f pos);
 };
 }  // namespace Menus

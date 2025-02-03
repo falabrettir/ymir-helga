@@ -1,5 +1,6 @@
 #include "Gerenciadores/GerenciadorEstados.h"
 
+#include <cstdlib>
 #include <iostream>
 
 namespace Gerenciadores {
@@ -22,10 +23,19 @@ States::State* GerenciadorEstados::topEstado() { return pilhaEstados.top(); }
 void GerenciadorEstados::executar() {
   if (!pilhaEstados.empty()) {
     topEstado()->executar();
+  } else {
+    std::cerr << "Pilha vazia!\n";
   }
 }
 
-void GerenciadorEstados::pushEstado(States::State* s) { pilhaEstados.push(s); }
+void GerenciadorEstados::pushEstado(States::State* s) {
+  if (s)
+    pilhaEstados.push(s);
+  else {
+    std::cerr << "Ponteiro nulo em GerenciadorEstados::pushEstado\n";
+    exit(EXIT_FAILURE);
+  }
+}
 
 void GerenciadorEstados::popEstado() {
   delete topEstado();

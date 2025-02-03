@@ -11,13 +11,13 @@ class ControladorMenu;
 
 namespace Menus {
 class Menu : public Ente, public States::State {
-private:
+ protected:
   std::list<Botao *> listaBotoes;
   std::list<Botao *>::iterator itBotao;
   Controladores::ControladorMenu *pContr;
   Gerenciadores::GerenciadorInput *pGI;
 
-public:
+ public:
   Menu(ID id);
   ~Menu();
   void addBotao(const std::string &texto, const ID id, sf::Vector2f pos);
@@ -25,6 +25,6 @@ public:
   void cima();
   void baixo();
   void inicializarIt();
-  void executar();
+  virtual void executar() = 0;
 };
-} // namespace Menus
+}  // namespace Menus

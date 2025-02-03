@@ -21,6 +21,7 @@ class ControladorMenu : public Observer {
   ~ControladorMenu();
   bool acharTecla(Key tecla);
 
+  void setTeclas();
   void atualizarTeclasPressionadas(Key tecla);
   void atualizarTeclasSoltas(Key tecla);
   void controlarMenu();

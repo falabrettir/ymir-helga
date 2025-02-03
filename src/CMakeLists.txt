@@ -58,6 +58,7 @@ add_library(jogo
 
   #Diretorio Menu
   Menu/Menu.cpp
+  Menu/MenuPrincipal.cpp
   Menu/Botao.cpp
 
   # Diretorio Listas

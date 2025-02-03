@@ -7,7 +7,7 @@
 #include "Gerenciadores/GerenciadorGrafico.h"
 #include "Gerenciadores/GerenciadorInput.h"
 #include "IDs.h"
-#include "Menu/Menu.h"
+#include "Menu/MenuPrincipal.h"
 
 Jogo::Jogo()
     : pGG(Gerenciadores::GerenciadorGrafico::getInstancia()),
@@ -16,7 +16,7 @@ Jogo::Jogo()
       pGS(Gerenciadores::GerenciadorEstados::getInstancia()) {
   // caverna = new Fases::Caverna();
   // pGS->pushEstado(caverna);
-  pGS->pushEstado(new Menus::Menu(ID::IDmenuprincipal));
+  pGS->pushEstado(new Menus::MenuPrincipal(ID::IDmenuprincipal));
   // pGS->pushEstado(new MenuPrincipal());
 }
 
