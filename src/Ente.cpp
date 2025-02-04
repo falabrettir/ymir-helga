@@ -3,6 +3,7 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -62,4 +63,5 @@ void Ente::desenhar() {
     exit(EXIT_FAILURE);
   }
 }
+
 const ID Ente::getId() const { return this->id; }

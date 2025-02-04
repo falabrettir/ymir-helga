@@ -2,30 +2,32 @@
 
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
 
 #include "Gerenciadores/GerenciadorColisoes.h"
+#include "IDs.h"
 
 namespace Entidades {
 
-Gerenciadores::GerenciadorColisoes* Entidade::pGC(nullptr);
+Gerenciadores::GerenciadorColisoes* Entidade::pGC(
+    Gerenciadores::GerenciadorColisoes::getInstancia());
 
 Entidade::Entidade(ID id)
     : Ente(id),
       pos(0, 0),
       velocidade(0, 0),
       gravidade(0, 0.08),
-      tamanho(0, 0),
       noChao(false),
       olhandoEsquerda(false),
       buffer(nullptr) {
-  if (pGC == nullptr) pGC = Gerenciadores::GerenciadorColisoes::getInstancia();
+  std::clog << "Criando Entidade\n";
 
   if (ehPlataforma(id)) {
-    sf::FloatRect hitbox(0.f, 0.f, 128.f, 16.f);
+    sf::IntRect hitbox(0.f, 0.f, 3 * 128.f, 3 * 16.f);
     setHitbox(hitbox);
 
   } else {
-    sf::FloatRect hitbox(16.f, 16.f, 16.f, 16.f);
+    sf::IntRect hitbox(0, 0, 3 * 16.f, 3 * 16.f);
     setHitbox(hitbox);
   }
 };
@@ -42,7 +44,6 @@ void Entidade::mover() {
   }
   sf::Vector2f novaPos = getPos() + (velocidade * pGG->getDeltaTempo());
   setPos(novaPos);
-  pSprite->setPosition(novaPos);
 }
 
 void Entidade::setOlhandoEsquerda(bool olhandoEsquerda) {
@@ -61,7 +62,12 @@ void Entidade::atualizaOrientacao() {
 
 bool Entidade::getOlhandoEsquerda() { return olhandoEsquerda; }
 
-void Entidade::setPos(sf::Vector2f novaPos) { pos = novaPos; }
+void Entidade::setPos(sf::Vector2f novaPos) {
+  pos = novaPos;
+  pSprite->setPosition(novaPos);
+  hitbox.left = novaPos.x;
+  hitbox.top = novaPos.y;
+}
 
 void Entidade::setVel(sf::Vector2f novaVel) { velocidade = novaVel; }
 
@@ -83,10 +89,27 @@ sf::Vector2<float> Entidade::getSize() const {
 
 void Entidade::cair() { setVel(getVel() + gravidade); }
 
-void Entidade::setHitbox(sf::FloatRect& hitbox) { this->hitbox = hitbox; }
+void Entidade::setHitbox(sf::IntRect& hitbox) { this->hitbox = hitbox; }
 
-sf::FloatRect Entidade::getHitbox() const {
-  return pSprite->getTransform().transformRect(hitbox);
+sf::IntRect Entidade::getHitbox() const {
+  if (ehPlataforma(id)) {
+    return sf::IntRect(pos.x, pos.y, 128, 16);
+  } else {
+    return sf::IntRect(pos.x, pos.y, 16, 16);
+  }
 }
 
+void Entidade::desenhar() {
+  if (pGG) {
+    if (ehPersonagem(id)) {
+      pSprite->setPosition(pos - sf::Vector2f{16 * 3, 16 * 3});
+    } else {
+      pSprite->setPosition(pos);
+    }
+    pGG->desenharEnte(this);
+  } else {
+    std::cerr << "erro: Entidade::desenhar() => pGG == nullptr";
+    exit(EXIT_FAILURE);
+  }
+}
 }  // namespace Entidades

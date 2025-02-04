@@ -8,7 +8,8 @@
 
 namespace Entidades::Obstaculos {
 
-Plataforma::Plataforma(ID id, const sf::Vector2f &pos) : Obstaculo(id, pos), empuxo(0.f, 0.f) {
+Plataforma::Plataforma(ID id, const sf::Vector2f &pos)
+    : Obstaculo(id, pos), empuxo(0.f, 0.f) {
   switch (id) {
     case (ID::IDmadeira1):
       std::clog << "Criando nova plataforma de madeira1\n";
@@ -44,6 +45,7 @@ void Plataforma::obstacular(Entidades::Entidade *pEnt) {}
 void Plataforma::colidir(Entidades::Entidade *pEnt, sf::Vector2f ds) {
   sf::Vector2f posEntidade = pEnt->getPos();
   sf::Vector2f velEntidade = pEnt->getVel();
+
   if (ds.x < 0.f && ds.y < 0.f) {  // Colidiu
     if (ds.x > ds.y) {             // Colisao em X
       if (posEntidade.x < this->getPos().x)

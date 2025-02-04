@@ -14,14 +14,13 @@ class Entidade : public Ente {
  private:
   sf::Vector2f pos;
   sf::Vector2f gravidade;
-  sf::Vector2f tamanho;
   bool noChao;
-  std::ostream *buffer;
   bool olhandoEsquerda;
+  std::ostream *buffer;
 
  protected:
   sf::Vector2f velocidade;
-  sf::FloatRect hitbox;
+  sf::IntRect hitbox;
   static Gerenciadores::GerenciadorColisoes *pGC;
 
  public:
@@ -39,14 +38,16 @@ class Entidade : public Ente {
   void setVelY(float velY);
 
   void setNoChao(bool noChao);
-  void setHitbox(sf::FloatRect &hitbox);
+  void setHitbox(sf::IntRect &hitbox);
   virtual void colidir(Entidade *pEnt, sf::Vector2f ds = {0, 0}) = 0;
 
   sf::Vector2f getVel() const;
   sf::Vector2f getPos() const;
   bool getNoChao() const;
   sf::Vector2f getSize() const;
-  sf::FloatRect getHitbox() const;
+  sf::IntRect getHitbox() const;
+
+  void desenhar();
 
   void cair();
 

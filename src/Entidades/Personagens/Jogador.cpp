@@ -37,7 +37,6 @@ Jogador::Jogador(const sf::Vector2f &pos)
     setTextura("/assets/Personagens/Helga.png");
 
   setPos(pos);
-  pSprite->setPosition(pos);
 }
 
 Jogador::~Jogador() {
