@@ -9,6 +9,7 @@ add_library(jogo
   Jogo.cpp
   Ente.cpp
   State.cpp
+  Mediator.cpp
 
   # Diretorio Observer
   Observer/Observer.cpp

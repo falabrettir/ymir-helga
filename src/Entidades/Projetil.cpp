@@ -71,7 +71,7 @@ void Projetil::colidir(Entidade *pE, sf::Vector2f ds) {
 void Projetil::executar() {
   mover();
   cair();
-  pGC->notificaColisao(this);
+  pGC->notificarColisao(this);
 }
 
 }  // namespace Entidades

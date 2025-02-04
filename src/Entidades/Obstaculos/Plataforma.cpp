@@ -38,7 +38,7 @@ Plataforma::Plataforma(ID id, const sf::Vector2f &pos)
 
 Plataforma::~Plataforma() {}
 
-void Plataforma::executar() { pGC->notificaColisao(this); }
+void Plataforma::executar() { pGC->notificarColisao(this); }
 
 void Plataforma::obstacular(Entidades::Entidade *pEnt) {}
 
@@ -63,7 +63,6 @@ void Plataforma::colidir(Entidades::Entidade *pEnt, sf::Vector2f ds) {
       velEntidade.y = 0.0f;
     }
   }
-  std::cout << ds.x << ' ' << ds.y << '\n';
   pEnt->setPos(posEntidade);
   pEnt->setVel(velEntidade);
 }

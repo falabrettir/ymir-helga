@@ -28,7 +28,6 @@ Ente::~Ente() {
 
 void Ente::atualizaSprite(sf::Texture *pTexture) {
   pSprite->setTexture(*pTexture);
-  // pSprite->setTextureRect({0, 0, 48, 48});
   pSprite->setScale(3.f, 3.f);
 }
 

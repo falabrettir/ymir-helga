@@ -20,12 +20,9 @@ Entidade::Entidade(ID id)
       noChao(false),
       olhandoEsquerda(false),
       buffer(nullptr) {
-  std::clog << "Criando Entidade\n";
-
   if (ehPlataforma(id)) {
     sf::IntRect hitbox(0.f, 0.f, 3 * 128.f, 3 * 16.f);
     setHitbox(hitbox);
-
   } else {
     sf::IntRect hitbox(0, 0, 3 * 16.f, 3 * 16.f);
     setHitbox(hitbox);
@@ -64,9 +61,27 @@ bool Entidade::getOlhandoEsquerda() { return olhandoEsquerda; }
 
 void Entidade::setPos(sf::Vector2f novaPos) {
   pos = novaPos;
+  if (ehObstaculo(id)) {
+    pSprite->setPosition(novaPos);
+  } else {
+    pSprite->setPosition(novaPos - sf::Vector2f(16, 16));
+  }
   pSprite->setPosition(novaPos);
   hitbox.left = novaPos.x;
   hitbox.top = novaPos.y;
+  std::clog << "setPos(...):\n"
+
+               "novaPos = "
+            << novaPos.x << " " << novaPos.y
+
+            << "\npSprite position = " << pSprite->getPosition().x << " "
+            << pSprite->getPosition().y
+            << "\nSprite bounds = " << pSprite->getLocalBounds().width << " "
+            << pSprite->getLocalBounds().height
+
+            << "\nhitbox position: " << hitbox.left << " " << hitbox.top
+            << "\nhitbox bounds: " << hitbox.width << " " << hitbox.height
+            << std::endl;
 }
 
 void Entidade::setVel(sf::Vector2f novaVel) { velocidade = novaVel; }
@@ -91,21 +106,10 @@ void Entidade::cair() { setVel(getVel() + gravidade); }
 
 void Entidade::setHitbox(sf::IntRect& hitbox) { this->hitbox = hitbox; }
 
-sf::IntRect Entidade::getHitbox() const {
-  if (ehPlataforma(id)) {
-    return sf::IntRect(pos.x, pos.y, 128, 16);
-  } else {
-    return sf::IntRect(pos.x, pos.y, 16, 16);
-  }
-}
+sf::IntRect Entidade::getHitbox() const { return hitbox; }
 
 void Entidade::desenhar() {
   if (pGG) {
-    if (ehPersonagem(id)) {
-      pSprite->setPosition(pos - sf::Vector2f{16 * 3, 16 * 3});
-    } else {
-      pSprite->setPosition(pos);
-    }
     pGG->desenharEnte(this);
   } else {
     std::cerr << "erro: Entidade::desenhar() => pGG == nullptr";

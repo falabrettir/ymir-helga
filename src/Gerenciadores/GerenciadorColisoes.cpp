@@ -36,26 +36,17 @@ GerenciadorColisoes *GerenciadorColisoes::getInstancia() {
 
 sf::Vector2f GerenciadorColisoes::resolverColisao(Entidades::Entidade *e1,
                                                   Entidades::Entidade *e2) {
-  sf::Vector2 p1 = e1->getPos();
-  sf::Vector2 p2 = e2->getPos();
+  sf::IntRect h1 = e1->getHitbox();
+  sf::IntRect h2 = e2->getHitbox();
+  sf::IntRect interseccao;
 
-  sf::Vector2 t1 = e1->getTamanho();
-  sf::Vector2 t2 = e2->getTamanho();
+  if (h1.intersects(h2, interseccao)) {
+    sf::Vector2f ds(interseccao.width, interseccao.height);
 
-  // Distancia entre os centros dos retangulos
-  // Se a componente X for negativa, e2 esta mais para a direita
-  // Se a componente Y for negativa, e2 esta mais para baixo
-  sf::Vector2f dc(std::fabs((p1.x + t1.x / 2.0f) - (p2.x + t2.x / 2.0f)),
-                  std::fabs((p1.y + t1.y / 2.0f) - (p2.y + t2.y / 2.0f)));
+    return ds;
+  }
 
-  // Distancia maxima entre o centro dos retangulos antes de haver interseccao
-  sf::Vector2f metadeRect(t1.x / 2.0f + t2.x / 2.0f, t1.y / 2.0f + t2.y / 2.0f);
-
-  // Vetor de deslocamento
-  // Negativo se houver interseccao
-  sf::Vector2f ds(dc.x - metadeRect.x, dc.y - metadeRect.y);
-
-  return ds;
+  return {0, 0};
 }
 
 void GerenciadorColisoes::incluirPers(

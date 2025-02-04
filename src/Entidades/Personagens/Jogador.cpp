@@ -85,7 +85,7 @@ void Jogador::aplicaLentidao(float viscosidade) {
 void Jogador::executar() {
   pContr->controlarJogador();
 
-  pGC->notificaColisao(this);
+  pGC->notificarColisao(this);
 
   if (!getNoChao()) cair();
 
