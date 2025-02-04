@@ -1,18 +1,21 @@
 #include "Ente.h"
-#include "Gerenciadores/GerenciadorGrafico.h"
+
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <cstdlib>
 #include <iostream>
 #include <string>
 
-int Ente::cont(0);
+#include "Gerenciadores/GerenciadorGrafico.h"
 
-Gerenciadores::Gerenciador_Grafico *Ente::pGG(nullptr);
+Gerenciadores::GerenciadorGrafico *Ente::pGG(
+    Gerenciadores::GerenciadorGrafico::getInstancia());
 
-Ente::Ente() : id(cont++) {
+Ente::Ente(ID id) : id(id) {
   pSprite = new sf::Sprite();
   pTexture = new sf::Texture();
+  if (pGG == nullptr) pGG = Gerenciadores::GerenciadorGrafico::getInstancia();
   setTarget();
 }
 
@@ -20,31 +23,23 @@ Ente::~Ente() {
   delete pSprite;
   delete pTexture;
   delete pAlvo;
-  cont--;
-}
-
-void Ente::setGerenciadorGrafico(Gerenciadores::Gerenciador_Grafico *ppGG) {
-  if (ppGG != nullptr) {
-    pGG = ppGG;
-  }
 }
 
 void Ente::atualizaSprite(sf::Texture *pTexture) {
-  std::clog << "funcao Ente::atualizaSprite" << std::endl;
   pSprite->setTexture(*pTexture);
-  pSprite->setTextureRect(sf::IntRect(0, 0, 100, 100));
+  // pSprite->setTextureRect({0, 0, 48, 48});
   pSprite->setScale(3.f, 3.f);
 }
 
-bool Ente::setTexture(const std::string &path) {
+bool Ente::setTextura(const std::string &path) {
   std::string filePath = ROOT;
   filePath += path;
   if (pTexture->loadFromFile(filePath)) {
     atualizaSprite(pTexture);
     return true;
   } else {
-    std::cerr << "Erro em loadFromFile" << std::endl;
-    return false;
+    std::cerr << "erro: loadFromFile()\n";
+    exit(EXIT_FAILURE);
   }
 }
 
@@ -54,7 +49,8 @@ void Ente::setTarget() {
   if (pGG) {
     pAlvo = pGG->getJanela();
   } else {
-    std::cerr << "Erro em setTarget" << std::endl;
+    std::cerr << "erro: Ente::setTarget() => pGG == nullptr\n";
+    exit(EXIT_FAILURE);
   }
 }
 
@@ -62,6 +58,8 @@ void Ente::desenhar() {
   if (pGG)
     pGG->desenharEnte(this);
   else {
-    std::clog << "Nullptr em desenharEnte" << std::endl;
+    std::cerr << "erro: Ente::desenhar() => pGG == nullptr";
+    exit(EXIT_FAILURE);
   }
 }
+const ID Ente::getId() const { return this->id; }

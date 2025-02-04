@@ -1,19 +1,20 @@
 #pragma once
 
+#include <SFML/Window/Keyboard.hpp>
+
 #include "Gerenciadores/GerenciadorInput.h"
 #include "Observer.h"
-#include <SFML/Window/Keyboard.hpp>
 
 typedef sf::Keyboard::Key Key;
 
 namespace Entidades::Personagens {
 class Jogador;
-} // namespace Entidades::Personagens
+}  // namespace Entidades::Personagens
 
 namespace Controladores {
 
 class Controlador_Jogador : public Observer {
-private:
+ private:
   Entidades::Personagens::Jogador *pJog;
   std::map<Key, bool> teclasPressionadas;
   Key direita;
@@ -21,7 +22,7 @@ private:
   Key pulo;
   Key ataque;
 
-public:
+ public:
   Controlador_Jogador();
   ~Controlador_Jogador();
 
@@ -38,4 +39,4 @@ public:
   void controlarJogador();
 };
 
-} // namespace Controladores
+}  // namespace Controladores

@@ -1,37 +1,35 @@
 #pragma once
 
-#include "Gerenciadores/GerenciadorGrafico.h"
-#include "Gerenciadores/GerenciadorInput.h"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Window.hpp>
+
+#include "Gerenciadores/GerenciadorGrafico.h"
+#include "Gerenciadores/GerenciadorInput.h"
 
 namespace Entidades::Personagens {
 class Jogador;
 
-} // namespace Personagens
+}  // namespace Entidades::Personagens
 
 namespace Gerenciadores {
 
-class Gerenciador_Eventos {
-private:
-  static Gerenciador_Eventos *instancia;
-
+class GerenciadorEventos {
+ private:
+  static GerenciadorEventos *instancia;
   sf::Window *pJanela;
-  Gerenciador_Grafico *pGG;
-  Gerenciador_Input *pGI;
+  GerenciadorGrafico *pGG;
+  GerenciadorInput *pGI;
 
-private:
-  Gerenciador_Eventos();
-  ~Gerenciador_Eventos();
-  Gerenciador_Eventos(const Gerenciador_Eventos &) = delete;
-  Gerenciador_Eventos &operator=(const Gerenciador_Eventos &) = delete;
+ private:
+  GerenciadorEventos();
+  ~GerenciadorEventos();
+  GerenciadorEventos(const GerenciadorEventos &) = delete;
+  GerenciadorEventos &operator=(const GerenciadorEventos &) = delete;
 
-public:
-  static Gerenciador_Eventos *getInstancia();
+ public:
+  static GerenciadorEventos *getInstancia();
 
-  void setGG(Gerenciador_Grafico *pGG);
-  void setGI(Gerenciador_Input *pGI);
   void processaEventos();
 };
 
-} // namespace Gerenciadores
+}  // namespace Gerenciadores

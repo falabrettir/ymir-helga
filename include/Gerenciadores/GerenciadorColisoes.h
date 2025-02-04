@@ -1,35 +1,39 @@
 #pragma once
-#include "Entidades/Obstaculos/Plataforma.h"
-#include "Listas/ListaEntidades.h"
+
 #include <SFML/System/Vector2.hpp>
 #include <list>
 #include <vector>
-namespace Entidades {
-namespace Personagens {
-class Personagem;
-} // namespace Personagens
-} // namespace Entidades
-namespace Gerenciadores {
-class Gerenciador_Colisoes {
-private:
-  static Gerenciador_Colisoes *instancia;
-  std::vector<Entidades::Personagens::Personagem *> vecChar;
-  std::list<Entidades::Obstaculos::Obstaculo *> listObst;
-  // std::set<Entidades::Proj> setProj;
-private:
-  // Singleton
-  Gerenciador_Colisoes();
-  Gerenciador_Colisoes(const Gerenciador_Colisoes &) = delete;
-  Gerenciador_Colisoes &operator=(const Gerenciador_Colisoes &) = delete;
-  ~Gerenciador_Colisoes();
 
-public:
-  static Gerenciador_Colisoes *getInstancia();
-  sf::Vector2<float> verificaColisao(Entidades::Entidade *e1,
-                                     Entidades::Entidade *e2);
-  void incluirChar(Entidades::Personagens::Personagem *pPers);
+#include "Entidades/Obstaculos/Obstaculo.h"
+#include "Entidades/Personagens/Personagem.h"
+#include "Entidades/Projetil.h"
+
+namespace Gerenciadores {
+
+class GerenciadorColisoes {
+ private:
+  static GerenciadorColisoes *instancia;
+  std::vector<Entidades::Personagens::Personagem *> vecPers;
+  std::list<Entidades::Obstaculos::Obstaculo *> listObst;
+  std::set<Entidades::Projetil *> setProj;
+
+ private:
+  // Singleton
+  GerenciadorColisoes();
+  GerenciadorColisoes(const GerenciadorColisoes &) = delete;
+  GerenciadorColisoes &operator=(const GerenciadorColisoes &) = delete;
+  ~GerenciadorColisoes();
+
+ public:
+  static GerenciadorColisoes *getInstancia();
+
+  sf::Vector2f verificaColisao(Entidades::Entidade *e1,
+                               Entidades::Entidade *e2);
+
+  void incluirPers(Entidades::Personagens::Personagem *pPers);
   void incluirObst(Entidades::Obstaculos::Obstaculo *pObst);
-  // void incluirProj(Entidades::Projetil* pProj);
-  void executar();
+  void incluirProj(Entidades::Projetil *pProj);
+  void notificaColisao(Entidades::Entidade *sender);
 };
-} // namespace Gerenciadores
+
+}  // namespace Gerenciadores

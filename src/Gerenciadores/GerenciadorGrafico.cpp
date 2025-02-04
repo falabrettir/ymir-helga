@@ -1,70 +1,94 @@
 #include "Gerenciadores/GerenciadorGrafico.h"
-#include "Ente.h"
+
+#include <SFML/Graphics/Texture.hpp>
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <iostream>
 
+#include "Ente.h"
+
 namespace Gerenciadores {
 
-Gerenciador_Grafico *Gerenciador_Grafico::instancia = nullptr;
+GerenciadorGrafico *GerenciadorGrafico::instancia = nullptr;
 
-Gerenciador_Grafico::Gerenciador_Grafico() : deltaTempo(0.f) {
+GerenciadorGrafico::GerenciadorGrafico() : deltaTempo(0.f) {
   pJanela = new sf::RenderWindow(sf::VideoMode(sf::VideoMode::getDesktopMode()),
-                                 "Skjolder e Helga", sf::Style::Fullscreen);
+                                 "Ymir e Helga", sf::Style::Fullscreen);
   pJanela->setVerticalSyncEnabled(true);
   pJanela->setFramerateLimit(30);
   pJanela->requestFocus();
 
   larguraJanela = pJanela->getSize().x;
   alturaJanela = pJanela->getSize().y;
+  superPixel = new sf::Font;
+
+  carregarFonte("/assets/SuperPixel-m2L8j.ttf");
 
   relogio.restart();
 }
 
-Gerenciador_Grafico::~Gerenciador_Grafico() {
+GerenciadorGrafico::~GerenciadorGrafico() {
   pJanela = nullptr;
-  instancia = nullptr;
+  delete instancia;
 }
 
-Gerenciador_Grafico *Gerenciador_Grafico::getInstancia() {
-  if (instancia == nullptr) {
-    instancia = new Gerenciador_Grafico();
+GerenciadorGrafico *GerenciadorGrafico::getInstancia() {
+  if (!instancia) {
+    instancia = new GerenciadorGrafico();
   }
   return instancia;
 }
 
-bool Gerenciador_Grafico::janelaAberta() { return pJanela->isOpen(); }
+bool GerenciadorGrafico::janelaAberta() { return pJanela->isOpen(); }
 
-void Gerenciador_Grafico::display() { pJanela->display(); }
+void GerenciadorGrafico::display() { pJanela->display(); }
 
-void Gerenciador_Grafico::clear() { pJanela->clear(); }
+void GerenciadorGrafico::clear() { pJanela->clear(); }
 
-void Gerenciador_Grafico::desenharEnte(Ente *pE) {
+void GerenciadorGrafico::desenharEnte(Ente *pE) {
   if (pJanela && pE) {
     pJanela->draw(pE->getSprite());
   } else {
-    std::cerr << "parametro invalido: Gerenciador_Grafico::desenharEnte()\n";
+    std::cerr
+        << "erro: parametro invalido: Gerenciador_Grafico::desenharEnte()\n";
+    exit(EXIT_FAILURE);
   }
 }
 
-void Gerenciador_Grafico::fecharJanela() {
+void GerenciadorGrafico::fecharJanela() {
   pJanela->close();
   pJanela = nullptr;
 }
 
-sf::RenderWindow *Gerenciador_Grafico::getJanela() const { return pJanela; }
+void GerenciadorGrafico::carregarFonte(const std::string &path) {
+  std::string filePath = ROOT;
+  filePath += path;
+  std::cerr << filePath << '\n';
+  if (!superPixel->loadFromFile(filePath)) {
+    std::cerr << "Erro em loadFromFile\n";
+    exit(EXIT_FAILURE);
+  }
+}
 
-void Gerenciador_Grafico::atualizaDeltaTempo() {
+sf::Font *GerenciadorGrafico::getFonte() const {
+  if (superPixel == nullptr) {
+    std::cerr << "Erro em getFonte() => nullptr em SuperPixel!\n";
+    exit(EXIT_FAILURE);
+  }
+  return superPixel;
+}
+
+sf::RenderWindow *GerenciadorGrafico::getJanela() const { return pJanela; }
+
+void GerenciadorGrafico::atualizaDeltaTempo() {
   deltaTempo = relogio.restart().asMilliseconds();
 }
 
-const float Gerenciador_Grafico::getDeltaTempo() const { return deltaTempo; }
+const float GerenciadorGrafico::getDeltaTempo() const { return deltaTempo; }
 
-const float Gerenciador_Grafico::getLarguraJanela() const {
+const float GerenciadorGrafico::getLarguraJanela() const {
   return larguraJanela;
 }
-const float Gerenciador_Grafico::getAlturaJanela() const {
-  return alturaJanela;
-}
+const float GerenciadorGrafico::getAlturaJanela() const { return alturaJanela; }
 
-} // namespace Gerenciadores
+}  // namespace Gerenciadores

@@ -8,28 +8,60 @@ add_library(jogo
   # Raiz do projeto
   Jogo.cpp
   Ente.cpp
-  Observer.cpp
-  Subject.cpp
+  State.cpp
+
+  # Diretorio Observer
+  Observer/Observer.cpp
+  Observer/Subject.cpp
 
   # Diretorio Gerenciadores
-  Gerenciadores/GerenciadorGrafico.cpp
+  Gerenciadores/GerenciadorColisoes.cpp
+  Gerenciadores/GerenciadorEstados.cpp
   Gerenciadores/GerenciadorEventos.cpp
+  Gerenciadores/GerenciadorGrafico.cpp
   Gerenciadores/GerenciadorInput.cpp
   Gerenciadores/GerenciadorColisoes.cpp
 
   # Diretorio Controladores
   Controladores/ControladorJogador.cpp
+  Controladores/ControladorMenu.cpp
 
   # Diretorio Entidades
   Entidades/Entidade.cpp
-  Entidades/Personagens/Jogador.cpp
-  Entidades/Personagens/Personagem.cpp
+  Entidades/Projetil.cpp
+
+  # Entidades::Personagens
+  Entidades/Personagens/Esqueleto.cpp
   Entidades/Personagens/Inimigo.cpp
+  Entidades/Personagens/Jogador.cpp
+  Entidades/Personagens/Mago.cpp
+  Entidades/Personagens/Personagem.cpp
   Entidades/Personagens/Slime.cpp
-  Entidades/Personagens/Skjolder.cpp
-  Entidades/Personagens/Helga.cpp
+
+  # Diretorio Fabrica
+  Fabrica/FabricaEntidadesCaverna.cpp
+  Fabrica/FabricaEntidades.cpp
+  Fabrica/FabricaEntidadesPlanicie.cpp
+  Fabrica/FabricaProjeteis.cpp
+
+  # Entidades::Obstaculos
+  Entidades/Obstaculos/Espinho.cpp
+  Entidades/Obstaculos/Gosma.cpp
   Entidades/Obstaculos/Obstaculo.cpp
   Entidades/Obstaculos/Plataforma.cpp
+
+  # Diretorio Fases
+  Fases/Caverna.cpp
+  Fases/Fase.cpp
+  Fases/Planicie.cpp
+
+  #Diretorio Menu
+  Menu/Menu.cpp
+  Menu/MenuPrincipal.cpp
+  Menu/Botao.cpp
+
+  # Diretorio Listas
+  Listas/ListaEntidade.cpp
 )
 
 target_link_libraries(jogo

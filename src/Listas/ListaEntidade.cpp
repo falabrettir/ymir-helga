@@ -1,17 +1,40 @@
+#include "Listas/Lista.h"
 #include "Listas/ListaEntidades.h"
 
 namespace Listas {
+
 ListaEntidades::ListaEntidades() : LEs() {}
-ListaEntidades::~ListaEntidades() { LEs.limpar(); }
-void ListaEntidades::incluir(Entidades::Entidade *pE) { LEs.incluir(pE); }
-void ListaEntidades::deletar(Entidades::Entidade *pE) { LEs.remover(pE); }
+
+ListaEntidades::~ListaEntidades() { limpar(); }
+
+void ListaEntidades::incluir(Entidades::Entidade *e) {
+  if (e != nullptr)
+    LEs.incluir(e);
+}
+
+void ListaEntidades::deletar(Entidades::Entidade *e) {
+  if (e != nullptr)
+    LEs.remover(e);
+}
+
 const int ListaEntidades::getSize() const { return LEs.getSize(); }
+
 void ListaEntidades::limpar() { LEs.limpar(); }
-Lista<Entidades::Entidade>::Iterator ListaEntidades::begin() const {
+
+Listas::Lista<Entidades::Entidade>::Iterator ListaEntidades::begin() {
   return LEs.begin();
 }
-Lista<Entidades::Entidade>::Iterator ListaEntidades::end() const {
+Listas::Lista<Entidades::Entidade>::Iterator ListaEntidades::end() {
   return LEs.end();
+}
+
+void ListaEntidades::executar() {
+  Entidades::Entidade *aux = nullptr;
+  for (int i = 0; i < LEs.getSize(); i++) {
+    aux = LEs.operator[](i);
+    aux->executar();
+    aux->desenhar();
+  }
 }
 
 } // namespace Listas

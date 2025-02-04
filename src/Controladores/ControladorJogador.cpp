@@ -1,10 +1,15 @@
 #include "Controladores/ControladorJogador.h"
-#include "Entidades/Personagens/Jogador.h"
-#include "Observer.h"
+
+#include <SFML/Graphics/Rect.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <cstdlib>
 #include <iostream>
 #include <utility>
+
+#include "Entidades/Personagens/Jogador.h"
+#include "Observer.h"
 
 namespace Controladores {
 
@@ -25,11 +30,11 @@ void Controlador_Jogador::setJog(Entidades::Personagens::Jogador *pJog) {
   } else {
     std::cerr << "error: parametro invalido em Controlador_Jogador::setJog(), "
                  "pJog == nullptr\n";
+    exit(EXIT_FAILURE);
   }
 }
 
 void Controlador_Jogador::setControles() {
-
   if (pJog->getPrimeiroJog()) {
     direita = sf::Keyboard::D;
     esquerda = sf::Keyboard::A;
@@ -55,10 +60,9 @@ bool Controlador_Jogador::acharTecla(Key tecla) {
 
 void Controlador_Jogador::atualizarTeclasPressionadas(Key tecla) {
   if (acharTecla(tecla)) {
-
     teclasPressionadas[tecla] = true;
 
-    // Considerar que a ultima tecla de novaVelimento apertada tem prioridade
+    // Considerar que a ultima tecla apertada tem prioridade
     if (tecla == direita)
       teclasPressionadas[esquerda] = false;
     else if (tecla == esquerda)
@@ -74,18 +78,23 @@ void Controlador_Jogador::atualizarTeclasSoltas(Key tecla) {
 
 void Controlador_Jogador::controlarJogador() {
   if (pJog) {
-
     // Controla movimento na horizontal
-    if (teclasPressionadas[direita])
+    if (teclasPressionadas[direita]) {
       pJog->andarDireita();
-    else if (teclasPressionadas[esquerda])
+    } else if (teclasPressionadas[esquerda]) {
       pJog->andarEsquerda();
-    else
+    } else {
       pJog->naoAndar();
+    }
 
-    if (teclasPressionadas[pulo])
+    if (teclasPressionadas[pulo]) {
       pJog->pular();
+    }
+
+    if (teclasPressionadas[ataque]) {
+      pJog->atacar();
+    }
   }
 }
 
-} // namespace Controladores
+}  // namespace Controladores

@@ -1,19 +1,29 @@
 #include "Entidades/Personagens/Personagem.h"
+
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <cstdlib>
+#include <iostream>
 
-using namespace Entidades::Personagens;
+namespace Entidades::Personagens {
 
-Personagem::Personagem()
-    : Entidade(), hp(100), numVidas(3), olhandoEsquerda(false) {}
+Fases::Fase* Personagem::pFase = nullptr;
+
+Personagem::Personagem(ID id) : Entidade(id), hp(100), dano(0) {}
 
 Personagem::~Personagem() {}
 
-void Personagem::mover() {
-  sf::Vector2f novaPos = getPos() + (velocidade * pGG->getDeltaTempo());
-  setPos(novaPos);
-  pSprite->setPosition(novaPos);
+void Personagem::setFase(Fases::Fase* fase) {
+  if (!fase) {
+    std::cerr << "erro: Personagem::setFase(...) => fase == nullptr\n";
+    exit(EXIT_FAILURE);
+  }
+  pFase = fase;
 }
+void Personagem::tomarDano(int dano) { hp -= dano; }
 
-void Personagem::setOlhandoEsquerda(bool olhandoEsquerda) {
-  this->olhandoEsquerda = olhandoEsquerda;
-}
+void Personagem::setDano(const int dano) { this->dano = dano; }
+
+const int Personagem::getDano() const { return dano; }
+
+}  // namespace Entidades::Personagens

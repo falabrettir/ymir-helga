@@ -1,40 +1,56 @@
-#include "Ente.h"
-#include <SFML/Graphics/Drawable.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/Graphics/Texture.hpp>
+#pragma once
+
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 
+#include "Ente.h"
+
+namespace Gerenciadores {
+class GerenciadorColisoes;
+}
 namespace Entidades {
 
-const float gravidade = 5;
-
 class Entidade : public Ente {
-private:
+ private:
   sf::Vector2f pos;
-  const sf::Vector2f gravidade;
+  sf::Vector2f gravidade;
   sf::Vector2f tamanho;
   bool noChao;
   std::ostream *buffer;
+  bool olhandoEsquerda;
 
-protected:
+ protected:
   sf::Vector2f velocidade;
+  sf::FloatRect hitbox;
+  static Gerenciadores::GerenciadorColisoes *pGC;
 
-public:
-  Entidade();
+ public:
+  Entidade(ID id);
   virtual ~Entidade();
 
+  void atualizaOrientacao();
+  void setOlhandoEsquerda(bool olhandoEsquerda);
+  bool getOlhandoEsquerda();
+
+  void mover();
+  void setPos(sf::Vector2f novaPos);
   void setVel(sf::Vector2f novaVel);
   void setVelX(float velX);
   void setVelY(float velY);
-  void setPos(sf::Vector2f novaPos);
+
   void setNoChao(bool noChao);
+  void setHitbox(sf::FloatRect &hitbox);
+  virtual void colidir(Entidade *pEnt, sf::Vector2f ds = {0, 0}) = 0;
 
   sf::Vector2f getVel() const;
   sf::Vector2f getPos() const;
   bool getNoChao() const;
   sf::Vector2f getSize() const;
+  sf::FloatRect getHitbox() const;
 
   void cair();
+
+  virtual void executar() = 0;
 };
 
-} // namespace Entidades
+}  // namespace Entidades
