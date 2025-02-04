@@ -79,22 +79,22 @@ void Controlador_Jogador::atualizarTeclasSoltas(Key tecla) {
 void Controlador_Jogador::controlarJogador() {
   if (pJog) {
     // Controla movimento na horizontal
-    if (teclasPressionadas[direita]) {
+    if (teclasPressionadas[direita] && !pJog->getDanificando()) {
       pJog->andarDireita();
-    } else if (teclasPressionadas[esquerda]) {
+    } else if (teclasPressionadas[esquerda] && !pJog->getDanificando()) {
       pJog->andarEsquerda();
     } else {
       pJog->naoAndar();
     }
 
-    if (teclasPressionadas[pulo]) {
+    if (teclasPressionadas[pulo] && !pJog->getDanificando()) {
       pJog->pular();
     }
 
-    if (teclasPressionadas[ataque]) {
+    if (teclasPressionadas[ataque] && !pJog->getDanificando()) {
       pJog->atacar();
     }
   }
 }
 
-}  // namespace Controladores
+} // namespace Controladores
