@@ -1,3 +1,4 @@
+#include "Entidades/Entidade.h"
 #include "Listas/Lista.h"
 #include "Listas/ListaEntidades.h"
 
@@ -8,13 +9,11 @@ ListaEntidades::ListaEntidades() : LEs() {}
 ListaEntidades::~ListaEntidades() { limpar(); }
 
 void ListaEntidades::incluir(Entidades::Entidade *e) {
-  if (e != nullptr)
-    LEs.incluir(e);
+  if (e != nullptr) LEs.incluir(e);
 }
 
 void ListaEntidades::deletar(Entidades::Entidade *e) {
-  if (e != nullptr)
-    LEs.remover(e);
+  if (e != nullptr) LEs.remover(e);
 }
 
 const int ListaEntidades::getSize() const { return LEs.getSize(); }
@@ -37,4 +36,4 @@ void ListaEntidades::executar() {
   }
 }
 
-} // namespace Listas
+}  // namespace Listas
