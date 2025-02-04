@@ -1,5 +1,6 @@
 #pragma once
 
+#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Vector2.hpp>
 
@@ -19,7 +20,6 @@ class Fase : public Ente, public States::State {
  protected:
   Gerenciadores::GerenciadorColisoes *pGC;
   Fabricas::FabricaEntidades *pFE;
-  sf::Texture *fundo;
 
   Listas::ListaEntidades listaObstaculos;
   Listas::ListaEntidades listaInimigos;

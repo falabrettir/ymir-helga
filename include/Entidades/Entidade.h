@@ -30,6 +30,7 @@ class Entidade : public Ente {
 
   void atualizaOrientacao();
   void setOlhandoEsquerda(bool olhandoEsquerda);
+  bool getOlhandoEsquerda();
 
   void mover();
   void setPos(sf::Vector2f novaPos);

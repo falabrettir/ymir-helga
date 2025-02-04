@@ -44,6 +44,7 @@ void Mago::aumentarPoder() { poder *= poder; }
 void Mago::executar() {
   perseguir();
   mover();
+  cair();
   if (getVisando()) atacar();
 }
 

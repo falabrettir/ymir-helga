@@ -28,8 +28,7 @@ Fase::Fase()
       listaInimigos(),
       listaProjeteis(),
       pFE(nullptr),
-      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()),
-      fundo(nullptr) {
+      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()) {
   listaObstaculos.limpar();
   listaJogadores.limpar();
   listaInimigos.limpar();
@@ -133,7 +132,8 @@ void Fase::criarMapa(const std::string path) {
   for (int j = 0; std::getline(arquivoMapa, linha); j++) {
     for (int i = 0; i < linha.size(); i++) {
       if (linha[i] != ' ') {
-        novaEntidade = pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
+        novaEntidade =
+            pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
         incluirNaLista(novaEntidade);
         incluirNoGC(novaEntidade);
       }

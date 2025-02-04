@@ -13,7 +13,7 @@ Entidade::Entidade(ID id)
     : Ente(id),
       pos(0, 0),
       velocidade(0, 0),
-      gravidade(0, 0.1),
+      gravidade(0, 0.08),
       tamanho(0, 0),
       noChao(false),
       olhandoEsquerda(false),
@@ -33,10 +33,10 @@ Entidade::Entidade(ID id)
 Entidade::~Entidade() { buffer = nullptr; }
 
 void Entidade::mover() {
-  if (velocidade.x >= 0) {
+  if (velocidade.x > 0) {
     atualizaOrientacao();
     setOlhandoEsquerda(false);
-  } else {
+  } else if (velocidade.x < 0) {
     atualizaOrientacao();
     setOlhandoEsquerda(true);
   }
@@ -58,6 +58,8 @@ void Entidade::atualizaOrientacao() {
     pSprite->setOrigin(0, 0);
   }
 }
+
+bool Entidade::getOlhandoEsquerda() { return olhandoEsquerda; }
 
 void Entidade::setPos(sf::Vector2f novaPos) { pos = novaPos; }
 

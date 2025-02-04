@@ -47,6 +47,8 @@ void Esqueleto::executar() {
   // draw
   perseguir();
   mover();
+  if (!getNoChao()) cair();
   if (getVisando() && flecha == nullptr) atacar();
 }
+
 }  // namespace Entidades::Personagens::Inimigos

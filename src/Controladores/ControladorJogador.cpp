@@ -34,8 +34,6 @@ void Controlador_Jogador::setJog(Entidades::Personagens::Jogador *pJog) {
   }
 }
 
-// TODO: Talvez ser singleton e mover cada jogador de acordo com suas teclas
-// de controle
 void Controlador_Jogador::setControles() {
   if (pJog->getPrimeiroJog()) {
     direita = sf::Keyboard::D;
@@ -91,6 +89,10 @@ void Controlador_Jogador::controlarJogador() {
 
     if (teclasPressionadas[pulo]) {
       pJog->pular();
+    }
+
+    if (teclasPressionadas[ataque]) {
+      pJog->atacar();
     }
   }
 }
