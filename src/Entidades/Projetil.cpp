@@ -36,7 +36,8 @@ Projetil::Projetil(Personagens::Personagem *pPersDono, int impulso)
   vel.x = 8 * MAXVEL;
   vel.x += vel.x * impulso;
   vel.y = -0.35;
-  if (pPersDono->getOlhandoEsquerda()) vel.x *= -1;
+  if (pPersDono->getOlhandoEsquerda())
+    vel.x *= -1;
 
   setVel(vel);
 }
@@ -55,7 +56,7 @@ void Projetil::colidir(Entidade *pE, sf::Vector2f ds) {
   sf::Vector2f posEntidade = pE->getPos();
   sf::Vector2f velEntidade = pE->getVel();
 
-  if (ds.x < 0.f && ds.y < 0.f) {  // Colidiu
+  if (ds.x < 0.f && ds.y < 0.f) { // Colidiu
     // Colidiu com plataforma -> deletar
     // Colidiu com um personagem -> danificar e deletar
     this->setPos({-6000, -6000});
@@ -63,7 +64,7 @@ void Projetil::colidir(Entidade *pE, sf::Vector2f ds) {
 
     if (ehPersonagem(pE->getId())) {
       dynamic_cast<Entidades::Personagens::Personagem *>(pE)->tomarDano(
-          getDano());
+          getDano(), this->getOlhandoEsquerda());
     }
   }
 }
@@ -74,4 +75,4 @@ void Projetil::executar() {
   pGC->notificaColisao(this);
 }
 
-}  // namespace Entidades
+} // namespace Entidades

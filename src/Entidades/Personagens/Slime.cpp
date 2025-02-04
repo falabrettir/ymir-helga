@@ -22,20 +22,24 @@ void Slime::colidir(Entidade *pEnt, sf::Vector2f ds) {
   if (ds.x < 0 && ds.y < 0) {
     if (pEnt->getId() == ID::IDjogador) {
       dynamic_cast<Jogador *>(pEnt)->aplicaLentidao(viscosidade);
-      dynamic_cast<Jogador *>(pEnt)->tomarDano(getDano());
+      dynamic_cast<Jogador *>(pEnt)->tomarDano(getDano(),
+                                               this->getOlhandoEsquerda());
     } else if (pEnt->getId() == ID::IDprojetil) {
       if (dynamic_cast<Projetil *>(pEnt)->getDono()->getId() == ID::IDjogador) {
-        tomarDano(dynamic_cast<Projetil *>(pEnt)->getDano());
+        tomarDano(dynamic_cast<Projetil *>(pEnt)->getDano(),
+                  pEnt->getOlhandoEsquerda());
       }
     }
   }
 }
 void Slime::executar() {
+  atualizarKnockback();
   perseguir();
   mover();
-  if (!getNoChao()) cair();
+  if (!getNoChao())
+    cair();
 }
 
 void Slime::atacar() {}
 
-}  // namespace Entidades::Personagens::Inimigos
+} // namespace Entidades::Personagens::Inimigos

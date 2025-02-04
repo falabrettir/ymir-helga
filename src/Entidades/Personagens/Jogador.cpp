@@ -82,6 +82,7 @@ void Jogador::aplicaLentidao(float viscosidade) {
 }
 
 void Jogador::executar() {
+  atualizarKnockback();
   setDanificando(false);
   pContr->controlarJogador();
 
@@ -113,7 +114,8 @@ void Jogador::colidir(Entidade *pEnt, sf::Vector2f ds) {
   if (ds.x < 0 && ds.y < 0) {
     if (pEnt->getId() == ID::IDesqueleto || pEnt->getId() == ID::IDmago ||
         pEnt->getId() == ID::IDslime) {
-      this->tomarDano(dynamic_cast<Personagem *>(pEnt)->getDano());
+      this->tomarDano(dynamic_cast<Personagem *>(pEnt)->getDano(),
+                      pEnt->getOlhandoEsquerda());
     }
   }
 }

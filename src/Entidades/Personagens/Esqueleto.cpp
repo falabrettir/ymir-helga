@@ -45,10 +45,13 @@ void Esqueleto::atacar() {
 }
 void Esqueleto::executar() {
   // draw
+  atualizarKnockback();
   perseguir();
   mover();
-  if (!getNoChao()) cair();
-  if (getVisando() && flecha == nullptr) atacar();
+  if (!getNoChao())
+    cair();
+  if (getVisando() && flecha == nullptr)
+    atacar();
 }
 
-}  // namespace Entidades::Personagens::Inimigos
+} // namespace Entidades::Personagens::Inimigos
