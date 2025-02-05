@@ -8,6 +8,7 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
+#include <iostream>
 #include <list>
 
 #include "Entidades/Obstaculos/Obstaculo.h"
@@ -36,17 +37,19 @@ GerenciadorColisoes *GerenciadorColisoes::getInstancia() {
 
 sf::Vector2f GerenciadorColisoes::resolverColisao(Entidades::Entidade *e1,
                                                   Entidades::Entidade *e2) {
-  sf::IntRect h1 = e1->getHitbox();
-  sf::IntRect h2 = e2->getHitbox();
-  sf::IntRect interseccao;
+  sf::Vector2f pos1 = e1->getPos();
+  sf::Vector2f pos2 = e2->getPos();
 
-  if (h1.intersects(h2, interseccao)) {
-    sf::Vector2f ds(interseccao.width, interseccao.height);
+  sf::Vector2f tam1 = e1->getSize();
+  sf::Vector2f tam2 = e2->getSize();
 
-    return ds;
-  }
-
-  return {0, 0};
+  sf::Vector2f distanciaEntreCentros(
+      fabs((pos1.x + tam1.x / 2.0f) - (pos2.x + tam2.x / 2.0f)),
+      fabs((pos1.y + tam1.y / 2.0f) - (pos2.y + tam2.y / 2.0f)));
+  sf::Vector2f somaMetadeRectangulo(tam1.x / 2.0f + tam2.x / 2.0f,
+                                    tam1.y / 2.0f + tam2.y / 2.0f);
+  return sf::Vector2f(distanciaEntreCentros.x - somaMetadeRectangulo.x,
+                      distanciaEntreCentros.y - somaMetadeRectangulo.y);
 }
 
 void GerenciadorColisoes::incluirPers(
@@ -63,6 +66,8 @@ void GerenciadorColisoes::incluirProj(Entidades::Projetil *pProj) {
 }
 
 void GerenciadorColisoes::notificarColisao(Entidades::Entidade *sender) {
+  // ==========================================================================
+  // Checar colisao de projeteis com todos os outros tipos de entidades
   if (ehProjetil(sender->getId())) {
     // colisao projeteis-personagens
     std::vector<Entidades::Personagens::Personagem *>::iterator itPers;
@@ -76,6 +81,8 @@ void GerenciadorColisoes::notificarColisao(Entidades::Entidade *sender) {
       sender->colidir(*itObst, resolverColisao(sender, *itObst));
     }
 
+    // ==========================================================================
+    // Checar colisao de obstaculos com personagens
   } else if (ehObstaculo(sender->getId())) {
     // colisao obstaculos-personagens
     std::vector<Entidades::Personagens::Personagem *>::iterator itPers;
@@ -84,6 +91,8 @@ void GerenciadorColisoes::notificarColisao(Entidades::Entidade *sender) {
     }
 
   } else {
+    // ==========================================================================
+    // Checar colisao de personagens com personagens
     // Colisao Personagem-Personagem
     std::vector<Entidades::Personagens::Personagem *>::iterator itPers;
     for (itPers = vecPers.begin(); itPers != vecPers.end(); ++itPers) {

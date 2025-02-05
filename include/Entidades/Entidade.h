@@ -20,7 +20,7 @@ class Entidade : public Ente {
 
  protected:
   sf::Vector2f velocidade;
-  sf::IntRect hitbox;
+  sf::FloatRect hitbox;
   static Gerenciadores::GerenciadorColisoes *pGC;
 
  public:
@@ -38,14 +38,14 @@ class Entidade : public Ente {
   void setVelY(float velY);
 
   void setNoChao(bool noChao);
-  void setHitbox(sf::IntRect &hitbox);
+  void setHitbox(sf::FloatRect &hitbox);
   virtual void colidir(Entidade *pEnt, sf::Vector2f ds = {0, 0}) = 0;
 
   sf::Vector2f getVel() const;
   sf::Vector2f getPos() const;
   bool getNoChao() const;
   sf::Vector2f getSize() const;
-  sf::IntRect getHitbox() const;
+  sf::FloatRect getHitbox() const;
 
   void desenhar();
 

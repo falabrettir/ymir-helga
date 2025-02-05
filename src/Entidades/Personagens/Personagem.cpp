@@ -26,4 +26,6 @@ void Personagem::setDano(const int dano) { this->dano = dano; }
 
 const int Personagem::getDano() const { return dano; }
 
+void Personagem::executar() { setNoChao(false); }
+
 }  // namespace Entidades::Personagens

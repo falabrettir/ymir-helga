@@ -21,10 +21,10 @@ Entidade::Entidade(ID id)
       olhandoEsquerda(false),
       buffer(nullptr) {
   if (ehPlataforma(id)) {
-    sf::IntRect hitbox(0.f, 0.f, 3 * 128.f, 3 * 16.f);
+    sf::FloatRect hitbox(0.f, 0.f, 3 * 128.f, 3 * 16.f);
     setHitbox(hitbox);
   } else {
-    sf::IntRect hitbox(0, 0, 3 * 16.f, 3 * 16.f);
+    sf::FloatRect hitbox(0, 0, 3 * 16.f, 3 * 16.f);
     setHitbox(hitbox);
   }
 };
@@ -69,19 +69,19 @@ void Entidade::setPos(sf::Vector2f novaPos) {
   pSprite->setPosition(novaPos);
   hitbox.left = novaPos.x;
   hitbox.top = novaPos.y;
-  std::clog << "setPos(...):\n"
-
-               "novaPos = "
-            << novaPos.x << " " << novaPos.y
-
-            << "\npSprite position = " << pSprite->getPosition().x << " "
-            << pSprite->getPosition().y
-            << "\nSprite bounds = " << pSprite->getLocalBounds().width << " "
-            << pSprite->getLocalBounds().height
-
-            << "\nhitbox position: " << hitbox.left << " " << hitbox.top
-            << "\nhitbox bounds: " << hitbox.width << " " << hitbox.height
-            << std::endl;
+  // std::clog << "setPos(...):\n"
+  //
+  //              "novaPos = "
+  //           << novaPos.x << " " << novaPos.y
+  //
+  //           << "\npSprite position = " << pSprite->getPosition().x << " "
+  //           << pSprite->getPosition().y
+  //           << "\nSprite bounds = " << pSprite->getLocalBounds().width << " "
+  //           << pSprite->getLocalBounds().height
+  //
+  //           << "\nhitbox position: " << hitbox.left << " " << hitbox.top
+  //           << "\nhitbox bounds: " << hitbox.width << " " << hitbox.height
+  //           << std::endl;
 }
 
 void Entidade::setVel(sf::Vector2f novaVel) { velocidade = novaVel; }
@@ -99,14 +99,14 @@ sf::Vector2f Entidade::getVel() const { return velocidade; }
 bool Entidade::getNoChao() const { return noChao; }
 
 sf::Vector2<float> Entidade::getSize() const {
-  return static_cast<sf::Vector2f>(pTexture->getSize());
+  return sf::Vector2f(hitbox.width, hitbox.height);
 }
 
 void Entidade::cair() { setVel(getVel() + gravidade); }
 
-void Entidade::setHitbox(sf::IntRect& hitbox) { this->hitbox = hitbox; }
+void Entidade::setHitbox(sf::FloatRect& hitbox) { this->hitbox = hitbox; }
 
-sf::IntRect Entidade::getHitbox() const { return hitbox; }
+sf::FloatRect Entidade::getHitbox() const { return hitbox; }
 
 void Entidade::desenhar() {
   if (pGG) {
