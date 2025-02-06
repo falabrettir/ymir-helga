@@ -4,10 +4,11 @@
 #include <iostream>
 
 #include "Entidades/Obstaculos/Obstaculo.h"
+#include "Gerenciadores/GerenciadorColisoes.h"
 
 namespace Entidades::Obstaculos {
 Gosma::Gosma(const sf::Vector2f &pos)
-    : Obstaculo(ID::IDgosma, pos), pegajosidade(0.6) {
+    : Obstaculo(ID::IDgosma, pos), pegajosidade(0.2) {
   std::clog << "Criando nova gosma\n";
 
   setTextura("/assets/Obstaculos/Gosma.png");

@@ -21,11 +21,13 @@ Slime::~Slime() {}
 void Slime::colidir(Entidade *pEnt) {}
 
 void Slime::executar() {
+  atualizarKnockback();
   perseguir();
   mover();
-  if (!getNoChao()) cair();
+  if (!getNoChao())
+    cair();
 }
 
 void Slime::atacar() {}
 
-}  // namespace Entidades::Personagens::Inimigos
+} // namespace Entidades::Personagens::Inimigos

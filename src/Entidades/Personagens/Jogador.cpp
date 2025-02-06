@@ -21,9 +21,7 @@ Fabricas::FabricaProjeteis *Jogador::fabProj =
     Fabricas::FabricaProjeteis::getInstancia();
 
 Jogador::Jogador(const sf::Vector2f &pos)
-    : Personagem(ID::IDjogador),
-      pContr(nullptr),
-      podePular(true),
+    : Personagem(ID::IDjogador), pContr(nullptr), podePular(true),
       pProj(nullptr) {
   std::clog << "Criando novo jogador\n";
 
@@ -89,11 +87,14 @@ void Jogador::aplicaLentidao(float viscosidade) {
 }
 
 void Jogador::executar() {
+  atualizarKnockback();
+  setDanificando(false);
   pContr->controlarJogador();
 
   setNoChao(false);
 
-  if (!getNoChao()) cair();
+  if (!getNoChao())
+    cair();
 
   mover();
 

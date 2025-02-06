@@ -10,6 +10,8 @@
 #include "Listas/ListaEntidades.h"
 #include "State.h"
 
+class ObservadorFase;
+
 namespace Gerenciadores {
 class GerenciadorColisoes;
 }  // namespace Gerenciadores
@@ -20,6 +22,7 @@ class Fase : public Ente, public States::State {
  protected:
   Gerenciadores::GerenciadorColisoes *pGC;
   Fabricas::FabricaEntidades *pFE;
+  ObservadorFase *thisObs;
 
   Listas::ListaEntidades listaObstaculos;
   Listas::ListaEntidades listaInimigos;

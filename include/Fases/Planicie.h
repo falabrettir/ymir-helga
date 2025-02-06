@@ -13,18 +13,30 @@
 namespace Fases {
 
 class Planicie : public Fase {
- private:
-  const int minOrc = 3;
-  const int maxOrc = 5;
-  int contOrc;
+private:
+  const int minMago;
+  static int contMago;
 
-  const int minSlimes = 3;
-  const int maxSlimes = 5;
-  int contSlime;
+  const int minEsq;
+  static int contEsq;
 
- public:
+  const int minGosma;
+  static int contGosma;
+
+  const int minPlat;
+  static int contPlat;
+
+public:
   Planicie();
   ~Planicie();
+
+  const int getMinEsq() const;
+  const int getMinMago() const;
+  const int getMinGosma() const;
+  const int getMinPlat() const;
+
+  const static int getCont(char tipoEnt);
+  void incrementaContadores(char tipoEnt);
 
   void executar();
   void criarMago(const sf::Vector2f &pos);
@@ -33,4 +45,4 @@ class Planicie : public Fase {
   void criarEspinho(const sf::Vector2f &pos);
 };
 
-}  // namespace Fases
+} // namespace Fases

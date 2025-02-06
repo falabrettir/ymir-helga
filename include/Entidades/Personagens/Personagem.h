@@ -16,20 +16,33 @@ class Personagem : public Entidades::Entidade {
  private:
   int dano;
   int hp;
+  bool danificando;
+  bool emAnimacaoKnockback;
+  float tempoKnockback;
+  float duracaoKnockback;
+  sf::Vector2f direcaoKnockback;
+  bool invencivel;
+  float tempoInvencibilidade;
+  const float DURACAO_INVENCIBILIDADE = 0.4f;  // 1 segundo de invencibilidade
 
  protected:
-  static Fases::Fase* pFase;
+  static Fases::Fase *pFase;
 
  public:
   Personagem(ID id);
   virtual ~Personagem();
 
-  void tomarDano(int dano);
+  void tomarDano(int dano, bool esq = true);
   const int getDano() const;
   void setDano(const int dano);
-  static void setFase(Fases::Fase* fase);
+  void colidir(Entidade *pEnt = nullptr);
   void executar();
-  void colidir(Entidade* pEnt = nullptr);
+  static void setFase(Fases::Fase *fase);
+  void setDanificando(bool danificando);
+  const bool getDanificando() const;
+  void atualizarKnockback();
+  bool getEmAnimacaoKnockback() const { return emAnimacaoKnockback; }
+  void setEmAnimacaoKnockback(bool valor) { emAnimacaoKnockback = valor; }
 };
 
 }  // namespace Personagens

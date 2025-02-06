@@ -19,8 +19,7 @@ Projetil::Projetil(Personagens::Personagem *pPersDono, int impulso)
     : Entidade(ID::IDprojetil), pPersDono(pPersDono), impulso(impulso) {
   std::clog << "Criando projetil\n";
 
-  if (pPersDono->getId() == ID::IDesqueleto ||
-      pPersDono->getId() == ID::IDjogador) {
+  if (pPersDono->getId() == ID::IDesqueleto || pPersDono->getId() == ID::IDjogador) {
     setTextura("/assets/Projeteis/Flecha.png");
   } else if (pPersDono->getId() == ID::IDmago) {
     setTextura("/assets/Projeteis/BolaDeFogo.png");

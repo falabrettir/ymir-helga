@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "Entidades/Personagens/Jogador.h"
+#include "Gerenciadores/GerenciadorColisoes.h"
 
 namespace Entidades::Obstaculos {
 
@@ -24,4 +25,4 @@ void Espinho::obstacular(Entidade *pEnt) {}
 
 void Espinho::colidir(Entidade *pEnt) {}
 
-}  // namespace Entidades::Obstaculos
+} // namespace Entidades::Obstaculos
