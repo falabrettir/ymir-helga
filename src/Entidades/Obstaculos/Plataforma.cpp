@@ -52,29 +52,6 @@ void Plataforma::executar() {
 
 void Plataforma::obstacular(Entidades::Entidade *pEnt) {}
 
-void Plataforma::colidir(Entidades::Entidade *pEnt, sf::Vector2f ds) {
-  sf::Vector2f posEntidade = pEnt->getPos();
-  sf::Vector2f velEntidade = pEnt->getVel();
-
-  if (ds.x < 0.f && ds.y < 0.f) {  // Colidiu
-    if (ds.x > ds.y) {             // Colisao em X
-      if (posEntidade.x < this->getPos().x)
-        posEntidade.x += ds.x;
-      else
-        posEntidade.x -= ds.x;
-      velEntidade.x = 0.0f;
-    } else {                                   // Colisao em Y
-      if (posEntidade.y < this->getPos().y) {  // Colidiu por cima
-        posEntidade.y += ds.y;                 // ds eh negativo
-        pEnt->setNoChao(true);
-      } else {                  // Colidiu por baixo
-        posEntidade.y -= ds.y;  // ds eh negativo
-      }
-      velEntidade.y = 0.0f;
-    }
-  }
-  pEnt->setPos(posEntidade);
-  pEnt->setVel(velEntidade);
-}
+void Plataforma::colidir(Entidades::Entidade *pEnt) {}
 
 }  // namespace Entidades::Obstaculos

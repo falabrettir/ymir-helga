@@ -11,6 +11,8 @@
 #include "Entidades/Projetil.h"
 #include "Mediator.h"
 
+enum class TipoColisao { DANO, LENTIDAO, NONE };
+
 namespace Gerenciadores {
 
 class GerenciadorColisoes : public Mediator {
@@ -36,17 +38,24 @@ class GerenciadorColisoes : public Mediator {
 
   // Funcoes principais
   void notificar(Entidades::Entidade *sender);
+
   void verificarColisoes(Entidades::Entidade *pEnt);
   void verificarProj(Entidades::Entidade *pEnt);
   void verificarInim(Entidades::Entidade *pEnt);
   void verificarJog(Entidades::Entidade *pEnt);
+
   void resolverColisao(Entidades::Entidade *e1, Entidades::Entidade *e2);
+  void resolverProj(Entidades::Entidade *e1, Entidades::Entidade *e2);
+  void resolverJog(Entidades::Entidade *e1, Entidades::Entidade *e2);
+  void resolverInim(Entidades::Entidade *e1, Entidades::Entidade *e2);
 
   // Funcoes auxiliares
   float calcOverlapVert(const Entidades::Entidade *e1,
                         const Entidades::Entidade *e2) const;
   float calcOverlapHor(const Entidades::Entidade *e1,
                        const Entidades::Entidade *e2) const;
+  sf::Vector2f calcOverlap(const Entidades::Entidade *e1,
+                           const Entidades::Entidade *e2) const;
   bool colidiu(const Entidades::Entidade *e1,
                const Entidades::Entidade *e2) const;
   bool colidiuVertical(const Entidades::Entidade *e1,

@@ -3,6 +3,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
 
+#include "Entidades/Entidade.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Personagens/Personagem.h"
 #include "IDs.h"
@@ -15,7 +16,9 @@ Inimigo::Inimigo(ID id) : Personagem(id), visada(500.f), visando(false) {}
 
 Inimigo::~Inimigo() {}
 
-float Inimigo::calculaDistancia(Jogador *pJog) { return fabs(pJog->getPos().x - this->getPos().x); }
+float Inimigo::calculaDistancia(Jogador *pJog) {
+  return fabs(pJog->getPos().x - this->getPos().x);
+}
 
 void Inimigo::adicionarJogador(Jogador *pJog) { setJogadores.insert(pJog); }
 
@@ -50,14 +53,6 @@ void Inimigo::perseguir() {
 }
 const bool Inimigo::getVisando() const { return visando; }
 
-void Inimigo::colidir(Entidade *pEnt,
-                      sf::Vector2f ds) {  // nesse caso, entidade há de ser
-                                          // outro inimigo ou então um jogador
-  if (ds.x < 0 && ds.y < 0) {
-    if (pEnt->getId() == ID::IDjogador) {
-      dynamic_cast<Jogador *>(pEnt)->tomarDano(getDano());
-    }
-  }
-}
+void Inimigo::colidir(Entidade *pEnt) {}
 
 }  // namespace Entidades::Personagens::Inimigos

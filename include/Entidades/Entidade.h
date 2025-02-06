@@ -8,6 +8,9 @@
 namespace Gerenciadores {
 class GerenciadorColisoes;
 }
+
+enum class TipoColisao;
+
 namespace Entidades {
 
 class Entidade : public Ente {
@@ -40,7 +43,7 @@ class Entidade : public Ente {
 
   void setNoChao(bool noChao);
   void setHitbox(sf::FloatRect &hitbox);
-  virtual void colidir(Entidade *pEnt, sf::Vector2f ds = {0, 0}) = 0;
+  virtual void colidir(Entidade *pEnt = nullptr) = 0;
 
   sf::Vector2f getVel() const;
   sf::Vector2f getPos() const;

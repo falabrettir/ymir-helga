@@ -30,7 +30,7 @@ class Jogador : public Personagem {
 
   bool getPrimeiroJog() const;
 
-  void colidir(Entidade *pEnt, sf::Vector2f ds = {0, 0});
+  void colidir(Entidade *pEnt = nullptr);
   void andarDireita();
   void andarEsquerda();
   void naoAndar();

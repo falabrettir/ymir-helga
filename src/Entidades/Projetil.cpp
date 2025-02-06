@@ -47,26 +47,7 @@ int Projetil::getDano() { return getVel().x; }
 
 Personagens::Personagem *Projetil::getDono() { return pPersDono; }
 
-void Projetil::colidir(Entidade *pE, sf::Vector2f ds) {
-  if (pE == pPersDono) {
-    return;
-  }
-
-  sf::Vector2f posEntidade = pE->getPos();
-  sf::Vector2f velEntidade = pE->getVel();
-
-  if (ds.x < 0.f && ds.y < 0.f) {  // Colidiu
-    // Colidiu com plataforma -> deletar
-    // Colidiu com um personagem -> danificar e deletar
-    this->setPos({-6000, -6000});
-    this->setVel({0, 0});
-
-    if (ehPersonagem(pE->getId())) {
-      dynamic_cast<Entidades::Personagens::Personagem *>(pE)->tomarDano(
-          getDano());
-    }
-  }
-}
+void Projetil::colidir(Entidade *pE) {}
 
 void Projetil::executar() {
   mover();

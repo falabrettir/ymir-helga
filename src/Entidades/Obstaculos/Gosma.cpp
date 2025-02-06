@@ -15,13 +15,11 @@ Gosma::Gosma(const sf::Vector2f &pos)
 Gosma::~Gosma() {}
 
 const float Gosma::getPegajosidade() const { return pegajosidade; }
+
 void Gosma::executar() {}
+
 void Gosma::obstacular(Entidade *pEnt) {}
-void Gosma::colidir(Entidade *pEnt, sf::Vector2f ds) {
-  if (ds.x < 0 && ds.y < 0) {
-    if (pEnt->getId() == ID::IDjogador) {
-      dynamic_cast<Personagens::Jogador *>(pEnt)->aplicaLentidao(pegajosidade);
-    }
-  }
-}
+
+void Gosma::colidir(Entidade *pEnt) {}
+
 }  // namespace Entidades::Obstaculos
