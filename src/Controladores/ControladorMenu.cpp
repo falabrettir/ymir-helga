@@ -47,6 +47,7 @@ void ControladorMenu::controlarMenu() {
     } else if (teclasPressionadas[baixo]) {
       menuAtual->baixo();
       teclasPressionadas[baixo] = false;
+
     } else if (teclasPressionadas[selecionar]) {
       ID id = menuAtual->getIdSelecionado();
       teclasPressionadas[selecionar] = false;
@@ -67,8 +68,12 @@ void ControladorMenu::controlarMenu() {
 
         case (ID::IDbotaosair): {
           pGS->popEstado();
+          pGS->popEstado();
         }
-
+        case (ID::IDbotaocontinuar): {
+          pGS->popEstado();
+        }
+        // TODO: Botao salvar jogada
         default:
           break;
       }

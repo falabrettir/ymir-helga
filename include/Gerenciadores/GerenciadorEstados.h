@@ -1,6 +1,7 @@
 #pragma once
 #include <stack>
 
+#include "IDs.h"
 #include "State.h"
 
 namespace Gerenciadores {
@@ -17,6 +18,7 @@ class GerenciadorEstados {
 
  public:
   static GerenciadorEstados *getInstancia();
+  ID getIdTop();
   void executar();
   void pushEstado(States::State *s);
   States::State *topEstado();

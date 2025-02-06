@@ -15,26 +15,23 @@
 #include "Gerenciadores/GerenciadorColisoes.h"
 #include "IDs.h"
 #include "Listas/ListaEntidades.h"
+#include "ObserverFase.h"
 
 using namespace Entidades;
 
 namespace Fases {
 
 Fase::Fase()
-    : Ente(ID::IDcaverna),
-      States::State(),
-      listaObstaculos(),
-      listaJogadores(),
-      listaInimigos(),
-      listaProjeteis(),
-      pFE(nullptr),
-      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()) {
+    : Ente(ID::IDfase), States::State(ID::IDfase), listaObstaculos(),
+      listaJogadores(), listaInimigos(), listaProjeteis(), pFE(nullptr),
+      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()), thisObs() {
   listaObstaculos.limpar();
   listaJogadores.limpar();
   listaInimigos.limpar();
   listaProjeteis.limpar();
 
   Entidades::Personagens::Personagem::setFase(this);
+  thisObs = new ObservadorFase(this);
 }
 
 Fase::~Fase() {
@@ -50,6 +47,7 @@ void Fase::executar() {
   listaJogadores.executar();
   listaInimigos.executar();
   listaProjeteis.executar();
+  thisObs->executar();
 }
 
 void Fase::incluirNoGC(Entidade *novaEntidade) {
@@ -134,8 +132,11 @@ void Fase::criarMapa(const std::string path) {
       if (linha[i] != ' ') {
         novaEntidade =
             pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
-        incluirNaLista(novaEntidade);
-        incluirNoGC(novaEntidade);
+        std::clog << linha[i] << std::endl;
+        if (novaEntidade != nullptr) {
+          incluirNaLista(novaEntidade);
+          incluirNoGC(novaEntidade);
+        }
       }
     }
   }
@@ -143,4 +144,4 @@ void Fase::criarMapa(const std::string path) {
   arquivoMapa.close();
 }
 
-}  // namespace Fases
+} // namespace Fases
