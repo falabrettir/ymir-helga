@@ -5,7 +5,7 @@
 
 #include "Fabrica/FabricaProjeteis.h"
 #include "Fases/Fase.h"
-
+#include "Gerenciadores/GerenciadorColisoes.h"
 namespace Entidades::Personagens::Inimigos {
 
 Fabricas::FabricaProjeteis *Mago::fabProj =
@@ -16,6 +16,9 @@ Mago::Mago(const sf::Vector2f &pos)
   std::clog << "Criando novo mago\n";
 
   setTextura("/assets/Personagens/Mago.png");
+  pSprite->setTextureRect({16, 16, 16, 16});
+  tamanho = {16, 16};
+  setPos(pos);
 }
 
 Mago::~Mago() { delete bolaDeFogo; }
@@ -42,10 +45,16 @@ void Mago::atacar() {
 void Mago::aumentarPoder() { poder *= poder; }
 
 void Mago::executar() {
+  atualizarKnockback();
+  setDanificando(false);
+  setNoChao(false);
+
+  if (!getNoChao())
+    cair();
   perseguir();
   mover();
-  cair();
-  if (getVisando()) atacar();
+
+  pGC->notificar(this);
 }
 
-}  // namespace Entidades::Personagens::Inimigos
+} // namespace Entidades::Personagens::Inimigos

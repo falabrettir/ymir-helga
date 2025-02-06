@@ -40,7 +40,7 @@ const int Planicie::getCont(char tipoEnt) {
   switch (tipoEnt) {
   case 'E':
     return contEsq;
-  case 'S':
+  case 'W':
     return contMago;
   case 'G':
     return contGosma;
@@ -54,7 +54,7 @@ void Planicie::incrementaContadores(char tipoEnt) {
   switch (tipoEnt) {
   case 'E':
     contEsq++;
-  case 'S':
+  case 'W':
     contMago++;
   case 'G':
     contGosma++;

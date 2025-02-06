@@ -47,7 +47,7 @@ Entidade *FabEntPlanicie::criarEntidade(char tipoEntidade,
       return criarEsqueleto(pos);
     }
     break;
-  case 'S':
+  case 'W':
     if (pP->getCont(tipoEntidade) < pP->getMinMago() || rand() % 5 > 1) {
       pP->incrementaContadores(tipoEntidade);
       return criarMago(pos);

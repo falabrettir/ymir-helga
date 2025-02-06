@@ -13,7 +13,7 @@ namespace Entidades::Personagens::Inimigos {
 
 std::set<Jogador *> Inimigo::setJogadores{};
 
-Inimigo::Inimigo(ID id) : Personagem(id), visada(500.f), visando(false) {
+Inimigo::Inimigo(ID id) : Personagem(id), visada(25.f), visando(false) {
   pGC->incluirInim(this);
 }
 
