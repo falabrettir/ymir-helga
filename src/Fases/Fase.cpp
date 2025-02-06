@@ -87,7 +87,6 @@ void Fase::adicionarProjetil(Entidades::Projetil *novoProjetil) {
   }
 
   incluirNaLista(novoProjetil);
-  incluirNoGC(novoProjetil);
 }
 
 void Fase::criarMapa(const std::string path) {

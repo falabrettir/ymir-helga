@@ -35,7 +35,7 @@ class Personagem : public Entidades::Entidade {
   void tomarDano(int dano, bool esq = true);
   const int getDano() const;
   void setDano(const int dano);
-  void colidir(Entidade *pEnt = nullptr);
+  virtual void colidir(Entidade *pEnt = nullptr) = 0;
   void executar();
   static void setFase(Fases::Fase *fase);
   void setDanificando(bool danificando);

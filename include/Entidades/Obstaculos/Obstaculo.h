@@ -15,7 +15,7 @@ class Obstaculo : public Entidade {
 
   virtual void executar() = 0;
   virtual void obstacular(Entidade *pEnt) = 0;
-  void colidir(Entidade *pEnt = nullptr);
+  virtual void colidir(Entidade *pEnt = nullptr) = 0;
   const bool ehDanoso() const;
 };
 }  // namespace Obstaculos

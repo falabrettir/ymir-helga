@@ -1,7 +1,3 @@
-/*
- * Código adaptado do monitor Daniel Zagroba, disponível em:
- * https://github.com/danzagroba/ROBOT_plus_plus
- */
 #include "Gerenciadores/GerenciadorColisoes.h"
 
 #include <SFML/System/Vector2.hpp>
@@ -137,8 +133,8 @@ void GerenciadorColisoes::verificarProj(Entidades::Entidade *pEnt) {
   for (jogIt = jogadores.begin(); jogIt != jogadores.end(); jogIt++) {
     if (*jogIt) {
       if (colidiu(pEnt, *jogIt)) {
-        pEnt->colidir();
         (*jogIt)->colidir(pEnt);
+        pEnt->colidir();
       }
     } else {
       std::clog << "erro: GerenciadorColisoes::verificarProj(...)\n";
@@ -150,8 +146,8 @@ void GerenciadorColisoes::verificarProj(Entidades::Entidade *pEnt) {
   for (inimIt = inimigos.begin(); inimIt != inimigos.end(); inimIt++) {
     if (*inimIt) {
       if (colidiu(pEnt, *inimIt)) {
-        pEnt->colidir();
         (*inimIt)->colidir(pEnt);
+        pEnt->colidir();
       }
     } else {
       std::clog << "erro: GerenciadorColisoes::verificarProj(...)\n";
@@ -189,7 +185,6 @@ void GerenciadorColisoes::verificarInim(Entidades::Entidade *pEnt) {
   for (jogIt = jogadores.begin(); jogIt != jogadores.end(); jogIt++) {
     if (*jogIt) {
       if (colidiu(pEnt, *jogIt)) {
-        pEnt->colidir(*jogIt);
         (*jogIt)->colidir(pEnt);
       }
     } else {
