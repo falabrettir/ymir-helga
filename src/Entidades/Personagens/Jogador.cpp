@@ -2,6 +2,8 @@
 
 #include <Fases/Fase.h>
 
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 #include <iostream>
 
 #include "Fabrica/FabricaProjeteis.h"
@@ -88,11 +90,20 @@ void Jogador::aplicaLentidao(float viscosidade) {
 void Jogador::executar() {
   pContr->controlarJogador();
 
+  setNoChao(false);
+
   if (!getNoChao()) cair();
 
   mover();
 
   pGC->notificar(this);
+
+  sf::RectangleShape debugShape(tamanho);
+  debugShape.setPosition(pSprite->getPosition());
+  debugShape.setFillColor(sf::Color::Transparent);
+  debugShape.setOutlineColor(sf::Color::Red);
+  debugShape.setOutlineThickness(1);
+  pGG->getJanela()->draw(debugShape);
 }
 
 void Jogador::atacar() {

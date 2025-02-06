@@ -40,7 +40,15 @@ Plataforma::Plataforma(ID id, const sf::Vector2f &pos)
 
 Plataforma::~Plataforma() {}
 
-void Plataforma::executar() { pGC->notificar(this); }
+void Plataforma::executar() {
+  pGC->notificar(this);
+  sf::RectangleShape debugShape(tamanho);
+  debugShape.setPosition(pSprite->getPosition());
+  debugShape.setFillColor(sf::Color::Transparent);
+  debugShape.setOutlineColor(sf::Color::Blue);
+  debugShape.setOutlineThickness(1);
+  pGG->getJanela()->draw(debugShape);
+}
 
 void Plataforma::obstacular(Entidades::Entidade *pEnt) {}
 

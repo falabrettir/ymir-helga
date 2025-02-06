@@ -41,19 +41,15 @@ GerenciadorColisoes *GerenciadorColisoes::getInstancia() {
   return instancia;
 }
 
-// ============================================================================
-// Funcoes de deteccao de colisao e calculo de overlap
-// ============================================================================
-
 float GerenciadorColisoes::calcOverlapVert(
     const Entidades::Entidade *e1, const Entidades::Entidade *e2) const {
   if (e1 && e2) {
-    float distY = (e1->getPos().y + e1->getTamanho().y / 2.f) -
-                  (e2->getPos().y + e2->getTamanho().y / 2.f);
+    float distY = std::abs((e1->getPos().y + e1->getTamanho().y / 2.f) -
+                           (e2->getPos().y + e2->getTamanho().y / 2.f));
     float distColisaoY =
         (e1->getTamanho().y / 2.f) + (e2->getTamanho().y / 2.f);
 
-    return distY - distColisaoY;
+    return distColisaoY - distY;
 
   } else {
     std::cerr << "erro: GerenciadorColisoes::calcOverlapVert(...)\n";
@@ -64,12 +60,12 @@ float GerenciadorColisoes::calcOverlapVert(
 float GerenciadorColisoes::calcOverlapHor(const Entidades::Entidade *e1,
                                           const Entidades::Entidade *e2) const {
   if (e1 && e2) {
-    float distX = (e1->getPos().x + e1->getTamanho().x / 2.f) -
-                  (e2->getPos().x + e2->getTamanho().x / 2.f);
+    float distX = std::abs((e1->getPos().x + e1->getTamanho().x / 2.f) -
+                           (e2->getPos().x + e2->getTamanho().x / 2.f));
     float distColisaoX =
         (e1->getTamanho().x / 2.f) + (e2->getTamanho().x / 2.f);
 
-    return distX - distColisaoX;
+    return distColisaoX - distX;
 
   } else {
     std::cerr << "erro: GerenciadorColisoes::calcOverlapHor(...)\n";
@@ -79,18 +75,18 @@ float GerenciadorColisoes::calcOverlapHor(const Entidades::Entidade *e1,
 
 bool GerenciadorColisoes::colidiuVertical(const Entidades::Entidade *e1,
                                           const Entidades::Entidade *e2) const {
-  return calcOverlapVert(e1, e2) < 0;
+  return calcOverlapVert(e1, e2) > 0;
 }
 
 bool GerenciadorColisoes::colidiuHorizontal(
     const Entidades::Entidade *e1, const Entidades::Entidade *e2) const {
-  return calcOverlapHor(e1, e2) < 0;
+  return calcOverlapHor(e1, e2) > 0;
 }
 
 bool GerenciadorColisoes::colidiu(const Entidade *e1,
                                   const Entidade *e2) const {
   if (e1 && e2)
-    return (colidiuHorizontal(e1, e2) || colidiuVertical(e1, e2));
+    return (colidiuHorizontal(e1, e2) && colidiuVertical(e1, e2));
   else {
     std::cerr << "erro: GerenciadorColisoes::colidiu(...)\n";
     exit(EXIT_FAILURE);
@@ -208,11 +204,11 @@ void GerenciadorColisoes::resolverColisao(Entidade *e1, Entidade *e2) {
     // Colisao entre jogador(e1) e obstaculo(e2)
 
     sf::Vector2f novaPos = e1->getPos();
+    float dx = calcOverlapHor(e1, e2);
+    float dy = calcOverlapVert(e1, e2);
 
     // Descobrir eixo da colisao
-    if (colidiuHorizontal(e1, e2)) {
-      float dx = calcOverlapHor(e1, e2);
-
+    if (dx < dy) {
       // Descobrir direcao da colisao
       if (e1->getPos().x < e2->getPos().x) {
         // Jogador colidiu da esquerda para direita
@@ -224,20 +220,17 @@ void GerenciadorColisoes::resolverColisao(Entidade *e1, Entidade *e2) {
       e1->setVelX(0);
     }
 
-    if (colidiuVertical(e1, e2)) {
-      float dy = calcOverlapVert(e1, e2);
-
+    if (dy <= dx) {
       // Descobrir direcao da colisao
       if (e1->getPos().y < e2->getPos().y) {
         // Jogador caindo
         novaPos.y -= dy;
+        e1->setNoChao(true);
       } else {
         // Jogador dando cabecada
         novaPos.y += dy;
       }
       e1->setVelY(0);
-    } else {
-      e1->setNoChao(false);
     }
 
     e1->setPos(novaPos);
