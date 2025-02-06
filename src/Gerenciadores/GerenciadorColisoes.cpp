@@ -200,7 +200,7 @@ void GerenciadorColisoes::verificarInim(Entidades::Entidade *pEnt) {
   for (obstIt = obstaculos.begin(); obstIt != obstaculos.end(); obstIt++) {
     if (*obstIt) {
       if (colidiu(pEnt, *obstIt)) {
-        pEnt->colidir();
+        pEnt->colidir(*obstIt);
       }
     } else {
       std::clog << "erro: GerenciadorColisoes::verificarInim(...)\n";

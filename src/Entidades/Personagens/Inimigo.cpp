@@ -45,15 +45,20 @@ void Inimigo::perseguir() {
   // If targeting player, chase them
   if (aux != nullptr) {
     setVelX(MAXVEL * 0.5);
+
     sf::Vector2f pos = this->getPos();
     sf::Vector2f jogpos = aux->getPos();
     sf::Vector2f direcao = jogpos - pos;
+
     float magnitude = std::sqrt(direcao.x * direcao.x + direcao.y * direcao.y);
+
     if (magnitude != 0)
       direcao /= magnitude;
+
     sf::Vector2f novaVel;
     novaVel.x = direcao.x * getVel().x;
     setVelX(novaVel.x);
+
   } else { // movimento aleatório
     static float moveTimer = 0.0f;
     static int direcao = 1;

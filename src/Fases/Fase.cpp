@@ -21,15 +21,9 @@ using namespace Entidades;
 namespace Fases {
 
 Fase::Fase()
-    : Ente(ID::IDfase),
-      States::State(ID::IDfase),
-      listaObstaculos(),
-      listaJogadores(),
-      listaInimigos(),
-      listaProjeteis(),
-      pFE(nullptr),
-      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()),
-      thisObs() {
+    : Ente(ID::IDfase), States::State(ID::IDfase), listaObstaculos(),
+      listaJogadores(), listaInimigos(), listaProjeteis(), pFE(nullptr),
+      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()), thisObs() {
   listaObstaculos.limpar();
   listaJogadores.limpar();
   listaInimigos.limpar();
@@ -127,4 +121,4 @@ void Fase::criarMapa(const std::string path) {
   arquivoMapa.close();
 }
 
-}  // namespace Fases
+} // namespace Fases
