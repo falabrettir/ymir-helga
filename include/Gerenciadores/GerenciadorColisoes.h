@@ -11,8 +11,6 @@
 #include "Entidades/Projetil.h"
 #include "Mediator.h"
 
-enum class TipoColisao { DANO, LENTIDAO, NONE };
-
 namespace Gerenciadores {
 
 class GerenciadorColisoes : public Mediator {
@@ -53,10 +51,10 @@ class GerenciadorColisoes : public Mediator {
                          const Entidades::Entidade *e2) const;
 
   void limparEntidades();
-  void incluirJog(Entidades::Personagens::Jogador *pJog);
-  void incluirInim(Entidades::Personagens::Inimigos::Inimigo *pInim);
-  void incluirObst(Entidades::Obstaculos::Obstaculo *pObst);
-  void incluirProj(Entidades::Projetil *pProj);
+
+  // ============================================================================
+  // Interface publica
+  // ============================================================================
 
  public:
   static GerenciadorColisoes *getInstancia();
@@ -65,6 +63,11 @@ class GerenciadorColisoes : public Mediator {
 
   sf::Vector2f calcOverlap(const Entidades::Entidade *e1,
                            const Entidades::Entidade *e2) const;
+
+  void incluirJog(Entidades::Personagens::Jogador *pJog);
+  void incluirInim(Entidades::Personagens::Inimigos::Inimigo *pInim);
+  void incluirObst(Entidades::Obstaculos::Obstaculo *pObst);
+  void incluirProj(Entidades::Projetil *pProj);
 };
 
 }  // namespace Gerenciadores

@@ -6,13 +6,16 @@
 #include "Entidades/Entidade.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Personagens/Personagem.h"
+#include "Gerenciadores/GerenciadorColisoes.h"
 #include "IDs.h"
 
 namespace Entidades::Personagens::Inimigos {
 
 std::set<Jogador *> Inimigo::setJogadores{};
 
-Inimigo::Inimigo(ID id) : Personagem(id), visada(500.f), visando(false) {}
+Inimigo::Inimigo(ID id) : Personagem(id), visada(500.f), visando(false) {
+  pGC->incluirInim(this);
+}
 
 Inimigo::~Inimigo() {}
 

@@ -11,7 +11,9 @@
 namespace Entidades {
 
 Projetil::Projetil()
-    : Entidade(ID::IDprojetil), pPersDono(nullptr), impulso(0) {}
+    : Entidade(ID::IDprojetil), pPersDono(nullptr), impulso(0) {
+  pGC->incluirProj(this);
+}
 
 Projetil::Projetil(Personagens::Personagem *pPersDono, int impulso)
     : Entidade(ID::IDprojetil), pPersDono(pPersDono), impulso(impulso) {

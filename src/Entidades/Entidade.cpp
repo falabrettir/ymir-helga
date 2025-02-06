@@ -9,7 +9,7 @@
 
 namespace Entidades {
 
-Gerenciadores::GerenciadorColisoes* Entidade::pGC(
+Gerenciadores::GerenciadorColisoes *Entidade::pGC(
     Gerenciadores::GerenciadorColisoes::getInstancia());
 
 Entidade::Entidade(ID id)
@@ -19,15 +19,7 @@ Entidade::Entidade(ID id)
       gravidade(0, 0.002),
       noChao(false),
       olhandoEsquerda(false),
-      buffer(nullptr) {
-  if (ehPlataforma(id)) {
-    sf::FloatRect hitbox(0.f, 0.f, 3 * 128.f, 3 * 16.f);
-    setHitbox(hitbox);
-  } else {
-    sf::FloatRect hitbox(0, 0, 3 * 16.f, 3 * 16.f);
-    setHitbox(hitbox);
-  }
-};
+      buffer(nullptr) {};
 
 Entidade::~Entidade() { buffer = nullptr; }
 
@@ -43,10 +35,6 @@ void Entidade::mover() {
   setPos(novaPos);
 }
 
-void Entidade::setOlhandoEsquerda(bool olhandoEsquerda) {
-  this->olhandoEsquerda = olhandoEsquerda;
-}
-
 void Entidade::atualizaOrientacao() {
   if (olhandoEsquerda) {
     pSprite->setScale(-3.f, 3.f);
@@ -57,34 +45,7 @@ void Entidade::atualizaOrientacao() {
   }
 }
 
-bool Entidade::getOlhandoEsquerda() { return olhandoEsquerda; }
-
-void Entidade::setPos(sf::Vector2f novaPos) {
-  pos = novaPos;
-  pSprite->setPosition(novaPos);
-}
-
-void Entidade::setVel(sf::Vector2f novaVel) { velocidade = novaVel; }
-
-void Entidade::setVelX(float velX) { velocidade.x = velX; }
-
-void Entidade::setVelY(float velY) { velocidade.y = velY; }
-
-void Entidade::setNoChao(bool noChao) { this->noChao = noChao; }
-
-sf::Vector2f Entidade::getPos() const { return pos; }
-
-sf::Vector2f Entidade::getVel() const { return velocidade; }
-
-bool Entidade::getNoChao() const { return noChao; }
-
-sf::Vector2f Entidade::getTamanho() const { return tamanho; }
-
 void Entidade::cair() { setVel(getVel() + gravidade * pGG->getDeltaTempo()); }
-
-void Entidade::setHitbox(sf::FloatRect& hitbox) { this->hitbox = hitbox; }
-
-sf::FloatRect Entidade::getHitbox() const { return hitbox; }
 
 void Entidade::desenhar() {
   if (pGG) {
@@ -94,4 +55,46 @@ void Entidade::desenhar() {
     exit(EXIT_FAILURE);
   }
 }
+
+// ============================================================================
+// Getters e setters
+// ============================================================================
+
+void Entidade::setVel(const sf::Vector2f &novaVel) { velocidade = novaVel; }
+
+void Entidade::setVelX(const float &velX) { velocidade.x = velX; }
+
+void Entidade::setVelY(const float &velY) { velocidade.y = velY; }
+
+void Entidade::setPos(const sf::Vector2f &novaPos) {
+  pos = novaPos;
+  pSprite->setPosition(novaPos);
+}
+
+void Entidade::setPosX(const float &x) {
+  pos.x = x;
+  pSprite->setPosition(x, pos.y);
+}
+
+void Entidade::setPosY(const float &y) {
+  pos.y = y;
+  pSprite->setPosition(pos.x, y);
+}
+
+void Entidade::setOlhandoEsquerda(const bool &olhandoEsquerda) {
+  this->olhandoEsquerda = olhandoEsquerda;
+}
+
+void Entidade::setNoChao(const bool &noChao) { this->noChao = noChao; }
+
+sf::Vector2f Entidade::getPos() const { return pos; }
+
+sf::Vector2f Entidade::getVel() const { return velocidade; }
+
+bool Entidade::getNoChao() const { return noChao; }
+
+bool Entidade::getOlhandoEsquerda() const { return olhandoEsquerda; }
+
+sf::Vector2f Entidade::getTamanho() const { return tamanho; }
+
 }  // namespace Entidades

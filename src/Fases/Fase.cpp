@@ -7,7 +7,6 @@
 #include <string>
 
 #include "Entidades/Entidade.h"
-#include "Entidades/Obstaculos/Obstaculo.h"
 #include "Entidades/Personagens/Inimigo.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Personagens/Personagem.h"
@@ -50,31 +49,6 @@ void Fase::executar() {
   listaJogadores.executar();
   listaInimigos.executar();
   listaProjeteis.executar();
-}
-
-void Fase::incluirNoGC(Entidade *novaEntidade) {
-  if (!novaEntidade) {
-    std::cerr << "erro: Fase::incluirNoGC() => novaEntidade == nullptr\n";
-    exit(EXIT_FAILURE);
-  }
-
-  ID id = novaEntidade->getId();
-
-  if (ehObstaculo(id)) {
-    pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(novaEntidade));
-
-  } else if (ehInimigo(id)) {
-    pGC->incluirInim(
-        dynamic_cast<Personagens::Inimigos::Inimigo *>(novaEntidade));
-
-  } else if (ehProjetil(id)) {
-    pGC->incluirProj(dynamic_cast<Entidades::Projetil *>(novaEntidade));
-  }
-
-  else {
-    pGC->incluirJog(
-        dynamic_cast<Entidades::Personagens::Jogador *>(novaEntidade));
-  }
 }
 
 void Fase::incluirNaLista(Entidade *novaEntidade) {
@@ -141,7 +115,6 @@ void Fase::criarMapa(const std::string path) {
         novaEntidade =
             pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
         incluirNaLista(novaEntidade);
-        incluirNoGC(novaEntidade);
       }
     }
   }

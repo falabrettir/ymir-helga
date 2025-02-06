@@ -31,6 +31,7 @@ Jogador::Jogador(const sf::Vector2f &pos)
   pContr->setJog(this);
 
   pGI->inscrever(pContr);
+  pGC->incluirJog(this);
 
   if (ehPrimeiroJogador) {
     setTextura("/assets/Personagens/Ymir.png");
