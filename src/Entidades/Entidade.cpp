@@ -61,27 +61,7 @@ bool Entidade::getOlhandoEsquerda() { return olhandoEsquerda; }
 
 void Entidade::setPos(sf::Vector2f novaPos) {
   pos = novaPos;
-  if (ehObstaculo(id)) {
-    pSprite->setPosition(novaPos);
-  } else {
-    pSprite->setPosition(novaPos - sf::Vector2f(16, 16));
-  }
   pSprite->setPosition(novaPos);
-  hitbox.left = novaPos.x;
-  hitbox.top = novaPos.y;
-  // std::clog << "setPos(...):\n"
-  //
-  //              "novaPos = "
-  //           << novaPos.x << " " << novaPos.y
-  //
-  //           << "\npSprite position = " << pSprite->getPosition().x << " "
-  //           << pSprite->getPosition().y
-  //           << "\nSprite bounds = " << pSprite->getLocalBounds().width << " "
-  //           << pSprite->getLocalBounds().height
-  //
-  //           << "\nhitbox position: " << hitbox.left << " " << hitbox.top
-  //           << "\nhitbox bounds: " << hitbox.width << " " << hitbox.height
-  //           << std::endl;
 }
 
 void Entidade::setVel(sf::Vector2f novaVel) { velocidade = novaVel; }

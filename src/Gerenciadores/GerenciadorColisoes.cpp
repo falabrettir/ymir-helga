@@ -53,8 +53,7 @@ float GerenciadorColisoes::calcOverlapVert(
     float distColisaoY =
         (e1->getTamanho().y / 2.f) + (e2->getTamanho().y / 2.f);
 
-    if (distY - distColisaoY < 0) return distY - distColisaoY;
-    return 0.f;
+    return distY - distColisaoY;
 
   } else {
     std::cerr << "erro: GerenciadorColisoes::calcOverlapVert(...)\n";
@@ -70,8 +69,7 @@ float GerenciadorColisoes::calcOverlapHor(const Entidades::Entidade *e1,
     float distColisaoX =
         (e1->getTamanho().x / 2.f) + (e2->getTamanho().x / 2.f);
 
-    if (distX - distColisaoX < 0) return distX - distColisaoX;
-    return 0.f;
+    return distX - distColisaoX;
 
   } else {
     std::cerr << "erro: GerenciadorColisoes::calcOverlapHor(...)\n";
@@ -81,12 +79,12 @@ float GerenciadorColisoes::calcOverlapHor(const Entidades::Entidade *e1,
 
 bool GerenciadorColisoes::colidiuVertical(const Entidades::Entidade *e1,
                                           const Entidades::Entidade *e2) const {
-  return calcOverlapVert(e1, e2);
+  return calcOverlapVert(e1, e2) < 0;
 }
 
 bool GerenciadorColisoes::colidiuHorizontal(
     const Entidades::Entidade *e1, const Entidades::Entidade *e2) const {
-  return calcOverlapHor(e1, e2);
+  return calcOverlapHor(e1, e2) < 0;
 }
 
 bool GerenciadorColisoes::colidiu(const Entidade *e1,
@@ -137,6 +135,7 @@ void GerenciadorColisoes::verificarColisoes() {
       for (obstIt = obstaculos.begin(); obstIt != obstaculos.end(); obstIt++) {
         if (*obstIt) {
           if (colidiu(*projIt, *obstIt)) {
+            std::clog << "Colidiu" << std::endl;
             resolverColisao(*projIt, *obstIt);
           }
         }
@@ -178,6 +177,7 @@ void GerenciadorColisoes::verificarColisoes() {
       for (obstIt = obstaculos.begin(); obstIt != obstaculos.end(); obstIt++) {
         if (*obstIt) {
           if (colidiu(*jogIt, *obstIt)) {
+            std::clog << "Colidiu" << std::endl;
             resolverColisao(*jogIt, *obstIt);
           }
         }
