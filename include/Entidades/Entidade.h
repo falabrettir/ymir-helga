@@ -13,13 +13,13 @@ namespace Entidades {
 class Entidade : public Ente {
  private:
   sf::Vector2f pos;
-  sf::Vector2f tamanho;
   sf::Vector2f gravidade;
   bool noChao;
   bool olhandoEsquerda;
   std::ostream *buffer;
 
  protected:
+  sf::Vector2f tamanho;
   sf::Vector2f velocidade;
   sf::FloatRect hitbox;
   static Gerenciadores::GerenciadorColisoes *pGC;

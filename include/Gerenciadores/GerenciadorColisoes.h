@@ -34,6 +34,8 @@ class GerenciadorColisoes : public Mediator {
   // Singleton
   static GerenciadorColisoes *getInstancia();
 
+  void executar();
+
   // Interface colisao
 
   void verificarColisoes();
@@ -51,8 +53,7 @@ class GerenciadorColisoes : public Mediator {
   bool colidiuHorizontal(const Entidades::Entidade *e1,
                          const Entidades::Entidade *e2) const;
 
-  sf::Vector2f resolverColisao(Entidades::Entidade *e1,
-                               Entidades::Entidade *e2);
+  void resolverColisao(Entidades::Entidade *e1, Entidades::Entidade *e2);
 
   void notificar(Entidades::Entidade *sender);
 

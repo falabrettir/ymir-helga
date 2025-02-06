@@ -50,6 +50,7 @@ void Fase::executar() {
   listaJogadores.executar();
   listaInimigos.executar();
   listaProjeteis.executar();
+  pGC->executar();
 }
 
 void Fase::incluirNoGC(Entidade *novaEntidade) {
@@ -63,11 +64,17 @@ void Fase::incluirNoGC(Entidade *novaEntidade) {
   if (ehObstaculo(id)) {
     pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(novaEntidade));
 
-  } else if (ehPersonagem(id)) {
-    pGC->incluirPers(dynamic_cast<Personagens::Personagem *>(novaEntidade));
+  } else if (ehInimigo(id)) {
+    pGC->incluirInim(
+        dynamic_cast<Personagens::Inimigos::Inimigo *>(novaEntidade));
 
   } else if (ehProjetil(id)) {
     pGC->incluirProj(dynamic_cast<Entidades::Projetil *>(novaEntidade));
+  }
+
+  else {
+    pGC->incluirJog(
+        dynamic_cast<Entidades::Personagens::Jogador *>(novaEntidade));
   }
 }
 

@@ -19,6 +19,8 @@ using namespace Entidades;
 
 namespace Gerenciadores {
 
+void GerenciadorColisoes::executar() { verificarColisoes(); }
+
 // ============================================================================
 // Construtora, Destrutora e Singleton
 // ============================================================================
@@ -184,27 +186,61 @@ void GerenciadorColisoes::verificarColisoes() {
   }
 }
 
-// TODO: ????
-sf::Vector2f GerenciadorColisoes::resolverColisao(Entidade *e1, Entidade *e2) {
+// TODO: mudar pra void
+void GerenciadorColisoes::resolverColisao(Entidade *e1, Entidade *e2) {
   ID id1 = e1->getId();
   ID id2 = e2->getId();
 
+  // nao imnporta a direcao da colisao
   if (ehProjetil(id1)) {
     if (ehObstaculo(id2)) {
-      // fodeu
+      // Apagar projetil
     } else if (ehInimigo(id2)) {
-      // danificar inimigo
+      // Danificar inimigo e apagar projetil
     } else {
-      // jog
+      // Danificar jogador e apagar projetil
     }
   } else if (ehInimigo(id1)) {
     if (ehObstaculo(id2)) {
-      // ababa
     } else {
-      // jog
     }
   } else {
-    // jog
+    // Colisao entre jogador(e1) e obstaculo(e2)
+
+    sf::Vector2f novaPos = e1->getPos();
+
+    // Descobrir eixo da colisao
+    if (colidiuHorizontal(e1, e2)) {
+      float dx = calcOverlapHor(e1, e2);
+
+      // Descobrir direcao da colisao
+      if (e1->getPos().x < e2->getPos().x) {
+        // Jogador colidiu da esquerda para direita
+        novaPos.x -= dx;
+      } else {
+        // Jogador colidiu da direita para esquerda
+        novaPos.x += dx;
+      }
+      e1->setVelX(0);
+    }
+
+    if (colidiuVertical(e1, e2)) {
+      float dy = calcOverlapVert(e1, e2);
+
+      // Descobrir direcao da colisao
+      if (e1->getPos().y < e2->getPos().y) {
+        // Jogador caindo
+        novaPos.y -= dy;
+      } else {
+        // Jogador dando cabecada
+        novaPos.y += dy;
+      }
+      e1->setVelY(0);
+    } else {
+      e1->setNoChao(false);
+    }
+
+    e1->setPos(novaPos);
   }
 }
 
@@ -230,4 +266,10 @@ void GerenciadorColisoes::incluirProj(Projetil *pProj) {
   if (pProj) projeteis.insert(pProj);
 }
 
+void GerenciadorColisoes::limparEntidades() {
+  jogadores.clear();
+  inimigos.clear();
+  obstaculos.clear();
+  projeteis.clear();
+}
 }  // namespace Gerenciadores

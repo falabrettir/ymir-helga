@@ -36,6 +36,9 @@ Jogador::Jogador(const sf::Vector2f &pos)
   } else
     setTextura("/assets/Personagens/Helga.png");
 
+  pSprite->setTextureRect({16, 16, 16, 16});
+  tamanho = {48, 48};
+
   setPos(pos);
 }
 
@@ -84,7 +87,8 @@ void Jogador::aplicaLentidao(float viscosidade) {
 
 void Jogador::executar() {
   pContr->controlarJogador();
-  cair();
+
+  if (!getNoChao()) cair();
 
   mover();
 

@@ -34,11 +34,13 @@ Plataforma::Plataforma(ID id, const sf::Vector2f &pos)
     default:
       break;
   }
+
+  tamanho = {128 * 3, 32 * 3};
 }
 
 Plataforma::~Plataforma() {}
 
-void Plataforma::executar() { pGC->notificarColisao(this); }
+void Plataforma::executar() { pGC->notificar(this); }
 
 void Plataforma::obstacular(Entidades::Entidade *pEnt) {}
 
