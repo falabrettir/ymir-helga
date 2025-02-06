@@ -58,4 +58,4 @@ void Menu::addBotao(const std::string &texto, const ID id, sf::Vector2f pos) {
 }
 Botao *Menu::getBotao() { return *itBotao; }
 
-}  // namespace Menus
+} // namespace Menus

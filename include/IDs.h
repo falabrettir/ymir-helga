@@ -81,3 +81,12 @@ inline bool ehPersonagem(ID id) {
       return false;
   }
 }
+
+inline bool ehProjetil(ID id) {
+  switch (id) {
+    case ID::IDprojetil:
+      return true;
+    default:
+      return false;
+  }
+}

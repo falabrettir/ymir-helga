@@ -7,12 +7,13 @@
 #include <iostream>
 #include <limits>
 
-#include "Fabrica/FabricaFlechas.h"
+#include "Fabrica/FabricaProjeteis.h"
+#include "Fases/Fase.h"
 
 namespace Entidades::Personagens::Inimigos {
 
 Fabricas::FabricaProjeteis *Esqueleto::fabProj =
-    Fabricas::FabricaFlechas::getInstancia();
+    Fabricas::FabricaProjeteis::getInstancia();
 
 Esqueleto::Esqueleto(const sf::Vector2f &pos)
     : Inimigo(ID::IDesqueleto), forca(0.0), flecha(nullptr) {
@@ -27,17 +28,30 @@ Esqueleto::~Esqueleto() {
 }
 
 void Esqueleto::atacar() {
-  if (fabProj) {
+  if (!fabProj) {
+    std::cerr << "erro: Esqueleto::atacar() => fabProj == nullptr\n";
+    exit(EXIT_FAILURE);
+  }
+  if (!pFase) {
+    std::cerr << "erro: Esqueleto::atacar() => pFase == nullptr\n";
+    exit(EXIT_FAILURE);
+  }
+
+  if (!flecha) {
     forca = static_cast<float>(rand()) / std::numeric_limits<float>::max();
     flecha = fabProj->criarProjetil(this, forca);
-  } else {
-    exit(EXIT_FAILURE);
+    pFase->adicionarProjetil(flecha);
   }
 }
 void Esqueleto::executar() {
   // draw
+  atualizarKnockback();
   perseguir();
   mover();
-  if (getVisando() && flecha == nullptr) atacar();
+  if (!getNoChao())
+    cair();
+  if (getVisando() && flecha == nullptr)
+    atacar();
 }
-}  // namespace Entidades::Personagens::Inimigos
+
+} // namespace Entidades::Personagens::Inimigos

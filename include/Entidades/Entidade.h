@@ -17,6 +17,7 @@ class Entidade : public Ente {
   sf::Vector2f tamanho;
   bool noChao;
   std::ostream *buffer;
+  bool olhandoEsquerda;
 
  protected:
   sf::Vector2f velocidade;
@@ -27,10 +28,16 @@ class Entidade : public Ente {
   Entidade(ID id);
   virtual ~Entidade();
 
+  void atualizaOrientacao();
+  void setOlhandoEsquerda(bool olhandoEsquerda);
+  bool getOlhandoEsquerda();
+
+  void mover();
+  void setPos(sf::Vector2f novaPos);
   void setVel(sf::Vector2f novaVel);
   void setVelX(float velX);
   void setVelY(float velY);
-  void setPos(sf::Vector2f novaPos);
+
   void setNoChao(bool noChao);
   void setHitbox(sf::FloatRect &hitbox);
   virtual void colidir(Entidade *pEnt, sf::Vector2f ds = {0, 0}) = 0;
@@ -40,7 +47,6 @@ class Entidade : public Ente {
   bool getNoChao() const;
   sf::Vector2f getSize() const;
   sf::FloatRect getHitbox() const;
-  const bool ehPlataforma() const;
 
   void cair();
 

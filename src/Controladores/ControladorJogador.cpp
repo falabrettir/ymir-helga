@@ -34,8 +34,6 @@ void Controlador_Jogador::setJog(Entidades::Personagens::Jogador *pJog) {
   }
 }
 
-// TODO: Talvez ser singleton e mover cada jogador de acordo com suas teclas
-// de controle
 void Controlador_Jogador::setControles() {
   if (pJog->getPrimeiroJog()) {
     direita = sf::Keyboard::D;
@@ -81,18 +79,24 @@ void Controlador_Jogador::atualizarTeclasSoltas(Key tecla) {
 void Controlador_Jogador::controlarJogador() {
   if (pJog) {
     // Controla movimento na horizontal
-    if (teclasPressionadas[direita]) {
-      pJog->andarDireita();
-    } else if (teclasPressionadas[esquerda]) {
-      pJog->andarEsquerda();
-    } else {
-      pJog->naoAndar();
-    }
+    if (!pJog->getEmAnimacaoKnockback()) {
+      if (teclasPressionadas[direita]) {
+        pJog->andarDireita();
+      } else if (teclasPressionadas[esquerda]) {
+        pJog->andarEsquerda();
+      } else {
+        pJog->naoAndar();
+      }
 
-    if (teclasPressionadas[pulo]) {
-      pJog->pular();
+      if (teclasPressionadas[pulo]) {
+        pJog->pular();
+      }
+
+      if (teclasPressionadas[ataque]) {
+        pJog->atacar();
+      }
     }
   }
 }
 
-}  // namespace Controladores
+} // namespace Controladores

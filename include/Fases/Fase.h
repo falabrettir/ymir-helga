@@ -1,9 +1,11 @@
 #pragma once
 
+#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Vector2.hpp>
 
 #include "Entidades/Entidade.h"
+#include "Entidades/Projetil.h"
 #include "Fabrica/FabricaEntidades.h"
 #include "Listas/ListaEntidades.h"
 #include "State.h"
@@ -18,7 +20,6 @@ class Fase : public Ente, public States::State {
  protected:
   Gerenciadores::GerenciadorColisoes *pGC;
   Fabricas::FabricaEntidades *pFE;
-  sf::Texture *fundo;
 
   Listas::ListaEntidades listaObstaculos;
   Listas::ListaEntidades listaInimigos;
@@ -32,6 +33,7 @@ class Fase : public Ente, public States::State {
   virtual void executar();
   void incluirNoGC(Entidades::Entidade *novaEntidade);
   void incluirNaLista(Entidades::Entidade *novaEntidade);
+  void adicionarProjetil(Entidades::Projetil *novoProjetil);
   void criarMapa(const std::string path);
 };
 

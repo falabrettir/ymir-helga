@@ -11,6 +11,7 @@
 #include "Entidades/Personagens/Inimigo.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Personagens/Personagem.h"
+#include "Entidades/Projetil.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
 #include "IDs.h"
 #include "Listas/ListaEntidades.h"
@@ -32,6 +33,8 @@ Fase::Fase()
   listaJogadores.limpar();
   listaInimigos.limpar();
   listaProjeteis.limpar();
+
+  Entidades::Personagens::Personagem::setFase(this);
 }
 
 Fase::~Fase() {
@@ -46,7 +49,7 @@ void Fase::executar() {
   listaObstaculos.executar();
   listaJogadores.executar();
   listaInimigos.executar();
-  // TODO: listaProjeteis.executar() ???
+  listaProjeteis.executar();
 }
 
 void Fase::incluirNoGC(Entidade *novaEntidade) {
@@ -62,12 +65,15 @@ void Fase::incluirNoGC(Entidade *novaEntidade) {
 
   } else if (ehPersonagem(id)) {
     pGC->incluirPers(dynamic_cast<Personagens::Personagem *>(novaEntidade));
+
+  } else if (ehProjetil(id)) {
+    pGC->incluirProj(dynamic_cast<Entidades::Projetil *>(novaEntidade));
   }
 }
 
 void Fase::incluirNaLista(Entidade *novaEntidade) {
   if (!novaEntidade) {
-    std::cerr << "erro: Fase::incluirNaLista() => novaEntidade == nullptr\n";
+    std::cerr << "erro: Fase::incluirNaLista(...) => novaEntidade == nullptr\n";
     exit(EXIT_FAILURE);
   }
 
@@ -83,7 +89,21 @@ void Fase::incluirNaLista(Entidade *novaEntidade) {
 
   } else if (ehObstaculo(id)) {
     listaObstaculos.incluir(novaEntidade);
+
+  } else if (ehProjetil(id)) {
+    listaProjeteis.incluir(novaEntidade);
   }
+}
+
+void Fase::adicionarProjetil(Entidades::Projetil *novoProjetil) {
+  if (!novoProjetil) {
+    std::cerr
+        << "erro: Fase::adicionarProjetil(...) => novoProjetil == nullptr\n";
+    exit(EXIT_FAILURE);
+  }
+
+  incluirNaLista(novoProjetil);
+  incluirNoGC(novoProjetil);
 }
 
 void Fase::criarMapa(const std::string path) {
@@ -112,7 +132,8 @@ void Fase::criarMapa(const std::string path) {
   for (int j = 0; std::getline(arquivoMapa, linha); j++) {
     for (int i = 0; i < linha.size(); i++) {
       if (linha[i] != ' ') {
-        novaEntidade = pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
+        novaEntidade =
+            pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
         incluirNaLista(novaEntidade);
         incluirNoGC(novaEntidade);
       }
