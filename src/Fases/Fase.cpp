@@ -7,7 +7,6 @@
 #include <string>
 
 #include "Entidades/Entidade.h"
-#include "Entidades/Obstaculos/Obstaculo.h"
 #include "Entidades/Personagens/Inimigo.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Personagens/Personagem.h"
@@ -15,26 +14,29 @@
 #include "Gerenciadores/GerenciadorColisoes.h"
 #include "IDs.h"
 #include "Listas/ListaEntidades.h"
+#include "ObserverFase.h"
 
 using namespace Entidades;
 
 namespace Fases {
 
 Fase::Fase()
-    : Ente(ID::IDcaverna),
-      States::State(),
+    : Ente(ID::IDfase),
+      States::State(ID::IDfase),
       listaObstaculos(),
       listaJogadores(),
       listaInimigos(),
       listaProjeteis(),
       pFE(nullptr),
-      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()) {
+      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()),
+      thisObs() {
   listaObstaculos.limpar();
   listaJogadores.limpar();
   listaInimigos.limpar();
   listaProjeteis.limpar();
 
   Entidades::Personagens::Personagem::setFase(this);
+  thisObs = new ObservadorFase(this);
 }
 
 Fase::~Fase() {
@@ -50,25 +52,7 @@ void Fase::executar() {
   listaJogadores.executar();
   listaInimigos.executar();
   listaProjeteis.executar();
-}
-
-void Fase::incluirNoGC(Entidade *novaEntidade) {
-  if (!novaEntidade) {
-    std::cerr << "erro: Fase::incluirNoGC() => novaEntidade == nullptr\n";
-    exit(EXIT_FAILURE);
-  }
-
-  ID id = novaEntidade->getId();
-
-  if (ehObstaculo(id)) {
-    pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(novaEntidade));
-
-  } else if (ehPersonagem(id)) {
-    pGC->incluirPers(dynamic_cast<Personagens::Personagem *>(novaEntidade));
-
-  } else if (ehProjetil(id)) {
-    pGC->incluirProj(dynamic_cast<Entidades::Projetil *>(novaEntidade));
-  }
+  thisObs->executar();
 }
 
 void Fase::incluirNaLista(Entidade *novaEntidade) {
@@ -103,7 +87,6 @@ void Fase::adicionarProjetil(Entidades::Projetil *novoProjetil) {
   }
 
   incluirNaLista(novoProjetil);
-  incluirNoGC(novoProjetil);
 }
 
 void Fase::criarMapa(const std::string path) {
@@ -134,8 +117,9 @@ void Fase::criarMapa(const std::string path) {
       if (linha[i] != ' ') {
         novaEntidade =
             pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
-        incluirNaLista(novaEntidade);
-        incluirNoGC(novaEntidade);
+        if (novaEntidade != nullptr) {
+          incluirNaLista(novaEntidade);
+        }
       }
     }
   }

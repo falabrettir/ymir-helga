@@ -18,8 +18,7 @@ class Inimigo : public Personagem {
 
   float calculaDistancia(Jogador *pJogs);
   void perseguir();
-  virtual void colidir(Entidade *pEnt,
-                       sf::Vector2f ds = sf::Vector2f({0.f, 0.f}));
+  void colidir(Entidade *pEnt = nullptr);
   const bool getVisando() const;
 
   static void adicionarJogador(Jogador *pJog);

@@ -21,7 +21,9 @@ Esqueleto::Esqueleto(const sf::Vector2f &pos)
 
   srand((unsigned int)time(NULL));
   setTextura("/assets/Personagens/Esqueleto.png");
+  setPos(pos);
 }
+
 Esqueleto::~Esqueleto() {
   flecha = nullptr;
   delete flecha;
@@ -45,6 +47,7 @@ void Esqueleto::atacar() {
 }
 void Esqueleto::executar() {
   // draw
+  atualizarKnockback();
   perseguir();
   mover();
   if (!getNoChao()) cair();

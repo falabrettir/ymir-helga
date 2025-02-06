@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 
+#include <cmath>
+
 #include "IDs.h"
 
 TEST(IDTest, EhJogador) {
@@ -40,9 +42,9 @@ TEST(IDTest, EhPlataforma) {
   EXPECT_TRUE(ehPlataforma(ID::IDmadeira1));
   EXPECT_TRUE(ehPlataforma(ID::IDmadeira2));
   EXPECT_TRUE(ehPlataforma(ID::IDpedra));
-  EXPECT_FALSE(ehPlataforma(ID::IDgrama));
-  EXPECT_FALSE(ehPlataforma(ID::IDcaverna));
-  EXPECT_FALSE(ehPlataforma(ID::IDprojetil));
+  EXPECT_TRUE(ehPlataforma(ID::IDgrama));
   EXPECT_FALSE(ehPlataforma(ID::IDgosma));
   EXPECT_FALSE(ehPlataforma(ID::IDespinho));
+  EXPECT_FALSE(ehPlataforma(ID::IDcaverna));
+  EXPECT_FALSE(ehPlataforma(ID::IDprojetil));
 }

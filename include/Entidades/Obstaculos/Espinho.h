@@ -1,13 +1,14 @@
+#include <SFML/System/Vector2.hpp>
+
 #include "Entidades/Entidade.h"
 #include "Obstaculo.h"
-#include <SFML/System/Vector2.hpp>
 
 namespace Entidades::Obstaculos {
 class Espinho : public Obstaculo {
-private:
+ private:
   int dano;
 
-public:
+ public:
   Espinho(const sf::Vector2f &pos);
   ~Espinho();
 
@@ -15,6 +16,6 @@ public:
 
   void executar();
   void obstacular(Entidade *pEnt);
-  void colidir(Entidade *pEnt, sf::Vector2f ds = {0, 0});
+  void colidir(Entidade *pEnt = nullptr);
 };
-} // namespace Entidades::Obstaculos
+}  // namespace Entidades::Obstaculos

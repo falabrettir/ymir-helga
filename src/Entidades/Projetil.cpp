@@ -11,14 +11,15 @@
 namespace Entidades {
 
 Projetil::Projetil()
-    : Entidade(ID::IDprojetil), pPersDono(nullptr), impulso(0) {}
+    : Entidade(ID::IDprojetil), pPersDono(nullptr), impulso(0) {
+  pGC->incluirProj(this);
+}
 
 Projetil::Projetil(Personagens::Personagem *pPersDono, int impulso)
     : Entidade(ID::IDprojetil), pPersDono(pPersDono), impulso(impulso) {
   std::clog << "Criando projetil\n";
 
-  if (pPersDono->getId() == ID::IDesqueleto ||
-      pPersDono->getId() == ID::IDjogador) {
+  if (pPersDono->getId() == ID::IDesqueleto || pPersDono->getId() == ID::IDjogador) {
     setTextura("/assets/Projeteis/Flecha.png");
   } else if (pPersDono->getId() == ID::IDmago) {
     setTextura("/assets/Projeteis/BolaDeFogo.png");
@@ -47,31 +48,12 @@ int Projetil::getDano() { return getVel().x; }
 
 Personagens::Personagem *Projetil::getDono() { return pPersDono; }
 
-void Projetil::colidir(Entidade *pE, sf::Vector2f ds) {
-  if (pE == pPersDono) {
-    return;
-  }
-
-  sf::Vector2f posEntidade = pE->getPos();
-  sf::Vector2f velEntidade = pE->getVel();
-
-  if (ds.x < 0.f && ds.y < 0.f) {  // Colidiu
-    // Colidiu com plataforma -> deletar
-    // Colidiu com um personagem -> danificar e deletar
-    this->setPos({-6000, -6000});
-    this->setVel({0, 0});
-
-    if (ehPersonagem(pE->getId())) {
-      dynamic_cast<Entidades::Personagens::Personagem *>(pE)->tomarDano(
-          getDano());
-    }
-  }
-}
+void Projetil::colidir(Entidade *pE) {}
 
 void Projetil::executar() {
   mover();
   cair();
-  pGC->notificaColisao(this);
+  pGC->notificar(this);
 }
 
 }  // namespace Entidades

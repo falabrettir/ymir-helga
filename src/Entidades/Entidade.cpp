@@ -2,33 +2,24 @@
 
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
 
 #include "Gerenciadores/GerenciadorColisoes.h"
+#include "IDs.h"
 
 namespace Entidades {
 
-Gerenciadores::GerenciadorColisoes* Entidade::pGC(nullptr);
+Gerenciadores::GerenciadorColisoes *Entidade::pGC(
+    Gerenciadores::GerenciadorColisoes::getInstancia());
 
 Entidade::Entidade(ID id)
     : Ente(id),
       pos(0, 0),
       velocidade(0, 0),
-      gravidade(0, 0.08),
-      tamanho(0, 0),
+      gravidade(0, 0.002),
       noChao(false),
       olhandoEsquerda(false),
-      buffer(nullptr) {
-  if (pGC == nullptr) pGC = Gerenciadores::GerenciadorColisoes::getInstancia();
-
-  if (ehPlataforma(id)) {
-    sf::FloatRect hitbox(0.f, 0.f, 128.f, 16.f);
-    setHitbox(hitbox);
-
-  } else {
-    sf::FloatRect hitbox(16.f, 16.f, 16.f, 16.f);
-    setHitbox(hitbox);
-  }
-};
+      buffer(nullptr) {};
 
 Entidade::~Entidade() { buffer = nullptr; }
 
@@ -42,11 +33,6 @@ void Entidade::mover() {
   }
   sf::Vector2f novaPos = getPos() + (velocidade * pGG->getDeltaTempo());
   setPos(novaPos);
-  pSprite->setPosition(novaPos);
-}
-
-void Entidade::setOlhandoEsquerda(bool olhandoEsquerda) {
-  this->olhandoEsquerda = olhandoEsquerda;
 }
 
 void Entidade::atualizaOrientacao() {
@@ -59,17 +45,47 @@ void Entidade::atualizaOrientacao() {
   }
 }
 
-bool Entidade::getOlhandoEsquerda() { return olhandoEsquerda; }
+void Entidade::cair() { setVel(getVel() + gravidade * pGG->getDeltaTempo()); }
 
-void Entidade::setPos(sf::Vector2f novaPos) { pos = novaPos; }
+void Entidade::desenhar() {
+  if (pGG) {
+    pGG->desenharEnte(this);
+  } else {
+    std::cerr << "erro: Entidade::desenhar() => pGG == nullptr";
+    exit(EXIT_FAILURE);
+  }
+}
 
-void Entidade::setVel(sf::Vector2f novaVel) { velocidade = novaVel; }
+// ============================================================================
+// Getters e setters
+// ============================================================================
 
-void Entidade::setVelX(float velX) { velocidade.x = velX; }
+void Entidade::setVel(const sf::Vector2f &novaVel) { velocidade = novaVel; }
 
-void Entidade::setVelY(float velY) { velocidade.y = velY; }
+void Entidade::setVelX(const float &velX) { velocidade.x = velX; }
 
-void Entidade::setNoChao(bool noChao) { this->noChao = noChao; }
+void Entidade::setVelY(const float &velY) { velocidade.y = velY; }
+
+void Entidade::setPos(const sf::Vector2f &novaPos) {
+  pos = novaPos;
+  pSprite->setPosition(novaPos);
+}
+
+void Entidade::setPosX(const float &x) {
+  pos.x = x;
+  pSprite->setPosition(x, pos.y);
+}
+
+void Entidade::setPosY(const float &y) {
+  pos.y = y;
+  pSprite->setPosition(pos.x, y);
+}
+
+void Entidade::setOlhandoEsquerda(const bool &olhandoEsquerda) {
+  this->olhandoEsquerda = olhandoEsquerda;
+}
+
+void Entidade::setNoChao(const bool &noChao) { this->noChao = noChao; }
 
 sf::Vector2f Entidade::getPos() const { return pos; }
 
@@ -77,16 +93,8 @@ sf::Vector2f Entidade::getVel() const { return velocidade; }
 
 bool Entidade::getNoChao() const { return noChao; }
 
-sf::Vector2<float> Entidade::getSize() const {
-  return static_cast<sf::Vector2f>(pTexture->getSize());
-}
+bool Entidade::getOlhandoEsquerda() const { return olhandoEsquerda; }
 
-void Entidade::cair() { setVel(getVel() + gravidade); }
-
-void Entidade::setHitbox(sf::FloatRect& hitbox) { this->hitbox = hitbox; }
-
-sf::FloatRect Entidade::getHitbox() const {
-  return pSprite->getTransform().transformRect(hitbox);
-}
+sf::Vector2f Entidade::getTamanho() const { return tamanho; }
 
 }  // namespace Entidades

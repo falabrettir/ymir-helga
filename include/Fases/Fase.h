@@ -10,6 +10,8 @@
 #include "Listas/ListaEntidades.h"
 #include "State.h"
 
+class ObservadorFase;
+
 namespace Gerenciadores {
 class GerenciadorColisoes;
 }  // namespace Gerenciadores
@@ -20,6 +22,7 @@ class Fase : public Ente, public States::State {
  protected:
   Gerenciadores::GerenciadorColisoes *pGC;
   Fabricas::FabricaEntidades *pFE;
+  ObservadorFase *thisObs;
 
   Listas::ListaEntidades listaObstaculos;
   Listas::ListaEntidades listaInimigos;
@@ -31,7 +34,11 @@ class Fase : public Ente, public States::State {
   ~Fase();
 
   virtual void executar();
-  void incluirNoGC(Entidades::Entidade *novaEntidade);
+
+  void incluirNoGC(                        // TODO: excluir essa funcao e
+      Entidades::Entidade *novaEntidade);  // responsabilizar cada entidade por
+                                           // se cadastrar no gc
+
   void incluirNaLista(Entidades::Entidade *novaEntidade);
   void adicionarProjetil(Entidades::Projetil *novoProjetil);
   void criarMapa(const std::string path);

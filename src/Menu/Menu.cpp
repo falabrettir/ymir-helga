@@ -11,7 +11,7 @@
 namespace Menus {
 Menu::Menu(ID id)
     : Ente(id),
-      States::State(),
+      States::State(id),
       listaBotoes(),
       itBotao(),
       pContr(),
@@ -58,4 +58,4 @@ void Menu::addBotao(const std::string &texto, const ID id, sf::Vector2f pos) {
 }
 Botao *Menu::getBotao() { return *itBotao; }
 
-} // namespace Menus
+}  // namespace Menus

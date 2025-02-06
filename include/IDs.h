@@ -20,10 +20,12 @@ enum class ID {
   IDbotaosair,          // 15
   IDbotaocontinuar,     // 16
   IDmenuprincipal,      // 17
-  IDmenuopcao,          // 18
+  IDmenupause,          // 18
   IDbotaomultijogador,  // 19
   IDbotaofase,          // 20
-  IDplanicie            // 21
+  IDplanicie,           // 21
+  IDbotaosalvarjogo,    // 22
+  IDfase                // 23
 
 };
 

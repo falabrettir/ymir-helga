@@ -41,5 +41,6 @@ void GerenciadorEstados::popEstado() {
   delete topEstado();
   pilhaEstados.pop();
 }
+ID GerenciadorEstados::getIdTop() { return topEstado()->getId(); }
 
 }  // namespace Gerenciadores

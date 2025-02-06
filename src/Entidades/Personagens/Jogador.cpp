@@ -2,6 +2,8 @@
 
 #include <Fases/Fase.h>
 
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 #include <iostream>
 
 #include "Fabrica/FabricaProjeteis.h"
@@ -19,9 +21,7 @@ Fabricas::FabricaProjeteis *Jogador::fabProj =
     Fabricas::FabricaProjeteis::getInstancia();
 
 Jogador::Jogador(const sf::Vector2f &pos)
-    : Personagem(ID::IDjogador),
-      pContr(nullptr),
-      podePular(true),
+    : Personagem(ID::IDjogador), pContr(nullptr), podePular(true),
       pProj(nullptr) {
   std::clog << "Criando novo jogador\n";
 
@@ -29,6 +29,7 @@ Jogador::Jogador(const sf::Vector2f &pos)
   pContr->setJog(this);
 
   pGI->inscrever(pContr);
+  pGC->incluirJog(this);
 
   if (ehPrimeiroJogador) {
     setTextura("/assets/Personagens/Ymir.png");
@@ -36,8 +37,10 @@ Jogador::Jogador(const sf::Vector2f &pos)
   } else
     setTextura("/assets/Personagens/Helga.png");
 
+  pSprite->setTextureRect({16, 16, 16, 16});
+  tamanho = {48, 48};
+
   setPos(pos);
-  pSprite->setPosition(pos);
 }
 
 Jogador::~Jogador() {
@@ -84,13 +87,25 @@ void Jogador::aplicaLentidao(float viscosidade) {
 }
 
 void Jogador::executar() {
+  atualizarKnockback();
+  setDanificando(false);
   pContr->controlarJogador();
 
-  pGC->notificaColisao(this);
+  setNoChao(false);
 
-  if (!getNoChao()) cair();
+  if (!getNoChao())
+    cair();
 
   mover();
+
+  pGC->notificar(this);
+
+  sf::RectangleShape debugShape(tamanho);
+  debugShape.setPosition(pSprite->getPosition());
+  debugShape.setFillColor(sf::Color::Transparent);
+  debugShape.setOutlineColor(sf::Color::Red);
+  debugShape.setOutlineThickness(1);
+  pGG->getJanela()->draw(debugShape);
 }
 
 void Jogador::atacar() {
@@ -109,11 +124,4 @@ void Jogador::atacar() {
   }
 }
 
-void Jogador::colidir(Entidade *pEnt, sf::Vector2f ds) {
-  if (ds.x < 0 && ds.y < 0) {
-    if (pEnt->getId() == ID::IDesqueleto || pEnt->getId() == ID::IDmago ||
-        pEnt->getId() == ID::IDslime) {
-      this->tomarDano(dynamic_cast<Personagem *>(pEnt)->getDano());
-    }
-  }
-}
+void Jogador::colidir(Entidade *pEnt) {}

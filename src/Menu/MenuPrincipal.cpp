@@ -28,7 +28,6 @@ void MenuPrincipal::criarBotoes() {
   inicializarIt();
 }
 void MenuPrincipal::executar() {
-  std::cerr << "Executar de menu principal\n";
   desenhar();
   pGG->getJanela()->draw(titulo);
   std::list<Botao *>::iterator it = listaBotoes.begin();
@@ -39,7 +38,8 @@ void MenuPrincipal::executar() {
   pContr->controlarMenu();
 }
 void MenuPrincipal::inicializaTitulo() {
-  titulo.setFont(*Gerenciadores::GerenciadorGrafico::getInstancia()->getFonte());
+  titulo.setFont(
+      *Gerenciadores::GerenciadorGrafico::getInstancia()->getFonte());
   titulo.setString("Ymir e Helga");
   titulo.setScale(1.5f, 1.5f);
   titulo.setFillColor(sf::Color::White);

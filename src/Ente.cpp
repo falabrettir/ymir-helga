@@ -3,6 +3,7 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -27,7 +28,6 @@ Ente::~Ente() {
 
 void Ente::atualizaSprite(sf::Texture *pTexture) {
   pSprite->setTexture(*pTexture);
-  // pSprite->setTextureRect({0, 0, 48, 48});
   pSprite->setScale(3.f, 3.f);
 }
 
@@ -62,4 +62,5 @@ void Ente::desenhar() {
     exit(EXIT_FAILURE);
   }
 }
+
 const ID Ente::getId() const { return this->id; }

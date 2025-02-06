@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "Entidades/Personagens/Jogador.h"
+#include "Gerenciadores/GerenciadorColisoes.h"
 
 namespace Entidades::Obstaculos {
 
@@ -19,11 +20,9 @@ Espinho::~Espinho() {}
 const int Espinho::getDano() const { return dano; }
 
 void Espinho::executar() {}
-void Espinho::obstacular(Entidade *pEnt) {}
-void Espinho::colidir(Entidade *pEnt, sf::Vector2f ds) {
-  if (ds.x < 0 && ds.y < 0) {
-    dynamic_cast<Personagens::Jogador *>(pEnt)->tomarDano(getDano());
-  }
-}
 
-}  // namespace Entidades::Obstaculos
+void Espinho::obstacular(Entidade *pEnt) {}
+
+void Espinho::colidir(Entidade *pEnt) {}
+
+} // namespace Entidades::Obstaculos
