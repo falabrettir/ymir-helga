@@ -33,9 +33,6 @@ class GerenciadorColisoes : public Mediator {
   void verificarInim(Entidades::Entidade *pEnt);
   void verificarJog(Entidades::Entidade *pEnt);
 
-  // TODO: explodir
-  void resolverColisao(Entidades::Entidade *e1, Entidades::Entidade *e2);
-
   // Funcoes auxiliares
   float calcOverlapVert(const Entidades::Entidade *e1,
                         const Entidades::Entidade *e2) const;
