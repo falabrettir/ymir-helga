@@ -22,15 +22,9 @@ using namespace Entidades;
 namespace Fases {
 
 Fase::Fase()
-    : Ente(ID::IDfase),
-      States::State(ID::IDfase),
-      listaObstaculos(),
-      listaJogadores(),
-      listaInimigos(),
-      listaProjeteis(),
-      pFE(nullptr),
-      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()),
-      thisObs() {
+    : Ente(ID::IDfase), States::State(ID::IDfase), listaObstaculos(),
+      listaJogadores(), listaInimigos(), listaProjeteis(), pFE(nullptr),
+      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()), thisObs() {
   listaObstaculos.limpar();
   listaJogadores.limpar();
   listaInimigos.limpar();
@@ -101,7 +95,8 @@ void Fase::incluirNaLista(Entidade *novaEntidade) {
 
 void Fase::adicionarProjetil(Entidades::Projetil *novoProjetil) {
   if (!novoProjetil) {
-    std::cerr << "erro: Fase::adicionarProjetil(...) => novoProjetil == nullptr\n";
+    std::cerr
+        << "erro: Fase::adicionarProjetil(...) => novoProjetil == nullptr\n";
     exit(EXIT_FAILURE);
   }
 
@@ -135,9 +130,13 @@ void Fase::criarMapa(const std::string path) {
   for (int j = 0; std::getline(arquivoMapa, linha); j++) {
     for (int i = 0; i < linha.size(); i++) {
       if (linha[i] != ' ') {
-        novaEntidade = pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
-        incluirNaLista(novaEntidade);
-        incluirNoGC(novaEntidade);
+        novaEntidade =
+            pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
+        std::clog << linha[i] << std::endl;
+        if (novaEntidade != nullptr) {
+          incluirNaLista(novaEntidade);
+          incluirNoGC(novaEntidade);
+        }
       }
     }
   }
@@ -145,4 +144,4 @@ void Fase::criarMapa(const std::string path) {
   arquivoMapa.close();
 }
 
-}  // namespace Fases
+} // namespace Fases

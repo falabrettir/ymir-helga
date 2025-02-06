@@ -10,18 +10,17 @@ using namespace Entidades;
 
 namespace Fases {
 int Caverna::contSlimes(0);
-int Caverna::contEsqueletos(0);
-int Caverna::contGosmas(0);
+int Caverna::contEsq(0);
+int Caverna::contEsp(0);
 int Caverna::contPlat(0);
-Caverna::Caverna()
-    : Fase(), minEsqueletos(3), minSlimes(3), minGosmas(4), minPlat(5) {
+Caverna::Caverna() : Fase(), minEsq(3), minSlimes(3), minEsp(4), minPlat(5) {
   std::clog << "Criando caverna.\n";
 
   setTextura("/assets/Fundos/fundofase1escalado.png");
   pSprite->setScale(1, 1);
 
   pFE = Fabricas::FabEntCaverna::getInstancia();
-
+  dynamic_cast<Fabricas::FabEntCaverna *>(pFE)->setFase(this);
   criarMapa("/assets/Mapas/caverna.txt");
 }
 
@@ -31,23 +30,35 @@ void Caverna::executar() {
   pGG->getJanela()->draw(getSprite());
   Fase::executar();
 }
-const int Caverna::getMinEsq() const { return minEsqueletos; }
+const int Caverna::getMinEsq() const { return minEsq; }
 const int Caverna::getMinSli() const { return minSlimes; }
-const int Caverna::getMinGosmas() const { return minGosmas; }
+const int Caverna::getMinEsp() const { return minEsp; }
 const int Caverna::getMinPlat() const { return minPlat; }
 
 const int Caverna::getCont(char tipoEnt) {
   switch (tipoEnt) {
   case 'E':
-    return contEsqueletos;
+    return contEsq;
   case 'S':
     return contSlimes;
   case 'G':
-    return contGosmas;
+    return contEsp;
   case 'M':
     return contPlat;
   default:
     return std::numeric_limits<int>::max();
+  }
+}
+void Caverna::incrementaContadores(char tipoEnt) {
+  switch (tipoEnt) {
+  case 'E':
+    contEsq++;
+  case 'S':
+    contSlimes++;
+  case 'G':
+    contEsp++;
+  case 'M':
+    contPlat++;
   }
 }
 }; // namespace Fases

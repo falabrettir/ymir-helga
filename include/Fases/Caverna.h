@@ -12,14 +12,14 @@ namespace Fases {
 
 class Caverna : public Fase {
 private:
-  const int minEsqueletos;
-  static int contEsqueletos;
+  const int minEsq;
+  static int contEsq;
 
   const int minSlimes;
   static int contSlimes;
 
-  const int minGosmas;
-  static int contGosmas;
+  const int minEsp;
+  static int contEsp;
 
   const int minPlat;
   static int contPlat;
@@ -30,16 +30,17 @@ public:
 
   const int getMinEsq() const;
   const int getMinSli() const;
-  const int getMinGosmas() const;
+  const int getMinEsp() const;
   const int getMinPlat() const;
 
   const static int getCont(char tipoEnt);
+  void incrementaContadores(char tipoEnt);
 
   void executar();
   void criarSlime(const sf::Vector2f &pos);
   void criarPedra(const sf::Vector2f &pos);
   void criarMadeira(const sf::Vector2f &pos);
-  void criarGosma(const sf::Vector2f &pos);
+  void criarEspinho(const sf::Vector2f &pos);
 };
 
 } // namespace Fases

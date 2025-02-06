@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "Entidades/Personagens/Jogador.h"
+#include "Gerenciadores/GerenciadorColisoes.h"
 
 namespace Entidades::Obstaculos {
 
@@ -18,7 +19,7 @@ Espinho::~Espinho() {}
 
 const int Espinho::getDano() const { return dano; }
 
-void Espinho::executar() {}
+void Espinho::executar() { pGC->notificaColisao(this); }
 void Espinho::obstacular(Entidade *pEnt) {}
 void Espinho::colidir(Entidade *pEnt, sf::Vector2f ds) {
   if (ds.x < 0 && ds.y < 0) {
@@ -26,4 +27,4 @@ void Espinho::colidir(Entidade *pEnt, sf::Vector2f ds) {
   }
 }
 
-}  // namespace Entidades::Obstaculos
+} // namespace Entidades::Obstaculos
