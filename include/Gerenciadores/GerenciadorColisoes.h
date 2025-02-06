@@ -6,7 +6,8 @@
 
 #include "Entidades/Entidade.h"
 #include "Entidades/Obstaculos/Obstaculo.h"
-#include "Entidades/Personagens/Personagem.h"
+#include "Entidades/Personagens/Inimigo.h"
+#include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Projetil.h"
 #include "Mediator.h"
 
@@ -14,10 +15,13 @@ namespace Gerenciadores {
 
 class GerenciadorColisoes : public Mediator {
  private:
+  // Singleton
   static GerenciadorColisoes *instancia;
-  std::vector<Entidades::Personagens::Personagem *> vecPers;
-  std::list<Entidades::Obstaculos::Obstaculo *> listObst;
-  std::set<Entidades::Projetil *> setProj;
+
+  std::vector<Entidades::Personagens::Jogador *> jogadores;
+  std::vector<Entidades::Personagens::Inimigos::Inimigo *> inimigos;
+  std::list<Entidades::Obstaculos::Obstaculo *> obstaculos;
+  std::set<Entidades::Projetil *> projeteis;
 
  private:
   // Singleton
@@ -27,18 +31,37 @@ class GerenciadorColisoes : public Mediator {
   ~GerenciadorColisoes();
 
  public:
+  // Singleton
   static GerenciadorColisoes *getInstancia();
 
   // Interface colisao
-  bool verificaColisao(const Entidades::Entidade *e1,
+
+  void verificarColisoes();
+  void verificarColisoesProjeteis();
+  void verificarColisoesPersonagens();
+
+  float calcOverlapVert(const Entidades::Entidade *e1,
+                        const Entidades::Entidade *e2) const;
+  float calcOverlapHor(const Entidades::Entidade *e1,
                        const Entidades::Entidade *e2) const;
+  bool colidiu(const Entidades::Entidade *e1,
+               const Entidades::Entidade *e2) const;
+  bool colidiuVertical(const Entidades::Entidade *e1,
+                       const Entidades::Entidade *e2) const;
+  bool colidiuHorizontal(const Entidades::Entidade *e1,
+                         const Entidades::Entidade *e2) const;
+
   sf::Vector2f resolverColisao(Entidades::Entidade *e1,
                                Entidades::Entidade *e2);
 
-  void incluirPers(Entidades::Personagens::Personagem *pPers);
+  void notificar(Entidades::Entidade *sender);
+
+  // TODO: Alterar a Fase para adicionar inimigos e jogadores
+  void limparEntidades();
+  void incluirJog(Entidades::Personagens::Jogador *pJog);
+  void incluirInim(Entidades::Personagens::Inimigos::Inimigo *pInim);
   void incluirObst(Entidades::Obstaculos::Obstaculo *pObst);
   void incluirProj(Entidades::Projetil *pProj);
-  void notificarColisao(Entidades::Entidade *sender);
 };
 
 }  // namespace Gerenciadores
