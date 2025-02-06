@@ -55,10 +55,10 @@ void Plataforma::colidir(Entidades::Entidade *pEnt, sf::Vector2f ds) {
       velEntidade.x = 0.0f;
     } else {                                   // Colisao em Y
       if (posEntidade.y < this->getPos().y) {  // Colidiu por cima
-        posEntidade.y += ds.y;
+        posEntidade.y += ds.y;                 // ds eh negativo
         pEnt->setNoChao(true);
-      } else {  // Colidiu por baixo
-        posEntidade.y -= ds.y;
+      } else {                  // Colidiu por baixo
+        posEntidade.y -= ds.y;  // ds eh negativo
       }
       velEntidade.y = 0.0f;
     }

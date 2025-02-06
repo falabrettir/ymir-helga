@@ -84,12 +84,11 @@ void Jogador::aplicaLentidao(float viscosidade) {
 
 void Jogador::executar() {
   pContr->controlarJogador();
-
   cair();
 
-  pGC->notificarColisao(this);
-
   mover();
+
+  pGC->notificar(this);
 }
 
 void Jogador::atacar() {

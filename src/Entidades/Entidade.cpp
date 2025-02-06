@@ -98,9 +98,7 @@ sf::Vector2f Entidade::getVel() const { return velocidade; }
 
 bool Entidade::getNoChao() const { return noChao; }
 
-sf::Vector2<float> Entidade::getSize() const {
-  return sf::Vector2f(hitbox.width, hitbox.height);
-}
+sf::Vector2f Entidade::getTamanho() const { return tamanho; }
 
 void Entidade::cair() { setVel(getVel() + gravidade); }
 

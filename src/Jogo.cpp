@@ -26,6 +26,7 @@ void Jogo::atualizar() {
   pGE->processaEventos();
 
   pGG->atualizaDeltaTempo();
+
   pGS->executar();
 
   // Sempre deixar display antes de clear
@@ -34,6 +35,5 @@ void Jogo::atualizar() {
 }
 
 void Jogo::executar() {
-  while (pGG->janelaAberta())
-    atualizar();
+  while (pGG->janelaAberta()) atualizar();
 }

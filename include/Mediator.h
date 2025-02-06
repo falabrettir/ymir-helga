@@ -9,5 +9,5 @@ class Mediator {
  public:
   Mediator();
   virtual ~Mediator();
-  virtual void notificarColisao(Entidades::Entidade *sender) = 0;
+  virtual void notificar(Entidades::Entidade *sender) = 0;
 };

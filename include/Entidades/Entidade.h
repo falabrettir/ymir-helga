@@ -13,6 +13,7 @@ namespace Entidades {
 class Entidade : public Ente {
  private:
   sf::Vector2f pos;
+  sf::Vector2f tamanho;
   sf::Vector2f gravidade;
   bool noChao;
   bool olhandoEsquerda;
@@ -44,7 +45,7 @@ class Entidade : public Ente {
   sf::Vector2f getVel() const;
   sf::Vector2f getPos() const;
   bool getNoChao() const;
-  sf::Vector2f getSize() const;
+  sf::Vector2f getTamanho() const;
   sf::FloatRect getHitbox() const;
 
   void desenhar();
