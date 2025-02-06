@@ -15,7 +15,6 @@ namespace Gerenciadores {
 
 class GerenciadorColisoes : public Mediator {
  private:
-  // Singleton
   static GerenciadorColisoes *instancia;
 
   std::vector<Entidades::Personagens::Jogador *> jogadores;
@@ -24,24 +23,26 @@ class GerenciadorColisoes : public Mediator {
   std::set<Entidades::Projetil *> projeteis;
 
  private:
-  // Singleton
   GerenciadorColisoes();
+  ~GerenciadorColisoes();
   GerenciadorColisoes(const GerenciadorColisoes &) = delete;
   GerenciadorColisoes &operator=(const GerenciadorColisoes &) = delete;
-  ~GerenciadorColisoes();
 
  public:
-  // Singleton
   static GerenciadorColisoes *getInstancia();
 
+  // TODO: remover essa funcao
   void executar();
 
-  // Interface colisao
+  // Funcoes principais
+  void notificar(Entidades::Entidade *sender);
+  void verificarColisoes(Entidades::Entidade *pEnt);
+  void verificarProj(Entidades::Entidade *pEnt);
+  void verificarInim(Entidades::Entidade *pEnt);
+  void verificarJog(Entidades::Entidade *pEnt);
+  void resolverColisao(Entidades::Entidade *e1, Entidades::Entidade *e2);
 
-  void verificarColisoes();
-  void verificarColisoesProjeteis();
-  void verificarColisoesPersonagens();
-
+  // Funcoes auxiliares
   float calcOverlapVert(const Entidades::Entidade *e1,
                         const Entidades::Entidade *e2) const;
   float calcOverlapHor(const Entidades::Entidade *e1,
@@ -53,11 +54,6 @@ class GerenciadorColisoes : public Mediator {
   bool colidiuHorizontal(const Entidades::Entidade *e1,
                          const Entidades::Entidade *e2) const;
 
-  void resolverColisao(Entidades::Entidade *e1, Entidades::Entidade *e2);
-
-  void notificar(Entidades::Entidade *sender);
-
-  // TODO: Alterar a Fase para adicionar inimigos e jogadores
   void limparEntidades();
   void incluirJog(Entidades::Personagens::Jogador *pJog);
   void incluirInim(Entidades::Personagens::Inimigos::Inimigo *pInim);

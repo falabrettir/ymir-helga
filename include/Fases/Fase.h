@@ -31,7 +31,11 @@ class Fase : public Ente, public States::State {
   ~Fase();
 
   virtual void executar();
-  void incluirNoGC(Entidades::Entidade *novaEntidade);
+
+  void incluirNoGC(                        // TODO: excluir essa funcao e
+      Entidades::Entidade *novaEntidade);  // responsabilizar cada entidade por
+                                           // se cadastrar no gc
+
   void incluirNaLista(Entidades::Entidade *novaEntidade);
   void adicionarProjetil(Entidades::Projetil *novoProjetil);
   void criarMapa(const std::string path);
