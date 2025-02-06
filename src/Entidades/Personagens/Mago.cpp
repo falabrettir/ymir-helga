@@ -45,13 +45,18 @@ void Mago::atacar() {
 void Mago::aumentarPoder() { poder *= poder; }
 
 void Mago::executar() {
-  // atualizarKnockback();
-  // setDanificando(false);
+  atualizarKnockback();
+  setDanificando(false);
   setNoChao(false);
 
-  if (!getNoChao()) cair();
+  if (!getNoChao())
+    cair();
 
-  // perseguir();
+  perseguir();
+
+  if (getVisando()) {
+    atacar();
+  }
 
   mover();
 
@@ -65,4 +70,4 @@ void Mago::executar() {
   pGG->getJanela()->draw(debugShape);
 }
 
-}  // namespace Entidades::Personagens::Inimigos
+} // namespace Entidades::Personagens::Inimigos

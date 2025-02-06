@@ -13,7 +13,7 @@ namespace Entidades::Personagens::Inimigos {
 
 std::set<Jogador *> Inimigo::setJogadores{};
 
-Inimigo::Inimigo(ID id) : Personagem(id), visada(25.f), visando(false) {
+Inimigo::Inimigo(ID id) : Personagem(id), visada(500.f), visando(false) {
   pGC->incluirInim(this);
 }
 
@@ -98,6 +98,9 @@ void Inimigo::colidir(Entidade *pEnt) {
       this->setVelY(0.f);
     }
     this->setPos(novaPos);
+  } else {
+    dynamic_cast<Entidades::Personagens::Jogador *>(pEnt)->tomarDano(
+        getDano(), getOlhandoEsquerda());
   }
 }
 
