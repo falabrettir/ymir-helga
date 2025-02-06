@@ -53,12 +53,13 @@ void ControladorMenu::controlarMenu() {
       teclasPressionadas[selecionar] = false;
       switch (id) {
         case (ID::IDbotaofase): {
-          dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->setFase(menuAtual->getBotao());
+          dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->setFase(
+              menuAtual->getBotao());
         } break;
 
         case (ID::IDbotaonovojogo): {
-          std::cerr << "Marcha no menuAtual\n";
-          bool fase = dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->getFase();
+          bool fase =
+              dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->getFase();
           if (fase) {
             pGS->pushEstado(new Fases::Planicie());
           } else {
