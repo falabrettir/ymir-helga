@@ -30,16 +30,7 @@ class GerenciadorColisoes : public Mediator {
   GerenciadorColisoes(const GerenciadorColisoes &) = delete;
   GerenciadorColisoes &operator=(const GerenciadorColisoes &) = delete;
 
- public:
-  static GerenciadorColisoes *getInstancia();
-
-  // TODO: remover essa funcao
-  void executar();
-
-  // Funcoes principais
-  void notificar(Entidades::Entidade *sender);
-
-  void verificarColisoes(Entidades::Entidade *pEnt);
+  // Funcoes para verificar colisoes de cada caso de entidade
   void verificarProj(Entidades::Entidade *pEnt);
   void verificarInim(Entidades::Entidade *pEnt);
   void verificarJog(Entidades::Entidade *pEnt);
@@ -54,8 +45,6 @@ class GerenciadorColisoes : public Mediator {
                         const Entidades::Entidade *e2) const;
   float calcOverlapHor(const Entidades::Entidade *e1,
                        const Entidades::Entidade *e2) const;
-  sf::Vector2f calcOverlap(const Entidades::Entidade *e1,
-                           const Entidades::Entidade *e2) const;
   bool colidiu(const Entidades::Entidade *e1,
                const Entidades::Entidade *e2) const;
   bool colidiuVertical(const Entidades::Entidade *e1,
@@ -68,6 +57,14 @@ class GerenciadorColisoes : public Mediator {
   void incluirInim(Entidades::Personagens::Inimigos::Inimigo *pInim);
   void incluirObst(Entidades::Obstaculos::Obstaculo *pObst);
   void incluirProj(Entidades::Projetil *pProj);
+
+ public:
+  static GerenciadorColisoes *getInstancia();
+
+  void notificar(Entidades::Entidade *sender);
+
+  sf::Vector2f calcOverlap(const Entidades::Entidade *e1,
+                           const Entidades::Entidade *e2) const;
 };
 
 }  // namespace Gerenciadores

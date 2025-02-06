@@ -19,8 +19,6 @@ using namespace Entidades;
 
 namespace Gerenciadores {
 
-void GerenciadorColisoes::executar() {}
-
 // ============================================================================
 // Construtora, Destrutora e Singleton
 // ============================================================================
@@ -86,7 +84,6 @@ sf::Vector2f GerenciadorColisoes::calcOverlap(
 
 bool GerenciadorColisoes::colidiuVertical(const Entidades::Entidade *e1,
                                           const Entidades::Entidade *e2) const {
-  // TODO: ????
   return calcOverlapVert(e1, e2) != 0;
 }
 
@@ -106,21 +103,25 @@ bool GerenciadorColisoes::colidiu(const Entidade *e1,
 }
 
 // ============================================================================
-// Funcoes principais do GerenciadorColisoes
+// Funcao do padrao de projeto Mediator
 // ============================================================================
 
-void GerenciadorColisoes::verificarColisoes(Entidades::Entidade *pEnt) {
-  ID id = pEnt->getId();
+void GerenciadorColisoes::notificar(Entidade *sender) {
+  ID id = sender->getId();
 
   if (ehProjetil(id))
-    verificarProj(pEnt);
+    verificarProj(sender);
 
   else if (ehInimigo(id))
-    verificarInim(pEnt);
+    verificarInim(sender);
 
   else if (ehJogador(id))
-    verificarJog(pEnt);
+    verificarJog(sender);
 }
+
+// ============================================================================
+// Funcao para verificar se projetil colidiu com jogador, inimigo ou obstaculo
+// ============================================================================
 
 void GerenciadorColisoes::verificarProj(Entidades::Entidade *pEnt) {
   if (pEnt == nullptr) {
@@ -136,7 +137,8 @@ void GerenciadorColisoes::verificarProj(Entidades::Entidade *pEnt) {
   for (jogIt = jogadores.begin(); jogIt != jogadores.end(); jogIt++) {
     if (*jogIt) {
       if (colidiu(pEnt, *jogIt)) {
-        resolverProj(pEnt, *jogIt);
+        pEnt->colidir();
+        (*jogIt)->colidir(pEnt);
       }
     } else {
       std::clog << "erro: GerenciadorColisoes::verificarProj(...)\n";
@@ -148,7 +150,8 @@ void GerenciadorColisoes::verificarProj(Entidades::Entidade *pEnt) {
   for (inimIt = inimigos.begin(); inimIt != inimigos.end(); inimIt++) {
     if (*inimIt) {
       if (colidiu(pEnt, *inimIt)) {
-        resolverProj(pEnt, *inimIt);
+        pEnt->colidir();
+        (*inimIt)->colidir(pEnt);
       }
     } else {
       std::clog << "erro: GerenciadorColisoes::verificarProj(...)\n";
@@ -160,7 +163,7 @@ void GerenciadorColisoes::verificarProj(Entidades::Entidade *pEnt) {
   for (obstIt = obstaculos.begin(); obstIt != obstaculos.end(); obstIt++) {
     if (*obstIt) {
       if (colidiu(pEnt, *obstIt)) {
-        resolverProj(pEnt, *obstIt);
+        pEnt->colidir();
       }
     } else {
       std::clog << "erro: GerenciadorColisoes::verificarProj(...)\n";
@@ -168,6 +171,10 @@ void GerenciadorColisoes::verificarProj(Entidades::Entidade *pEnt) {
     }
   }
 }
+
+// ============================================================================
+// Funcao para verificar se inimigo colidiu com jogador ou obstaculo
+// ============================================================================
 
 void GerenciadorColisoes::verificarInim(Entidades::Entidade *pEnt) {
   if (pEnt == nullptr) {
@@ -182,7 +189,8 @@ void GerenciadorColisoes::verificarInim(Entidades::Entidade *pEnt) {
   for (jogIt = jogadores.begin(); jogIt != jogadores.end(); jogIt++) {
     if (*jogIt) {
       if (colidiu(pEnt, *jogIt)) {
-        resolverInim(pEnt, *jogIt);
+        pEnt->colidir(*jogIt);
+        (*jogIt)->colidir(pEnt);
       }
     } else {
       std::clog << "erro: GerenciadorColisoes::verificarInim(...)\n";
@@ -194,7 +202,7 @@ void GerenciadorColisoes::verificarInim(Entidades::Entidade *pEnt) {
   for (obstIt = obstaculos.begin(); obstIt != obstaculos.end(); obstIt++) {
     if (*obstIt) {
       if (colidiu(pEnt, *obstIt)) {
-        resolverInim(pEnt, *obstIt);
+        pEnt->colidir();
       }
     } else {
       std::clog << "erro: GerenciadorColisoes::verificarInim(...)\n";
@@ -202,6 +210,10 @@ void GerenciadorColisoes::verificarInim(Entidades::Entidade *pEnt) {
     }
   }
 }
+
+// ============================================================================
+// Funcao para verificar se jogador colidiu com algum obstaculo
+// ============================================================================
 
 void GerenciadorColisoes::verificarJog(Entidades::Entidade *pEnt) {
   if (pEnt == nullptr) {
@@ -214,7 +226,8 @@ void GerenciadorColisoes::verificarJog(Entidades::Entidade *pEnt) {
   for (obstIt = obstaculos.begin(); obstIt != obstaculos.end(); obstIt++) {
     if (*obstIt) {
       if (colidiu(pEnt, *obstIt)) {
-        resolverJog(pEnt, *obstIt);
+        // Jogador colide com obstaculo
+        pEnt->colidir(*obstIt);
       }
     } else {
       std::clog << "erro: GerenciadorColisoes::verificarJog(...)\n";
@@ -223,66 +236,7 @@ void GerenciadorColisoes::verificarJog(Entidades::Entidade *pEnt) {
   }
 }
 
-void GerenciadorColisoes::resolverProj(Entidade *e1, Entidade *e2) {
-  // Se e2 for um personagem, ele toma dano e o projetil some
-  // Tipos de colisao:
-  //
-  // projetil->colidir();
-  // projetil deve ser deletado
-  //
-  // personagem->colidir();
-  // personagem sofre dano do projetil
-  //
-  // obstaculo->colidir();
-  // nada acontece com a plataforma
-}
-
-void GerenciadorColisoes::resolverInim(Entidade *e1, Entidade *e2) {}
-
-void GerenciadorColisoes::resolverJog(Entidade *e1, Entidade *e2) {
-  // Criar atributo dano de entidades, plataforma tem dano 0
-  // Criar metodo getDano de entidades
-  // Se e2 for plataforma, apenas deslocar o jogador
-  //
-  // Se e2 for gosma, aplicar lentidao sem knockback
-  //
-  // Se e2 for espinho, danificar e knockback
-
-  sf::Vector2f novaPos = e1->getPos();
-
-  float dx = calcOverlapHor(e1, e2);
-  float dy = calcOverlapVert(e1, e2);
-  sf::Vector2f ds(dx, dy);
-
-  // Descobrir eixo da colisao
-  if (dx < dy) {
-    // Descobrir direcao da colisao
-    if (e1->getPos().x < e2->getPos().x) {
-      // Jogador colidiu da esquerda para direita
-      novaPos.x -= dx;
-    } else {
-      // Jogador colidiu da direita para esquerda
-      novaPos.x += dx;
-    }
-    e1->setVelX(0);
-  }
-
-  if (dy <= dx) {
-    // Descobrir direcao da colisao
-    if (e1->getPos().y < e2->getPos().y) {
-      // Jogador caindo
-      novaPos.y -= dy;
-      e1->setNoChao(true);
-    } else {
-      // Jogador dando cabecada
-      novaPos.y += dy;
-    }
-    e1->setVelY(0);
-  }
-
-  e1->setPos(novaPos);
-}
-
+// TODO: explodir
 void GerenciadorColisoes::resolverColisao(Entidade *e1, Entidade *e2) {
   ID id1 = e1->getId();
   ID id2 = e2->getId();
@@ -339,12 +293,8 @@ void GerenciadorColisoes::resolverColisao(Entidade *e1, Entidade *e2) {
   }
 }
 
-void GerenciadorColisoes::notificar(Entidade *sender) {
-  verificarColisoes(sender);
-}
-
 // ============================================================================
-// Funcoes para incluir entidades no GerenciadorColisoes
+// Funcoes para gerenciar os conjuntos de entidades
 // ============================================================================
 
 void GerenciadorColisoes::incluirJog(Personagens::Jogador *pJog) {
