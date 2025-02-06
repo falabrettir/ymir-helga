@@ -16,7 +16,7 @@ Entidade::Entidade(ID id)
     : Ente(id),
       pos(0, 0),
       velocidade(0, 0),
-      gravidade(0, 0.08),
+      gravidade(0, 0.002),
       noChao(false),
       olhandoEsquerda(false),
       buffer(nullptr) {
@@ -80,7 +80,7 @@ bool Entidade::getNoChao() const { return noChao; }
 
 sf::Vector2f Entidade::getTamanho() const { return tamanho; }
 
-void Entidade::cair() { setVel(getVel() + gravidade); }
+void Entidade::cair() { setVel(getVel() + gravidade * pGG->getDeltaTempo()); }
 
 void Entidade::setHitbox(sf::FloatRect& hitbox) { this->hitbox = hitbox; }
 

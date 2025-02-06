@@ -35,7 +35,7 @@ Plataforma::Plataforma(ID id, const sf::Vector2f &pos)
       break;
   }
 
-  tamanho = {128 * 3, 32 * 3};
+  tamanho = {128 * 3, 16 * 3};
 }
 
 Plataforma::~Plataforma() {}
