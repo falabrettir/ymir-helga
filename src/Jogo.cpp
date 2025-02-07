@@ -25,13 +25,13 @@ Jogo::~Jogo() {}
 void Jogo::atualizar() {
   pGE->processaEventos();
 
-  pGG->atualizaDeltaTempo();
-
   pGS->executar();
 
   // Sempre deixar display antes de clear
   pGG->display();
   pGG->clear();
+
+  pGG->atualizaDeltaTempo();
 }
 
 void Jogo::executar() {

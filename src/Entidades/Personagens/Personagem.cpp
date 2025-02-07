@@ -21,6 +21,8 @@ Personagem::Personagem(ID id)
       direcaoKnockback(0.f, 0.f),
       invencivel(false),
       tempoInvencibilidade(0.0f),
+      podeAtacar(true),
+      ultimoAtaque(0),
       pProj(nullptr) {}
 
 Personagem::~Personagem() {}
@@ -64,7 +66,14 @@ const int Personagem::getDano() const { return dano; }
 void Personagem::setDanificando(bool danificando) {
   this->danificando = danificando;
 }
-void Personagem::executar() { setNoChao(false); }
+
+void Personagem::executar() {
+  ultimoAtaque += pGG->getDeltaTempo();
+  if (ultimoAtaque > 1000) {
+    podeAtacar = true;
+    ultimoAtaque = 0;
+  }
+}
 
 const bool Personagem::getDanificando() const { return danificando; }
 void Personagem::atualizarKnockback() {

@@ -8,13 +8,11 @@ ListaEntidades::ListaEntidades() : LEs() {}
 ListaEntidades::~ListaEntidades() { limpar(); }
 
 void ListaEntidades::incluir(Entidades::Entidade *e) {
-  if (e != nullptr)
-    LEs.incluir(e);
+  if (e != nullptr) LEs.incluir(e);
 }
 
 void ListaEntidades::deletar(Entidades::Entidade *e) {
-  if (e != nullptr)
-    LEs.remover(e);
+  if (e != nullptr) LEs.remover(e);
 }
 
 const int ListaEntidades::getSize() const { return LEs.getSize(); }
@@ -33,8 +31,8 @@ void ListaEntidades::executar() {
   for (int i = 0; i < LEs.getSize(); i++) {
     aux = LEs.operator[](i);
     aux->executar();
-    aux->desenhar();
+    if (aux) aux->desenhar();
   }
 }
 
-} // namespace Listas
+}  // namespace Listas

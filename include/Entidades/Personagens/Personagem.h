@@ -30,6 +30,8 @@ class Personagem : public Entidades::Entidade {
  protected:
   static Fases::Fase *pFase;
   Entidades::Projetil *pProj;
+  bool podeAtacar;
+  float ultimoAtaque;
 
  public:
   Personagem(ID id);

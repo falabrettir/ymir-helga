@@ -3,6 +3,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 
+#include "Entidades/Personagens/Personagem.h"
 #include "Fabrica/FabricaProjeteis.h"
 #include "Fases/Fase.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
@@ -12,7 +13,7 @@ Fabricas::FabricaProjeteis *Mago::fabProj =
     Fabricas::FabricaProjeteis::getInstancia();
 
 Mago::Mago(const sf::Vector2f &pos)
-    : Inimigo(ID::IDmago), poder(1.0005), bolaDeFogo(nullptr) {
+    : Inimigo(ID::IDmago), poder(1.000005), bolaDeFogo(nullptr) {
   std::clog << "Criando novo mago\n";
 
   setTextura("/assets/Personagens/Mago.png");
@@ -34,9 +35,10 @@ void Mago::atacar() {
   }
 
   // Ataca apenas se a ultima bola de fogo ja colidiu
-  if (!bolaDeFogo) {
-    bolaDeFogo = fabProj->criarProjetil(this, poder);
-    pFase->adicionarProjetil(bolaDeFogo);
+  if (podeAtacar) {
+    podeAtacar = false;
+    pProj = fabProj->criarProjetil(this, poder);
+    pFase->adicionarProjetil(pProj);
 
     aumentarPoder();
   }
@@ -45,6 +47,8 @@ void Mago::atacar() {
 void Mago::aumentarPoder() { poder *= poder; }
 
 void Mago::executar() {
+  Personagem::executar();
+
   atualizarKnockback();
   setDanificando(false);
   setNoChao(false);

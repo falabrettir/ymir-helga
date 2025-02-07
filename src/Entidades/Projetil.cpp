@@ -18,7 +18,7 @@ Projetil::Projetil()
 
 Projetil::Projetil(Personagens::Personagem *pPersDono, int impulso)
     : Entidade(ID::IDprojetil), pPersDono(pPersDono), impulso(impulso) {
-  std::clog << "Criando projetil\n";
+  std::clog << "Criando projetil" << std::endl;
 
   if (pPersDono->getId() == ID::IDesqueleto ||
       pPersDono->getId() == ID::IDjogador) {
@@ -32,9 +32,9 @@ Projetil::Projetil(Personagens::Personagem *pPersDono, int impulso)
 
   sf::Vector2f pos = pPersDono->getPos();
   if (pPersDono->getOlhandoEsquerda()) {
-    pos.x -= 32;
+    pos.x -= 48;
   } else {
-    pos.x += 32;
+    pos.x += 48;
   }
   setPos(pos);
 
@@ -45,20 +45,27 @@ Projetil::Projetil(Personagens::Personagem *pPersDono, int impulso)
   if (pPersDono->getOlhandoEsquerda()) vel.x *= -1;
 
   setVel(vel);
+  std::clog << "projetil criado" << std::endl;
 }
 
-Projetil::~Projetil() { pFase = nullptr; }
+Projetil::~Projetil() {
+  pFase = nullptr;
+  pPersDono = nullptr;
+}
 
 int Projetil::getDano() { return getVel().x; }
 
 Personagens::Personagem *Projetil::getDono() { return pPersDono; }
 
 void Projetil::colidir(Entidade *pE) {
-  // Fazer com que a fase tire o projetil da sua lista
-  // mesma coisa pro pgc
-  pPersDono->apagarProj();
-  pGC->removerEnt(this);
-  pFase->removerProjetil(this);
+  if (pE != pPersDono) {
+    pPersDono->apagarProj();
+    std::clog << "pPersDono apagou prjetil" << std::endl;
+    pGC->removerEnt(this);
+    std::clog << "projetil removido do gc" << std::endl;
+    pFase->removerProjetil(this);
+    std::clog << "projetil removido da fase" << std::endl;
+  }
 }
 
 void Projetil::executar() {
