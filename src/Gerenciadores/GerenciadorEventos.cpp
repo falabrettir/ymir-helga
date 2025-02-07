@@ -12,7 +12,8 @@ namespace Gerenciadores {
 GerenciadorEventos *GerenciadorEventos::instancia = nullptr;
 
 GerenciadorEventos::GerenciadorEventos()
-    : pGG(GerenciadorGrafico::getInstancia()), pGI(GerenciadorInput::getInstancia()) {
+    : pGG(GerenciadorGrafico::getInstancia()),
+      pGI(GerenciadorInput::getInstancia()) {
   pJanela = pGG->getJanela();
 }
 
