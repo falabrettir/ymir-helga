@@ -1,10 +1,10 @@
 #include "Fases/Planicie.h"
 
 #include <iostream>
+#include <limits>
 
 #include "Fabrica/FabricaEntidadesPlanicie.h"
 #include "Fases/Fase.h"
-#include <limits>
 
 using namespace Entidades;
 
@@ -13,7 +13,7 @@ int Planicie::contMago(0);
 int Planicie::contEsq(0);
 int Planicie::contPlat(0);
 int Planicie::contGosma(0);
-Planicie::Planicie() : Fase(), minGosma(5), minPlat(4), minMago(4), minEsq(5) {
+Planicie::Planicie() : Fase(ID::IDplanicie), minGosma(5), minPlat(4), minMago(4), minEsq(5) {
   std::clog << "Criando Planicie.\n";
 
   setTextura("/assets/Fundos/fundofase2escalado.png");
@@ -38,29 +38,29 @@ const int Planicie::getMinPlat() const { return minPlat; }
 
 const int Planicie::getCont(char tipoEnt) {
   switch (tipoEnt) {
-  case 'E':
-    return contEsq;
-  case 'W':
-    return contMago;
-  case 'G':
-    return contGosma;
-  case 'M':
-    return contPlat;
-  default:
-    return std::numeric_limits<int>::max();
+    case 'E':
+      return contEsq;
+    case 'W':
+      return contMago;
+    case 'G':
+      return contGosma;
+    case 'M':
+      return contPlat;
+    default:
+      return std::numeric_limits<int>::max();
   }
 }
 void Planicie::incrementaContadores(char tipoEnt) {
   switch (tipoEnt) {
-  case 'E':
-    contEsq++;
-  case 'W':
-    contMago++;
-  case 'G':
-    contGosma++;
-  case 'M':
-    contPlat++;
+    case 'E':
+      contEsq++;
+    case 'W':
+      contMago++;
+    case 'G':
+      contGosma++;
+    case 'M':
+      contPlat++;
   }
 }
 
-} // namespace Fases
+}  // namespace Fases

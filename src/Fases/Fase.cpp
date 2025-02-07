@@ -20,10 +20,16 @@ using namespace Entidades;
 
 namespace Fases {
 
-Fase::Fase()
-    : Ente(ID::IDfase), States::State(ID::IDfase), listaObstaculos(),
-      listaJogadores(), listaInimigos(), listaProjeteis(), pFE(nullptr),
-      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()), thisObs() {
+Fase::Fase(ID id)
+    : Ente(id),
+      States::State(id),
+      listaObstaculos(),
+      listaJogadores(),
+      listaInimigos(),
+      listaProjeteis(),
+      pFE(nullptr),
+      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()),
+      thisObs() {
   listaObstaculos.limpar();
   listaJogadores.limpar();
   listaInimigos.limpar();
@@ -44,6 +50,9 @@ Fase::~Fase() {
 void Fase::executar() {
   listaObstaculos.executar();
   listaJogadores.executar();
+  // if (listaInimigos.getSize() == 0) {
+  //   thisObs->notificarFim();
+  // }
   listaInimigos.executar();
   listaProjeteis.executar();
   thisObs->executar();
@@ -73,14 +82,11 @@ void Fase::incluirNaLista(Entidade *novaEntidade) {
   }
 }
 
-void Fase::removerProjetil(Projetil *projetil) {
-  listaProjeteis.deletar(projetil);
-}
+void Fase::removerProjetil(Projetil *projetil) { listaProjeteis.deletar(projetil); }
 
 void Fase::adicionarProjetil(Entidades::Projetil *novoProjetil) {
   if (!novoProjetil) {
-    std::cerr
-        << "erro: Fase::adicionarProjetil(...) => novoProjetil == nullptr\n";
+    std::cerr << "erro: Fase::adicionarProjetil(...) => novoProjetil == nullptr\n";
     exit(EXIT_FAILURE);
   }
 
@@ -114,8 +120,7 @@ void Fase::criarMapa(const std::string path) {
   for (int j = 0; std::getline(arquivoMapa, linha); j++) {
     for (int i = 0; i < linha.size(); i++) {
       if (linha[i] != ' ') {
-        novaEntidade =
-            pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
+        novaEntidade = pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
         if (novaEntidade != nullptr) {
           incluirNaLista(novaEntidade);
         }
@@ -133,7 +138,8 @@ void Fase::notificarMorreu(Entidades::Entidade *pEnt) {
   } else {
     pGC->removerEnt(pEnt);
     listaInimigos.deletar(pEnt);
+    std::clog << "listaInimigos.deletar()" << std::endl;
   }
 }
 
-} // namespace Fases
+}  // namespace Fases

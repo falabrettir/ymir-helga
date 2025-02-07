@@ -14,10 +14,10 @@ class ObservadorFase : public Observer {
  public:
   ObservadorFase(Fases::Fase* fAtual);
   ~ObservadorFase();
+  void notificarFim();
   void atualizarTeclasPressionadas(sf::Keyboard::Key tecla);
   void atualizarTeclasSoltas(sf::Keyboard::Key tecla);
   void notificarJogadorMorreu();
-  void notificarProjetil();
   void pausar();
   bool acharTecla(Key tecla);
   void setTeclas();

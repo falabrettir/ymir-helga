@@ -14,12 +14,12 @@ class ObservadorFase;
 
 namespace Gerenciadores {
 class GerenciadorColisoes;
-} // namespace Gerenciadores
+}  // namespace Gerenciadores
 
 namespace Fases {
 
 class Fase : public Ente, public States::State {
-protected:
+ protected:
   Gerenciadores::GerenciadorColisoes *pGC;
   Fabricas::FabricaEntidades *pFE;
   ObservadorFase *thisObs;
@@ -29,8 +29,8 @@ protected:
   Listas::ListaEntidades listaJogadores;
   Listas::ListaEntidades listaProjeteis;
 
-public:
-  Fase();
+ public:
+  Fase(ID id);
   ~Fase();
 
   virtual void executar();
@@ -42,4 +42,4 @@ public:
   void criarMapa(const std::string path);
 };
 
-} // namespace Fases
+}  // namespace Fases

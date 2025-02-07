@@ -1,14 +1,18 @@
 #pragma once
-#include "Fases/Fase.h"
 #include "Menu/Menu.h"
 namespace Menus {
 class MenuPausa : public Menu {
  private:
-  Fases::Fase* faseAtual;
+  static MenuPausa* instancia;
+
+ private:
+  MenuPausa();
+  ~MenuPausa();
+  MenuPausa(const MenuPausa&) = delete;
+  MenuPausa& operator=(const MenuPausa&) = delete;
 
  public:
-  MenuPausa(ID id, Fases::Fase* fAtual);
-  ~MenuPausa();
+  static MenuPausa* getInstancia();
   void executar();
   void criarBotoes();
 };

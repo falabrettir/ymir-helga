@@ -53,27 +53,25 @@ void ControladorMenu::controlarMenu() {
       teclasPressionadas[selecionar] = false;
       switch (id) {
         case (ID::IDbotaofase): {
-          dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->setFase(
-              menuAtual->getBotao());
+          dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->setFase(menuAtual->getBotao());
         } break;
 
         case (ID::IDbotaonovojogo): {
-          bool fase =
-              dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->getFase();
+          bool fase = dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->getFase();
           if (fase) {
-            pGS->pushEstado(new Fases::Planicie());
+            pGS->inserirEstado(new Fases::Planicie());
+            pGS->mudarEstado(ID::IDplanicie);
           } else {
-            pGS->pushEstado(new Fases::Caverna());
+            pGS->inserirEstado(new Fases::Caverna());
+            pGS->mudarEstado(ID::IDcaverna);
           }
         } break;
 
         case (ID::IDbotaosair): {
-          pGS->popEstado();
-          pGS->popEstado();
-        }
+        } break;
         case (ID::IDbotaocontinuar): {
-          pGS->popEstado();
-        }
+          pGS->mudarEstado(pGS->getEstadoAnterior());
+        } break;
         // TODO: Botao salvar jogada
         default:
           break;

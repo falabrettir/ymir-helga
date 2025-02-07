@@ -1,5 +1,5 @@
 #pragma once
-#include <stack>
+#include <map>
 
 #include "IDs.h"
 #include "State.h"
@@ -7,8 +7,10 @@
 namespace Gerenciadores {
 class GerenciadorEstados {
  private:
-  std::stack<States::State *> pilhaEstados;
+  std::map<ID, States::State *> mapStates;
   static GerenciadorEstados *instancia;
+  ID idAtual;
+  ID idAnterior;
 
  private:
   GerenciadorEstados();
@@ -18,10 +20,11 @@ class GerenciadorEstados {
 
  public:
   static GerenciadorEstados *getInstancia();
-  ID getIdTop();
+  const ID getEstadoAnterior();
+  const ID getEstadoAtual();
+  void mudarEstado(ID id);
   void executar();
-  void pushEstado(States::State *s);
-  States::State *topEstado();
-  void popEstado();
+  void inserirEstado(States::State *s);
+  void removerEstado(ID id);
 };
 }  // namespace Gerenciadores

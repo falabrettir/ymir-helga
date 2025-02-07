@@ -3,6 +3,7 @@
 #include <iostream>
 #include <map>
 
+#include "Fases/Planicie.h"
 #include "Gerenciadores/GerenciadorEstados.h"
 #include "IDs.h"
 #include "Menu/MenuPausa.h"
@@ -36,17 +37,26 @@ void ObservadorFase::atualizarTeclasSoltas(sf::Keyboard::Key tecla) {
 }
 void ObservadorFase::pausar() {
   std::cerr << "Pausar chamado\n";
-  if (pGS->topEstado()->getId() == ID::IDfase) {
+  if (pGS->getEstadoAtual() == ID::IDcaverna || pGS->getEstadoAtual() == ID::IDplanicie) {
     std::cerr << "Dentro do if de Pausar\n";
-    pGS->pushEstado(new Menus::MenuPausa(ID::IDmenupause, fAtual));
+    pGS->inserirEstado(Menus::MenuPausa::getInstancia());
+    pGS->mudarEstado(ID::IDmenupause);
   }
 }
 void ObservadorFase::notificarJogadorMorreu() {
   // pGS->pushEstado(new Menus::MenuGameOver(ID::IDmenugameover));
 }
-void ObservadorFase::notificarProjetil() {}
 void ObservadorFase::executar() {
   if (teclasPressionadas[pause]) {
     pausar();
-  }  // TODO: notificarProjetil e notificarJogadorMorreu
+  }
+}
+void ObservadorFase::notificarFim() {
+  if (fAtual->States::State::getId() == ID::IDcaverna) {
+    std::clog << "NotficarFim" << std::endl;
+    pGS->inserirEstado(new Fases::Planicie());
+    pGS->mudarEstado(ID::IDplanicie);
+  } else {
+    std::clog << "WINNER WINNER CHICKEN DINNER" << std::endl;
+  }  // TODO: COZER
 }

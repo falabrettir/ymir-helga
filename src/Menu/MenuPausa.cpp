@@ -5,7 +5,9 @@
 
 namespace Menus {
 
-MenuPausa::MenuPausa(ID id, Fases::Fase* fAtual) : Menu(id) {
+MenuPausa* MenuPausa::instancia(nullptr);
+
+MenuPausa::MenuPausa() : Menu(ID::IDmenupause) {
   pContr = new Controladores::ControladorMenu(this);
   pGI->inscrever(pContr);
   setTextura("/assets/Menu.png");
@@ -27,5 +29,11 @@ void MenuPausa::executar() {
     ++it;
   }
   pContr->controlarMenu();
+}
+MenuPausa* MenuPausa::getInstancia() {
+  if (instancia == nullptr) {
+    instancia = new MenuPausa();
+  }
+  return instancia;
 }
 }  // namespace Menus

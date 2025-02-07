@@ -13,15 +13,11 @@ namespace Entidades::Personagens::Inimigos {
 
 std::set<Jogador *> Inimigo::setJogadores{};
 
-Inimigo::Inimigo(ID id) : Personagem(id), visada(500.f), visando(false) {
-  pGC->incluirInim(this);
-}
+Inimigo::Inimigo(ID id) : Personagem(id), visada(25.f), visando(false) { pGC->incluirInim(this); }
 
 Inimigo::~Inimigo() {}
 
-float Inimigo::calculaDistancia(Jogador *pJog) {
-  return fabs(pJog->getPos().x - this->getPos().x);
-}
+float Inimigo::calculaDistancia(Jogador *pJog) { return fabs(pJog->getPos().x - this->getPos().x); }
 
 void Inimigo::adicionarJogador(Jogador *pJog) { setJogadores.insert(pJog); }
 
@@ -29,7 +25,7 @@ void Inimigo::perseguir() {
   std::set<Jogador *>::iterator it = setJogadores.begin();
   Jogador *aux = nullptr;
   float atual, min = visada;
-  visando = false; // Reset targeting flag
+  visando = false;  // Reset targeting flag
 
   // Check for players in sight
   while (it != setJogadores.end()) {
@@ -52,25 +48,24 @@ void Inimigo::perseguir() {
 
     float magnitude = std::sqrt(direcao.x * direcao.x + direcao.y * direcao.y);
 
-    if (magnitude != 0)
-      direcao /= magnitude;
+    if (magnitude != 0) direcao /= magnitude;
 
     sf::Vector2f novaVel;
     novaVel.x = direcao.x * getVel().x;
     setVelX(novaVel.x);
 
-  } else { // movimento aleatório
+  } else {  // movimento aleatório
     static float moveTimer = 0.0f;
     static int direcao = 1;
-    static float mudarIntervalo = (rand() % 20 + 10) / 10.0f; // 1-3 seconds
+    static float mudarIntervalo = (rand() % 20 + 10) / 10.0f;  // 1-3 seconds
 
     moveTimer += 0.016f;
 
     // Random chance to change direction each frame (10%)
     if ((rand() % 100) < 10 || moveTimer >= mudarIntervalo) {
-      direcao = (rand() % 2) * 2 - 1; // Generates either -1 or 1
+      direcao = (rand() % 2) * 2 - 1;  // Generates either -1 or 1
       moveTimer = 0.0f;
-      mudarIntervalo = (rand() % 20 + 10) / 10.0f; // New random interval
+      mudarIntervalo = (rand() % 20 + 10) / 10.0f;  // New random interval
     }
 
     setVelX(MAXVEL * 0.3 * direcao);
@@ -82,16 +77,16 @@ void Inimigo::colidir(Entidade *pEnt) {
   if (ehPlataforma(pEnt->getId())) {
     sf::Vector2f novaPos = this->getPos();
     sf::Vector2f ds = pGC->calcOverlap(this, pEnt);
-    if (ds.x < ds.y) {                         // Eixo da colisão
-      if (this->getPos().x < pEnt->getPos().x) // Direção da colisao
-        novaPos.x -= ds.x;                     // Colisão Esquerda => Direita
+    if (ds.x < ds.y) {                          // Eixo da colisão
+      if (this->getPos().x < pEnt->getPos().x)  // Direção da colisao
+        novaPos.x -= ds.x;                      // Colisão Esquerda => Direita
       else
-        novaPos.x += ds.x; // Colisao Direita => Esquerda
+        novaPos.x += ds.x;  // Colisao Direita => Esquerda
       this->setVelX(0.f);
     }
-    if (ds.y < ds.x) {                           // Eixo da colisão
-      if (this->getPos().y < pEnt->getPos().y) { // Direção da colisão
-        novaPos.y -= ds.y;                       // Caindo
+    if (ds.y < ds.x) {                            // Eixo da colisão
+      if (this->getPos().y < pEnt->getPos().y) {  // Direção da colisão
+        novaPos.y -= ds.y;                        // Caindo
         this->setNoChao(true);
       } else
         novaPos.y += ds.y;
@@ -99,15 +94,14 @@ void Inimigo::colidir(Entidade *pEnt) {
     }
     this->setPos(novaPos);
   } else if (ehJogador(pEnt->getId())) {
-    dynamic_cast<Entidades::Personagens::Jogador *>(pEnt)->tomarDano(
-        getDano(), getOlhandoEsquerda());
+    dynamic_cast<Entidades::Personagens::Jogador *>(pEnt)->tomarDano(getDano(),
+                                                                     getOlhandoEsquerda());
   } else if (ehProjetil(pEnt->getId())) {
-    if (ehJogador(
-            dynamic_cast<Entidades::Projetil *>(pEnt)->getDono()->getId())) {
-      tomarDano(dynamic_cast<Entidades::Projetil *>(pEnt)->getDano(),
+    if (ehJogador(dynamic_cast<Entidades::Projetil *>(pEnt)->getDono()->getId())) {
+      tomarDano(dynamic_cast<Entidades::Projetil *>(pEnt)->getDano() + 200,
                 pEnt->getOlhandoEsquerda());
     }
   }
 }
 
-} // namespace Entidades::Personagens::Inimigos
+}  // namespace Entidades::Personagens::Inimigos
