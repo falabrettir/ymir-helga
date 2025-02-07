@@ -7,6 +7,7 @@
 
 #include "Entidades/Entidade.h"
 #include "Entidades/Obstaculos/Obstaculo.h"
+#include "Entidades/Personagens/Inimigo.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Projetil.h"
 #include "IDs.h"
@@ -265,6 +266,29 @@ void GerenciadorColisoes::limparEntidades() {
   inimigos.clear();
   obstaculos.clear();
   projeteis.clear();
+}
+
+void GerenciadorColisoes::removerEnt(Entidade *pEnt) {
+  ID id = pEnt->getId();
+
+  if (ehInimigo(id)) {
+    Personagens::Inimigos::Inimigo *aux =
+        dynamic_cast<Personagens::Inimigos::Inimigo *>(pEnt);
+
+    inimigos.erase(std::remove(inimigos.begin(), inimigos.end(), aux),
+                   inimigos.end());
+
+  } else if (ehJogador(id)) {
+    Personagens::Jogador *aux = dynamic_cast<Personagens::Jogador *>(pEnt);
+
+    jogadores.erase(std::remove(jogadores.begin(), jogadores.end(), aux),
+                    jogadores.end());
+  }
+
+  else if (ehProjetil(id)) {
+    Projetil *aux = dynamic_cast<Projetil *>(pEnt);
+    projeteis.erase(aux);
+  }
 }
 
 }  // namespace Gerenciadores

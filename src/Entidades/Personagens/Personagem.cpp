@@ -11,10 +11,17 @@ namespace Entidades::Personagens {
 Fases::Fase *Personagem::pFase = nullptr;
 
 Personagem::Personagem(ID id)
-    : Entidade(id), hp(100), dano(0), danificando(false),
-      emAnimacaoKnockback(false), tempoKnockback(0.0f), duracaoKnockback(0.5f),
-      direcaoKnockback(0.f, 0.f), invencivel(false),
-      tempoInvencibilidade(0.0f) {}
+    : Entidade(id),
+      hp(100),
+      dano(0),
+      danificando(false),
+      emAnimacaoKnockback(false),
+      tempoKnockback(0.0f),
+      duracaoKnockback(0.5f),
+      direcaoKnockback(0.f, 0.f),
+      invencivel(false),
+      tempoInvencibilidade(0.0f),
+      pProj(nullptr) {}
 
 Personagem::~Personagem() {}
 
@@ -40,8 +47,8 @@ void Personagem::tomarDano(int dano, bool esq) {
 
     // Aplica velocidade inicial para criar um arco natural
     sf::Vector2f novaVel;
-    novaVel.x = direcaoKnockback.x * 0.5f; // Velocidade horizontal constante
-    novaVel.y = -0.7f;                     // Impulso inicial para cima
+    novaVel.x = direcaoKnockback.x * 0.5f;  // Velocidade horizontal constante
+    novaVel.y = -0.7f;                      // Impulso inicial para cima
     setVel(novaVel);
     setNoChao(false);
   } else if (!invencivel && !emAnimacaoKnockback) {
@@ -61,7 +68,7 @@ void Personagem::executar() { setNoChao(false); }
 
 const bool Personagem::getDanificando() const { return danificando; }
 void Personagem::atualizarKnockback() {
-  const float deltaTime = 0.016f; // Aproximadamente 60 FPS
+  const float deltaTime = 0.016f;  // Aproximadamente 60 FPS
 
   // Atualiza invencibilidade
   if (invencivel) {
@@ -86,15 +93,18 @@ void Personagem::atualizarKnockback() {
       sf::Vector2f vel = getVel();
 
       // Aplica gravidade para criar o arco
-      vel.y += 0.08f; // Força da gravidade
+      vel.y += 0.08f;  // Força da gravidade
 
       // Diminui mais rapidamente a velocidade horizontal (exponencial)
       float t = tempoKnockback / duracaoKnockback;
       vel.x = direcaoKnockback.x * 0.5f *
-              std::exp(-4.0f * t); // Decaimento exponencial mais rápido
+              std::exp(-4.0f * t);  // Decaimento exponencial mais rápido
 
       setVel(vel);
     }
   }
 }
-} // namespace Entidades::Personagens
+
+void Personagem::apagarProj() { pProj = nullptr; }
+
+}  // namespace Entidades::Personagens

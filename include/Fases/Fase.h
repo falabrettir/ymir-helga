@@ -41,6 +41,7 @@ class Fase : public Ente, public States::State {
 
   void incluirNaLista(Entidades::Entidade *novaEntidade);
   void adicionarProjetil(Entidades::Projetil *novoProjetil);
+  void removerProjetil(Entidades::Projetil *projetil);
   void criarMapa(const std::string path);
 };
 

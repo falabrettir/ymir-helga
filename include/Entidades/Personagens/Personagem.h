@@ -10,6 +10,8 @@ class Fase;
 
 namespace Entidades {
 
+class Projetil;
+
 namespace Personagens {
 
 class Personagem : public Entidades::Entidade {
@@ -27,6 +29,7 @@ class Personagem : public Entidades::Entidade {
 
  protected:
   static Fases::Fase *pFase;
+  Entidades::Projetil *pProj;
 
  public:
   Personagem(ID id);
@@ -43,6 +46,7 @@ class Personagem : public Entidades::Entidade {
   void atualizarKnockback();
   bool getEmAnimacaoKnockback() const { return emAnimacaoKnockback; }
   void setEmAnimacaoKnockback(bool valor) { emAnimacaoKnockback = valor; }
+  void apagarProj();
 };
 
 }  // namespace Personagens

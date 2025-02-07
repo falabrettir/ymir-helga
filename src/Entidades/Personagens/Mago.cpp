@@ -12,7 +12,7 @@ Fabricas::FabricaProjeteis *Mago::fabProj =
     Fabricas::FabricaProjeteis::getInstancia();
 
 Mago::Mago(const sf::Vector2f &pos)
-    : Inimigo(ID::IDmago), poder(1.05), bolaDeFogo(nullptr) {
+    : Inimigo(ID::IDmago), poder(1.0005), bolaDeFogo(nullptr) {
   std::clog << "Criando novo mago\n";
 
   setTextura("/assets/Personagens/Mago.png");
@@ -49,8 +49,7 @@ void Mago::executar() {
   setDanificando(false);
   setNoChao(false);
 
-  if (!getNoChao())
-    cair();
+  if (!getNoChao()) cair();
 
   perseguir();
 
@@ -70,4 +69,4 @@ void Mago::executar() {
   pGG->getJanela()->draw(debugShape);
 }
 
-} // namespace Entidades::Personagens::Inimigos
+}  // namespace Entidades::Personagens::Inimigos

@@ -10,6 +10,7 @@ namespace Entidades {
 class Projetil : public Entidade {
  private:
   Personagens::Personagem *pPersDono;
+  Fases::Fase *pFase;
   int impulso;
 
  public:
@@ -21,6 +22,7 @@ class Projetil : public Entidade {
   Personagens::Personagem *getDono();
   void colidir(Entidade *pEnt = nullptr);
   void executar();
+  void setFase(Fases::Fase *fase);
 };
 
 }  // namespace Entidades

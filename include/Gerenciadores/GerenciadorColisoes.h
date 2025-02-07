@@ -63,6 +63,7 @@ class GerenciadorColisoes : public Mediator {
   void incluirInim(Entidades::Personagens::Inimigos::Inimigo *pInim);
   void incluirObst(Entidades::Obstaculos::Obstaculo *pObst);
   void incluirProj(Entidades::Projetil *pProj);
+  void removerEnt(Entidades::Entidade *pEnt);
 };
 
 }  // namespace Gerenciadores

@@ -21,8 +21,7 @@ Fabricas::FabricaProjeteis *Jogador::fabProj =
     Fabricas::FabricaProjeteis::getInstancia();
 
 Jogador::Jogador(const sf::Vector2f &pos)
-    : Personagem(ID::IDjogador), pContr(nullptr), podePular(true),
-      pProj(nullptr) {
+    : Personagem(ID::IDjogador), pContr(nullptr), podePular(true) {
   std::clog << "Criando novo jogador\n";
 
   pContr = new Controladores::Controlador_Jogador();
@@ -43,10 +42,7 @@ Jogador::Jogador(const sf::Vector2f &pos)
   setPos(pos);
 }
 
-Jogador::~Jogador() {
-  delete pProj;
-  delete pContr;
-}
+Jogador::~Jogador() { delete pContr; }
 
 bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
@@ -93,8 +89,7 @@ void Jogador::executar() {
 
   setNoChao(false);
 
-  if (!getNoChao())
-    cair();
+  if (!getNoChao()) cair();
 
   mover();
 
@@ -128,16 +123,16 @@ void Jogador::colidir(Entidade *pEnt) {
   if (ehPlataforma(pEnt->getId())) {
     sf::Vector2f novaPos = this->getPos();
     sf::Vector2f ds = pGC->calcOverlap(this, pEnt);
-    if (ds.x < ds.y) {                         // Eixo da colisão
-      if (this->getPos().x < pEnt->getPos().x) // Direção da colisao
-        novaPos.x -= ds.x;                     // Colisão Esquerda => Direita
+    if (ds.x < ds.y) {                          // Eixo da colisão
+      if (this->getPos().x < pEnt->getPos().x)  // Direção da colisao
+        novaPos.x -= ds.x;                      // Colisão Esquerda => Direita
       else
-        novaPos.x += ds.x; // Colisao Direita => Esquerda
+        novaPos.x += ds.x;  // Colisao Direita => Esquerda
       this->setVelX(0.f);
     }
-    if (ds.y < ds.x) {                           // Eixo da colisão
-      if (this->getPos().y < pEnt->getPos().y) { // Direção da colisão
-        novaPos.y -= ds.y;                       // Caindo
+    if (ds.y < ds.x) {                            // Eixo da colisão
+      if (this->getPos().y < pEnt->getPos().y) {  // Direção da colisão
+        novaPos.y -= ds.y;                        // Caindo
         this->setNoChao(true);
       } else
         novaPos.y += ds.y;

@@ -21,9 +21,15 @@ using namespace Entidades;
 namespace Fases {
 
 Fase::Fase()
-    : Ente(ID::IDfase), States::State(ID::IDfase), listaObstaculos(),
-      listaJogadores(), listaInimigos(), listaProjeteis(), pFE(nullptr),
-      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()), thisObs() {
+    : Ente(ID::IDfase),
+      States::State(ID::IDfase),
+      listaObstaculos(),
+      listaJogadores(),
+      listaInimigos(),
+      listaProjeteis(),
+      pFE(nullptr),
+      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()),
+      thisObs() {
   listaObstaculos.limpar();
   listaJogadores.limpar();
   listaInimigos.limpar();
@@ -73,6 +79,10 @@ void Fase::incluirNaLista(Entidade *novaEntidade) {
   }
 }
 
+void Fase::removerProjetil(Projetil *projetil) {
+  listaProjeteis.deletar(projetil);
+}
+
 void Fase::adicionarProjetil(Entidades::Projetil *novoProjetil) {
   if (!novoProjetil) {
     std::cerr
@@ -81,6 +91,7 @@ void Fase::adicionarProjetil(Entidades::Projetil *novoProjetil) {
   }
 
   incluirNaLista(novoProjetil);
+  novoProjetil->setFase(this);
 }
 
 void Fase::criarMapa(const std::string path) {
@@ -121,4 +132,4 @@ void Fase::criarMapa(const std::string path) {
   arquivoMapa.close();
 }
 
-} // namespace Fases
+}  // namespace Fases

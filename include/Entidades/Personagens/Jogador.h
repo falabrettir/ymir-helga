@@ -5,7 +5,6 @@
 
 #include "Controladores/ControladorJogador.h"
 #include "Entidades/Personagens/Personagem.h"
-#include "Entidades/Projetil.h"
 #include "Fabrica/FabricaProjeteis.h"
 #include "Gerenciadores/GerenciadorEventos.h"
 #include "Gerenciadores/GerenciadorInput.h"
@@ -22,7 +21,6 @@ class Jogador : public Personagem {
   Controladores::Controlador_Jogador *pContr;
   static bool ehPrimeiroJogador;
   bool podePular;
-  Entidades::Projetil *pProj;
 
  public:
   Jogador(const sf::Vector2f &pos);
