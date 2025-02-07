@@ -6,6 +6,8 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <iostream>
 
+#include "Entidades/Obstaculos/Gosma.h"
+#include "Fabrica/FabricaEntidades.h"
 #include "Fabrica/FabricaProjeteis.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
 
@@ -139,5 +141,12 @@ void Jogador::colidir(Entidade *pEnt) {
       this->setVelY(0.f);
     }
     this->setPos(novaPos);
+  } else if (pEnt->getId() == ID::IDgosma) {
+    // deixar lento
+    aplicaLentidao(
+        dynamic_cast<Entidades::Obstaculos::Gosma *>(pEnt)->getPegajosidade());
+  } else {
+    // espinho
+    tomarDano(dynamic_cast<Entidades::Obstaculos::Espinho *>(pEnt)->getDano());
   }
 }
