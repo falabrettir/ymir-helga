@@ -2,17 +2,15 @@
 
 namespace Listas {
 
-template <class TL>
-class Lista {
- public:
+template <class TL> class Lista {
+public:
   // Classe Elemento aninhada
-  template <class TE>
-  class Elemento {
-   private:
+  template <class TE> class Elemento {
+  private:
     Elemento<TE> *pProx;
     TE *pInfo;
 
-   public:
+  public:
     Elemento() : pProx(nullptr), pInfo(nullptr) {}
     Elemento(TE *info) : pInfo(info), pProx(nullptr) {}
     ~Elemento() {
@@ -25,22 +23,24 @@ class Lista {
     TE *getInfo() const { return pInfo; }
   };
 
- private:
+private:
   Elemento<TL> *pPrimeiro;
   Elemento<TL> *pUltimo;
   int tamanho;
 
- public:
+public:
   Lista() : pPrimeiro(nullptr), pUltimo(nullptr), tamanho(0) {}
 
   ~Lista() { limpar(); }
 
   Elemento<TL> *getpPrimeiro() const {
-    if (pPrimeiro) return pPrimeiro;
+    if (pPrimeiro)
+      return pPrimeiro;
   }
 
   Elemento<TL> *getpUltimo() const {
-    if (pUltimo) return pUltimo;
+    if (pUltimo)
+      return pUltimo;
   }
 
   void incluir(TL *p) {
@@ -69,7 +69,7 @@ class Lista {
     }
     if (node->getInfo() == p) {
       if (node == pPrimeiro) {
-        pPrimeiro = pPrimeiro->getProximo();
+        pPrimeiro = node->getProximo();
       } else if (node == pUltimo) {
         pUltimo = anterior;
       } else {
@@ -78,7 +78,6 @@ class Lista {
       delete node;
       tamanho--;
     }
-
     node = nullptr;
     anterior = nullptr;
   }
@@ -103,12 +102,12 @@ class Lista {
   }
   int getSize() const { return tamanho; }
 
- public:
+public:
   class Iterator {
-   private:
+  private:
     Elemento<TL> *pAtual;
 
-   public:
+  public:
     Iterator() : pAtual(nullptr) {}
     Iterator(Elemento<TL> *pElem) : pAtual(pElem) {}
     ~Iterator() { pAtual = nullptr; }
@@ -141,4 +140,4 @@ class Lista {
   Iterator end() { return Iterator(nullptr); }
 };
 
-}  // namespace Listas
+} // namespace Listas

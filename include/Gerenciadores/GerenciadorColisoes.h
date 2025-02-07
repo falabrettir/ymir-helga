@@ -18,7 +18,7 @@ private:
   static GerenciadorColisoes *instancia;
 
   std::set<Entidades::Personagens::Jogador *> jogadores;
-  std::vector<Entidades::Personagens::Inimigos::Inimigo *> inimigos;
+  std::set<Entidades::Personagens::Inimigos::Inimigo *> inimigos;
   std::list<Entidades::Obstaculos::Obstaculo *> obstaculos;
   std::set<Entidades::Projetil *> projeteis;
 

@@ -136,7 +136,7 @@ void GerenciadorColisoes::verificarProj(Entidades::Entidade *pEnt) {
   }
 
   std::set<Entidades::Personagens::Jogador *>::iterator jogIt;
-  std::vector<Entidades::Personagens::Inimigos::Inimigo *>::iterator inimIt;
+  std::set<Entidades::Personagens::Inimigos::Inimigo *>::iterator inimIt;
   std::list<Entidades::Obstaculos::Obstaculo *>::iterator obstIt;
 
   // Detectar colisao projetil-jogador
@@ -257,7 +257,7 @@ void GerenciadorColisoes::incluirJog(Personagens::Jogador *pJog) {
 void GerenciadorColisoes::incluirInim(Personagens::Inimigos::Inimigo *pInim) {
   std::clog << "Incluindo inimigo no gerenciador de colisoes" << std::endl;
   if (pInim)
-    inimigos.push_back(pInim);
+    inimigos.insert(pInim);
 }
 
 void GerenciadorColisoes::incluirObst(Obstaculos::Obstaculo *pObst) {
@@ -286,8 +286,7 @@ void GerenciadorColisoes::removerEnt(Entidade *pEnt) {
     Personagens::Inimigos::Inimigo *aux =
         dynamic_cast<Personagens::Inimigos::Inimigo *>(pEnt);
 
-    inimigos.erase(std::remove(inimigos.begin(), inimigos.end(), aux),
-                   inimigos.end());
+    inimigos.erase(aux);
 
   } else if (ehJogador(id)) {
     Personagens::Jogador *aux = dynamic_cast<Personagens::Jogador *>(pEnt);
