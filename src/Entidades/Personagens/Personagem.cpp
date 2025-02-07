@@ -47,6 +47,7 @@ void Personagem::tomarDano(int dano, bool esq) {
 
   if (!invencivel && !emAnimacaoKnockback && getNoChao()) {
     hp -= dano;
+
     // Inicia animação de knockback e invencibilidade
     emAnimacaoKnockback = true;
     tempoKnockback = 0.0f;
@@ -64,6 +65,7 @@ void Personagem::tomarDano(int dano, bool esq) {
     setVel(novaVel);
     setNoChao(false);
   }
+
   setDanificando(true);
   invencivel = true;
   tempoInvencibilidade = 0.0f;
