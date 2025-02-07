@@ -15,7 +15,7 @@ class Projetil;
 namespace Personagens {
 
 class Personagem : public Entidades::Entidade {
- private:
+private:
   int dano;
   int hp;
   bool danificando;
@@ -25,15 +25,16 @@ class Personagem : public Entidades::Entidade {
   sf::Vector2f direcaoKnockback;
   bool invencivel;
   float tempoInvencibilidade;
-  const float DURACAO_INVENCIBILIDADE = 0.4f;  // 1 segundo de invencibilidade
+  const float DURACAO_INVENCIBILIDADE = 0.4f; // 1 segundo de invencibilidade
+  bool vivo;
 
- protected:
+protected:
   static Fases::Fase *pFase;
   Entidades::Projetil *pProj;
   bool podeAtacar;
   float ultimoAtaque;
 
- public:
+public:
   Personagem(ID id);
   virtual ~Personagem();
 
@@ -51,6 +52,6 @@ class Personagem : public Entidades::Entidade {
   void apagarProj();
 };
 
-}  // namespace Personagens
+} // namespace Personagens
 
-}  // namespace Entidades
+} // namespace Entidades

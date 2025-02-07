@@ -7,9 +7,11 @@
 #include <iostream>
 
 #include "Entidades/Obstaculos/Gosma.h"
+#include "Entidades/Projetil.h"
 #include "Fabrica/FabricaEntidades.h"
 #include "Fabrica/FabricaProjeteis.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
+#include "IDs.h"
 
 using namespace Entidades::Personagens;
 
@@ -91,7 +93,8 @@ void Jogador::executar() {
 
   setNoChao(false);
 
-  if (!getNoChao()) cair();
+  if (!getNoChao())
+    cair();
 
   mover();
 
@@ -115,7 +118,8 @@ void Jogador::atacar() {
     exit(EXIT_FAILURE);
   }
 
-  if (!pProj) {
+  if (podeAtacar) {
+    podeAtacar = false;
     pProj = fabProj->criarProjetil(this);
     pFase->adicionarProjetil(pProj);
   }
@@ -125,16 +129,16 @@ void Jogador::colidir(Entidade *pEnt) {
   if (ehPlataforma(pEnt->getId())) {
     sf::Vector2f novaPos = this->getPos();
     sf::Vector2f ds = pGC->calcOverlap(this, pEnt);
-    if (ds.x < ds.y) {                          // Eixo da colisão
-      if (this->getPos().x < pEnt->getPos().x)  // Direção da colisao
-        novaPos.x -= ds.x;                      // Colisão Esquerda => Direita
+    if (ds.x < ds.y) {                         // Eixo da colisão
+      if (this->getPos().x < pEnt->getPos().x) // Direção da colisao
+        novaPos.x -= ds.x;                     // Colisão Esquerda => Direita
       else
-        novaPos.x += ds.x;  // Colisao Direita => Esquerda
+        novaPos.x += ds.x; // Colisao Direita => Esquerda
       this->setVelX(0.f);
     }
-    if (ds.y < ds.x) {                            // Eixo da colisão
-      if (this->getPos().y < pEnt->getPos().y) {  // Direção da colisão
-        novaPos.y -= ds.y;                        // Caindo
+    if (ds.y < ds.x) {                           // Eixo da colisão
+      if (this->getPos().y < pEnt->getPos().y) { // Direção da colisão
+        novaPos.y -= ds.y;                       // Caindo
         this->setNoChao(true);
       } else
         novaPos.y += ds.y;
@@ -145,8 +149,14 @@ void Jogador::colidir(Entidade *pEnt) {
     // deixar lento
     aplicaLentidao(
         dynamic_cast<Entidades::Obstaculos::Gosma *>(pEnt)->getPegajosidade());
-  } else {
+  } else if (pEnt->getId() == ID::IDespinho) {
     // espinho
     tomarDano(dynamic_cast<Entidades::Obstaculos::Espinho *>(pEnt)->getDano());
+  } else if (ehProjetil(pEnt->getId())) {
+    if (ehInimigo(
+            dynamic_cast<Entidades::Projetil *>(pEnt)->getDono()->getId())) {
+      tomarDano(dynamic_cast<Entidades::Projetil *>(pEnt)->getDano(),
+                pEnt->getOlhandoEsquerda());
+    }
   }
 }

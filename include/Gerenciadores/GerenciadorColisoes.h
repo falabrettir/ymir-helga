@@ -14,15 +14,15 @@
 namespace Gerenciadores {
 
 class GerenciadorColisoes : public Mediator {
- private:
+private:
   static GerenciadorColisoes *instancia;
 
-  std::vector<Entidades::Personagens::Jogador *> jogadores;
+  std::set<Entidades::Personagens::Jogador *> jogadores;
   std::vector<Entidades::Personagens::Inimigos::Inimigo *> inimigos;
   std::list<Entidades::Obstaculos::Obstaculo *> obstaculos;
   std::set<Entidades::Projetil *> projeteis;
 
- private:
+private:
   GerenciadorColisoes();
   ~GerenciadorColisoes();
   GerenciadorColisoes(const GerenciadorColisoes &) = delete;
@@ -51,7 +51,7 @@ class GerenciadorColisoes : public Mediator {
   // Interface publica
   // ============================================================================
 
- public:
+public:
   static GerenciadorColisoes *getInstancia();
 
   void notificar(Entidades::Entidade *sender);
@@ -66,4 +66,4 @@ class GerenciadorColisoes : public Mediator {
   void removerEnt(Entidades::Entidade *pEnt);
 };
 
-}  // namespace Gerenciadores
+} // namespace Gerenciadores

@@ -39,7 +39,8 @@ void Esqueleto::atacar() {
     exit(EXIT_FAILURE);
   }
 
-  if (!flecha) {
+  if (podeAtacar) {
+    podeAtacar = false;
     forca = static_cast<float>(rand()) / std::numeric_limits<float>::max();
     flecha = fabProj->criarProjetil(this, forca);
     pFase->adicionarProjetil(flecha);
@@ -50,8 +51,10 @@ void Esqueleto::executar() {
   atualizarKnockback();
   perseguir();
   mover();
-  if (!getNoChao()) cair();
-  if (getVisando() && flecha == nullptr) atacar();
+  if (!getNoChao())
+    cair();
+  if (getVisando() && flecha == nullptr)
+    atacar();
 }
 
-}  // namespace Entidades::Personagens::Inimigos
+} // namespace Entidades::Personagens::Inimigos

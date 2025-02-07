@@ -1,4 +1,5 @@
 #include "Entidades/Projetil.h"
+#include <cmath>
 
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
@@ -42,7 +43,8 @@ Projetil::Projetil(Personagens::Personagem *pPersDono, int impulso)
   vel.x = 2 * MAXVEL;
   vel.x += vel.x * impulso;
   // vel.y = -0.35;
-  if (pPersDono->getOlhandoEsquerda()) vel.x *= -1;
+  if (pPersDono->getOlhandoEsquerda())
+    vel.x *= -1;
 
   setVel(vel);
   std::clog << "projetil criado" << std::endl;
@@ -53,7 +55,7 @@ Projetil::~Projetil() {
   pPersDono = nullptr;
 }
 
-int Projetil::getDano() { return getVel().x; }
+int Projetil::getDano() { return std::fabs(getVel().x); }
 
 Personagens::Personagem *Projetil::getDono() { return pPersDono; }
 
@@ -76,4 +78,4 @@ void Projetil::executar() {
 
 void Projetil::setFase(Fases::Fase *fase) { pFase = fase; }
 
-}  // namespace Entidades
+} // namespace Entidades

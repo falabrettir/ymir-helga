@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <list>
+#include <vector>
 
 #include "Entidades/Entidade.h"
 #include "Entidades/Obstaculos/Obstaculo.h"
@@ -48,7 +49,8 @@ float GerenciadorColisoes::calcOverlapVert(
     float distColisaoY =
         (e1->getTamanho().y / 2.f) + (e2->getTamanho().y / 2.f);
 
-    if (distColisaoY - distY > 0) return distColisaoY - distY;
+    if (distColisaoY - distY > 0)
+      return distColisaoY - distY;
     return 0;
 
   } else {
@@ -65,7 +67,8 @@ float GerenciadorColisoes::calcOverlapHor(const Entidades::Entidade *e1,
     float distColisaoX =
         (e1->getTamanho().x / 2.f) + (e2->getTamanho().x / 2.f);
 
-    if (distColisaoX - distX > 0) return distColisaoX - distX;
+    if (distColisaoX - distX > 0)
+      return distColisaoX - distX;
     return 0;
 
   } else {
@@ -74,8 +77,9 @@ float GerenciadorColisoes::calcOverlapHor(const Entidades::Entidade *e1,
   }
 }
 
-sf::Vector2f GerenciadorColisoes::calcOverlap(
-    const Entidades::Entidade *e1, const Entidades::Entidade *e2) const {
+sf::Vector2f
+GerenciadorColisoes::calcOverlap(const Entidades::Entidade *e1,
+                                 const Entidades::Entidade *e2) const {
   return sf::Vector2f(calcOverlapHor(e1, e2), calcOverlapVert(e1, e2));
 }
 
@@ -131,7 +135,7 @@ void GerenciadorColisoes::verificarProj(Entidades::Entidade *pEnt) {
     exit(EXIT_FAILURE);
   }
 
-  std::vector<Entidades::Personagens::Jogador *>::iterator jogIt;
+  std::set<Entidades::Personagens::Jogador *>::iterator jogIt;
   std::vector<Entidades::Personagens::Inimigos::Inimigo *>::iterator inimIt;
   std::list<Entidades::Obstaculos::Obstaculo *>::iterator obstIt;
 
@@ -180,11 +184,12 @@ void GerenciadorColisoes::verificarProj(Entidades::Entidade *pEnt) {
 
 void GerenciadorColisoes::verificarInim(Entidades::Entidade *pEnt) {
   if (pEnt == nullptr) {
-    std::clog << "erro: GerenciadorColisoes::verificarInim(...)\n";
+    std::cerr << "erro: GerenciadorColisoes::verificarInim(...) => inimigo == "
+                 "nullptr\n";
     exit(EXIT_FAILURE);
   }
 
-  std::vector<Entidades::Personagens::Jogador *>::iterator jogIt;
+  std::set<Entidades::Personagens::Jogador *>::iterator jogIt;
   std::list<Entidades::Obstaculos::Obstaculo *>::iterator obstIt;
 
   // Detectar colisao inimigo-jogador
@@ -194,7 +199,8 @@ void GerenciadorColisoes::verificarInim(Entidades::Entidade *pEnt) {
         (pEnt)->colidir(*jogIt);
       }
     } else {
-      std::clog << "erro: GerenciadorColisoes::verificarInim(...)\n";
+      std::cerr << "erro: GerenciadorColisoes::verificarInim(...) jogador == "
+                   "nullptr\n";
       exit(EXIT_FAILURE);
     }
   }
@@ -206,7 +212,8 @@ void GerenciadorColisoes::verificarInim(Entidades::Entidade *pEnt) {
         pEnt->colidir(*obstIt);
       }
     } else {
-      std::clog << "erro: GerenciadorColisoes::verificarInim(...)\n";
+      std::cerr << "erro: GerenciadorColisoes::verificarInim(...) obstaculo == "
+                   "nullptr\n";
       exit(EXIT_FAILURE);
     }
   }
@@ -243,22 +250,26 @@ void GerenciadorColisoes::verificarJog(Entidades::Entidade *pEnt) {
 
 void GerenciadorColisoes::incluirJog(Personagens::Jogador *pJog) {
   std::clog << "Incluindo jogador no gerenciador de colisoes" << std::endl;
-  if (pJog) jogadores.push_back(pJog);
+  if (pJog)
+    jogadores.insert(pJog);
 }
 
 void GerenciadorColisoes::incluirInim(Personagens::Inimigos::Inimigo *pInim) {
   std::clog << "Incluindo inimigo no gerenciador de colisoes" << std::endl;
-  if (pInim) inimigos.push_back(pInim);
+  if (pInim)
+    inimigos.push_back(pInim);
 }
 
 void GerenciadorColisoes::incluirObst(Obstaculos::Obstaculo *pObst) {
   std::clog << "Incluindo obstaculo no gerenciador de colisoes" << std::endl;
-  if (pObst) obstaculos.push_back(pObst);
+  if (pObst)
+    obstaculos.push_back(pObst);
 }
 
 void GerenciadorColisoes::incluirProj(Projetil *pProj) {
   std::clog << "Incluindo projetil no gerenciador de colisoes" << std::endl;
-  if (pProj) projeteis.insert(pProj);
+  if (pProj)
+    projeteis.insert(pProj);
 }
 
 void GerenciadorColisoes::limparEntidades() {
@@ -280,9 +291,7 @@ void GerenciadorColisoes::removerEnt(Entidade *pEnt) {
 
   } else if (ehJogador(id)) {
     Personagens::Jogador *aux = dynamic_cast<Personagens::Jogador *>(pEnt);
-
-    jogadores.erase(std::remove(jogadores.begin(), jogadores.end(), aux),
-                    jogadores.end());
+    jogadores.erase(aux);
   }
 
   else if (ehProjetil(id)) {
@@ -291,4 +300,4 @@ void GerenciadorColisoes::removerEnt(Entidade *pEnt) {
   }
 }
 
-}  // namespace Gerenciadores
+} // namespace Gerenciadores
