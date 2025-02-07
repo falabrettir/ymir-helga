@@ -25,7 +25,6 @@ Personagem::Personagem(ID id)
       tempoInvencibilidade(0.0f),
       podeAtacar(true),
       ultimoAtaque(0),
-      pProj(nullptr),
       vivo(true) {}
 
 Personagem::~Personagem() {}
@@ -40,11 +39,12 @@ void Personagem::setFase(Fases::Fase *fase) {
 
 void Personagem::tomarDano(int dano, bool esq) {
   hp -= dano;
+
   if (hp <= 0) {
     vivo = false;
     setPos({-6000, -6000});
-    pFase->notificarMorreu(this);
   }
+
   if (!invencivel && !emAnimacaoKnockback && getNoChao()) {
     hp -= dano;
     // Inicia animação de knockback e invencibilidade
@@ -68,10 +68,13 @@ void Personagem::tomarDano(int dano, bool esq) {
   invencivel = true;
   tempoInvencibilidade = 0.0f;
 }
+
 void Personagem::setDano(const int dano) { this->dano = dano; }
 
 const int Personagem::getDano() const { return dano; }
-void Personagem::setDanificando(bool danificando) { this->danificando = danificando; }
+void Personagem::setDanificando(bool danificando) {
+  this->danificando = danificando;
+}
 
 void Personagem::executar() {
   ultimoAtaque += pGG->getDeltaTempo();
@@ -79,6 +82,8 @@ void Personagem::executar() {
     podeAtacar = true;
     ultimoAtaque = 0;
   }
+
+  if (!vivo) pFase->notificarMorreu(this);
 }
 
 const bool Personagem::getDanificando() const { return danificando; }
@@ -112,14 +117,12 @@ void Personagem::atualizarKnockback() {
 
       // Diminui mais rapidamente a velocidade horizontal (exponencial)
       float t = tempoKnockback / duracaoKnockback;
-      vel.x =
-          direcaoKnockback.x * 0.5f * std::exp(-4.0f * t);  // Decaimento exponencial mais rápido
+      vel.x = direcaoKnockback.x * 0.5f *
+              std::exp(-4.0f * t);  // Decaimento exponencial mais rápido
 
       setVel(vel);
     }
   }
 }
-
-void Personagem::apagarProj() { pProj = nullptr; }
 
 }  // namespace Entidades::Personagens

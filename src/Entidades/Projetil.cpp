@@ -1,7 +1,7 @@
 #include "Entidades/Projetil.h"
-#include <cmath>
 
 #include <SFML/System/Vector2.hpp>
+#include <cmath>
 #include <iostream>
 
 #include "Entidades/Personagens/Jogador.h"
@@ -43,8 +43,7 @@ Projetil::Projetil(Personagens::Personagem *pPersDono, int impulso)
   vel.x = 2 * MAXVEL;
   vel.x += vel.x * impulso;
   // vel.y = -0.35;
-  if (pPersDono->getOlhandoEsquerda())
-    vel.x *= -1;
+  if (pPersDono->getOlhandoEsquerda()) vel.x *= -1;
 
   setVel(vel);
   std::clog << "projetil criado" << std::endl;
@@ -60,14 +59,10 @@ int Projetil::getDano() { return std::fabs(getVel().x); }
 Personagens::Personagem *Projetil::getDono() { return pPersDono; }
 
 void Projetil::colidir(Entidade *pE) {
-  if (pE != pPersDono) {
-    pPersDono->apagarProj();
-    std::clog << "pPersDono apagou prjetil" << std::endl;
-    pGC->removerEnt(this);
-    std::clog << "projetil removido do gc" << std::endl;
-    pFase->removerProjetil(this);
-    std::clog << "projetil removido da fase" << std::endl;
-  }
+  pGC->removerEnt(this);
+  std::clog << "projetil removido do gc" << std::endl;
+  pFase->removerProjetil(this);
+  std::clog << "projetil removido da fase" << std::endl;
 }
 
 void Projetil::executar() {
@@ -78,4 +73,4 @@ void Projetil::executar() {
 
 void Projetil::setFase(Fases::Fase *fase) { pFase = fase; }
 
-} // namespace Entidades
+}  // namespace Entidades

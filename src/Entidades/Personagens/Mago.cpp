@@ -37,8 +37,7 @@ void Mago::atacar() {
   // Ataca apenas se a ultima bola de fogo ja colidiu
   if (podeAtacar) {
     podeAtacar = false;
-    pProj = fabProj->criarProjetil(this, poder);
-    pFase->adicionarProjetil(pProj);
+    pFase->adicionarProjetil(fabProj->criarProjetil(this, poder));
 
     aumentarPoder();
   }

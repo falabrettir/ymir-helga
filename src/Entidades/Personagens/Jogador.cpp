@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "Entidades/Obstaculos/Gosma.h"
+#include "Entidades/Personagens/Personagem.h"
 #include "Entidades/Projetil.h"
 #include "Fabrica/FabricaEntidades.h"
 #include "Fabrica/FabricaProjeteis.h"
@@ -87,14 +88,15 @@ void Jogador::aplicaLentidao(float viscosidade) {
 }
 
 void Jogador::executar() {
+  Personagem::executar();
+
   atualizarKnockback();
   setDanificando(false);
   pContr->controlarJogador();
 
   setNoChao(false);
 
-  if (!getNoChao())
-    cair();
+  if (!getNoChao()) cair();
 
   mover();
 
@@ -120,8 +122,7 @@ void Jogador::atacar() {
 
   if (podeAtacar) {
     podeAtacar = false;
-    pProj = fabProj->criarProjetil(this);
-    pFase->adicionarProjetil(pProj);
+    pFase->adicionarProjetil(fabProj->criarProjetil(this));
   }
 }
 
@@ -129,16 +130,16 @@ void Jogador::colidir(Entidade *pEnt) {
   if (ehPlataforma(pEnt->getId())) {
     sf::Vector2f novaPos = this->getPos();
     sf::Vector2f ds = pGC->calcOverlap(this, pEnt);
-    if (ds.x < ds.y) {                         // Eixo da colisão
-      if (this->getPos().x < pEnt->getPos().x) // Direção da colisao
-        novaPos.x -= ds.x;                     // Colisão Esquerda => Direita
+    if (ds.x < ds.y) {                          // Eixo da colisão
+      if (this->getPos().x < pEnt->getPos().x)  // Direção da colisao
+        novaPos.x -= ds.x;                      // Colisão Esquerda => Direita
       else
-        novaPos.x += ds.x; // Colisao Direita => Esquerda
+        novaPos.x += ds.x;  // Colisao Direita => Esquerda
       this->setVelX(0.f);
     }
-    if (ds.y < ds.x) {                           // Eixo da colisão
-      if (this->getPos().y < pEnt->getPos().y) { // Direção da colisão
-        novaPos.y -= ds.y;                       // Caindo
+    if (ds.y < ds.x) {                            // Eixo da colisão
+      if (this->getPos().y < pEnt->getPos().y) {  // Direção da colisão
+        novaPos.y -= ds.y;                        // Caindo
         this->setNoChao(true);
       } else
         novaPos.y += ds.y;

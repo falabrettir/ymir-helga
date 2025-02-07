@@ -2,6 +2,8 @@
 
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
+#include <cstdlib>
+#include <iostream>
 
 #include "Entidades/Entidade.h"
 #include "Entidades/Personagens/Jogador.h"
@@ -13,11 +15,15 @@ namespace Entidades::Personagens::Inimigos {
 
 std::set<Jogador *> Inimigo::setJogadores{};
 
-Inimigo::Inimigo(ID id) : Personagem(id), visada(25.f), visando(false) { pGC->incluirInim(this); }
+Inimigo::Inimigo(ID id) : Personagem(id), visada(25.f), visando(false) {
+  pGC->incluirInim(this);
+}
 
 Inimigo::~Inimigo() {}
 
-float Inimigo::calculaDistancia(Jogador *pJog) { return fabs(pJog->getPos().x - this->getPos().x); }
+float Inimigo::calculaDistancia(Jogador *pJog) {
+  return fabs(pJog->getPos().x - this->getPos().x);
+}
 
 void Inimigo::adicionarJogador(Jogador *pJog) { setJogadores.insert(pJog); }
 
@@ -74,6 +80,11 @@ void Inimigo::perseguir() {
 const bool Inimigo::getVisando() const { return visando; }
 
 void Inimigo::colidir(Entidade *pEnt) {
+  if (pEnt == nullptr) {
+    std::cerr << "erro: Inimigo::colidir(...) => pEnt == nullptr\n";
+    exit(EXIT_FAILURE);
+  }
+
   if (ehPlataforma(pEnt->getId())) {
     sf::Vector2f novaPos = this->getPos();
     sf::Vector2f ds = pGC->calcOverlap(this, pEnt);
@@ -93,13 +104,22 @@ void Inimigo::colidir(Entidade *pEnt) {
       this->setVelY(0.f);
     }
     this->setPos(novaPos);
+
   } else if (ehJogador(pEnt->getId())) {
-    dynamic_cast<Entidades::Personagens::Jogador *>(pEnt)->tomarDano(getDano(),
-                                                                     getOlhandoEsquerda());
+    dynamic_cast<Entidades::Personagens::Jogador *>(pEnt)->tomarDano(
+        getDano(), getOlhandoEsquerda());
+
   } else if (ehProjetil(pEnt->getId())) {
-    if (ehJogador(dynamic_cast<Entidades::Projetil *>(pEnt)->getDono()->getId())) {
-      tomarDano(dynamic_cast<Entidades::Projetil *>(pEnt)->getDano() + 200,
-                pEnt->getOlhandoEsquerda());
+    Personagem *pDono = dynamic_cast<Projetil *>(pEnt)->getDono();
+
+    if (pDono == nullptr) {
+      std::cerr << "erro: Inimigo::colidir(...) => pDono == nullptr\n";
+      exit(EXIT_FAILURE);
+    }
+
+    ID idDono = pDono->getId();
+    if (ehJogador(idDono)) {
+      tomarDano(pDono->getDano() + 200, pDono->getOlhandoEsquerda());
     }
   }
 }
