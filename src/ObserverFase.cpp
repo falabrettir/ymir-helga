@@ -54,6 +54,7 @@ void ObservadorFase::executar() {
 void ObservadorFase::notificarFim() {
   if (fAtual->States::State::getId() == ID::IDcaverna) {
     std::clog << "NotficarFim" << std::endl;
+    fAtual->limparListas();
     pGS->inserirEstado(new Fases::Planicie());
     pGS->mudarEstado(ID::IDplanicie);
   } else {

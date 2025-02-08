@@ -36,6 +36,7 @@ class Fase : public Ente, public States::State {
   virtual void executar();
   void notificarMorreu(Entidades::Entidade *pEnt);
 
+  void limparListas();
   void incluirNaLista(Entidades::Entidade *novaEntidade);
   void adicionarProjetil(Entidades::Projetil *novoProjetil);
   void removerProjetil(Entidades::Projetil *projetil);

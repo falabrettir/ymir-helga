@@ -17,7 +17,6 @@ class Entidade : public Ente {
   sf::Vector2f gravidade;
   bool noChao;
   bool olhandoEsquerda;
-  std::ostream *buffer;
 
  protected:
   sf::Vector2f tamanho;

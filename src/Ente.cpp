@@ -10,8 +10,7 @@
 
 #include "Gerenciadores/GerenciadorGrafico.h"
 
-Gerenciadores::GerenciadorGrafico *Ente::pGG(
-    Gerenciadores::GerenciadorGrafico::getInstancia());
+Gerenciadores::GerenciadorGrafico *Ente::pGG(Gerenciadores::GerenciadorGrafico::getInstancia());
 
 Ente::Ente(ID id) : id(id) {
   pSprite = new sf::Sprite();
@@ -21,9 +20,14 @@ Ente::Ente(ID id) : id(id) {
 }
 
 Ente::~Ente() {
+  std::clog << "~Ent" << std::endl;
   delete pSprite;
+  pSprite = nullptr;
   delete pTexture;
+  pTexture = nullptr;
   delete pAlvo;
+  pAlvo = nullptr;
+  std::clog << "~Ente" << std::endl;
 }
 
 void Ente::atualizaSprite(sf::Texture *pTexture) {

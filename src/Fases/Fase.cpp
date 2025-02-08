@@ -48,12 +48,12 @@ Fase::~Fase() {
 }
 
 void Fase::executar() {
-  listaProjeteis.executar();
-  listaInimigos.executar();
-  listaJogadores.executar();
   if (listaInimigos.getSize() == 0) {
     thisObs->notificarFim();
   }
+  listaProjeteis.executar();
+  listaInimigos.executar();
+  listaJogadores.executar();
   listaObstaculos.executar();
   thisObs->executar();
 }
@@ -139,12 +139,18 @@ void Fase::notificarMorreu(Entidades::Entidade *pEnt) {
     std::clog << "pGC->removerEnt\n";
     listaJogadores.deletar(pEnt);
     std::clog << "listaJogadores.deletar()\n";
-
   } else {
     pGC->removerEnt(pEnt);
     listaInimigos.deletar(pEnt);
     std::clog << "listaInimigos.deletar()" << std::endl;
   }
+}
+void Fase::limparListas() {
+  listaProjeteis.limpar();
+  listaJogadores.limpar();
+  listaObstaculos.limpar();
+  listaInimigos.limpar();
+  pGC->limparEntidades();
 }
 
 }  // namespace Fases

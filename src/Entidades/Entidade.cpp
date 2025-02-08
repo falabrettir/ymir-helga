@@ -18,10 +18,9 @@ Entidade::Entidade(ID id)
       velocidade(0, 0),
       gravidade(0, 0.002),
       noChao(false),
-      olhandoEsquerda(false),
-      buffer(nullptr) {};
+      olhandoEsquerda(false){};
 
-Entidade::~Entidade() { buffer = nullptr; }
+Entidade::~Entidade() { std::clog << "~Entidade" << std::endl; }
 
 void Entidade::mover() {
   if (velocidade.x > 0) {

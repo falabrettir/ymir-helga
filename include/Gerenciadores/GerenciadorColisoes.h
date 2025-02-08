@@ -14,7 +14,7 @@
 namespace Gerenciadores {
 
 class GerenciadorColisoes : public Mediator {
-private:
+ private:
   static GerenciadorColisoes *instancia;
 
   std::set<Entidades::Personagens::Jogador *> jogadores;
@@ -22,7 +22,7 @@ private:
   std::list<Entidades::Obstaculos::Obstaculo *> obstaculos;
   std::set<Entidades::Projetil *> projeteis;
 
-private:
+ private:
   GerenciadorColisoes();
   ~GerenciadorColisoes();
   GerenciadorColisoes(const GerenciadorColisoes &) = delete;
@@ -34,30 +34,23 @@ private:
   void verificarJog(Entidades::Entidade *pEnt);
 
   // Funcoes auxiliares
-  float calcOverlapVert(const Entidades::Entidade *e1,
-                        const Entidades::Entidade *e2) const;
-  float calcOverlapHor(const Entidades::Entidade *e1,
-                       const Entidades::Entidade *e2) const;
-  bool colidiu(const Entidades::Entidade *e1,
-               const Entidades::Entidade *e2) const;
-  bool colidiuVertical(const Entidades::Entidade *e1,
-                       const Entidades::Entidade *e2) const;
-  bool colidiuHorizontal(const Entidades::Entidade *e1,
-                         const Entidades::Entidade *e2) const;
-
-  void limparEntidades();
+  float calcOverlapVert(const Entidades::Entidade *e1, const Entidades::Entidade *e2) const;
+  float calcOverlapHor(const Entidades::Entidade *e1, const Entidades::Entidade *e2) const;
+  bool colidiu(const Entidades::Entidade *e1, const Entidades::Entidade *e2) const;
+  bool colidiuVertical(const Entidades::Entidade *e1, const Entidades::Entidade *e2) const;
+  bool colidiuHorizontal(const Entidades::Entidade *e1, const Entidades::Entidade *e2) const;
 
   // ============================================================================
   // Interface publica
   // ============================================================================
 
-public:
+ public:
   static GerenciadorColisoes *getInstancia();
 
   void notificar(Entidades::Entidade *sender);
 
-  sf::Vector2f calcOverlap(const Entidades::Entidade *e1,
-                           const Entidades::Entidade *e2) const;
+  sf::Vector2f calcOverlap(const Entidades::Entidade *e1, const Entidades::Entidade *e2) const;
+  void limparEntidades();
 
   void incluirJog(Entidades::Personagens::Jogador *pJog);
   void incluirInim(Entidades::Personagens::Inimigos::Inimigo *pInim);
@@ -66,4 +59,4 @@ public:
   void removerEnt(Entidades::Entidade *pEnt);
 };
 
-} // namespace Gerenciadores
+}  // namespace Gerenciadores
