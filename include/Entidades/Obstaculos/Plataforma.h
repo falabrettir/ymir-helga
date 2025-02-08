@@ -8,15 +8,15 @@
 namespace Entidades::Obstaculos {
 
 class Plataforma : public Obstaculo {
- private:
+private:
   sf::Vector2f empuxo;
 
- public:
+public:
   Plataforma(ID id, const sf::Vector2f &pos);
   ~Plataforma();
   void executar();
-  void obstacular(Entidades::Entidade *pEnt);
   void colidir(Entidade *pEnt = nullptr);
+  void obstacular(Entidades::Entidade *pEnt);
 };
 
-}  // namespace Entidades::Obstaculos
+} // namespace Entidades::Obstaculos

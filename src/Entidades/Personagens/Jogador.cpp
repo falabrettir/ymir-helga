@@ -128,34 +128,7 @@ void Jogador::atacar() {
 }
 
 void Jogador::colidir(Entidade *pEnt) {
-  if (ehPlataforma(pEnt->getId())) {
-    sf::Vector2f novaPos = this->getPos();
-    sf::Vector2f ds = pGC->calcOverlap(this, pEnt);
-    if (ds.x < ds.y) {                         // Eixo da colisão
-      if (this->getPos().x < pEnt->getPos().x) // Direção da colisao
-        novaPos.x -= ds.x;                     // Colisão Esquerda => Direita
-      else
-        novaPos.x += ds.x; // Colisao Direita => Esquerda
-      this->setVelX(0.f);
-    }
-    if (ds.y < ds.x) {                           // Eixo da colisão
-      if (this->getPos().y < pEnt->getPos().y) { // Direção da colisão
-        novaPos.y -= ds.y;                       // Caindo
-        this->setNoChao(true);
-      } else
-        novaPos.y += ds.y;
-      this->setVelY(0.f);
-    }
-    this->setPos(novaPos);
-  } else if (pEnt->getId() == ID::IDgosma) {
-    // deixar lento
-    aplicaLentidao(
-        dynamic_cast<Entidades::Obstaculos::Gosma *>(pEnt)->getPegajosidade());
-  } else if (pEnt->getId() == ID::IDespinho) {
-    // espinho
-    tomarDano(dynamic_cast<Entidades::Obstaculos::Espinho *>(pEnt)->getDano(),
-              true);
-  } else if (ehProjetil(pEnt->getId())) {
+  if (ehProjetil(pEnt->getId())) {
     if (ehInimigo(
             dynamic_cast<Entidades::Projetil *>(pEnt)->getDono()->getId())) {
       tomarDano(dynamic_cast<Entidades::Projetil *>(pEnt)->getDano(),

@@ -49,7 +49,8 @@ float GerenciadorColisoes::calcOverlapVert(
     float distColisaoY =
         (e1->getTamanho().y / 2.f) + (e2->getTamanho().y / 2.f);
 
-    if (distColisaoY - distY > 0) return distColisaoY - distY;
+    if (distColisaoY - distY > 0)
+      return distColisaoY - distY;
     return 0;
 
   } else {
@@ -66,7 +67,8 @@ float GerenciadorColisoes::calcOverlapHor(const Entidades::Entidade *e1,
     float distColisaoX =
         (e1->getTamanho().x / 2.f) + (e2->getTamanho().x / 2.f);
 
-    if (distColisaoX - distX > 0) return distColisaoX - distX;
+    if (distColisaoX - distX > 0)
+      return distColisaoX - distX;
     return 0;
 
   } else {
@@ -75,8 +77,9 @@ float GerenciadorColisoes::calcOverlapHor(const Entidades::Entidade *e1,
   }
 }
 
-sf::Vector2f GerenciadorColisoes::calcOverlap(
-    const Entidades::Entidade *e1, const Entidades::Entidade *e2) const {
+sf::Vector2f
+GerenciadorColisoes::calcOverlap(const Entidades::Entidade *e1,
+                                 const Entidades::Entidade *e2) const {
   return sf::Vector2f(calcOverlapHor(e1, e2), calcOverlapVert(e1, e2));
 }
 
@@ -206,7 +209,7 @@ void GerenciadorColisoes::verificarInim(Entidades::Entidade *pEnt) {
   for (obstIt = obstaculos.begin(); obstIt != obstaculos.end(); obstIt++) {
     if (*obstIt) {
       if (colidiu(pEnt, *obstIt)) {
-        pEnt->colidir(*obstIt);
+        (*obstIt)->colidir(pEnt);
       }
     } else {
       std::cerr << "erro: GerenciadorColisoes::verificarInim(...) obstaculo == "
@@ -232,7 +235,7 @@ void GerenciadorColisoes::verificarJog(Entidades::Entidade *pEnt) {
     if (*obstIt) {
       if (colidiu(pEnt, *obstIt)) {
         // Jogador colide com obstaculo
-        pEnt->colidir(*obstIt);
+        (*obstIt)->colidir(pEnt);
       }
     } else {
       std::clog << "erro: GerenciadorColisoes::verificarJog(...)\n";
@@ -247,22 +250,26 @@ void GerenciadorColisoes::verificarJog(Entidades::Entidade *pEnt) {
 
 void GerenciadorColisoes::incluirJog(Personagens::Jogador *pJog) {
   std::clog << "Incluindo jogador no gerenciador de colisoes" << std::endl;
-  if (pJog) jogadores.insert(pJog);
+  if (pJog)
+    jogadores.insert(pJog);
 }
 
 void GerenciadorColisoes::incluirInim(Personagens::Inimigos::Inimigo *pInim) {
   std::clog << "Incluindo inimigo no gerenciador de colisoes" << std::endl;
-  if (pInim) inimigos.insert(pInim);
+  if (pInim)
+    inimigos.insert(pInim);
 }
 
 void GerenciadorColisoes::incluirObst(Obstaculos::Obstaculo *pObst) {
   std::clog << "Incluindo obstaculo no gerenciador de colisoes" << std::endl;
-  if (pObst) obstaculos.push_back(pObst);
+  if (pObst)
+    obstaculos.push_back(pObst);
 }
 
 void GerenciadorColisoes::incluirProj(Projetil *pProj) {
   std::clog << "Incluindo projetil no gerenciador de colisoes" << std::endl;
-  if (pProj) projeteis.insert(pProj);
+  if (pProj)
+    projeteis.insert(pProj);
 }
 
 void GerenciadorColisoes::limparEntidades() {
@@ -292,4 +299,4 @@ void GerenciadorColisoes::removerEnt(Entidade *pEnt) {
   }
 }
 
-}  // namespace Gerenciadores
+} // namespace Gerenciadores

@@ -8,17 +8,14 @@ namespace Entidades {
 namespace Obstaculos {
 
 Obstaculo::Obstaculo(ID id, const sf::Vector2f &pos, const bool danoso)
-    : Entidade(id), pJog(nullptr), danoso(danoso) {
+    : Entidade(id), danoso(danoso) {
   pGC->incluirObst(this);
   setPos(pos);
 }
 
-Obstaculo::~Obstaculo() {
-  pJog = nullptr;
-  delete pJog;
-}
+Obstaculo::~Obstaculo() {}
 
 const bool Obstaculo::ehDanoso() const { return danoso; }
 
-}  // namespace Obstaculos
-}  // namespace Entidades
+} // namespace Obstaculos
+} // namespace Entidades

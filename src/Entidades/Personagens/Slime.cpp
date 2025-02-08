@@ -23,25 +23,6 @@ void Slime::colidir(Entidade *pEnt) {
   if (ehJogador(pEnt->getId())) {
     dynamic_cast<Jogador *>(pEnt)->aplicaLentidao(viscosidade);
     dynamic_cast<Jogador *>(pEnt)->tomarDano(getDano(), getOlhandoEsquerda());
-  } else if (ehPlataforma(pEnt->getId())) {
-    sf::Vector2f novaPos = this->getPos();
-    sf::Vector2f ds = pGC->calcOverlap(this, pEnt);
-    if (ds.x < ds.y) {                         // Eixo da colisão
-      if (this->getPos().x < pEnt->getPos().x) // Direção da colisao
-        novaPos.x -= ds.x;                     // Colisão Esquerda => Direita
-      else
-        novaPos.x += ds.x; // Colisao Direita => Esquerda
-      this->setVelX(0.f);
-    }
-    if (ds.y < ds.x) {                           // Eixo da colisão
-      if (this->getPos().y < pEnt->getPos().y) { // Direção da colisão
-        novaPos.y -= ds.y;                       // Caindo
-        this->setNoChao(true);
-      } else
-        novaPos.y += ds.y;
-      this->setVelY(0.f);
-    }
-    this->setPos(novaPos);
   }
 }
 

@@ -5,17 +5,17 @@
 
 namespace Entidades::Obstaculos {
 class Espinho : public Obstaculo {
- private:
+private:
   int dano;
 
- public:
+public:
   Espinho(const sf::Vector2f &pos);
   ~Espinho();
 
   const int getDano() const;
+  void colidir(Entidade *pEnt = nullptr);
 
   void executar();
   void obstacular(Entidade *pEnt);
-  void colidir(Entidade *pEnt = nullptr);
 };
-}  // namespace Entidades::Obstaculos
+} // namespace Entidades::Obstaculos

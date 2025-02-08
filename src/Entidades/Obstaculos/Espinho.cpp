@@ -1,4 +1,5 @@
 #include "Entidades/Obstaculos/Espinho.h"
+#include "IDs.h"
 
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
@@ -20,8 +21,16 @@ const int Espinho::getDano() const { return dano; }
 
 void Espinho::executar() {}
 
-void Espinho::obstacular(Entidade *pEnt) {}
+void Espinho::obstacular(Entidade *pEnt) {
+  if (ehJogador(pEnt->getId())) {
+    dynamic_cast<Personagens::Personagem *>(pEnt)->tomarDano(getDano());
+  }
+}
 
-void Espinho::colidir(Entidade *pEnt) {}
+void Espinho::colidir(Entidade *pEnt) {
+  if (pEnt) {
+    obstacular(pEnt);
+  }
+}
 
 } // namespace Entidades::Obstaculos
