@@ -6,12 +6,12 @@
 #include "Ente.h"
 namespace Menus {
 class Botao : public Ente {
- private:
+private:
   sf::Text texto;
   unsigned int fontSize;
   bool selecionado;
 
- public:
+public:
   Botao(const std::string &text, ID id, sf::Vector2f pos);
   ~Botao();
   void executar();
@@ -19,5 +19,6 @@ class Botao : public Ente {
   const bool getSelecionado() const;
   void inicializa(const std::string &text, sf::Vector2f pos);
   void mudaFase(bool fase2);
+  void mudaMultijogador(bool mp);
 };
-}  // namespace Menus
+} // namespace Menus

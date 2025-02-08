@@ -4,10 +4,10 @@
 
 namespace Entidades::Obstaculos {
 class Gosma : public Obstaculo {
- private:
+private:
   float pegajosidade;
 
- public:
+public:
   Gosma(const sf::Vector2f &pos);
   ~Gosma();
 
@@ -15,6 +15,6 @@ class Gosma : public Obstaculo {
 
   void executar();
   void obstacular(Entidade *pEnt);
-  void colidir(Entidade *pEnt, sf::Vector2f ds = {0, 0});
+  void colidir(Entidade *pEnt = nullptr);
 };
-}  // namespace Entidades::Obstaculos
+} // namespace Entidades::Obstaculos

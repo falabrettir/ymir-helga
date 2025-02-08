@@ -2,10 +2,15 @@
 
 #include <Fases/Fase.h>
 
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 #include <iostream>
 
+#include "Entidades/Personagens/Personagem.h"
+#include "Entidades/Projetil.h"
 #include "Fabrica/FabricaProjeteis.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
+#include "IDs.h"
 
 using namespace Entidades::Personagens;
 
@@ -19,16 +24,14 @@ Fabricas::FabricaProjeteis *Jogador::fabProj =
     Fabricas::FabricaProjeteis::getInstancia();
 
 Jogador::Jogador(const sf::Vector2f &pos)
-    : Personagem(ID::IDjogador),
-      pContr(nullptr),
-      podePular(true),
-      pProj(nullptr) {
+    : Personagem(ID::IDjogador), pContr(nullptr), podePular(true) {
   std::clog << "Criando novo jogador\n";
 
   pContr = new Controladores::Controlador_Jogador();
   pContr->setJog(this);
 
   pGI->inscrever(pContr);
+  pGC->incluirJog(this);
 
   if (ehPrimeiroJogador) {
     setTextura("/assets/Personagens/Ymir.png");
@@ -36,18 +39,21 @@ Jogador::Jogador(const sf::Vector2f &pos)
   } else
     setTextura("/assets/Personagens/Helga.png");
 
+  pSprite->setTextureRect({16, 16, 16, 16});
+  setTamanho({48, 48});
+
   setPos(pos);
-  pSprite->setPosition(pos);
 }
 
 Jogador::~Jogador() {
-  delete pProj;
   delete pContr;
+  resetPrimeiroJog();
 }
 
 bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
-// TODO: Recozer movimentos, o jogador ta meio devagaroso lesmo
+void Jogador::resetPrimeiroJog() { ehPrimeiroJogador = true; }
+
 void Jogador::andarDireita() {
   if (getVel().x < MAXVEL) {
     sf::Vector2f vel = getVel();
@@ -84,13 +90,27 @@ void Jogador::aplicaLentidao(float viscosidade) {
 }
 
 void Jogador::executar() {
+  Personagem::executar();
+
+  atualizarKnockback();
+  setDanificando(false);
   pContr->controlarJogador();
 
-  pGC->notificaColisao(this);
+  setNoChao(false);
 
-  if (!getNoChao()) cair();
+  if (!getNoChao())
+    cair();
 
   mover();
+
+  pGC->notificar(this);
+
+  sf::RectangleShape debugShape(tamanho);
+  debugShape.setPosition(pSprite->getPosition());
+  debugShape.setFillColor(sf::Color::Transparent);
+  debugShape.setOutlineColor(sf::Color::Red);
+  debugShape.setOutlineThickness(1);
+  pGG->getJanela()->draw(debugShape);
 }
 
 void Jogador::atacar() {
@@ -103,17 +123,18 @@ void Jogador::atacar() {
     exit(EXIT_FAILURE);
   }
 
-  if (!pProj) {
-    pProj = fabProj->criarProjetil(this);
-    pFase->adicionarProjetil(pProj);
+  if (podeAtacar) {
+    podeAtacar = false;
+    pFase->adicionarProjetil(fabProj->criarProjetil(this));
   }
 }
 
-void Jogador::colidir(Entidade *pEnt, sf::Vector2f ds) {
-  if (ds.x < 0 && ds.y < 0) {
-    if (pEnt->getId() == ID::IDesqueleto || pEnt->getId() == ID::IDmago ||
-        pEnt->getId() == ID::IDslime) {
-      this->tomarDano(dynamic_cast<Personagem *>(pEnt)->getDano());
+void Jogador::colidir(Entidade *pEnt) {
+  if (ehProjetil(pEnt->getId())) {
+    if (ehInimigo(
+            dynamic_cast<Entidades::Projetil *>(pEnt)->getDono()->getId())) {
+      tomarDano(dynamic_cast<Entidades::Projetil *>(pEnt)->getDano(),
+                pEnt->getOlhandoEsquerda());
     }
   }
 }

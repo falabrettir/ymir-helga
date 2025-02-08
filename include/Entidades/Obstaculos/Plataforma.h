@@ -15,9 +15,8 @@ public:
   Plataforma(ID id, const sf::Vector2f &pos);
   ~Plataforma();
   void executar();
+  void colidir(Entidade *pEnt = nullptr);
   void obstacular(Entidades::Entidade *pEnt);
-  void colidir(Entidades::Entidade *outraEnt,
-               sf::Vector2f ds = sf::Vector2f(0.0f, 0.0f));
 };
 
 } // namespace Entidades::Obstaculos

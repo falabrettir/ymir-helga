@@ -3,19 +3,23 @@
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 
+#include "Entidades/Personagens/Personagem.h"
 #include "Fabrica/FabricaProjeteis.h"
 #include "Fases/Fase.h"
-
+#include "Gerenciadores/GerenciadorColisoes.h"
 namespace Entidades::Personagens::Inimigos {
 
 Fabricas::FabricaProjeteis *Mago::fabProj =
     Fabricas::FabricaProjeteis::getInstancia();
 
 Mago::Mago(const sf::Vector2f &pos)
-    : Inimigo(ID::IDmago), poder(1.05), bolaDeFogo(nullptr) {
+    : Inimigo(ID::IDmago), poder(1.000005), bolaDeFogo(nullptr) {
   std::clog << "Criando novo mago\n";
 
   setTextura("/assets/Personagens/Mago.png");
+  pSprite->setTextureRect({16, 16, 16, 16});
+  setTamanho({48, 48});
+  setPos(pos);
 }
 
 Mago::~Mago() { delete bolaDeFogo; }
@@ -31,9 +35,9 @@ void Mago::atacar() {
   }
 
   // Ataca apenas se a ultima bola de fogo ja colidiu
-  if (!bolaDeFogo) {
-    bolaDeFogo = fabProj->criarProjetil(this, poder);
-    pFase->adicionarProjetil(bolaDeFogo);
+  if (podeAtacar) {
+    podeAtacar = false;
+    pFase->adicionarProjetil(fabProj->criarProjetil(this, poder));
 
     aumentarPoder();
   }
@@ -42,10 +46,31 @@ void Mago::atacar() {
 void Mago::aumentarPoder() { poder *= poder; }
 
 void Mago::executar() {
+  Personagem::executar();
+
+  atualizarKnockback();
+  setDanificando(false);
+  setNoChao(false);
+
+  if (!getNoChao())
+    cair();
+
   perseguir();
+
+  if (getVisando()) {
+    atacar();
+  }
+
   mover();
-  cair();
-  if (getVisando()) atacar();
+
+  pGC->notificar(this);
+
+  sf::RectangleShape debugShape(tamanho);
+  debugShape.setPosition(pSprite->getPosition());
+  debugShape.setFillColor(sf::Color::Transparent);
+  debugShape.setOutlineColor(sf::Color::Red);
+  debugShape.setOutlineThickness(1);
+  pGG->getJanela()->draw(debugShape);
 }
 
-}  // namespace Entidades::Personagens::Inimigos
+} // namespace Entidades::Personagens::Inimigos

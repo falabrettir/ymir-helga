@@ -3,14 +3,14 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <cstdlib>
 #include <iostream>
 #include <string>
 
 #include "Gerenciadores/GerenciadorGrafico.h"
 
-Gerenciadores::GerenciadorGrafico *Ente::pGG(
-    Gerenciadores::GerenciadorGrafico::getInstancia());
+Gerenciadores::GerenciadorGrafico *Ente::pGG(Gerenciadores::GerenciadorGrafico::getInstancia());
 
 Ente::Ente(ID id) : id(id) {
   pSprite = new sf::Sprite();
@@ -20,14 +20,18 @@ Ente::Ente(ID id) : id(id) {
 }
 
 Ente::~Ente() {
+  std::clog << "~Ent" << std::endl;
   delete pSprite;
+  pSprite = nullptr;
   delete pTexture;
+  pTexture = nullptr;
   delete pAlvo;
+  pAlvo = nullptr;
+  std::clog << "~Ente" << std::endl;
 }
 
 void Ente::atualizaSprite(sf::Texture *pTexture) {
   pSprite->setTexture(*pTexture);
-  // pSprite->setTextureRect({0, 0, 48, 48});
   pSprite->setScale(3.f, 3.f);
 }
 
@@ -62,4 +66,5 @@ void Ente::desenhar() {
     exit(EXIT_FAILURE);
   }
 }
+
 const ID Ente::getId() const { return this->id; }

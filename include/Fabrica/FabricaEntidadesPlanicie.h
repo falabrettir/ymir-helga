@@ -2,21 +2,25 @@
 
 #include "Entidades/Entidade.h"
 #include "Fabrica/FabricaEntidades.h"
+#include "Fases/Planicie.h"
 
 namespace Fabricas {
 
 class FabEntPlanicie : public FabricaEntidades {
- private:
+private:
   static FabEntPlanicie *instancia;
+  Fases::Planicie *pP;
 
- private:
+private:
   FabEntPlanicie();
   ~FabEntPlanicie();
   FabEntPlanicie(const FabEntPlanicie &) = delete;
   FabEntPlanicie &operator=(const FabEntPlanicie &) = delete;
 
- public:
+public:
   static FabEntPlanicie *getInstancia();
+
+  void setFase(Fases::Planicie *pP);
 
   Entidades::Obstaculos::Plataforma *criarMadeira(const sf::Vector2f &pos);
   Entidades::Obstaculos::Plataforma *criarChao(const sf::Vector2f &pos);
@@ -24,4 +28,4 @@ class FabEntPlanicie : public FabricaEntidades {
                                      const sf::Vector2f &pos);
 };
 
-}  // namespace Fabricas
+} // namespace Fabricas

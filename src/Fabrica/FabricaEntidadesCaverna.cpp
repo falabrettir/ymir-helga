@@ -5,6 +5,7 @@
 #include "Entidades/Obstaculos/Plataforma.h"
 #include "Fabrica/FabricaEntidades.h"
 #include "IDs.h"
+#include <time.h>
 
 using namespace Entidades;
 
@@ -12,15 +13,16 @@ namespace Fabricas {
 
 FabEntCaverna *FabEntCaverna::instancia = nullptr;
 
-FabEntCaverna::FabEntCaverna() : FabricaEntidades() {
+FabEntCaverna::FabEntCaverna(const bool mp) : FabricaEntidades() {
   std::clog << "Criando FabEntPlanicie\n";
+  srand(time(nullptr));
 }
 
 FabEntCaverna::~FabEntCaverna() { std::clog << "Destruindo FabEntCaverna\n"; }
 
-FabEntCaverna *FabEntCaverna::getInstancia() {
+FabEntCaverna *FabEntCaverna::getInstancia(const bool mp) {
   if (!instancia) {
-    instancia = new FabEntCaverna();
+    instancia = new FabEntCaverna(mp);
   }
   return instancia;
 }
@@ -40,21 +42,47 @@ Obstaculos::Plataforma *FabEntCaverna::criarChao(const sf::Vector2f &pos) {
 Entidade *FabEntCaverna::criarEntidade(char tipoEntidade,
                                        const sf::Vector2f &pos) {
   switch (tipoEntidade) {
-    case 'E':
+  case 'E':
+    if (pC->getCont(tipoEntidade) < pC->getMinEsq() || rand() % 5 > 1) {
+      pC->incrementaContadores(tipoEntidade);
       return criarEsqueleto(pos);
-    case 'S':
+    }
+    break;
+  case 'S':
+    if (pC->getCont(tipoEntidade) < pC->getMinSli() || rand() % 5 > 1) {
+      pC->incrementaContadores(tipoEntidade);
       return criarSlime(pos);
-    case 'P':
-      return criarChao(pos);
-    case 'M':
+    }
+    break;
+  case 'P':
+    return criarChao(pos);
+    break;
+  case 'M':
+    if (pC->getCont(tipoEntidade) < pC->getMinPlat() || rand() % 5 > 1) {
+      pC->incrementaContadores(tipoEntidade);
       return criarMadeira(pos);
-    case 'G':
-      return criarGosma(pos);
-    case 'J':
+    }
+    break;
+  case 'G':
+    if (pC->getCont(tipoEntidade) < pC->getMinEsp() || rand() % 5 > 1) {
+      pC->incrementaContadores(tipoEntidade);
+      return criarEspinho(pos);
+    }
+    break;
+  case 'J':
+    return criarJogador(pos);
+    break;
+  case 'H':
+    if (pC->getMp()) {
       return criarJogador(pos);
-    default:
-      return nullptr;
+      break;
+    } else
+      break;
+  default:
+    return nullptr;
   }
+  return nullptr;
 }
+void FabEntCaverna::setFase(Fases::Caverna *pC) { this->pC = pC; }
 
-}  // namespace Fabricas
+} // namespace Fabricas

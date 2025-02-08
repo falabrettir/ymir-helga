@@ -1,19 +1,20 @@
 #include "Controladores/ControladorMenu.h"
 
+#include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 
 #include "Fases/Caverna.h"
 #include "Fases/Planicie.h"
 #include "Gerenciadores/GerenciadorEstados.h"
+#include "Gerenciadores/GerenciadorGrafico.h"
 #include "IDs.h"
 #include "Menu/MenuPrincipal.h"
 #include "Observer.h"
 
 namespace Controladores {
 ControladorMenu::ControladorMenu(Menus::Menu *menu)
-    : Observer(),
-      menuAtual(menu),
+    : Observer(), menuAtual(menu),
       pGS(Gerenciadores::GerenciadorEstados::getInstancia()),
       teclasPressionadas() {
   teclasPressionadas.clear();
@@ -47,30 +48,39 @@ void ControladorMenu::controlarMenu() {
     } else if (teclasPressionadas[baixo]) {
       menuAtual->baixo();
       teclasPressionadas[baixo] = false;
+
     } else if (teclasPressionadas[selecionar]) {
       ID id = menuAtual->getIdSelecionado();
       teclasPressionadas[selecionar] = false;
       switch (id) {
-        case (ID::IDbotaofase): {
-          dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->setFase(menuAtual->getBotao());
-        } break;
+      case (ID::IDbotaofase): {
+        dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->setFase(
+            menuAtual->getBotao());
+      } break;
+      case (ID::IDbotaomultijogador): {
+        dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->setMultijogador(
+            menuAtual->getBotao());
+      } break;
 
-        case (ID::IDbotaonovojogo): {
-          std::cerr << "Marcha no menuAtual\n";
-          bool fase = dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->getFase();
-          if (fase) {
-            pGS->pushEstado(new Fases::Planicie());
-          } else {
-            pGS->pushEstado(new Fases::Caverna());
-          }
-        } break;
-
-        case (ID::IDbotaosair): {
-          pGS->popEstado();
+      case (ID::IDbotaonovojogo): {
+        bool fase = dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->getFase();
+        bool mp = dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->getMp();
+        if (fase) {
+          pGS->inserirEstado(new Fases::Planicie(mp));
+          pGS->mudarEstado(ID::IDplanicie);
+        } else {
+          pGS->inserirEstado(new Fases::Caverna(mp));
+          pGS->mudarEstado(ID::IDcaverna);
         }
-
-        default:
-          break;
+      } break;
+      case (ID::IDbotaosair): {
+        Gerenciadores::GerenciadorGrafico::getInstancia()->getJanela()->close();
+      } break;
+      case (ID::IDbotaocontinuar): {
+        pGS->mudarEstado(pGS->getEstadoAnterior());
+      } break;
+      default:
+        break;
       }
     }
   }
@@ -83,4 +93,4 @@ void ControladorMenu::setTeclas() {
   teclasPressionadas.insert(std::pair<Key, bool>(cima, false));
   teclasPressionadas.insert(std::pair<Key, bool>(baixo, false));
 }
-}  // namespace Controladores
+} // namespace Controladores

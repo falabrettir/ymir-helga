@@ -1,12 +1,15 @@
 #pragma once
+#include "IDs.h"
 
 namespace States {
 class State {
  private:
   bool ativo;
+  ID id;
 
  public:
-  State();
+  State(ID id);
+  const ID getId() const;
   virtual ~State();
   const bool getAtivo() const;
   void setAtivo(const bool ativo);

@@ -7,7 +7,6 @@
 #include <string>
 
 #include "Entidades/Entidade.h"
-#include "Entidades/Obstaculos/Obstaculo.h"
 #include "Entidades/Personagens/Inimigo.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Personagens/Personagem.h"
@@ -15,26 +14,26 @@
 #include "Gerenciadores/GerenciadorColisoes.h"
 #include "IDs.h"
 #include "Listas/ListaEntidades.h"
+#include "ObserverFase.h"
 
 using namespace Entidades;
 
 namespace Fases {
 
-Fase::Fase()
-    : Ente(ID::IDcaverna),
-      States::State(),
-      listaObstaculos(),
-      listaJogadores(),
-      listaInimigos(),
-      listaProjeteis(),
-      pFE(nullptr),
-      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()) {
+Fase::Fase(ID id, bool mp)
+    : Ente(id), States::State(id), listaObstaculos(), listaJogadores(),
+      listaInimigos(), listaProjeteis(), pFE(nullptr),
+      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()), thisObs(),
+      mp(mp) {
   listaObstaculos.limpar();
   listaJogadores.limpar();
   listaInimigos.limpar();
   listaProjeteis.limpar();
 
+  pJog->resetPrimeiroJog();
+
   Entidades::Personagens::Personagem::setFase(this);
+  thisObs = new ObservadorFase(this);
 }
 
 Fase::~Fase() {
@@ -46,29 +45,14 @@ Fase::~Fase() {
 }
 
 void Fase::executar() {
-  listaObstaculos.executar();
-  listaJogadores.executar();
-  listaInimigos.executar();
+  if (listaInimigos.getSize() == 0) {
+    thisObs->notificarFim();
+  }
   listaProjeteis.executar();
-}
-
-void Fase::incluirNoGC(Entidade *novaEntidade) {
-  if (!novaEntidade) {
-    std::cerr << "erro: Fase::incluirNoGC() => novaEntidade == nullptr\n";
-    exit(EXIT_FAILURE);
-  }
-
-  ID id = novaEntidade->getId();
-
-  if (ehObstaculo(id)) {
-    pGC->incluirObst(dynamic_cast<Obstaculos::Obstaculo *>(novaEntidade));
-
-  } else if (ehPersonagem(id)) {
-    pGC->incluirPers(dynamic_cast<Personagens::Personagem *>(novaEntidade));
-
-  } else if (ehProjetil(id)) {
-    pGC->incluirProj(dynamic_cast<Entidades::Projetil *>(novaEntidade));
-  }
+  listaInimigos.executar();
+  listaJogadores.executar();
+  listaObstaculos.executar();
+  thisObs->executar();
 }
 
 void Fase::incluirNaLista(Entidade *novaEntidade) {
@@ -95,6 +79,11 @@ void Fase::incluirNaLista(Entidade *novaEntidade) {
   }
 }
 
+void Fase::removerProjetil(Projetil *projetil) {
+  listaProjeteis.deletar(projetil);
+  std::clog << "Fase::removerProjetil => projetil removido" << std::endl;
+}
+
 void Fase::adicionarProjetil(Entidades::Projetil *novoProjetil) {
   if (!novoProjetil) {
     std::cerr
@@ -103,7 +92,7 @@ void Fase::adicionarProjetil(Entidades::Projetil *novoProjetil) {
   }
 
   incluirNaLista(novoProjetil);
-  incluirNoGC(novoProjetil);
+  novoProjetil->setFase(this);
 }
 
 void Fase::criarMapa(const std::string path) {
@@ -134,13 +123,35 @@ void Fase::criarMapa(const std::string path) {
       if (linha[i] != ' ') {
         novaEntidade =
             pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
-        incluirNaLista(novaEntidade);
-        incluirNoGC(novaEntidade);
+        if (novaEntidade != nullptr) {
+          incluirNaLista(novaEntidade);
+        }
       }
     }
   }
 
   arquivoMapa.close();
 }
+void Fase::notificarMorreu(Entidades::Entidade *pEnt) {
+  if (pEnt->getId() == ID::IDjogador) {
+    pGC->removerEnt(pEnt);
+    std::clog << "pGC->removerEnt\n";
+    listaJogadores.deletar(pEnt);
+    std::clog << "listaJogadores.deletar()\n";
+  } else {
+    pGC->removerEnt(pEnt);
+    listaInimigos.deletar(pEnt);
+    std::clog << "listaInimigos.deletar()" << std::endl;
+  }
+}
+void Fase::limparListas() {
+  listaProjeteis.limpar();
+  listaJogadores.limpar();
+  listaObstaculos.limpar();
+  listaInimigos.limpar();
+  pGC->limparEntidades();
+}
 
-}  // namespace Fases
+const bool Fase::getMp() { return mp; }
+
+} // namespace Fases

@@ -9,6 +9,7 @@
 
 #include "Fabrica/FabricaProjeteis.h"
 #include "Fases/Fase.h"
+#include "Gerenciadores/GerenciadorColisoes.h"
 
 namespace Entidades::Personagens::Inimigos {
 
@@ -21,11 +22,12 @@ Esqueleto::Esqueleto(const sf::Vector2f &pos)
 
   srand((unsigned int)time(NULL));
   setTextura("/assets/Personagens/Esqueleto.png");
+  pSprite->setTextureRect({16, 16, 16, 16});
+  setTamanho({48, 48});
+  setPos(pos);
 }
-Esqueleto::~Esqueleto() {
-  flecha = nullptr;
-  delete flecha;
-}
+
+Esqueleto::~Esqueleto() { delete flecha; }
 
 void Esqueleto::atacar() {
   if (!fabProj) {
@@ -37,18 +39,32 @@ void Esqueleto::atacar() {
     exit(EXIT_FAILURE);
   }
 
-  if (!flecha) {
+  if (podeAtacar) {
+    podeAtacar = false;
     forca = static_cast<float>(rand()) / std::numeric_limits<float>::max();
     flecha = fabProj->criarProjetil(this, forca);
     pFase->adicionarProjetil(flecha);
   }
 }
 void Esqueleto::executar() {
-  // draw
+  Personagem::executar();
+
+  atualizarKnockback();
+  setDanificando(false);
+  setNoChao(false);
+
+  if (!getNoChao())
+    cair();
+
   perseguir();
+
+  if (getVisando()) {
+    atacar();
+  }
+
   mover();
-  if (!getNoChao()) cair();
-  if (getVisando() && flecha == nullptr) atacar();
+
+  pGC->notificar(this);
 }
 
-}  // namespace Entidades::Personagens::Inimigos
+} // namespace Entidades::Personagens::Inimigos

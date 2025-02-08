@@ -30,12 +30,14 @@ private:
 
 public:
   Lista() : pPrimeiro(nullptr), pUltimo(nullptr), tamanho(0) {}
+
   ~Lista() { limpar(); }
 
   Elemento<TL> *getpPrimeiro() const {
     if (pPrimeiro)
       return pPrimeiro;
   }
+
   Elemento<TL> *getpUltimo() const {
     if (pUltimo)
       return pUltimo;
@@ -46,39 +48,40 @@ public:
       Elemento<TL> *node = new Elemento<TL>();
       if (node != nullptr) {
         node->incluir(p);
-        if (pUltimo != nullptr) {
-          pUltimo->setProx(node);
+        if (pPrimeiro == nullptr) {
+          pPrimeiro = node;
           pUltimo = node;
         } else {
-          pPrimeiro = node;
+          pUltimo->setProx(node);
           pUltimo = node;
         }
         tamanho++;
       }
     }
   }
+
   void remover(TL *p) {
     Elemento<TL> *node = pPrimeiro;
     Elemento<TL> *anterior = nullptr;
-    while (node != nullptr) {
+    while (node != nullptr && node->getInfo() != p) {
       anterior = node;
       node = node->getProximo();
-      if (node->getInfo() == p) {
-        if (node == pPrimeiro) {
-          pPrimeiro = pPrimeiro->getProximo();
-        } else if (node == pUltimo) {
-          pUltimo = anterior;
-        } else {
-          anterior->setProx(node->getProximo());
-        }
-        delete node;
-        tamanho--;
-        break;
+    }
+    if (node->getInfo() == p) {
+      if (node == pPrimeiro) {
+        pPrimeiro = node->getProximo();
+      } else if (node == pUltimo) {
+        pUltimo = anterior;
+      } else {
+        anterior->setProx(node->getProximo());
       }
+      delete node;
+      tamanho--;
     }
     node = nullptr;
     anterior = nullptr;
   }
+
   // TL pop(TL* p);
   void limpar() {
     Elemento<TL> *node = pPrimeiro;

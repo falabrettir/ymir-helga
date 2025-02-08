@@ -41,21 +41,46 @@ Obstaculos::Plataforma *FabEntPlanicie::criarChao(const sf::Vector2f &pos) {
 Entidade *FabEntPlanicie::criarEntidade(char tipoEntidade,
                                         const sf::Vector2f &pos) {
   switch (tipoEntidade) {
-    case 'E':
+  case 'E':
+    if (pP->getCont(tipoEntidade) < pP->getMinEsq() || rand() % 5 > 1) {
+      pP->incrementaContadores(tipoEntidade);
       return criarEsqueleto(pos);
-    case 'S':
+    }
+    break;
+  case 'W':
+    if (pP->getCont(tipoEntidade) < pP->getMinMago() || rand() % 5 > 1) {
+      pP->incrementaContadores(tipoEntidade);
       return criarMago(pos);
-    case 'P':
-      return criarChao(pos);
-    case 'M':
+    }
+    break;
+  case 'P':
+    return criarChao(pos);
+    break;
+  case 'M':
+    if (pP->getCont(tipoEntidade) < pP->getMinPlat() || rand() % 5 > 1) {
+      pP->incrementaContadores(tipoEntidade);
       return criarMadeira(pos);
-    case 'G':
+    }
+    break;
+  case 'G':
+    if (pP->getCont(tipoEntidade) < pP->getMinGosma() || rand() % 5 > 1) {
+      pP->incrementaContadores(tipoEntidade);
       return criarGosma(pos);
-    case 'J':
+    }
+    break;
+  case 'J':
+    return criarJogador(pos);
+  case 'H':
+    if (pP->getMp()) {
       return criarJogador(pos);
-    default:
-      return nullptr;
+      break;
+    } else
+      break;
+  default:
+    return nullptr;
   }
+  return nullptr;
 }
+void FabEntPlanicie::setFase(Fases::Planicie *pP) { this->pP = pP; }
 
-}  // namespace Fabricas
+} // namespace Fabricas

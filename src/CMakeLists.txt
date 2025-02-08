@@ -9,6 +9,8 @@ add_library(jogo
   Jogo.cpp
   Ente.cpp
   State.cpp
+  Mediator.cpp
+  ObserverFase.cpp
 
   # Diretorio Observer
   Observer/Observer.cpp
@@ -58,6 +60,7 @@ add_library(jogo
   #Diretorio Menu
   Menu/Menu.cpp
   Menu/MenuPrincipal.cpp
+  Menu/MenuPausa.cpp
   Menu/Botao.cpp
 
   # Diretorio Listas

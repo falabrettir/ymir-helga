@@ -12,7 +12,8 @@ namespace Gerenciadores {
 GerenciadorEventos *GerenciadorEventos::instancia = nullptr;
 
 GerenciadorEventos::GerenciadorEventos()
-    : pGG(GerenciadorGrafico::getInstancia()), pGI(GerenciadorInput::getInstancia()) {
+    : pGG(GerenciadorGrafico::getInstancia()),
+      pGI(GerenciadorInput::getInstancia()) {
   pJanela = pGG->getJanela();
 }
 
@@ -36,7 +37,7 @@ void GerenciadorEventos::processaEventos() {
 
     while (pJanela->pollEvent(evento)) {
       // windowClose ou ESC para fechar a janela
-      if (evento.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+      if (evento.type == sf::Event::Closed) {
         pGG->fecharJanela();
       }
 

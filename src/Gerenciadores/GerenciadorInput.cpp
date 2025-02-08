@@ -108,5 +108,4 @@ void GerenciadorInput::ProcessaTeclaSolta(sf::Keyboard::Key tecla) {
     exit(EXIT_FAILURE);
   }
 }
-
 }  // namespace Gerenciadores

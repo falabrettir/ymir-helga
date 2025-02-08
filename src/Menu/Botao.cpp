@@ -8,7 +8,7 @@
 #include "Gerenciadores/GerenciadorGrafico.h"
 
 namespace Menus {
-Botao::Botao(const std::string& text, ID id, sf::Vector2f pos)
+Botao::Botao(const std::string &text, ID id, sf::Vector2f pos)
     : Ente(id), selecionado(false), texto() {
   inicializa(text, pos);
 }
@@ -29,9 +29,11 @@ void Botao::executar() {
   }
   pAlvo->draw(texto);
 }
-void Botao::setSelecionado(const bool selecionado) { this->selecionado = selecionado; }
+void Botao::setSelecionado(const bool selecionado) {
+  this->selecionado = selecionado;
+}
 const bool Botao::getSelecionado() const { return selecionado; }
-void Botao::inicializa(const std::string& text, sf::Vector2f pos) {
+void Botao::inicializa(const std::string &text, sf::Vector2f pos) {
   texto.setFont(*Gerenciadores::GerenciadorGrafico::getInstancia()->getFonte());
   texto.setString(text);
   texto.setScale(1.f, 1.f);
@@ -62,4 +64,11 @@ void Botao::mudaFase(bool fase2) {
     texto.setString("Caverna");
   }
 }
-}  // namespace Menus
+void Botao::mudaMultijogador(bool mp) {
+  if (mp) {
+    texto.setString("Multijogador");
+  } else {
+    texto.setString("Jogar Sozinho");
+  }
+}
+} // namespace Menus

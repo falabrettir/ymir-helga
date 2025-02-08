@@ -2,14 +2,15 @@
 
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Text.hpp>
-#include <iostream>
 
 #include "Controladores/ControladorMenu.h"
 #include "Gerenciadores/GerenciadorGrafico.h"
-#define ALTURA 130
+#define ALTURA 150
 
 namespace Menus {
-MenuPrincipal::MenuPrincipal(ID id) : Menu(id), titulo(), fase2(false) {
+MenuPrincipal *MenuPrincipal::instancia(nullptr);
+MenuPrincipal::MenuPrincipal()
+    : Menu(ID::IDmenuprincipal), titulo(), fase2(false), mp(false) {
   inicializaTitulo();
   pContr = new Controladores::ControladorMenu(this);
   pGI->inscrever(pContr);
@@ -20,15 +21,12 @@ MenuPrincipal::MenuPrincipal(ID id) : Menu(id), titulo(), fase2(false) {
 MenuPrincipal::~MenuPrincipal() {}
 void MenuPrincipal::criarBotoes() {
   Menu::addBotao("Novo jogo", ID::IDbotaonovojogo, {960, ALTURA * 2});
-  Menu::addBotao("Multijogador", ID::IDbotaomultijogador, {960, ALTURA * 3});
+  Menu::addBotao("Jogar Sozinho", ID::IDbotaomultijogador, {960, ALTURA * 3});
   Menu::addBotao("Caverna", ID::IDbotaofase, {960, ALTURA * 4});
-  Menu::addBotao("Carregar jogo", ID::IDbotaocarregarjogo, {960, ALTURA * 5});
-  Menu::addBotao("Colocacao", ID::IDbotaocolocacao, {960, ALTURA * 6});
-  Menu::addBotao("Sair", ID::IDbotaosair, {960, ALTURA * 7});
+  Menu::addBotao("Sair", ID::IDbotaosair, {960, ALTURA * 5});
   inicializarIt();
 }
 void MenuPrincipal::executar() {
-  std::cerr << "Executar de menu principal\n";
   desenhar();
   pGG->getJanela()->draw(titulo);
   std::list<Botao *>::iterator it = listaBotoes.begin();
@@ -39,7 +37,8 @@ void MenuPrincipal::executar() {
   pContr->controlarMenu();
 }
 void MenuPrincipal::inicializaTitulo() {
-  titulo.setFont(*Gerenciadores::GerenciadorGrafico::getInstancia()->getFonte());
+  titulo.setFont(
+      *Gerenciadores::GerenciadorGrafico::getInstancia()->getFonte());
   titulo.setString("Ymir e Helga");
   titulo.setScale(1.5f, 1.5f);
   titulo.setFillColor(sf::Color::White);
@@ -51,5 +50,16 @@ void MenuPrincipal::setFase(Botao *botao) {
   fase2 = !fase2;
   botao->mudaFase(fase2);
 }
+void MenuPrincipal::setMultijogador(Botao *botao) {
+  mp = !mp;
+  botao->mudaMultijogador(mp);
+}
+const bool MenuPrincipal::getMp() const { return mp; }
 const bool MenuPrincipal::getFase() const { return fase2; }
-}  // namespace Menus
+MenuPrincipal *MenuPrincipal::getInstancia() {
+  if (instancia == nullptr) {
+    instancia = new MenuPrincipal();
+  }
+  return instancia;
+}
+} // namespace Menus
