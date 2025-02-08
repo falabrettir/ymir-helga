@@ -57,6 +57,10 @@ void ControladorMenu::controlarMenu() {
         dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->setFase(
             menuAtual->getBotao());
       } break;
+      case (ID::IDbotaomultijogador): {
+        dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->setMultijogador(
+            menuAtual->getBotao());
+      } break;
 
       case (ID::IDbotaonovojogo): {
         bool fase = dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->getFase();

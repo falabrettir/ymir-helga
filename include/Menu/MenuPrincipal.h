@@ -3,23 +3,25 @@
 
 namespace Menus {
 class MenuPrincipal : public Menu {
- private:
+private:
   sf::Text titulo;
   bool fase2;
-  static MenuPrincipal* instancia;
+  bool mp;
+  static MenuPrincipal *instancia;
 
- private:
+private:
   MenuPrincipal();
   ~MenuPrincipal();
-  MenuPrincipal(const MenuPrincipal&) = delete;
-  MenuPrincipal& operator=(const MenuPrincipal&) = delete;
+  MenuPrincipal(const MenuPrincipal &) = delete;
+  MenuPrincipal &operator=(const MenuPrincipal &) = delete;
 
- public:
-  static MenuPrincipal* getInstancia();
+public:
+  static MenuPrincipal *getInstancia();
   void inicializaTitulo();
   void executar();
   void criarBotoes();
-  void setFase(Botao* botao);
+  void setFase(Botao *botao);
+  void setMultijogador(Botao *botao);
   const bool getFase() const;
 };
-}  // namespace Menus
+} // namespace Menus
