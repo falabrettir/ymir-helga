@@ -70,6 +70,12 @@ Entidade *FabEntPlanicie::criarEntidade(char tipoEntidade,
     break;
   case 'J':
     return criarJogador(pos);
+  case 'H':
+    if (pP->getMp()) {
+      return criarJogador(pos);
+      break;
+    } else
+      break;
   default:
     return nullptr;
   }

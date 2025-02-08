@@ -54,6 +54,7 @@ void MenuPrincipal::setMultijogador(Botao *botao) {
   mp = !mp;
   botao->mudaMultijogador(mp);
 }
+const bool MenuPrincipal::getMp() const { return mp; }
 const bool MenuPrincipal::getFase() const { return fase2; }
 MenuPrincipal *MenuPrincipal::getInstancia() {
   if (instancia == nullptr) {

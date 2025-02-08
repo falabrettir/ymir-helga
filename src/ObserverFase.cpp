@@ -7,11 +7,11 @@
 #include "Gerenciadores/GerenciadorEstados.h"
 #include "IDs.h"
 #include "Menu/MenuPausa.h"
+#include "Menu/MenuPrincipal.h"
 #include "Observer.h"
 
-ObservadorFase::ObservadorFase(Fases::Fase* fAtual)
-    : Observer(),
-      fAtual(fAtual),
+ObservadorFase::ObservadorFase(Fases::Fase *fAtual)
+    : Observer(), fAtual(fAtual),
       pGS(Gerenciadores::GerenciadorEstados::getInstancia()),
       pGI(Gerenciadores::GerenciadorInput::getInstancia()),
       teclasPressionadas() {
@@ -37,7 +37,8 @@ void ObservadorFase::atualizarTeclasSoltas(sf::Keyboard::Key tecla) {
 }
 void ObservadorFase::pausar() {
   std::cerr << "Pausar chamado\n";
-  if (pGS->getEstadoAtual() == ID::IDcaverna || pGS->getEstadoAtual() == ID::IDplanicie) {
+  if (pGS->getEstadoAtual() == ID::IDcaverna ||
+      pGS->getEstadoAtual() == ID::IDplanicie) {
     std::cerr << "Dentro do if de Pausar\n";
     pGS->inserirEstado(Menus::MenuPausa::getInstancia());
     pGS->mudarEstado(ID::IDmenupause);
@@ -55,9 +56,10 @@ void ObservadorFase::notificarFim() {
   if (fAtual->States::State::getId() == ID::IDcaverna) {
     std::clog << "NotficarFim" << std::endl;
     fAtual->limparListas();
-    pGS->inserirEstado(new Fases::Planicie());
+    pGS->inserirEstado(
+        new Fases::Planicie(Menus::MenuPrincipal::getInstancia()->getMp()));
     pGS->mudarEstado(ID::IDplanicie);
   } else {
     std::clog << "WINNER WINNER CHICKEN DINNER" << std::endl;
-  }  // TODO: COZER
+  } // TODO: COZER
 }

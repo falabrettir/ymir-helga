@@ -20,10 +20,11 @@ using namespace Entidades;
 
 namespace Fases {
 
-Fase::Fase(ID id)
+Fase::Fase(ID id, bool mp)
     : Ente(id), States::State(id), listaObstaculos(), listaJogadores(),
       listaInimigos(), listaProjeteis(), pFE(nullptr),
-      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()), thisObs() {
+      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()), thisObs(),
+      mp(mp) {
   listaObstaculos.limpar();
   listaJogadores.limpar();
   listaInimigos.limpar();
@@ -148,5 +149,7 @@ void Fase::limparListas() {
   listaInimigos.limpar();
   pGC->limparEntidades();
 }
+
+const bool Fase::getMp() { return mp; }
 
 } // namespace Fases

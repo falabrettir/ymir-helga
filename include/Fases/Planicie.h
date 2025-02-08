@@ -27,7 +27,7 @@ private:
   static int contPlat;
 
 public:
-  Planicie();
+  Planicie(bool mp);
   ~Planicie();
 
   const int getMinEsq() const;

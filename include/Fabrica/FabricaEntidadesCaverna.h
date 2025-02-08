@@ -12,13 +12,13 @@ private:
   Fases::Caverna *pC;
 
 private:
-  FabEntCaverna();
+  FabEntCaverna(const bool mp);
   ~FabEntCaverna();
   FabEntCaverna(const FabEntCaverna &) = delete;
   FabEntCaverna &operator=(const FabEntCaverna &) = delete;
 
 public:
-  static FabEntCaverna *getInstancia();
+  static FabEntCaverna *getInstancia(const bool mp = false);
 
   void setFase(Fases::Caverna *pC);
 

@@ -25,7 +25,7 @@ private:
   static int contPlat;
 
 public:
-  Caverna();
+  Caverna(bool mp);
   ~Caverna();
 
   const int getMinEsq() const;

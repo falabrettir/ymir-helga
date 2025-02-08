@@ -64,11 +64,12 @@ void ControladorMenu::controlarMenu() {
 
       case (ID::IDbotaonovojogo): {
         bool fase = dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->getFase();
+        bool mp = dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->getMp();
         if (fase) {
-          pGS->inserirEstado(new Fases::Planicie());
+          pGS->inserirEstado(new Fases::Planicie(mp));
           pGS->mudarEstado(ID::IDplanicie);
         } else {
-          pGS->inserirEstado(new Fases::Caverna());
+          pGS->inserirEstado(new Fases::Caverna(mp));
           pGS->mudarEstado(ID::IDcaverna);
         }
       } break;

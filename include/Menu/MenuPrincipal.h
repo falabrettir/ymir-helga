@@ -23,5 +23,6 @@ public:
   void setFase(Botao *botao);
   void setMultijogador(Botao *botao);
   const bool getFase() const;
+  const bool getMp() const;
 };
 } // namespace Menus

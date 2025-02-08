@@ -13,16 +13,16 @@ namespace Fabricas {
 
 FabEntCaverna *FabEntCaverna::instancia = nullptr;
 
-FabEntCaverna::FabEntCaverna() : FabricaEntidades() {
+FabEntCaverna::FabEntCaverna(const bool mp) : FabricaEntidades() {
   std::clog << "Criando FabEntPlanicie\n";
   srand(time(nullptr));
 }
 
 FabEntCaverna::~FabEntCaverna() { std::clog << "Destruindo FabEntCaverna\n"; }
 
-FabEntCaverna *FabEntCaverna::getInstancia() {
+FabEntCaverna *FabEntCaverna::getInstancia(const bool mp) {
   if (!instancia) {
-    instancia = new FabEntCaverna();
+    instancia = new FabEntCaverna(mp);
   }
   return instancia;
 }
@@ -72,6 +72,12 @@ Entidade *FabEntCaverna::criarEntidade(char tipoEntidade,
   case 'J':
     return criarJogador(pos);
     break;
+  case 'H':
+    if (pC->getMp()) {
+      return criarJogador(pos);
+      break;
+    } else
+      break;
   default:
     return nullptr;
   }
