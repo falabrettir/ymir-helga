@@ -18,7 +18,7 @@ Mago::Mago(const sf::Vector2f &pos)
 
   setTextura("/assets/Personagens/Mago.png");
   pSprite->setTextureRect({16, 16, 16, 16});
-  tamanho = {48, 48};
+  setTamanho({48, 48});
   setPos(pos);
 }
 
@@ -52,7 +52,8 @@ void Mago::executar() {
   setDanificando(false);
   setNoChao(false);
 
-  if (!getNoChao()) cair();
+  if (!getNoChao())
+    cair();
 
   perseguir();
 
@@ -72,4 +73,4 @@ void Mago::executar() {
   pGG->getJanela()->draw(debugShape);
 }
 
-}  // namespace Entidades::Personagens::Inimigos
+} // namespace Entidades::Personagens::Inimigos

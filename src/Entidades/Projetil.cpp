@@ -29,7 +29,7 @@ Projetil::Projetil(Personagens::Personagem *pPersDono, int impulso)
   }
 
   pSprite->setTextureRect({16, 16, 16, 16});
-  tamanho = {16, 16};
+  setTamanho({16, 16});
 
   sf::Vector2f pos = pPersDono->getPos();
   if (pPersDono->getOlhandoEsquerda()) {
@@ -43,7 +43,8 @@ Projetil::Projetil(Personagens::Personagem *pPersDono, int impulso)
   vel.x = 2 * MAXVEL;
   vel.x += vel.x * impulso;
   // vel.y = -0.35;
-  if (pPersDono->getOlhandoEsquerda()) vel.x *= -1;
+  if (pPersDono->getOlhandoEsquerda())
+    vel.x *= -1;
 
   setVel(vel);
   std::clog << "projetil criado" << std::endl;
@@ -73,4 +74,4 @@ void Projetil::executar() {
 
 void Projetil::setFase(Fases::Fase *fase) { pFase = fase; }
 
-}  // namespace Entidades
+} // namespace Entidades

@@ -13,7 +13,8 @@
 
 namespace Entidades::Personagens::Inimigos {
 
-Fabricas::FabricaProjeteis *Esqueleto::fabProj = Fabricas::FabricaProjeteis::getInstancia();
+Fabricas::FabricaProjeteis *Esqueleto::fabProj =
+    Fabricas::FabricaProjeteis::getInstancia();
 
 Esqueleto::Esqueleto(const sf::Vector2f &pos)
     : Inimigo(ID::IDesqueleto), forca(0.0), flecha(nullptr) {
@@ -22,7 +23,7 @@ Esqueleto::Esqueleto(const sf::Vector2f &pos)
   srand((unsigned int)time(NULL));
   setTextura("/assets/Personagens/Esqueleto.png");
   pSprite->setTextureRect({16, 16, 16, 16});
-  tamanho = {48, 48};
+  setTamanho({48, 48});
   setPos(pos);
 }
 
@@ -52,7 +53,8 @@ void Esqueleto::executar() {
   setDanificando(false);
   setNoChao(false);
 
-  if (!getNoChao()) cair();
+  if (!getNoChao())
+    cair();
 
   perseguir();
 
@@ -65,4 +67,4 @@ void Esqueleto::executar() {
   pGC->notificar(this);
 }
 
-}  // namespace Entidades::Personagens::Inimigos
+} // namespace Entidades::Personagens::Inimigos

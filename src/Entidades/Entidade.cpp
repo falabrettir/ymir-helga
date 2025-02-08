@@ -9,16 +9,12 @@
 
 namespace Entidades {
 
-Gerenciadores::GerenciadorColisoes *Entidade::pGC(
-    Gerenciadores::GerenciadorColisoes::getInstancia());
+Gerenciadores::GerenciadorColisoes *
+    Entidade::pGC(Gerenciadores::GerenciadorColisoes::getInstancia());
 
 Entidade::Entidade(ID id)
-    : Ente(id),
-      pos(0, 0),
-      velocidade(0, 0),
-      gravidade(0, 0.002),
-      noChao(false),
-      olhandoEsquerda(false){};
+    : Ente(id), pos(0, 0), velocidade(0, 0), gravidade(0, 0.002), noChao(false),
+      olhandoEsquerda(false) {};
 
 Entidade::~Entidade() { std::clog << "~Entidade" << std::endl; }
 
@@ -95,5 +91,6 @@ bool Entidade::getNoChao() const { return noChao; }
 bool Entidade::getOlhandoEsquerda() const { return olhandoEsquerda; }
 
 sf::Vector2f Entidade::getTamanho() const { return tamanho; }
+void Entidade::setTamanho(const sf::Vector2f tam) { tamanho = tam; }
 
-}  // namespace Entidades
+} // namespace Entidades
