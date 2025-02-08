@@ -15,18 +15,19 @@ namespace Entidades::Personagens {
 #define ACEL 0.05;
 
 class Jogador : public Personagem {
- private:
+private:
   static Gerenciadores::GerenciadorInput *pGI;
   static Fabricas::FabricaProjeteis *fabProj;
   Controladores::Controlador_Jogador *pContr;
   static bool ehPrimeiroJogador;
   bool podePular;
 
- public:
+public:
   Jogador(const sf::Vector2f &pos);
   ~Jogador();
 
   bool getPrimeiroJog() const;
+  void resetPrimeiroJog();
 
   void colidir(Entidade *pEnt = nullptr);
   void andarDireita();
@@ -38,4 +39,4 @@ class Jogador : public Personagem {
   void aplicaLentidao(float viscosidade);
 };
 
-}  // namespace Entidades::Personagens
+} // namespace Entidades::Personagens

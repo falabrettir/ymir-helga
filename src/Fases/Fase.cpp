@@ -30,6 +30,8 @@ Fase::Fase(ID id, bool mp)
   listaInimigos.limpar();
   listaProjeteis.limpar();
 
+  pJog->resetPrimeiroJog();
+
   Entidades::Personagens::Personagem::setFase(this);
   thisObs = new ObservadorFase(this);
 }

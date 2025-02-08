@@ -6,10 +6,8 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <iostream>
 
-#include "Entidades/Obstaculos/Gosma.h"
 #include "Entidades/Personagens/Personagem.h"
 #include "Entidades/Projetil.h"
-#include "Fabrica/FabricaEntidades.h"
 #include "Fabrica/FabricaProjeteis.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
 #include "IDs.h"
@@ -47,11 +45,15 @@ Jogador::Jogador(const sf::Vector2f &pos)
   setPos(pos);
 }
 
-Jogador::~Jogador() { delete pContr; }
+Jogador::~Jogador() {
+  delete pContr;
+  resetPrimeiroJog();
+}
 
 bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
-// TODO: Recozer movimentos, o jogador ta meio devagaroso lesmo
+void Jogador::resetPrimeiroJog() { ehPrimeiroJogador = true; }
+
 void Jogador::andarDireita() {
   if (getVel().x < MAXVEL) {
     sf::Vector2f vel = getVel();

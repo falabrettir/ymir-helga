@@ -19,7 +19,7 @@ Inimigo::Inimigo(ID id) : Personagem(id), visada(25.f), visando(false) {
   pGC->incluirInim(this);
 }
 
-Inimigo::~Inimigo() {}
+Inimigo::~Inimigo() { std::clog << "Deletando Inimigo\n"; }
 
 float Inimigo::calculaDistancia(Jogador *pJog) {
   return fabs(pJog->getPos().x - this->getPos().x);
