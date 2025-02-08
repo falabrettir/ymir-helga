@@ -150,7 +150,7 @@ void Fase::limparListas() {
   listaJogadores.limpar();
   listaObstaculos.limpar();
   listaInimigos.limpar();
-  pGC->limparEntidades();
+  // pGC->limparEntidades();
 }
 
 }  // namespace Fases

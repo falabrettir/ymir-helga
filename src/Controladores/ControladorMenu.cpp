@@ -1,11 +1,13 @@
 #include "Controladores/ControladorMenu.h"
 
+#include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 
 #include "Fases/Caverna.h"
 #include "Fases/Planicie.h"
 #include "Gerenciadores/GerenciadorEstados.h"
+#include "Gerenciadores/GerenciadorGrafico.h"
 #include "IDs.h"
 #include "Menu/MenuPrincipal.h"
 #include "Observer.h"
@@ -68,6 +70,7 @@ void ControladorMenu::controlarMenu() {
         } break;
 
         case (ID::IDbotaosair): {
+          Gerenciadores::GerenciadorGrafico::getInstancia()->getJanela()->close();
         } break;
         case (ID::IDbotaocontinuar): {
           pGS->mudarEstado(pGS->getEstadoAnterior());
