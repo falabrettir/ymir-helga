@@ -5,7 +5,7 @@
 
 namespace Menus {
 
-MenuPausa* MenuPausa::instancia(nullptr);
+MenuPausa *MenuPausa::instancia(nullptr);
 
 MenuPausa::MenuPausa() : Menu(ID::IDmenupause) {
   pContr = new Controladores::ControladorMenu(this);
@@ -17,23 +17,22 @@ MenuPausa::MenuPausa() : Menu(ID::IDmenupause) {
 MenuPausa::~MenuPausa() {}
 void MenuPausa::criarBotoes() {
   addBotao("Continuar", ID::IDbotaocontinuar, {960, 180});
-  addBotao("Salvar Jogo", ID::IDbotaosalvarjogo, {960, 360});
   addBotao("Sair", ID::IDbotaosair, {960, 540});
   inicializarIt();
 }
 void MenuPausa::executar() {
   desenhar();
-  std::list<Botao*>::iterator it = listaBotoes.begin();
+  std::list<Botao *>::iterator it = listaBotoes.begin();
   while (it != listaBotoes.end()) {
     (*it)->executar();
     ++it;
   }
   pContr->controlarMenu();
 }
-MenuPausa* MenuPausa::getInstancia() {
+MenuPausa *MenuPausa::getInstancia() {
   if (instancia == nullptr) {
     instancia = new MenuPausa();
   }
   return instancia;
 }
-}  // namespace Menus
+} // namespace Menus

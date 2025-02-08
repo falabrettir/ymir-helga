@@ -14,8 +14,7 @@
 
 namespace Controladores {
 ControladorMenu::ControladorMenu(Menus::Menu *menu)
-    : Observer(),
-      menuAtual(menu),
+    : Observer(), menuAtual(menu),
       pGS(Gerenciadores::GerenciadorEstados::getInstancia()),
       teclasPressionadas() {
   teclasPressionadas.clear();
@@ -54,30 +53,29 @@ void ControladorMenu::controlarMenu() {
       ID id = menuAtual->getIdSelecionado();
       teclasPressionadas[selecionar] = false;
       switch (id) {
-        case (ID::IDbotaofase): {
-          dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->setFase(menuAtual->getBotao());
-        } break;
+      case (ID::IDbotaofase): {
+        dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->setFase(
+            menuAtual->getBotao());
+      } break;
 
-        case (ID::IDbotaonovojogo): {
-          bool fase = dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->getFase();
-          if (fase) {
-            pGS->inserirEstado(new Fases::Planicie());
-            pGS->mudarEstado(ID::IDplanicie);
-          } else {
-            pGS->inserirEstado(new Fases::Caverna());
-            pGS->mudarEstado(ID::IDcaverna);
-          }
-        } break;
-
-        case (ID::IDbotaosair): {
-          Gerenciadores::GerenciadorGrafico::getInstancia()->getJanela()->close();
-        } break;
-        case (ID::IDbotaocontinuar): {
-          pGS->mudarEstado(pGS->getEstadoAnterior());
-        } break;
-        // TODO: Botao salvar jogada
-        default:
-          break;
+      case (ID::IDbotaonovojogo): {
+        bool fase = dynamic_cast<Menus::MenuPrincipal *>(menuAtual)->getFase();
+        if (fase) {
+          pGS->inserirEstado(new Fases::Planicie());
+          pGS->mudarEstado(ID::IDplanicie);
+        } else {
+          pGS->inserirEstado(new Fases::Caverna());
+          pGS->mudarEstado(ID::IDcaverna);
+        }
+      } break;
+      case (ID::IDbotaosair): {
+        Gerenciadores::GerenciadorGrafico::getInstancia()->getJanela()->close();
+      } break;
+      case (ID::IDbotaocontinuar): {
+        pGS->mudarEstado(pGS->getEstadoAnterior());
+      } break;
+      default:
+        break;
       }
     }
   }
@@ -90,4 +88,4 @@ void ControladorMenu::setTeclas() {
   teclasPressionadas.insert(std::pair<Key, bool>(cima, false));
   teclasPressionadas.insert(std::pair<Key, bool>(baixo, false));
 }
-}  // namespace Controladores
+} // namespace Controladores
