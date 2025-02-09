@@ -17,7 +17,7 @@ int Caverna::contEsp(0);
 int Caverna::contPlat(0);
 
 Caverna::Caverna(bool mp)
-    : Fase(ID::IDcaverna, mp), minEsq(3), minSlimes(3), minEsp(4), minPlat(3) {
+    : Fase(ID::IDcaverna, mp), minEsq(3), minSlimes(3), minEsp(3), minPlat(3) {
 
   setTextura("/assets/Fundos/caverna.png");
   pSprite->setScale(1, 1);

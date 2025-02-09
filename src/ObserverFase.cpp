@@ -45,10 +45,12 @@ void ObservadorFase::pausar() {
     pGS->mudarEstado(ID::IDmenupause);
   }
 }
+
 void ObservadorFase::notificarJogadorMorreu() {
   pGS->inserirEstado(new Menus::GameOver(ID::IDgameover, false));
   pGS->mudarEstado(ID::IDgameover);
 }
+
 void ObservadorFase::executar() {
   if (teclasPressionadas[pause]) {
     pausar();

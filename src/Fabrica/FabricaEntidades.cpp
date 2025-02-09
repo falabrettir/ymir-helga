@@ -1,7 +1,6 @@
 #include "Fabrica/FabricaEntidades.h"
 
 #include <SFML/System/Vector2.hpp>
-#include <iostream>
 #include "Entidades/Obstaculos/Plataforma.h"
 #include "IDs.h"
 
@@ -9,12 +8,9 @@ using namespace Entidades;
 
 namespace Fabricas {
 
-FabricaEntidades::FabricaEntidades() : ativo(true) {
-  std::clog << "Criando FabricaEntidades\n";
-}
+FabricaEntidades::FabricaEntidades() : ativo(true) {}
 
 FabricaEntidades::~FabricaEntidades() {
-  std::clog << "Destruindo FabricaEntidades\n";
   ativo = false;
 }
 

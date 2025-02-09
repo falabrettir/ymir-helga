@@ -16,8 +16,7 @@ int Planicie::contPlat(0);
 int Planicie::contGosma(0);
 
 Planicie::Planicie(bool mp)
-    : Fase(ID::IDplanicie, mp), minGosma(5), minPlat(4), minMago(4), minEsq(5) {
-  std::clog << "Criando Planicie." << std::endl;
+    : Fase(ID::IDplanicie, mp), minGosma(3), minPlat(3), minMago(3), minEsq(3) {
 
   setTextura("/assets/Fundos/planicie.png");
   pSprite->setScale(1, 1);
@@ -44,13 +43,21 @@ void Planicie::executar() {
   Fase::executar();
 }
 
-const int Planicie::getMinEsq() const { return minEsq; }
+const int Planicie::getMinEsq() const {
+  return minEsq;
+}
 
-const int Planicie::getMinMago() const { return minMago; }
+const int Planicie::getMinMago() const {
+  return minMago;
+}
 
-const int Planicie::getMinGosma() const { return minGosma; }
+const int Planicie::getMinGosma() const {
+  return minGosma;
+}
 
-const int Planicie::getMinPlat() const { return minPlat; }
+const int Planicie::getMinPlat() const {
+  return minPlat;
+}
 
 const int Planicie::getCont(char tipoEnt) {
   switch (tipoEnt) {

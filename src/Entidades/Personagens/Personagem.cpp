@@ -36,7 +36,6 @@ void Personagem::tomarDano(int dano, bool esq) {
   hp -= dano;
 
   if (hp <= 0) {
-    std::clog << "Estou morto" << std::endl;
     vivo = false;
     setPos({-6000, -6000});
   }
@@ -81,7 +80,6 @@ void Personagem::executar() {
   }
 
   if (!vivo && pFase) {
-    std::clog << "Persongaem notificando morreu" << std::endl;
     pFase->notificarMorreu(this);
   }
 }

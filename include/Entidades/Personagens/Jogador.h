@@ -27,7 +27,7 @@ class Jogador : public Personagem {
   ~Jogador();
 
   bool getPrimeiroJog() const;
-  static void resetPrimeiroJog();
+  static void resetJog();
 
   void colidir(Entidade* pEnt = nullptr);
   void andarDireita();

@@ -10,18 +10,19 @@ class Inimigo : public Personagem {
  protected:
   float visada;
   bool visando;
-  static std::set<Jogador *> setJogadores;
+  static std::set<Jogador*> setJogadores;
 
  public:
   Inimigo(ID id);
   virtual ~Inimigo();
 
-  float calculaDistancia(Jogador *pJogs);
+  float calculaDistancia(Jogador* pJogs);
   void perseguir();
-  void colidir(Entidade *pEnt = nullptr);
+  void colidir(Entidade* pEnt = nullptr);
   const bool getVisando() const;
+  static void resetJogs();
 
-  static void adicionarJogador(Jogador *pJog);
+  static void adicionarJogador(Jogador* pJog);
 
   virtual void atacar() = 0;
   virtual void executar() = 0;

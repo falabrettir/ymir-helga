@@ -111,4 +111,8 @@ void Inimigo::colidir(Entidade* pEnt) {
   }
 }
 
+void Inimigo::resetJogs() {
+  setJogadores.clear();
+}
+
 }  // namespace Entidades::Personagens::Inimigos

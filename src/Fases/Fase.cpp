@@ -36,7 +36,7 @@ Fase::Fase(ID id, bool mp)
   listaInimigos.limpar();
   listaProjeteis.limpar();
 
-  Personagens::Jogador::resetPrimeiroJog();
+  Personagens::Jogador::resetJog();
 
   Entidades::Personagens::Personagem::setFase(this);
   thisObs = new ObservadorFase(this);
@@ -60,6 +60,8 @@ void Fase::executar() {
   thisObs->executar();
 
   if (listaInimigos.getSize() == 0) {
+    listaJogadores.limpar();
+    Personagens::Inimigos::Inimigo::resetJogs();
     thisObs->notificarFim();
   }
 

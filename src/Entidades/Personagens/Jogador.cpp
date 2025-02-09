@@ -42,6 +42,7 @@ Jogador::Jogador(const sf::Vector2f& pos)
 }
 
 Jogador::~Jogador() {
+  std::clog << "Deletando jog" << std::endl;
   delete pContr;
   pContr = nullptr;
 }
@@ -50,7 +51,7 @@ bool Jogador::getPrimeiroJog() const {
   return ehPrimeiroJogador;
 }
 
-void Jogador::resetPrimeiroJog() {
+void Jogador::resetJog() {
   ehPrimeiroJogador = true;
 }
 
