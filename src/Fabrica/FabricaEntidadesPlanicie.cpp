@@ -8,7 +8,7 @@ using namespace Entidades;
 
 namespace Fabricas {
 
-FabEntPlanicie *FabEntPlanicie::instancia = nullptr;
+FabEntPlanicie* FabEntPlanicie::instancia = nullptr;
 
 FabEntPlanicie::FabEntPlanicie() : FabricaEntidades() {
   std::clog << "Criando FabEntPlanicie\n";
@@ -18,7 +18,7 @@ FabEntPlanicie::~FabEntPlanicie() {
   std::clog << "Destruindo FabEntPlanicie\n";
 }
 
-FabEntPlanicie *FabEntPlanicie::getInstancia() {
+FabEntPlanicie* FabEntPlanicie::getInstancia() {
   if (!instancia) {
     instancia = new FabEntPlanicie();
     std::clog << "FabEntPlanicie criado\n";
@@ -26,61 +26,65 @@ FabEntPlanicie *FabEntPlanicie::getInstancia() {
   return instancia;
 }
 
-Obstaculos::Plataforma *FabEntPlanicie::criarMadeira(const sf::Vector2f &pos) {
-  Obstaculos::Plataforma *novaPlat =
+Obstaculos::Plataforma* FabEntPlanicie::criarMadeira(const sf::Vector2f& pos) {
+  Obstaculos::Plataforma* novaPlat =
       new Obstaculos::Plataforma(ID::IDmadeira2, pos);
   return novaPlat;
 }
 
-Obstaculos::Plataforma *FabEntPlanicie::criarChao(const sf::Vector2f &pos) {
-  Obstaculos::Plataforma *novaPlat =
+Obstaculos::Plataforma* FabEntPlanicie::criarChao(const sf::Vector2f& pos) {
+  Obstaculos::Plataforma* novaPlat =
       new Obstaculos::Plataforma(ID::IDgrama, pos);
   return novaPlat;
 }
 
-Entidade *FabEntPlanicie::criarEntidade(char tipoEntidade,
-                                        const sf::Vector2f &pos) {
+Entidade* FabEntPlanicie::criarEntidade(char tipoEntidade,
+                                        const sf::Vector2f& pos) {
   switch (tipoEntidade) {
-  case 'E':
-    if (pP->getCont(tipoEntidade) < pP->getMinEsq() || rand() % 5 > 1) {
-      pP->incrementaContadores(tipoEntidade);
-      return criarEsqueleto(pos);
-    }
-    break;
-  case 'W':
-    if (pP->getCont(tipoEntidade) < pP->getMinMago() || rand() % 5 > 1) {
-      pP->incrementaContadores(tipoEntidade);
-      return criarMago(pos);
-    }
-    break;
-  case 'P':
-    return criarChao(pos);
-    break;
-  case 'M':
-    if (pP->getCont(tipoEntidade) < pP->getMinPlat() || rand() % 5 > 1) {
-      pP->incrementaContadores(tipoEntidade);
-      return criarMadeira(pos);
-    }
-    break;
-  case 'G':
-    if (pP->getCont(tipoEntidade) < pP->getMinGosma() || rand() % 5 > 1) {
-      pP->incrementaContadores(tipoEntidade);
-      return criarGosma(pos);
-    }
-    break;
-  case 'J':
-    return criarJogador(pos);
-  case 'H':
-    if (pP->getMp()) {
+    case 'E':
+      if (pP->getCont(tipoEntidade) < pP->getMinEsq() || rand() % 5 > 1) {
+        pP->incrementaContadores(tipoEntidade);
+        return criarEsqueleto(pos);
+      }
+      break;
+    case 'W':
+      if (pP->getCont(tipoEntidade) < pP->getMinMago() || rand() % 5 > 1) {
+        pP->incrementaContadores(tipoEntidade);
+        return criarMago(pos);
+      }
+      break;
+    case 'P':
+      return criarChao(pos);
+      break;
+    case 'M':
+      if (pP->getCont(tipoEntidade) < pP->getMinPlat() || rand() % 5 > 1) {
+        pP->incrementaContadores(tipoEntidade);
+        return criarMadeira(pos);
+      }
+      break;
+    case 'G':
+      if (pP->getCont(tipoEntidade) < pP->getMinGosma() || rand() % 5 > 1) {
+        pP->incrementaContadores(tipoEntidade);
+        return criarGosma(pos);
+      }
+      break;
+    case 'J':
       return criarJogador(pos);
-      break;
-    } else
-      break;
-  default:
-    return nullptr;
+    case 'H':
+      if (pP->getMp()) {
+        return criarJogador(pos);
+        break;
+      } else
+        break;
+    case 'F':
+      return criarParede(pos);
+    default:
+      return nullptr;
   }
   return nullptr;
 }
-void FabEntPlanicie::setFase(Fases::Planicie *pP) { this->pP = pP; }
+void FabEntPlanicie::setFase(Fases::Planicie* pP) {
+  this->pP = pP;
+}
 
-} // namespace Fabricas
+}  // namespace Fabricas

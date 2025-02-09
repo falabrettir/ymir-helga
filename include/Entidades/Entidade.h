@@ -12,18 +12,18 @@ class GerenciadorColisoes;
 namespace Entidades {
 
 class Entidade : public Ente {
-private:
+ private:
   sf::Vector2f pos;
   sf::Vector2f gravidade;
   bool noChao;
   bool olhandoEsquerda;
 
-protected:
+ protected:
   sf::Vector2f tamanho;
   sf::Vector2f velocidade;
-  static Gerenciadores::GerenciadorColisoes *pGC;
+  static Gerenciadores::GerenciadorColisoes* pGC;
 
-public:
+ public:
   Entidade(ID id);
   virtual ~Entidade();
 
@@ -32,25 +32,25 @@ public:
   void cair();
   void desenhar();
 
-  virtual void colidir(Entidade *pEnt = nullptr) = 0;
+  virtual void colidir(Entidade* pEnt = nullptr) = 0;
   virtual void executar() = 0;
 
   // ============================================================================
   // Getters e setters
   // ============================================================================
 
-  void setVel(const sf::Vector2f &novaVel);
-  void setVelX(const float &velX);
-  void setVelY(const float &velY);
+  void setVel(const sf::Vector2f& novaVel);
+  void setVelX(const float& velX);
+  void setVelY(const float& velY);
 
-  void setPos(const sf::Vector2f &novaPos);
-  void setPosX(const float &x);
-  void setPosY(const float &y);
+  void setPos(const sf::Vector2f& novaPos);
+  void setPosX(const float& x);
+  void setPosY(const float& y);
 
-  void setTamanho(const sf::Vector2f tam);
+  void setTamanho(const sf::Vector2f& tam);
 
-  void setOlhandoEsquerda(const bool &olhandoEsquerda);
-  void setNoChao(const bool &noChao);
+  void setOlhandoEsquerda(const bool& olhandoEsquerda);
+  void setNoChao(const bool& noChao);
 
   sf::Vector2f getVel() const;
   sf::Vector2f getPos() const;
@@ -59,4 +59,4 @@ public:
   bool getOlhandoEsquerda() const;
 };
 
-} // namespace Entidades
+}  // namespace Entidades
