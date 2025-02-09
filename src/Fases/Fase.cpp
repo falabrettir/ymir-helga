@@ -21,9 +21,15 @@ using namespace Entidades;
 namespace Fases {
 
 Fase::Fase(ID id, bool mp)
-    : Ente(id), States::State(id), listaObstaculos(), listaJogadores(),
-      listaInimigos(), listaProjeteis(), pFE(nullptr),
-      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()), thisObs(),
+    : Ente(id),
+      States::State(id),
+      listaObstaculos(),
+      listaJogadores(),
+      listaInimigos(),
+      listaProjeteis(),
+      pFE(nullptr),
+      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()),
+      thisObs(),
       mp(mp) {
   listaObstaculos.limpar();
   listaJogadores.limpar();
@@ -47,6 +53,9 @@ Fase::~Fase() {
 void Fase::executar() {
   if (listaInimigos.getSize() == 0) {
     thisObs->notificarFim();
+  }
+  if (listaJogadores.getSize() == 0) {
+    thisObs->notificarJogadorMorreu();
   }
   listaProjeteis.executar();
   listaInimigos.executar();
@@ -86,8 +95,7 @@ void Fase::removerProjetil(Projetil *projetil) {
 
 void Fase::adicionarProjetil(Entidades::Projetil *novoProjetil) {
   if (!novoProjetil) {
-    std::cerr
-        << "erro: Fase::adicionarProjetil(...) => novoProjetil == nullptr\n";
+    std::cerr << "erro: Fase::adicionarProjetil(...) => novoProjetil == nullptr\n";
     exit(EXIT_FAILURE);
   }
 
@@ -121,8 +129,7 @@ void Fase::criarMapa(const std::string path) {
   for (int j = 0; std::getline(arquivoMapa, linha); j++) {
     for (int i = 0; i < linha.size(); i++) {
       if (linha[i] != ' ') {
-        novaEntidade =
-            pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
+        novaEntidade = pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
         if (novaEntidade != nullptr) {
           incluirNaLista(novaEntidade);
         }
@@ -154,4 +161,4 @@ void Fase::limparListas() {
 
 const bool Fase::getMp() { return mp; }
 
-} // namespace Fases
+}  // namespace Fases

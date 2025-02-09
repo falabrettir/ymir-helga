@@ -26,13 +26,12 @@ enum class ID {
   IDplanicie,           // 21
   IDbotaosalvarjogo,    // 22
   IDfase,               // 23
-  IDparede              // 24
+  IDparede,             // 24
+  IDgameover            // 25
 
 };
 
-inline bool ehJogador(ID id) {
-  return id == ID::IDjogador;
-}
+inline bool ehJogador(ID id) { return id == ID::IDjogador; }
 
 inline bool ehInimigo(ID id) {
   switch (id) {

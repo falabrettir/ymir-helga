@@ -62,6 +62,7 @@ add_library(jogo
   Menu/MenuPrincipal.cpp
   Menu/MenuPausa.cpp
   Menu/Botao.cpp
+  Menu/GameOver.cpp
 
   # Diretorio Listas
   Listas/ListaEntidade.cpp
