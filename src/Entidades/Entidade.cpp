@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <cstdlib>
 #include <iostream>
 
 #include "Gerenciadores/GerenciadorColisoes.h"
@@ -18,13 +19,17 @@ Entidade::Entidade(ID id)
       velocidade(0, 0),
       gravidade(0, 0.002),
       noChao(false),
-      olhandoEsquerda(false) {};
+      olhandoEsquerda(false),
+      tamanho({0, 0}) {};
 
-Entidade::~Entidade() {
-  std::clog << "~Entidade" << std::endl;
-}
+Entidade::~Entidade() {}
 
 void Entidade::mover() {
+  if (pGG == nullptr) {
+    std::cerr << "erro: Entidade::mover() => pGG == nullptr" << std::endl;
+    exit(EXIT_FAILURE);
+  }
+
   if (velocidade.x > 0) {
     atualizaOrientacao();
     setOlhandoEsquerda(false);
@@ -48,16 +53,21 @@ void Entidade::atualizaOrientacao() {
 }
 
 void Entidade::cair() {
+  if (pGG == nullptr) {
+    std::cerr << "erro: Entidade::cair() => pGG == nullptr" << std::endl;
+    exit(EXIT_FAILURE);
+  }
+
   setVel(getVel() + gravidade * pGG->getDeltaTempo());
 }
 
 void Entidade::desenhar() {
-  if (pGG) {
-    pGG->desenharEnte(this);
-  } else {
-    std::cerr << "erro: Entidade::desenhar() => pGG == nullptr";
+  if (pGG == nullptr) {
+    std::cerr << "erro: Entidade::desenhar() => pGG == nullptr" << std::endl;
     exit(EXIT_FAILURE);
   }
+
+  pGG->desenharEnte(this);
 }
 
 // ============================================================================

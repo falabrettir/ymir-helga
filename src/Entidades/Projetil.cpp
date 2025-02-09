@@ -2,6 +2,7 @@
 
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
+#include <cstdlib>
 #include <iostream>
 
 #include "Entidades/Personagens/Jogador.h"
@@ -12,14 +13,15 @@
 
 namespace Entidades {
 
-Projetil::Projetil()
-    : Entidade(ID::IDprojetil), pPersDono(nullptr), impulso(0) {
-  pGC->incluirProj(this);
-}
-
-Projetil::Projetil(Personagens::Personagem *pPersDono, int impulso)
-    : Entidade(ID::IDprojetil), pPersDono(pPersDono), impulso(impulso) {
-  std::clog << "Criando projetil" << std::endl;
+Projetil::Projetil(Personagens::Personagem* pPersDono, int impulso)
+    : Entidade(ID::IDprojetil),
+      pPersDono(pPersDono),
+      impulso(impulso),
+      pFase(nullptr) {
+  if (pPersDono == nullptr) {
+    std::cerr << "erro: Projetil::Projetil(...) => pGC == nullptr" << std::endl;
+    exit(EXIT_FAILURE);
+  }
 
   if (pPersDono->getId() == ID::IDesqueleto ||
       pPersDono->getId() == ID::IDjogador) {
@@ -31,6 +33,7 @@ Projetil::Projetil(Personagens::Personagem *pPersDono, int impulso)
   pSprite->setTextureRect({16, 16, 16, 16});
   setTamanho({16, 16});
 
+  // Inicializacao da posicao
   sf::Vector2f pos = pPersDono->getPos();
   if (pPersDono->getOlhandoEsquerda()) {
     pos.x -= 48;
@@ -39,15 +42,13 @@ Projetil::Projetil(Personagens::Personagem *pPersDono, int impulso)
   }
   setPos(pos);
 
+  // Inicializacao da velocidade
   sf::Vector2f vel;
   vel.x = 2 * MAXVEL;
   vel.x += vel.x * impulso;
-  // vel.y = -0.35;
   if (pPersDono->getOlhandoEsquerda())
     vel.x *= -1;
-
   setVel(vel);
-  std::clog << "projetil criado" << std::endl;
 }
 
 Projetil::~Projetil() {
@@ -55,23 +56,41 @@ Projetil::~Projetil() {
   pPersDono = nullptr;
 }
 
-int Projetil::getDano() { return std::fabs(getVel().x); }
+int Projetil::getDano() {
+  return std::fabs(getVel().x);
+}
 
-Personagens::Personagem *Projetil::getDono() { return pPersDono; }
+Personagens::Personagem* Projetil::getDono() {
+  return pPersDono;
+}
 
-void Projetil::colidir(Entidade *pE) {
+void Projetil::colidir(Entidade* pE) {
+  if (pGC == nullptr) {
+    std::cerr << "erro: Projetil::colidir() => pGC == nullptr" << std::endl;
+    exit(EXIT_FAILURE);
+  }
+
+  if (pFase == nullptr) {
+    std::cerr << "erro: Projetil::colidir() => pFase == nullptr" << std::endl;
+    exit(EXIT_FAILURE);
+  }
+
   pGC->removerEnt(this);
-  std::clog << "projetil removido do gc" << std::endl;
   pFase->removerProjetil(this);
-  std::clog << "projetil removido da fase" << std::endl;
 }
 
 void Projetil::executar() {
   mover();
-  // cair();
+
+  if (pGC == nullptr) {
+    std::cerr << "erro: Projetil::executar() => pGC == nullptr" << std::endl;
+    exit(EXIT_FAILURE);
+  }
   pGC->notificar(this);
 }
 
-void Projetil::setFase(Fases::Fase *fase) { pFase = fase; }
+void Projetil::setFase(Fases::Fase* fase) {
+  pFase = fase;
+}
 
-} // namespace Entidades
+}  // namespace Entidades

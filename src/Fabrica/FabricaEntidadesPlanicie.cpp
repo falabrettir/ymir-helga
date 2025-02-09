@@ -10,9 +10,7 @@ namespace Fabricas {
 
 FabEntPlanicie* FabEntPlanicie::instancia = nullptr;
 
-FabEntPlanicie::FabEntPlanicie() : FabricaEntidades() {
-  std::clog << "Criando FabEntPlanicie\n";
-}
+FabEntPlanicie::FabEntPlanicie() : FabricaEntidades() {}
 
 FabEntPlanicie::~FabEntPlanicie() {
   std::clog << "Destruindo FabEntPlanicie\n";

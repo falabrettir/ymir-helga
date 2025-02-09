@@ -46,7 +46,7 @@ void ObservadorFase::pausar() {
   }
 }
 void ObservadorFase::notificarJogadorMorreu() {
-  pGS->inserirEstado(new Menus::GameOver(ID::IDgameover));
+  pGS->inserirEstado(new Menus::GameOver(ID::IDgameover, false));
   pGS->mudarEstado(ID::IDgameover);
 }
 void ObservadorFase::executar() {
@@ -61,7 +61,8 @@ void ObservadorFase::notificarFim() {
     pGS->inserirEstado(new Fases::Planicie(Menus::MenuPrincipal::getInstancia()->getMp()));
     pGS->mudarEstado(ID::IDplanicie);
   } else {
-    pGS->inserirEstado(new Menus::GameOver(ID::IDgameover));
+    pGS->inserirEstado(new Menus::GameOver(ID::IDgameover, true));
     pGS->mudarEstado(ID::IDgameover);
-  }
+    std::clog << "WINNER WINNER CHICKEN DINNER" << std::endl;
+  }  // TODO: COZER
 }

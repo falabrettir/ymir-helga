@@ -10,32 +10,33 @@
 
 #include "Gerenciadores/GerenciadorGrafico.h"
 
-Gerenciadores::GerenciadorGrafico *Ente::pGG(Gerenciadores::GerenciadorGrafico::getInstancia());
+Gerenciadores::GerenciadorGrafico* Ente::pGG(
+    Gerenciadores::GerenciadorGrafico::getInstancia());
 
 Ente::Ente(ID id) : id(id) {
   pSprite = new sf::Sprite();
   pTexture = new sf::Texture();
-  if (pGG == nullptr) pGG = Gerenciadores::GerenciadorGrafico::getInstancia();
+
   setTarget();
 }
 
 Ente::~Ente() {
-  std::clog << "~Ent" << std::endl;
+
   delete pSprite;
   pSprite = nullptr;
+
   delete pTexture;
   pTexture = nullptr;
-  delete pAlvo;
+
   pAlvo = nullptr;
-  std::clog << "~Ente" << std::endl;
 }
 
-void Ente::atualizaSprite(sf::Texture *pTexture) {
+void Ente::atualizaSprite(sf::Texture* pTexture) {
   pSprite->setTexture(*pTexture);
   pSprite->setScale(3.f, 3.f);
 }
 
-bool Ente::setTextura(const std::string &path) {
+bool Ente::setTextura(const std::string& path) {
   std::string filePath = ROOT;
   filePath += path;
   if (pTexture->loadFromFile(filePath)) {
@@ -47,24 +48,28 @@ bool Ente::setTextura(const std::string &path) {
   }
 }
 
-sf::Sprite Ente::getSprite() { return *pSprite; }
+sf::Sprite Ente::getSprite() {
+  return *pSprite;
+}
 
 void Ente::setTarget() {
-  if (pGG) {
-    pAlvo = pGG->getJanela();
-  } else {
-    std::cerr << "erro: Ente::setTarget() => pGG == nullptr\n";
+  if (pGG == nullptr) {
+    std::cerr << "erro: Ente::setTarget() => pGG == nullptr" << std::endl;
     exit(EXIT_FAILURE);
   }
+
+  pAlvo = pGG->getJanela();
 }
 
 void Ente::desenhar() {
-  if (pGG)
-    pGG->desenharEnte(this);
-  else {
-    std::cerr << "erro: Ente::desenhar() => pGG == nullptr";
+  if (pGG == nullptr) {
+    std::cerr << "erro: Ente::desenhar() => pGG == nullptr" << std::endl;
     exit(EXIT_FAILURE);
   }
+
+  pGG->desenharEnte(this);
 }
 
-const ID Ente::getId() const { return this->id; }
+const ID Ente::getId() const {
+  return this->id;
+}

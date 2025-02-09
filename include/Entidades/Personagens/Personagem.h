@@ -29,7 +29,7 @@ class Personagem : public Entidades::Entidade {
   bool vivo;
 
  protected:
-  static Fases::Fase *pFase;
+  static Fases::Fase* pFase;
   bool podeAtacar;
   float ultimoAtaque;
 
@@ -38,16 +38,21 @@ class Personagem : public Entidades::Entidade {
   virtual ~Personagem();
 
   void tomarDano(int dano, bool esq = true);
-  const int getDano() const;
-  void setDano(const int dano);
-  virtual void colidir(Entidade *pEnt = nullptr) = 0;
   void executar();
-  static void setFase(Fases::Fase *fase);
-  void setDanificando(bool danificando);
-  const bool getDanificando() const;
   void atualizarKnockback();
-  bool getEmAnimacaoKnockback() const { return emAnimacaoKnockback; }
-  void setEmAnimacaoKnockback(bool valor) { emAnimacaoKnockback = valor; }
+  virtual void colidir(Entidade* pEnt = nullptr) = 0;
+
+  // ============================================================================
+  // Getters e setters
+  // ============================================================================
+  const int getDano() const;
+  bool getEmAnimacaoKnockback() const;
+  const bool getDanificando() const;
+
+  void setDano(const int dano);
+  void setEmAnimacaoKnockback(bool valor);
+  void setDanificando(bool danificando);
+  static void setFase(Fases::Fase* fase);
 };
 
 }  // namespace Personagens

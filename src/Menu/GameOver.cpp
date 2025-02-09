@@ -2,8 +2,8 @@
 
 #include "Controladores/ControladorMenu.h"
 namespace Menus {
-GameOver::GameOver(ID id) : Menu(id), _gameOver() {
-  inicializaTitulo();
+GameOver::GameOver(ID id, bool venceu) : Menu(id), _gameOver() {
+  inicializaTitulo(venceu);
   pContr = new Controladores::ControladorMenu(this);
   pGI->inscrever(pContr);
   setTextura("/assets/Menu.png");
@@ -12,9 +12,12 @@ GameOver::GameOver(ID id) : Menu(id), _gameOver() {
 }
 GameOver::~GameOver() {}
 
-void GameOver::inicializaTitulo() {
+void GameOver::inicializaTitulo(bool venceu) {
   _gameOver.setFont(*Gerenciadores::GerenciadorGrafico::getInstancia()->getFonte());
-  _gameOver.setString("Game Over!");
+  if (!venceu)
+    _gameOver.setString("Game Over!");
+  else
+    _gameOver.setString("Parabens!");
   _gameOver.setScale(1.5f, 1.5f);
   _gameOver.setFillColor(sf::Color::White);
   _gameOver.setOutlineColor(sf::Color::Black);

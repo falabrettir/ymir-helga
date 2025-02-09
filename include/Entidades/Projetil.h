@@ -9,20 +9,19 @@ namespace Entidades {
 
 class Projetil : public Entidade {
  private:
-  Personagens::Personagem *pPersDono;
-  Fases::Fase *pFase;
+  Personagens::Personagem* pPersDono;
+  Fases::Fase* pFase;
   int impulso;
 
  public:
-  Projetil(Personagens::Personagem *pPersDono, int impulso = 0);
-  Projetil();
+  Projetil(Personagens::Personagem* pPersDono, int impulso = 0);
   ~Projetil();
 
   int getDano();
-  Personagens::Personagem *getDono();
-  void colidir(Entidade *pEnt = nullptr);
+  Personagens::Personagem* getDono();
+  void colidir(Entidade* pEnt = nullptr);
   void executar();
-  void setFase(Fases::Fase *fase);
+  void setFase(Fases::Fase* fase);
 };
 
 }  // namespace Entidades
