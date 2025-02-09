@@ -20,8 +20,9 @@ Slime::~Slime() {}
 
 void Slime::colidir(Entidade* pEnt) {
   if (ehJogador(pEnt->getId())) {
-    dynamic_cast<Jogador*>(pEnt)->aplicaLentidao(viscosidade);
     dynamic_cast<Jogador*>(pEnt)->tomarDano(getDano(), getOlhandoEsquerda());
+    dynamic_cast<Jogador*>(pEnt)->aplicaLentidao(viscosidade);
+
   } else if (ehProjetil(pEnt->getId())) {
     Personagem* pDono = dynamic_cast<Projetil*>(pEnt)->getDono();
 
@@ -47,7 +48,8 @@ void Slime::executar() {
 }
 
 void Slime::atacar() {
-  if (!getNoChao()) cair();
+  if (!getNoChao())
+    cair();
 
   perseguir();
 

@@ -18,7 +18,6 @@ int Caverna::contPlat(0);
 
 Caverna::Caverna(bool mp)
     : Fase(ID::IDcaverna, mp), minEsq(3), minSlimes(3), minEsp(4), minPlat(3) {
-  std::clog << "Criando caverna." << std::endl;
 
   setTextura("/assets/Fundos/caverna.png");
   pSprite->setScale(1, 1);
@@ -45,13 +44,21 @@ void Caverna::executar() {
   Fase::executar();
 }
 
-const int Caverna::getMinEsq() const { return minEsq; }
+const int Caverna::getMinEsq() const {
+  return minEsq;
+}
 
-const int Caverna::getMinSli() const { return minSlimes; }
+const int Caverna::getMinSli() const {
+  return minSlimes;
+}
 
-const int Caverna::getMinEsp() const { return minEsp; }
+const int Caverna::getMinEsp() const {
+  return minEsp;
+}
 
-const int Caverna::getMinPlat() const { return minPlat; }
+const int Caverna::getMinPlat() const {
+  return minPlat;
+}
 
 const int Caverna::getCont(char tipoEnt) {
   switch (tipoEnt) {

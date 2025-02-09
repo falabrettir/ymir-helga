@@ -30,12 +30,13 @@ Personagem::Personagem(ID id)
   setTamanho({48, 48});
 }
 
-Personagem::~Personagem() { std::clog << "~Personagem" << std::endl; }
+Personagem::~Personagem() {}
 
 void Personagem::tomarDano(int dano, bool esq) {
   hp -= dano;
 
   if (hp <= 0) {
+    std::clog << "Estou morto" << std::endl;
     vivo = false;
     setPos({-6000, -6000});
   }
@@ -79,8 +80,10 @@ void Personagem::executar() {
     }
   }
 
-  if (!vivo && pFase)
+  if (!vivo && pFase) {
+    std::clog << "Persongaem notificando morreu" << std::endl;
     pFase->notificarMorreu(this);
+  }
 }
 
 void Personagem::atualizarKnockback() {
@@ -113,8 +116,8 @@ void Personagem::atualizarKnockback() {
 
       // Diminui mais rapidamente a velocidade horizontal (exponencial)
       float t = tempoKnockback / duracaoKnockback;
-      vel.x =
-          direcaoKnockback.x * 0.5f * std::exp(-4.0f * t);  // Decaimento exponencial mais rápido
+      vel.x = direcaoKnockback.x * 0.5f *
+              std::exp(-4.0f * t);  // Decaimento exponencial mais rápido
 
       setVel(vel);
     }
@@ -125,18 +128,32 @@ void Personagem::atualizarKnockback() {
 // Getters e setters
 // ============================================================================
 
-const int Personagem::getDano() const { return dano; }
+const int Personagem::getDano() const {
+  return dano;
+}
 
-bool Personagem::getEmAnimacaoKnockback() const { return emAnimacaoKnockback; }
+bool Personagem::getEmAnimacaoKnockback() const {
+  return emAnimacaoKnockback;
+}
 
-const bool Personagem::getDanificando() const { return danificando; }
+const bool Personagem::getDanificando() const {
+  return danificando;
+}
 
-void Personagem::setFase(Fases::Fase* fase) { pFase = fase; }
+void Personagem::setFase(Fases::Fase* fase) {
+  pFase = fase;
+}
 
-void Personagem::setDano(const int dano) { this->dano = dano; }
+void Personagem::setDano(const int dano) {
+  this->dano = dano;
+}
 
-void Personagem::setEmAnimacaoKnockback(bool valor) { emAnimacaoKnockback = valor; }
+void Personagem::setEmAnimacaoKnockback(bool valor) {
+  emAnimacaoKnockback = valor;
+}
 
-void Personagem::setDanificando(bool danificando) { this->danificando = danificando; }
+void Personagem::setDanificando(bool danificando) {
+  this->danificando = danificando;
+}
 
 }  // namespace Entidades::Personagens

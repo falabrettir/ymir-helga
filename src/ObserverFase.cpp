@@ -8,10 +8,9 @@
 #include "IDs.h"
 #include "Menu/GameOver.h"
 #include "Menu/MenuPausa.h"
-#include "Menu/MenuPrincipal.h"
 #include "Observer.h"
 
-ObservadorFase::ObservadorFase(Fases::Fase *fAtual)
+ObservadorFase::ObservadorFase(Fases::Fase* fAtual)
     : Observer(),
       fAtual(fAtual),
       pGS(Gerenciadores::GerenciadorEstados::getInstancia()),
@@ -39,7 +38,8 @@ void ObservadorFase::atualizarTeclasSoltas(sf::Keyboard::Key tecla) {
 }
 void ObservadorFase::pausar() {
   std::cerr << "Pausar chamado\n";
-  if (pGS->getEstadoAtual() == ID::IDcaverna || pGS->getEstadoAtual() == ID::IDplanicie) {
+  if (pGS->getEstadoAtual() == ID::IDcaverna ||
+      pGS->getEstadoAtual() == ID::IDplanicie) {
     std::cerr << "Dentro do if de Pausar\n";
     pGS->inserirEstado(Menus::MenuPausa::getInstancia());
     pGS->mudarEstado(ID::IDmenupause);
@@ -56,13 +56,11 @@ void ObservadorFase::executar() {
 }
 void ObservadorFase::notificarFim() {
   if (fAtual->States::State::getId() == ID::IDcaverna) {
-    std::clog << "NotficarFim" << std::endl;
     fAtual->limparListas();
     pGS->inserirEstado(new Fases::Planicie(false));
     pGS->mudarEstado(ID::IDplanicie);
   } else {
     pGS->inserirEstado(new Menus::GameOver(ID::IDgameover, true));
     pGS->mudarEstado(ID::IDgameover);
-    std::clog << "WINNER WINNER CHICKEN DINNER" << std::endl;
-  }  // TODO: COZER
+  }
 }

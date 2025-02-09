@@ -13,19 +13,27 @@
 
 namespace Entidades::Personagens::Inimigos {
 
-std::set<Jogador *> Inimigo::setJogadores{};
+std::set<Jogador*> Inimigo::setJogadores{};
 
-Inimigo::Inimigo(ID id) : Personagem(id), visada(100.f), visando(false) { pGC->incluirInim(this); }
+Inimigo::Inimigo(ID id) : Personagem(id), visada(300.f), visando(false) {
+  pGC->incluirInim(this);
+}
 
-Inimigo::~Inimigo() { std::clog << "~Inimigo" << std::endl; }
+Inimigo::~Inimigo() {
+  std::clog << "~Inimigo" << std::endl;
+}
 
-float Inimigo::calculaDistancia(Jogador *pJog) { return fabs(pJog->getPos().x - this->getPos().x); }
+float Inimigo::calculaDistancia(Jogador* pJog) {
+  return fabs(pJog->getPos().x - this->getPos().x);
+}
 
-void Inimigo::adicionarJogador(Jogador *pJog) { setJogadores.insert(pJog); }
+void Inimigo::adicionarJogador(Jogador* pJog) {
+  setJogadores.insert(pJog);
+}
 
 void Inimigo::perseguir() {
-  std::set<Jogador *>::iterator it = setJogadores.begin();
-  Jogador *aux = nullptr;
+  std::set<Jogador*>::iterator it = setJogadores.begin();
+  Jogador* aux = nullptr;
   float atual, min = visada;
   visando = false;  // Reset targeting flag
 
@@ -50,7 +58,8 @@ void Inimigo::perseguir() {
 
     float magnitude = std::sqrt(direcao.x * direcao.x + direcao.y * direcao.y);
 
-    if (magnitude != 0) direcao /= magnitude;
+    if (magnitude != 0)
+      direcao /= magnitude;
 
     sf::Vector2f novaVel;
     novaVel.x = direcao.x * getVel().x;
@@ -73,20 +82,22 @@ void Inimigo::perseguir() {
     setVelX(MAXVEL * 0.3 * direcao);
   }
 }
-const bool Inimigo::getVisando() const { return visando; }
+const bool Inimigo::getVisando() const {
+  return visando;
+}
 
-void Inimigo::colidir(Entidade *pEnt) {
+void Inimigo::colidir(Entidade* pEnt) {
   if (pEnt == nullptr) {
     std::cerr << "erro: Inimigo::colidir(...) => pEnt == nullptr\n";
     exit(EXIT_FAILURE);
   }
 
   else if (ehJogador(pEnt->getId())) {
-    dynamic_cast<Entidades::Personagens::Jogador *>(pEnt)->tomarDano(getDano(),
-                                                                     getOlhandoEsquerda());
+    dynamic_cast<Entidades::Personagens::Jogador*>(pEnt)->tomarDano(
+        getDano(), getOlhandoEsquerda());
 
   } else if (ehProjetil(pEnt->getId())) {
-    Personagem *pDono = dynamic_cast<Projetil *>(pEnt)->getDono();
+    Personagem* pDono = dynamic_cast<Projetil*>(pEnt)->getDono();
 
     if (pDono == nullptr) {
       std::cerr << "erro: Inimigo::colidir(...) => pDono == nullptr\n";

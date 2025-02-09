@@ -53,18 +53,19 @@ Fase::~Fase() {
 }
 
 void Fase::executar() {
-  if (listaInimigos.getSize() == 0) {
-    thisObs->notificarFim();
-  }
-  if (listaJogadores.getSize() == 0 && listaInimigos.getSize() > 0) {
-    thisObs->notificarJogadorMorreu();
-  }
-  std::clog << "Fase::executar()" << std::endl;
   listaProjeteis.executar();
   listaInimigos.executar();
   listaJogadores.executar();
   listaObstaculos.executar();
   thisObs->executar();
+
+  if (listaInimigos.getSize() == 0) {
+    thisObs->notificarFim();
+  }
+
+  if (listaJogadores.getSize() == 0 && listaInimigos.getSize() > 0) {
+    thisObs->notificarJogadorMorreu();
+  }
 }
 
 void Fase::incluirNaLista(Entidade* novaEntidade) {
@@ -98,7 +99,6 @@ void Fase::removerProjetil(Projetil* projetil) {
   }
   pGC->removerEnt(projetil);
   listaProjeteis.deletar(projetil);
-  std::clog << "Fase::removerProjetil => projetil removido" << std::endl;
 }
 
 void Fase::adicionarProjetil(Entidades::Projetil* novoProjetil) {
@@ -114,24 +114,18 @@ void Fase::adicionarProjetil(Entidades::Projetil* novoProjetil) {
 
 void Fase::criarMapa(const std::string path) {
   if (!pFE) {
-    std::cerr << "erro: Fase::criarMapa() => pFE == nullptr\n";
     exit(EXIT_FAILURE);
   }
-
-  std::clog << "Criando mapa da fase" << std::endl;
 
   std::ifstream arquivoMapa;
   std::string filePath = ROOT;
   filePath += path;
 
-  std::clog << "Abrindo arquivo: " << filePath << std::endl;
   arquivoMapa.open(filePath);
 
   if (!arquivoMapa.is_open()) {
-    std::cerr << "erro: arquivoMapa.open()" << std::endl;
     exit(EXIT_FAILURE);
   }
-  std::clog << "Arquivo de mapa aberto com sucesso" << std::endl;
 
   std::string linha;
   Entidade* novaEntidade;
@@ -157,13 +151,10 @@ void Fase::notificarMorreu(Entidades::Entidade* pEnt) {
 
   if (pEnt->getId() == ID::IDjogador) {
     pGC->removerEnt(pEnt);
-    std::clog << "pGC->removerEnt\n";
     listaJogadores.deletar(pEnt);
-    std::clog << "listaJogadores.deletar()\n";
   } else {
     pGC->removerEnt(pEnt);
     listaInimigos.deletar(pEnt);
-    std::clog << "listaInimigos.deletar()" << std::endl;
   }
 }
 
@@ -175,6 +166,8 @@ void Fase::limparListas() {
   pGC->limparEntidades();
 }
 
-const bool Fase::getMp() { return mp; }
+const bool Fase::getMp() {
+  return mp;
+}
 
 }  // namespace Fases

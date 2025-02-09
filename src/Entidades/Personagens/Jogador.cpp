@@ -105,17 +105,8 @@ void Jogador::executar() {
     mover();
 
     pGC->notificar(this);
-
-    // TODO: Apagar
-    // sf::RectangleShape debugShape(tamanho);
-    // debugShape.setPosition(pSprite->getPosition());
-    // debugShape.setFillColor(sf::Color::Transparent);
-    // debugShape.setOutlineColor(sf::Color::Red);
-    // debugShape.setOutlineThickness(1);
-    // pGG->getJanela()->draw(debugShape);
-
-    Personagem::executar();
   }
+  Personagem::executar();
 }
 
 void Jogador::atacar() {

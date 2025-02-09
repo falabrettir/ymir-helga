@@ -9,7 +9,7 @@
 namespace Entidades::Obstaculos {
 
 Espinho::Espinho(const sf::Vector2f& pos)
-    : Obstaculo(ID::IDespinho, pos, true), dano(10) {
+    : Obstaculo(ID::IDespinho, pos, true), dano(50) {
 
   setTextura("/assets/Obstaculos/Espinho.png");
   pSprite->setTextureRect({16, 16, 16, 16});
