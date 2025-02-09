@@ -28,6 +28,7 @@ void Gosma::executar() {
     exit(EXIT_FAILURE);
   }
   pGC->notificar(this);
+  mover();
 }
 
 void Gosma::obstacular(Entidade* pEnt) {

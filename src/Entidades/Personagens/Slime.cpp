@@ -48,8 +48,6 @@ void Slime::executar() {
 }
 
 void Slime::atacar() {
-  if (!getNoChao())
-    cair();
 
   perseguir();
 

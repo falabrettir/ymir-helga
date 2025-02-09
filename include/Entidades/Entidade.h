@@ -3,7 +3,6 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 
-#include "Constants.h"
 #include "Ente.h"
 
 namespace Gerenciadores {
@@ -15,7 +14,6 @@ namespace Entidades {
 class Entidade : public Ente {
  private:
   sf::Vector2f pos;
-  sf::Vector2f gravidade;
   bool noChao;
   bool olhandoEsquerda;
 

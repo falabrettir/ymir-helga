@@ -51,9 +51,6 @@ void Esqueleto::executar() {
   setDanificando(false);
   setNoChao(false);
 
-  if (!getNoChao())
-    cair();
-
   perseguir();
 
   if (getVisando()) {
