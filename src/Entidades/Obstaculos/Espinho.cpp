@@ -27,6 +27,7 @@ void Espinho::executar() {
     std::cerr << "erro: Espinho::executar() => pGC == nullptr" << std::endl;
   }
   pGC->notificar(this);
+  mover();
 }
 
 void Espinho::obstacular(Entidade* pEnt) {

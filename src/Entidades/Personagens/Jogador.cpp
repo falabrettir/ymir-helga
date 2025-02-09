@@ -100,9 +100,6 @@ void Jogador::executar() {
 
     setNoChao(false);
 
-    if (!getNoChao())
-      cair();
-
     mover();
 
     pGC->notificar(this);

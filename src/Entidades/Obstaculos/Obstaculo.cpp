@@ -14,6 +14,9 @@ Obstaculo::Obstaculo(ID id, const sf::Vector2f& pos, const bool danoso)
               << std::endl;
     exit(EXIT_FAILURE);
   }
+
+  setNoChao(true);
+
   pGC->incluirObst(this);
   setPos(pos);
 }
