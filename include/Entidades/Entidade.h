@@ -3,6 +3,7 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 
+#include "Constants.h"
 #include "Ente.h"
 
 namespace Gerenciadores {
