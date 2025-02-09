@@ -17,15 +17,14 @@ using namespace Entidades::Personagens;
 // Flag inicialmente definida como true
 bool Jogador::ehPrimeiroJogador = true;
 
-Gerenciadores::GerenciadorInput *Jogador::pGI =
+Gerenciadores::GerenciadorInput* Jogador::pGI =
     Gerenciadores::GerenciadorInput::getInstancia();
 
-Fabricas::FabricaProjeteis *Jogador::fabProj =
+Fabricas::FabricaProjeteis* Jogador::fabProj =
     Fabricas::FabricaProjeteis::getInstancia();
 
-Jogador::Jogador(const sf::Vector2f &pos)
+Jogador::Jogador(const sf::Vector2f& pos)
     : Personagem(ID::IDjogador), pContr(nullptr), podePular(true) {
-  std::clog << "Criando novo jogador\n";
 
   pContr = new Controladores::Controlador_Jogador();
   pContr->setJog(this);
@@ -39,9 +38,6 @@ Jogador::Jogador(const sf::Vector2f &pos)
   } else
     setTextura("/assets/Personagens/Helga.png");
 
-  pSprite->setTextureRect({16, 16, 16, 16});
-  setTamanho({48, 48});
-
   setPos(pos);
 }
 
@@ -50,9 +46,13 @@ Jogador::~Jogador() {
   resetPrimeiroJog();
 }
 
-bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
+bool Jogador::getPrimeiroJog() const {
+  return ehPrimeiroJogador;
+}
 
-void Jogador::resetPrimeiroJog() { ehPrimeiroJogador = true; }
+void Jogador::resetPrimeiroJog() {
+  ehPrimeiroJogador = true;
+}
 
 void Jogador::andarDireita() {
   if (getVel().x < MAXVEL) {
@@ -74,7 +74,9 @@ void Jogador::andarEsquerda() {
   }
 }
 
-void Jogador::naoAndar() { setVelX(0); }
+void Jogador::naoAndar() {
+  setVelX(0);
+}
 
 void Jogador::pular() {
   if (getNoChao()) {
@@ -129,11 +131,11 @@ void Jogador::atacar() {
   }
 }
 
-void Jogador::colidir(Entidade *pEnt) {
+void Jogador::colidir(Entidade* pEnt) {
   if (ehProjetil(pEnt->getId())) {
     if (ehInimigo(
-            dynamic_cast<Entidades::Projetil *>(pEnt)->getDono()->getId())) {
-      tomarDano(dynamic_cast<Entidades::Projetil *>(pEnt)->getDano(),
+            dynamic_cast<Entidades::Projetil*>(pEnt)->getDono()->getId())) {
+      tomarDano(dynamic_cast<Entidades::Projetil*>(pEnt)->getDano(),
                 pEnt->getOlhandoEsquerda());
     }
   }

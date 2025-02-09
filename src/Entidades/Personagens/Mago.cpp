@@ -9,20 +9,20 @@
 #include "Gerenciadores/GerenciadorColisoes.h"
 namespace Entidades::Personagens::Inimigos {
 
-Fabricas::FabricaProjeteis *Mago::fabProj =
+Fabricas::FabricaProjeteis* Mago::fabProj =
     Fabricas::FabricaProjeteis::getInstancia();
 
-Mago::Mago(const sf::Vector2f &pos)
+Mago::Mago(const sf::Vector2f& pos)
     : Inimigo(ID::IDmago), poder(1.000005), bolaDeFogo(nullptr) {
-  std::clog << "Criando novo mago\n";
 
   setTextura("/assets/Personagens/Mago.png");
-  pSprite->setTextureRect({16, 16, 16, 16});
-  setTamanho({48, 48});
+
   setPos(pos);
 }
 
-Mago::~Mago() { delete bolaDeFogo; }
+Mago::~Mago() {
+  delete bolaDeFogo;
+}
 
 void Mago::atacar() {
   if (!fabProj) {
@@ -43,7 +43,9 @@ void Mago::atacar() {
   }
 }
 
-void Mago::aumentarPoder() { poder *= poder; }
+void Mago::aumentarPoder() {
+  poder *= poder;
+}
 
 void Mago::executar() {
   Personagem::executar();
@@ -73,4 +75,4 @@ void Mago::executar() {
   pGG->getJanela()->draw(debugShape);
 }
 
-} // namespace Entidades::Personagens::Inimigos
+}  // namespace Entidades::Personagens::Inimigos

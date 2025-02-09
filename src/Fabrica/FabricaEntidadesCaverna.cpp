@@ -14,7 +14,6 @@ namespace Fabricas {
 FabEntCaverna* FabEntCaverna::instancia = nullptr;
 
 FabEntCaverna::FabEntCaverna(const bool mp) : FabricaEntidades() {
-  std::clog << "Criando FabEntPlanicie\n";
   srand(time(nullptr));
 }
 

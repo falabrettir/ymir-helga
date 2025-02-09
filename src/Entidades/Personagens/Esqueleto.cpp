@@ -13,21 +13,20 @@
 
 namespace Entidades::Personagens::Inimigos {
 
-Fabricas::FabricaProjeteis *Esqueleto::fabProj =
+Fabricas::FabricaProjeteis* Esqueleto::fabProj =
     Fabricas::FabricaProjeteis::getInstancia();
 
-Esqueleto::Esqueleto(const sf::Vector2f &pos)
+Esqueleto::Esqueleto(const sf::Vector2f& pos)
     : Inimigo(ID::IDesqueleto), forca(0.0), flecha(nullptr) {
-  std::clog << "Criando novo esqueleto\n";
 
   srand((unsigned int)time(NULL));
   setTextura("/assets/Personagens/Esqueleto.png");
-  pSprite->setTextureRect({16, 16, 16, 16});
-  setTamanho({48, 48});
   setPos(pos);
 }
 
-Esqueleto::~Esqueleto() { delete flecha; }
+Esqueleto::~Esqueleto() {
+  delete flecha;
+}
 
 void Esqueleto::atacar() {
   if (!fabProj) {
@@ -67,4 +66,4 @@ void Esqueleto::executar() {
   pGC->notificar(this);
 }
 
-} // namespace Entidades::Personagens::Inimigos
+}  // namespace Entidades::Personagens::Inimigos

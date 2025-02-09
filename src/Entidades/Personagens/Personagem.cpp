@@ -10,12 +10,12 @@
 
 namespace Entidades::Personagens {
 
-Fases::Fase *Personagem::pFase = nullptr;
+Fases::Fase* Personagem::pFase = nullptr;
 
 Personagem::Personagem(ID id)
     : Entidade(id),
-      hp(200),
       dano(10),
+      hp(200),
       danificando(false),
       emAnimacaoKnockback(false),
       tempoKnockback(0.0f),
@@ -25,17 +25,12 @@ Personagem::Personagem(ID id)
       tempoInvencibilidade(0.0f),
       podeAtacar(true),
       ultimoAtaque(0),
-      vivo(true) {}
+      vivo(true) {
+  pSprite->setTextureRect({16, 16, 16, 16});
+  setTamanho({48, 48});
+}
 
 Personagem::~Personagem() {}
-
-void Personagem::setFase(Fases::Fase *fase) {
-  if (!fase) {
-    std::cerr << "erro: Personagem::setFase(...) => fase == nullptr\n";
-    exit(EXIT_FAILURE);
-  }
-  pFase = fase;
-}
 
 void Personagem::tomarDano(int dano, bool esq) {
   hp -= dano;
@@ -71,13 +66,6 @@ void Personagem::tomarDano(int dano, bool esq) {
   tempoInvencibilidade = 0.0f;
 }
 
-void Personagem::setDano(const int dano) { this->dano = dano; }
-
-const int Personagem::getDano() const { return dano; }
-void Personagem::setDanificando(bool danificando) {
-  this->danificando = danificando;
-}
-
 void Personagem::executar() {
   ultimoAtaque += pGG->getDeltaTempo();
   if (ultimoAtaque > 1000) {
@@ -85,10 +73,10 @@ void Personagem::executar() {
     ultimoAtaque = 0;
   }
 
-  if (!vivo) pFase->notificarMorreu(this);
+  if (!vivo)
+    pFase->notificarMorreu(this);
 }
 
-const bool Personagem::getDanificando() const { return danificando; }
 void Personagem::atualizarKnockback() {
   const float deltaTime = 0.016f;  // Aproximadamente 60 FPS
 
@@ -125,6 +113,38 @@ void Personagem::atualizarKnockback() {
       setVel(vel);
     }
   }
+}
+
+// ============================================================================
+// Getters e setters
+// ============================================================================
+
+const int Personagem::getDano() const {
+  return dano;
+}
+
+bool Personagem::getEmAnimacaoKnockback() const {
+  return emAnimacaoKnockback;
+}
+
+const bool Personagem::getDanificando() const {
+  return danificando;
+}
+
+void Personagem::setFase(Fases::Fase* fase) {
+  pFase = fase;
+}
+
+void Personagem::setDano(const int dano) {
+  this->dano = dano;
+}
+
+void Personagem::setEmAnimacaoKnockback(bool valor) {
+  emAnimacaoKnockback = valor;
+}
+
+void Personagem::setDanificando(bool danificando) {
+  this->danificando = danificando;
 }
 
 }  // namespace Entidades::Personagens

@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <cstdlib>
 #include <iostream>
 
 #include "Gerenciadores/GerenciadorColisoes.h"
@@ -13,25 +14,20 @@ Plataforma::Plataforma(ID id, const sf::Vector2f& pos)
     : Obstaculo(id, pos), empuxo(0.f, 0.f) {
   switch (id) {
     case (ID::IDparede):
-      std::clog << "Criando parede\n";
 
     case (ID::IDmadeira1):
-      std::clog << "Criando nova plataforma de madeira1\n";
       setTextura("/assets/Obstaculos/plataformafase1.png");
       break;
 
     case (ID::IDmadeira2):
-      std::clog << "Criando nova plataforma de madeira2\n";
       setTextura("/assets/Obstaculos/plataformafase2.png");
       break;
 
     case (ID::IDpedra):
-      std::clog << "Criando nova plataforma de pedra\n";
       setTextura("/assets/Obstaculos/chaofase1.png");
       break;
 
     case (ID::IDgrama):
-      std::clog << "Criando nova plataforma de grama\n";
       setTextura("/assets/Obstaculos/chaofase2.png");
       break;
 
@@ -49,7 +45,13 @@ Plataforma::Plataforma(ID id, const sf::Vector2f& pos)
 Plataforma::~Plataforma() {}
 
 void Plataforma::executar() {
+  if (pGC == nullptr) {
+    std::cerr << "erro: Plataforma::executar() => pGC == nullptr" << std::endl;
+    exit(EXIT_FAILURE);
+  }
   pGC->notificar(this);
+
+  // TODO: apagar
   sf::RectangleShape debugShape(tamanho);
   debugShape.setPosition(pSprite->getPosition());
   debugShape.setFillColor(sf::Color::Transparent);
@@ -59,8 +61,20 @@ void Plataforma::executar() {
 }
 
 void Plataforma::obstacular(Entidades::Entidade* pEnt) {
+  if (pEnt == nullptr) {
+    std::cerr << "erro: Plataforma::obstacular() => pEnt == nullptr"
+              << std::endl;
+    exit(EXIT_FAILURE);
+  }
+  if (pGC == nullptr) {
+    std::cerr << "erro: Plataforma::obstacular() => pGC == nullptr"
+              << std::endl;
+    exit(EXIT_FAILURE);
+  }
+
   sf::Vector2f novaPos = pEnt->getPos();
   sf::Vector2f ds = pGC->calcOverlap(pEnt, this);
+
   if (ds.x < ds.y) {                          // Eixo da colisão
     if (pEnt->getPos().x < this->getPos().x)  // Direção da colisao
       novaPos.x -= ds.x;                      // Colisão Esquerda => Direita
@@ -79,9 +93,12 @@ void Plataforma::obstacular(Entidades::Entidade* pEnt) {
   pEnt->setPos(novaPos);
 }
 void Plataforma::colidir(Entidade* pEnt) {
-  if (pEnt) {
-    obstacular(pEnt);
+  if (pEnt == nullptr) {
+    std::cerr << "erro: Plataforma::colidir() => pEnt == nullptr" << std::endl;
+    exit(EXIT_FAILURE);
   }
+
+  obstacular(pEnt);
 }
 
 }  // namespace Entidades::Obstaculos
