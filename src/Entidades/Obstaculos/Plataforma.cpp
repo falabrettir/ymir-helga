@@ -52,12 +52,12 @@ void Plataforma::executar() {
   pGC->notificar(this);
 
   // TODO: apagar
-  sf::RectangleShape debugShape(tamanho);
-  debugShape.setPosition(pSprite->getPosition());
-  debugShape.setFillColor(sf::Color::Transparent);
-  debugShape.setOutlineColor(sf::Color::Blue);
-  debugShape.setOutlineThickness(1);
-  pGG->getJanela()->draw(debugShape);
+  // sf::RectangleShape debugShape(tamanho);
+  // debugShape.setPosition(pSprite->getPosition());
+  // debugShape.setFillColor(sf::Color::Transparent);
+  // debugShape.setOutlineColor(sf::Color::Blue);
+  // debugShape.setOutlineThickness(1);
+  // pGG->getJanela()->draw(debugShape);
 }
 
 void Plataforma::obstacular(Entidades::Entidade* pEnt) {

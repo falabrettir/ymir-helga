@@ -5,7 +5,6 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "Entidades/Entidade.h"
-#include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Projetil.h"
 #include "Fabrica/FabricaEntidades.h"
 #include "Listas/ListaEntidades.h"
@@ -15,16 +14,15 @@ class ObservadorFase;
 
 namespace Gerenciadores {
 class GerenciadorColisoes;
-} // namespace Gerenciadores
+}  // namespace Gerenciadores
 
 namespace Fases {
 
 class Fase : public Ente, public States::State {
-protected:
-  Entidades::Personagens::Jogador *pJog;
-  Gerenciadores::GerenciadorColisoes *pGC;
-  Fabricas::FabricaEntidades *pFE;
-  ObservadorFase *thisObs;
+ protected:
+  Gerenciadores::GerenciadorColisoes* pGC;
+  Fabricas::FabricaEntidades* pFE;
+  ObservadorFase* thisObs;
 
   Listas::ListaEntidades listaObstaculos;
   Listas::ListaEntidades listaInimigos;
@@ -33,19 +31,19 @@ protected:
 
   const bool mp;
 
-public:
+ public:
   Fase(ID id, bool mp = false);
   ~Fase();
 
   virtual void executar();
-  void notificarMorreu(Entidades::Entidade *pEnt);
+  void notificarMorreu(Entidades::Entidade* pEnt);
 
   void limparListas();
-  void incluirNaLista(Entidades::Entidade *novaEntidade);
-  void adicionarProjetil(Entidades::Projetil *novoProjetil);
-  void removerProjetil(Entidades::Projetil *projetil);
+  void incluirNaLista(Entidades::Entidade* novaEntidade);
+  void adicionarProjetil(Entidades::Projetil* novoProjetil);
+  void removerProjetil(Entidades::Projetil* projetil);
   void criarMapa(const std::string path);
   const bool getMp();
 };
 
-} // namespace Fases
+}  // namespace Fases

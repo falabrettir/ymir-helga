@@ -21,7 +21,7 @@ Mago::Mago(const sf::Vector2f& pos)
 }
 
 Mago::~Mago() {
-  delete bolaDeFogo;
+  bolaDeFogo = nullptr;
 }
 
 void Mago::atacar() {
@@ -48,7 +48,6 @@ void Mago::aumentarPoder() {
 }
 
 void Mago::executar() {
-  Personagem::executar();
 
   atualizarKnockback();
   setDanificando(false);
@@ -66,13 +65,15 @@ void Mago::executar() {
   mover();
 
   pGC->notificar(this);
+  Personagem::executar();
 
-  sf::RectangleShape debugShape(tamanho);
-  debugShape.setPosition(pSprite->getPosition());
-  debugShape.setFillColor(sf::Color::Transparent);
-  debugShape.setOutlineColor(sf::Color::Red);
-  debugShape.setOutlineThickness(1);
-  pGG->getJanela()->draw(debugShape);
+  // TODO: Apagar
+  // sf::RectangleShape debugShape(tamanho);
+  // debugShape.setPosition(pSprite->getPosition());
+  // debugShape.setFillColor(sf::Color::Transparent);
+  // debugShape.setOutlineColor(sf::Color::Red);
+  // debugShape.setOutlineThickness(1);
+  // pGG->getJanela()->draw(debugShape);
 }
 
 }  // namespace Entidades::Personagens::Inimigos

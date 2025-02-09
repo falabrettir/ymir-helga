@@ -43,7 +43,7 @@ Jogador::Jogador(const sf::Vector2f& pos)
 
 Jogador::~Jogador() {
   delete pContr;
-  resetPrimeiroJog();
+  pContr = nullptr;
 }
 
 bool Jogador::getPrimeiroJog() const {
@@ -92,27 +92,30 @@ void Jogador::aplicaLentidao(float viscosidade) {
 }
 
 void Jogador::executar() {
-  Personagem::executar();
+  if (vivo && pGC) {
+    atualizarKnockback();
+    setDanificando(false);
+    pContr->controlarJogador();
 
-  atualizarKnockback();
-  setDanificando(false);
-  pContr->controlarJogador();
+    setNoChao(false);
 
-  setNoChao(false);
+    if (!getNoChao())
+      cair();
 
-  if (!getNoChao())
-    cair();
+    mover();
 
-  mover();
+    pGC->notificar(this);
 
-  pGC->notificar(this);
+    // TODO: Apagar
+    // sf::RectangleShape debugShape(tamanho);
+    // debugShape.setPosition(pSprite->getPosition());
+    // debugShape.setFillColor(sf::Color::Transparent);
+    // debugShape.setOutlineColor(sf::Color::Red);
+    // debugShape.setOutlineThickness(1);
+    // pGG->getJanela()->draw(debugShape);
 
-  sf::RectangleShape debugShape(tamanho);
-  debugShape.setPosition(pSprite->getPosition());
-  debugShape.setFillColor(sf::Color::Transparent);
-  debugShape.setOutlineColor(sf::Color::Red);
-  debugShape.setOutlineThickness(1);
-  pGG->getJanela()->draw(debugShape);
+    Personagem::executar();
+  }
 }
 
 void Jogador::atacar() {

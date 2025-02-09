@@ -30,14 +30,13 @@ Fase::Fase(ID id, bool mp)
       mp(mp),
       pGC(Gerenciadores::GerenciadorColisoes::getInstancia()),
       thisObs(nullptr),
-      pFE(nullptr),
-      pJog(nullptr) {
+      pFE(nullptr) {
   listaObstaculos.limpar();
   listaJogadores.limpar();
   listaInimigos.limpar();
   listaProjeteis.limpar();
 
-  pJog->resetPrimeiroJog();
+  Personagens::Jogador::resetPrimeiroJog();
 
   Entidades::Personagens::Personagem::setFase(this);
   thisObs = new ObservadorFase(this);
@@ -48,8 +47,9 @@ Fase::~Fase() {
   listaJogadores.limpar();
   listaInimigos.limpar();
   listaProjeteis.limpar();
-  pJog = nullptr;
   pGC = nullptr;
+  delete thisObs;
+  thisObs = nullptr;
 }
 
 void Fase::executar() {
@@ -102,7 +102,8 @@ void Fase::removerProjetil(Projetil* projetil) {
 
 void Fase::adicionarProjetil(Entidades::Projetil* novoProjetil) {
   if (!novoProjetil) {
-    std::cerr << "erro: Fase::adicionarProjetil(...) => novoProjetil == nullptr\n";
+    std::cerr
+        << "erro: Fase::adicionarProjetil(...) => novoProjetil == nullptr\n";
     exit(EXIT_FAILURE);
   }
 
@@ -136,7 +137,8 @@ void Fase::criarMapa(const std::string path) {
   for (int j = 0; std::getline(arquivoMapa, linha); j++) {
     for (int i = 0; i < linha.size(); i++) {
       if (linha[i] != ' ') {
-        novaEntidade = pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
+        novaEntidade =
+            pFE->criarEntidade(linha[i], sf::Vector2f(i * 16, j * 16));
         if (novaEntidade != nullptr) {
           incluirNaLista(novaEntidade);
         }

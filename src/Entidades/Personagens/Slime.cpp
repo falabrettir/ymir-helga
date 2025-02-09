@@ -38,12 +38,12 @@ void Slime::colidir(Entidade* pEnt) {
 }
 
 void Slime::executar() {
-  Personagem::executar();
   atualizarKnockback();
   setDanificando(false);
   setNoChao(false);
   atacar();
   pGC->notificar(this);
+  Personagem::executar();
 }
 
 void Slime::atacar() {
@@ -51,7 +51,8 @@ void Slime::atacar() {
   setDanificando(false);
   setNoChao(false);
 
-  if (!getNoChao()) cair();
+  if (!getNoChao())
+    cair();
 
   perseguir();
 

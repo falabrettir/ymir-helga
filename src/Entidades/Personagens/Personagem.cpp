@@ -67,13 +67,19 @@ void Personagem::tomarDano(int dano, bool esq) {
 }
 
 void Personagem::executar() {
-  ultimoAtaque += pGG->getDeltaTempo();
-  if (ultimoAtaque > 1000) {
-    podeAtacar = true;
-    ultimoAtaque = 0;
+  if (vivo) {
+    if (pGG == nullptr) {
+      std::cerr << "erro: Personagem::executar() => pGG == nullptr"
+                << std::endl;
+    }
+    ultimoAtaque += pGG->getDeltaTempo();
+    if (ultimoAtaque > 1000) {
+      podeAtacar = true;
+      ultimoAtaque = 0;
+    }
   }
 
-  if (!vivo)
+  if (!vivo && pFase)
     pFase->notificarMorreu(this);
 }
 

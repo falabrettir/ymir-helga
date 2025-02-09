@@ -25,7 +25,7 @@ Esqueleto::Esqueleto(const sf::Vector2f& pos)
 }
 
 Esqueleto::~Esqueleto() {
-  delete flecha;
+  flecha = nullptr;
 }
 
 void Esqueleto::atacar() {
@@ -46,7 +46,6 @@ void Esqueleto::atacar() {
   }
 }
 void Esqueleto::executar() {
-  Personagem::executar();
 
   atualizarKnockback();
   setDanificando(false);
@@ -64,6 +63,7 @@ void Esqueleto::executar() {
   mover();
 
   pGC->notificar(this);
+  Personagem::executar();
 }
 
 }  // namespace Entidades::Personagens::Inimigos

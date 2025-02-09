@@ -26,12 +26,12 @@ class Personagem : public Entidades::Entidade {
   bool invencivel;
   float tempoInvencibilidade;
   const float DURACAO_INVENCIBILIDADE = 0.4f;  // 1 segundo de invencibilidade
-  bool vivo;
 
  protected:
   static Fases::Fase* pFase;
   bool podeAtacar;
   float ultimoAtaque;
+  bool vivo;
 
  public:
   Personagem(ID id);
