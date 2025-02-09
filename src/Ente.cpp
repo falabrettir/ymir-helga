@@ -10,8 +10,7 @@
 
 #include "Gerenciadores/GerenciadorGrafico.h"
 
-Gerenciadores::GerenciadorGrafico* Ente::pGG(
-    Gerenciadores::GerenciadorGrafico::getInstancia());
+Gerenciadores::GerenciadorGrafico* Ente::pGG(Gerenciadores::GerenciadorGrafico::getInstancia());
 
 Ente::Ente(ID id) : id(id) {
   pSprite = new sf::Sprite();
@@ -21,7 +20,6 @@ Ente::Ente(ID id) : id(id) {
 }
 
 Ente::~Ente() {
-
   delete pSprite;
   pSprite = nullptr;
 
@@ -29,6 +27,7 @@ Ente::~Ente() {
   pTexture = nullptr;
 
   pAlvo = nullptr;
+  std::clog << "~Ente" << std::endl;
 }
 
 void Ente::atualizaSprite(sf::Texture* pTexture) {
@@ -48,9 +47,7 @@ bool Ente::setTextura(const std::string& path) {
   }
 }
 
-sf::Sprite Ente::getSprite() {
-  return *pSprite;
-}
+sf::Sprite Ente::getSprite() { return *pSprite; }
 
 void Ente::setTarget() {
   if (pGG == nullptr) {
@@ -70,6 +67,4 @@ void Ente::desenhar() {
   pGG->desenharEnte(this);
 }
 
-const ID Ente::getId() const {
-  return this->id;
-}
+const ID Ente::getId() const { return this->id; }

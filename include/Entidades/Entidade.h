@@ -31,7 +31,6 @@ class Entidade : public Ente {
   void mover();
   void cair();
   void desenhar();
-
   virtual void colidir(Entidade* pEnt = nullptr) = 0;
   virtual void executar() = 0;
 

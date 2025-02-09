@@ -2,15 +2,17 @@
 
 namespace Listas {
 
-template <class TL> class Lista {
-public:
+template <class TL>
+class Lista {
+ public:
   // Classe Elemento aninhada
-  template <class TE> class Elemento {
-  private:
+  template <class TE>
+  class Elemento {
+   private:
     Elemento<TE> *pProx;
     TE *pInfo;
 
-  public:
+   public:
     Elemento() : pProx(nullptr), pInfo(nullptr) {}
     Elemento(TE *info) : pInfo(info), pProx(nullptr) {}
     ~Elemento() {
@@ -23,24 +25,22 @@ public:
     TE *getInfo() const { return pInfo; }
   };
 
-private:
+ private:
   Elemento<TL> *pPrimeiro;
   Elemento<TL> *pUltimo;
   int tamanho;
 
-public:
+ public:
   Lista() : pPrimeiro(nullptr), pUltimo(nullptr), tamanho(0) {}
 
   ~Lista() { limpar(); }
 
   Elemento<TL> *getpPrimeiro() const {
-    if (pPrimeiro)
-      return pPrimeiro;
+    if (pPrimeiro) return pPrimeiro;
   }
 
   Elemento<TL> *getpUltimo() const {
-    if (pUltimo)
-      return pUltimo;
+    if (pUltimo) return pUltimo;
   }
 
   void incluir(TL *p) {
@@ -60,39 +60,39 @@ public:
     }
   }
 
-  void remover(TL *p) {
-    Elemento<TL> *node = pPrimeiro;
-    Elemento<TL> *anterior = nullptr;
-    while (node != nullptr && node->getInfo() != p) {
-      anterior = node;
-      node = node->getProximo();
-    }
-    if (node->getInfo() == p) {
-      if (node == pPrimeiro) {
-        pPrimeiro = node->getProximo();
-      } else if (node == pUltimo) {
-        pUltimo = anterior;
-      } else {
-        anterior->setProx(node->getProximo());
-      }
-      delete node;
-      tamanho--;
-    }
-    node = nullptr;
-    anterior = nullptr;
-  }
+  // void remover(TL *p) {
+  //   Elemento<TL> *node = pPrimeiro;
+  //   Elemento<TL> *anterior = nullptr;
+  //   while (node != nullptr && node->getInfo() != p) {
+  //     anterior = node;
+  //     node = node->getProximo();
+  //   }
+  //   if (node->getInfo() == p) {
+  //     if (node == pPrimeiro) {
+  //       pPrimeiro = node->getProximo();
+  //     } else if (node == pUltimo) {
+  //       pUltimo = anterior;
+  //     } else {
+  //       anterior->setProx(node->getProximo());
+  //     }
+  //     delete node;
+  //     tamanho--;
+  //   }
+  //   node = nullptr;
+  //   anterior = nullptr;
+  // }
 
   // TL pop(TL* p);
-  void limpar() {
-    Elemento<TL> *node = pPrimeiro;
-    while (node != nullptr) {
-      pPrimeiro = pPrimeiro->getProximo();
-      delete node;
-      node = pPrimeiro;
-    }
-    pUltimo = nullptr;
-    tamanho = 0;
-  }
+  // void limpar() {
+  //   Elemento<TL> *node = pPrimeiro;
+  //   while (node != nullptr) {
+  //     pPrimeiro = pPrimeiro->getProximo();
+  //     delete node;
+  //     node = pPrimeiro;
+  //   }
+  //   pUltimo = nullptr;
+  //   tamanho = 0;
+  // }
   TL *operator[](int pos) {
     Elemento<TL> *aux = pPrimeiro;
     for (int i = 0; i < pos; i++) {
@@ -102,12 +102,12 @@ public:
   }
   int getSize() const { return tamanho; }
 
-public:
+ public:
   class Iterator {
-  private:
+   private:
     Elemento<TL> *pAtual;
 
-  public:
+   public:
     Iterator() : pAtual(nullptr) {}
     Iterator(Elemento<TL> *pElem) : pAtual(pElem) {}
     ~Iterator() { pAtual = nullptr; }
@@ -128,9 +128,8 @@ public:
       return *this;
     }
 
-    bool operator!=(const Iterator &outro) const {
-      return this->pAtual != outro.pAtual;
-    }
+    bool operator!=(const Iterator &outro) const { return this->pAtual != outro.pAtual; }
+    Elemento<TL> *getAtual() const { return pAtual; }
 
     friend class Lista;
   };
@@ -138,6 +137,52 @@ public:
   Iterator begin() { return Iterator(pPrimeiro); }
 
   Iterator end() { return Iterator(nullptr); }
+  void remover(TL *p) {
+    Iterator it = begin();
+    Iterator anterior = end();
+
+    while (it != end() && *it != p) {
+      anterior = it;
+      ++it;
+    }
+
+    if (it != end()) {
+      Elemento<TL> *atual = it.getAtual();
+
+      if (atual == pPrimeiro) {
+        pPrimeiro = atual->getProximo();
+        // Se a lista ficou vazia, atualiza pUltimo também
+        if (pPrimeiro == nullptr) {
+          pUltimo = nullptr;
+        }
+      } else if (atual == pUltimo) {
+        pUltimo = anterior.getAtual();
+        // Define o próximo do novo último elemento como nullptr
+        if (anterior != end()) {
+          anterior.getAtual()->setProx(nullptr);
+        }
+      } else {
+        // Atualiza o próximo do elemento anterior
+        anterior.getAtual()->setProx(atual->getProximo());
+      }
+
+      delete atual;
+      tamanho--;
+    }
+  }
+  void limpar() {
+    Iterator it = begin();
+
+    while (it != end()) {
+      Elemento<TL> *aux = it.getAtual();
+      ++it;
+      delete aux;
+    }
+
+    pPrimeiro = nullptr;
+    pUltimo = nullptr;
+    tamanho = 0;
+  }
 };
 
-} // namespace Listas
+}  // namespace Listas

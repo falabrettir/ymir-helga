@@ -30,7 +30,7 @@ Personagem::Personagem(ID id)
   setTamanho({48, 48});
 }
 
-Personagem::~Personagem() {}
+Personagem::~Personagem() { std::clog << "~Personagem" << std::endl; }
 
 void Personagem::tomarDano(int dano, bool esq) {
   hp -= dano;
@@ -113,8 +113,8 @@ void Personagem::atualizarKnockback() {
 
       // Diminui mais rapidamente a velocidade horizontal (exponencial)
       float t = tempoKnockback / duracaoKnockback;
-      vel.x = direcaoKnockback.x * 0.5f *
-              std::exp(-4.0f * t);  // Decaimento exponencial mais rápido
+      vel.x =
+          direcaoKnockback.x * 0.5f * std::exp(-4.0f * t);  // Decaimento exponencial mais rápido
 
       setVel(vel);
     }
@@ -125,32 +125,18 @@ void Personagem::atualizarKnockback() {
 // Getters e setters
 // ============================================================================
 
-const int Personagem::getDano() const {
-  return dano;
-}
+const int Personagem::getDano() const { return dano; }
 
-bool Personagem::getEmAnimacaoKnockback() const {
-  return emAnimacaoKnockback;
-}
+bool Personagem::getEmAnimacaoKnockback() const { return emAnimacaoKnockback; }
 
-const bool Personagem::getDanificando() const {
-  return danificando;
-}
+const bool Personagem::getDanificando() const { return danificando; }
 
-void Personagem::setFase(Fases::Fase* fase) {
-  pFase = fase;
-}
+void Personagem::setFase(Fases::Fase* fase) { pFase = fase; }
 
-void Personagem::setDano(const int dano) {
-  this->dano = dano;
-}
+void Personagem::setDano(const int dano) { this->dano = dano; }
 
-void Personagem::setEmAnimacaoKnockback(bool valor) {
-  emAnimacaoKnockback = valor;
-}
+void Personagem::setEmAnimacaoKnockback(bool valor) { emAnimacaoKnockback = valor; }
 
-void Personagem::setDanificando(bool danificando) {
-  this->danificando = danificando;
-}
+void Personagem::setDanificando(bool danificando) { this->danificando = danificando; }
 
 }  // namespace Entidades::Personagens

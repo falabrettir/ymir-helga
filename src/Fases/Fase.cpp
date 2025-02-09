@@ -56,9 +56,10 @@ void Fase::executar() {
   if (listaInimigos.getSize() == 0) {
     thisObs->notificarFim();
   }
-  if (listaJogadores.getSize() == 0) {
+  if (listaJogadores.getSize() == 0 && listaInimigos.getSize() > 0) {
     thisObs->notificarJogadorMorreu();
   }
+  std::clog << "Fase::executar()" << std::endl;
   listaProjeteis.executar();
   listaInimigos.executar();
   listaJogadores.executar();
@@ -95,7 +96,7 @@ void Fase::removerProjetil(Projetil* projetil) {
     std::cerr << "erro: Fase::removerProjetil(...) => projetil == nullptr\n";
     exit(EXIT_FAILURE);
   }
-
+  pGC->removerEnt(projetil);
   listaProjeteis.deletar(projetil);
   std::clog << "Fase::removerProjetil => projetil removido" << std::endl;
 }
@@ -174,8 +175,6 @@ void Fase::limparListas() {
   pGC->limparEntidades();
 }
 
-const bool Fase::getMp() {
-  return mp;
-}
+const bool Fase::getMp() { return mp; }
 
 }  // namespace Fases

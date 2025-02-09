@@ -19,7 +19,7 @@ class GerenciadorColisoes : public Mediator {
 
   std::set<Entidades::Personagens::Jogador *> jogadores;
   std::set<Entidades::Personagens::Inimigos::Inimigo *> inimigos;
-  std::list<Entidades::Obstaculos::Obstaculo *> obstaculos;
+  std::set<Entidades::Obstaculos::Obstaculo *> obstaculos;
   std::set<Entidades::Projetil *> projeteis;
 
  private:

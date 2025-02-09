@@ -15,15 +15,11 @@ namespace Entidades::Personagens::Inimigos {
 
 std::set<Jogador *> Inimigo::setJogadores{};
 
-Inimigo::Inimigo(ID id) : Personagem(id), visada(100.f), visando(false) {
-  pGC->incluirInim(this);
-}
+Inimigo::Inimigo(ID id) : Personagem(id), visada(100.f), visando(false) { pGC->incluirInim(this); }
 
-Inimigo::~Inimigo() { std::clog << "Deletando Inimigo\n"; }
+Inimigo::~Inimigo() { std::clog << "~Inimigo" << std::endl; }
 
-float Inimigo::calculaDistancia(Jogador *pJog) {
-  return fabs(pJog->getPos().x - this->getPos().x);
-}
+float Inimigo::calculaDistancia(Jogador *pJog) { return fabs(pJog->getPos().x - this->getPos().x); }
 
 void Inimigo::adicionarJogador(Jogador *pJog) { setJogadores.insert(pJog); }
 
@@ -31,7 +27,7 @@ void Inimigo::perseguir() {
   std::set<Jogador *>::iterator it = setJogadores.begin();
   Jogador *aux = nullptr;
   float atual, min = visada;
-  visando = false; // Reset targeting flag
+  visando = false;  // Reset targeting flag
 
   // Check for players in sight
   while (it != setJogadores.end()) {
@@ -54,25 +50,24 @@ void Inimigo::perseguir() {
 
     float magnitude = std::sqrt(direcao.x * direcao.x + direcao.y * direcao.y);
 
-    if (magnitude != 0)
-      direcao /= magnitude;
+    if (magnitude != 0) direcao /= magnitude;
 
     sf::Vector2f novaVel;
     novaVel.x = direcao.x * getVel().x;
     setVelX(novaVel.x);
 
-  } else { // movimento aleatório
+  } else {  // movimento aleatório
     static float moveTimer = 0.0f;
     static int direcao = 1;
-    static float mudarIntervalo = (rand() % 20 + 10) / 10.0f; // 1-3 seconds
+    static float mudarIntervalo = (rand() % 20 + 10) / 10.0f;  // 1-3 seconds
 
     moveTimer += 0.016f;
 
     // Random chance to change direction each frame (10%)
     if ((rand() % 100) < 10 || moveTimer >= mudarIntervalo) {
-      direcao = (rand() % 2) * 2 - 1; // Generates either -1 or 1
+      direcao = (rand() % 2) * 2 - 1;  // Generates either -1 or 1
       moveTimer = 0.0f;
-      mudarIntervalo = (rand() % 20 + 10) / 10.0f; // New random interval
+      mudarIntervalo = (rand() % 20 + 10) / 10.0f;  // New random interval
     }
 
     setVelX(MAXVEL * 0.3 * direcao);
@@ -87,8 +82,8 @@ void Inimigo::colidir(Entidade *pEnt) {
   }
 
   else if (ehJogador(pEnt->getId())) {
-    dynamic_cast<Entidades::Personagens::Jogador *>(pEnt)->tomarDano(
-        getDano(), getOlhandoEsquerda());
+    dynamic_cast<Entidades::Personagens::Jogador *>(pEnt)->tomarDano(getDano(),
+                                                                     getOlhandoEsquerda());
 
   } else if (ehProjetil(pEnt->getId())) {
     Personagem *pDono = dynamic_cast<Projetil *>(pEnt)->getDono();
@@ -105,4 +100,4 @@ void Inimigo::colidir(Entidade *pEnt) {
   }
 }
 
-} // namespace Entidades::Personagens::Inimigos
+}  // namespace Entidades::Personagens::Inimigos

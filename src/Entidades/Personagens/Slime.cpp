@@ -47,12 +47,7 @@ void Slime::executar() {
 }
 
 void Slime::atacar() {
-  atualizarKnockback();
-  setDanificando(false);
-  setNoChao(false);
-
-  if (!getNoChao())
-    cair();
+  if (!getNoChao()) cair();
 
   perseguir();
 

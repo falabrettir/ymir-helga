@@ -14,17 +14,13 @@
 namespace Entidades {
 
 Projetil::Projetil(Personagens::Personagem* pPersDono, int impulso)
-    : Entidade(ID::IDprojetil),
-      pPersDono(pPersDono),
-      impulso(impulso),
-      pFase(nullptr) {
+    : Entidade(ID::IDprojetil), pPersDono(pPersDono), impulso(impulso), pFase(nullptr) {
   if (pPersDono == nullptr) {
     std::cerr << "erro: Projetil::Projetil(...) => pGC == nullptr" << std::endl;
     exit(EXIT_FAILURE);
   }
 
-  if (pPersDono->getId() == ID::IDesqueleto ||
-      pPersDono->getId() == ID::IDjogador) {
+  if (pPersDono->getId() == ID::IDesqueleto || pPersDono->getId() == ID::IDjogador) {
     setTextura("/assets/Projeteis/Flecha.png");
   } else if (pPersDono->getId() == ID::IDmago) {
     setTextura("/assets/Projeteis/BolaDeFogo.png");
@@ -46,23 +42,19 @@ Projetil::Projetil(Personagens::Personagem* pPersDono, int impulso)
   sf::Vector2f vel;
   vel.x = 2 * MAXVEL;
   vel.x += vel.x * impulso;
-  if (pPersDono->getOlhandoEsquerda())
-    vel.x *= -1;
+  if (pPersDono->getOlhandoEsquerda()) vel.x *= -1;
   setVel(vel);
 }
 
 Projetil::~Projetil() {
   pFase = nullptr;
   pPersDono = nullptr;
+  std::clog << "~Projetil" << std::endl;
 }
 
-int Projetil::getDano() {
-  return std::fabs(getVel().x);
-}
+int Projetil::getDano() { return std::fabs(getVel().x); }
 
-Personagens::Personagem* Projetil::getDono() {
-  return pPersDono;
-}
+Personagens::Personagem* Projetil::getDono() { return pPersDono; }
 
 void Projetil::colidir(Entidade* pE) {
   if (pGC == nullptr) {
@@ -74,8 +66,6 @@ void Projetil::colidir(Entidade* pE) {
     std::cerr << "erro: Projetil::colidir() => pFase == nullptr" << std::endl;
     exit(EXIT_FAILURE);
   }
-
-  pGC->removerEnt(this);
   pFase->removerProjetil(this);
 }
 
@@ -89,8 +79,6 @@ void Projetil::executar() {
   pGC->notificar(this);
 }
 
-void Projetil::setFase(Fases::Fase* fase) {
-  pFase = fase;
-}
+void Projetil::setFase(Fases::Fase* fase) { pFase = fase; }
 
 }  // namespace Entidades
