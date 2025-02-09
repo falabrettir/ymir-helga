@@ -17,7 +17,7 @@ Planicie::Planicie(bool mp)
     : Fase(ID::IDplanicie, mp), minGosma(5), minPlat(4), minMago(4), minEsq(5) {
   std::clog << "Criando Planicie.\n";
 
-  setTextura("/assets/Fundos/fundofase2escalado.png");
+  setTextura("/assets/Fundos/planicie.png");
   pSprite->setScale(1, 1);
 
   pFE = Fabricas::FabEntPlanicie::getInstancia();

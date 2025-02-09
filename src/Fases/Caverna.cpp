@@ -17,7 +17,7 @@ Caverna::Caverna(bool mp)
     : Fase(ID::IDcaverna, mp), minEsq(3), minSlimes(3), minEsp(4), minPlat(5) {
   std::clog << "Criando caverna.\n";
 
-  setTextura("/assets/Fundos/fundofase1escalado.png");
+  setTextura("/assets/Fundos/caverna.png");
   pSprite->setScale(1, 1);
 
   pFE = Fabricas::FabEntCaverna::getInstancia();
