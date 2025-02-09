@@ -44,34 +44,31 @@ void Planicie::executar() {
   Fase::executar();
 }
 
-const int Planicie::getMinEsq() const {
-  return minEsq;
-}
+const int Planicie::getMinEsq() const { return minEsq; }
 
-const int Planicie::getMinMago() const {
-  return minMago;
-}
+const int Planicie::getMinMago() const { return minMago; }
 
-const int Planicie::getMinGosma() const {
-  return minGosma;
-}
+const int Planicie::getMinGosma() const { return minGosma; }
 
-const int Planicie::getMinPlat() const {
-  return minPlat;
-}
+const int Planicie::getMinPlat() const { return minPlat; }
 
 const int Planicie::getCont(char tipoEnt) {
   switch (tipoEnt) {
     case 'E':
       return contEsq;
+      break;
     case 'W':
       return contMago;
+      break;
     case 'G':
       return contGosma;
+      break;
     case 'M':
       return contPlat;
+      break;
     default:
       return std::numeric_limits<int>::max();
+      break;
   }
 }
 
@@ -79,12 +76,16 @@ void Planicie::incrementaContadores(char tipoEnt) {
   switch (tipoEnt) {
     case 'E':
       contEsq++;
+      break;
     case 'W':
       contMago++;
+      break;
     case 'G':
       contGosma++;
+      break;
     case 'M':
       contPlat++;
+      break;
   }
 }
 

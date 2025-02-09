@@ -45,21 +45,13 @@ void Caverna::executar() {
   Fase::executar();
 }
 
-const int Caverna::getMinEsq() const {
-  return minEsq;
-}
+const int Caverna::getMinEsq() const { return minEsq; }
 
-const int Caverna::getMinSli() const {
-  return minSlimes;
-}
+const int Caverna::getMinSli() const { return minSlimes; }
 
-const int Caverna::getMinEsp() const {
-  return minEsp;
-}
+const int Caverna::getMinEsp() const { return minEsp; }
 
-const int Caverna::getMinPlat() const {
-  return minPlat;
-}
+const int Caverna::getMinPlat() const { return minPlat; }
 
 const int Caverna::getCont(char tipoEnt) {
   switch (tipoEnt) {
@@ -80,12 +72,16 @@ void Caverna::incrementaContadores(char tipoEnt) {
   switch (tipoEnt) {
     case 'E':
       contEsq++;
+      break;
     case 'S':
       contSlimes++;
+      break;
     case 'G':
       contEsp++;
+      break;
     case 'M':
       contPlat++;
+      break;
   }
 }
 
