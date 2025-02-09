@@ -17,15 +17,11 @@ using namespace Entidades::Personagens;
 // Flag inicialmente definida como true
 bool Jogador::ehPrimeiroJogador = true;
 
-Gerenciadores::GerenciadorInput* Jogador::pGI =
-    Gerenciadores::GerenciadorInput::getInstancia();
+Gerenciadores::GerenciadorInput* Jogador::pGI = Gerenciadores::GerenciadorInput::getInstancia();
 
-Fabricas::FabricaProjeteis* Jogador::fabProj =
-    Fabricas::FabricaProjeteis::getInstancia();
+Fabricas::FabricaProjeteis* Jogador::fabProj = Fabricas::FabricaProjeteis::getInstancia();
 
-Jogador::Jogador(const sf::Vector2f& pos)
-    : Personagem(ID::IDjogador), pContr(nullptr), podePular(true) {
-
+Jogador::Jogador(const sf::Vector2f& pos) : Personagem(ID::IDjogador), pContr(nullptr) {
   pContr = new Controladores::Controlador_Jogador();
   pContr->setJog(this);
 
@@ -47,13 +43,9 @@ Jogador::~Jogador() {
   pContr = nullptr;
 }
 
-bool Jogador::getPrimeiroJog() const {
-  return ehPrimeiroJogador;
-}
+bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
-void Jogador::resetJog() {
-  ehPrimeiroJogador = true;
-}
+void Jogador::resetJog() { ehPrimeiroJogador = true; }
 
 void Jogador::andarDireita() {
   if (getVel().x < MAXVEL) {
@@ -75,9 +67,7 @@ void Jogador::andarEsquerda() {
   }
 }
 
-void Jogador::naoAndar() {
-  setVelX(0);
-}
+void Jogador::naoAndar() { setVelX(0); }
 
 void Jogador::pular() {
   if (getNoChao()) {
@@ -100,8 +90,7 @@ void Jogador::executar() {
 
     setNoChao(false);
 
-    if (!getNoChao())
-      cair();
+    if (!getNoChao()) cair();
 
     mover();
 
@@ -128,10 +117,8 @@ void Jogador::atacar() {
 
 void Jogador::colidir(Entidade* pEnt) {
   if (ehProjetil(pEnt->getId())) {
-    if (ehInimigo(
-            dynamic_cast<Entidades::Projetil*>(pEnt)->getDono()->getId())) {
-      tomarDano(dynamic_cast<Entidades::Projetil*>(pEnt)->getDano(),
-                pEnt->getOlhandoEsquerda());
+    if (ehInimigo(dynamic_cast<Entidades::Projetil*>(pEnt)->getDono()->getId())) {
+      tomarDano(dynamic_cast<Entidades::Projetil*>(pEnt)->getDano(), pEnt->getOlhandoEsquerda());
     }
   }
 }

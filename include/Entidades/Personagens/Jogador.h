@@ -20,7 +20,6 @@ class Jogador : public Personagem {
   static Fabricas::FabricaProjeteis* fabProj;
   Controladores::Controlador_Jogador* pContr;
   static bool ehPrimeiroJogador;
-  bool podePular;
 
  public:
   Jogador(const sf::Vector2f& pos);
