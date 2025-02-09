@@ -61,6 +61,7 @@ void ObservadorFase::notificarFim() {
     pGS->inserirEstado(new Fases::Planicie(Menus::MenuPrincipal::getInstancia()->getMp()));
     pGS->mudarEstado(ID::IDplanicie);
   } else {
+    pGS->mudarEstado(ID::IDmenuprincipal);
     std::clog << "WINNER WINNER CHICKEN DINNER" << std::endl;
   }  // TODO: COZER
 }
