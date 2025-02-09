@@ -17,7 +17,7 @@ int Caverna::contEsp(0);
 int Caverna::contPlat(0);
 
 Caverna::Caverna(bool mp)
-    : Fase(ID::IDcaverna, mp), minEsq(3), minSlimes(3), minEsp(4), minPlat(5) {
+    : Fase(ID::IDcaverna, mp), minEsq(3), minSlimes(3), minEsp(4), minPlat(3) {
   std::clog << "Criando caverna." << std::endl;
 
   setTextura("/assets/Fundos/caverna.png");
@@ -57,14 +57,19 @@ const int Caverna::getCont(char tipoEnt) {
   switch (tipoEnt) {
     case 'E':
       return contEsq;
+      break;
     case 'S':
       return contSlimes;
+      break;
     case 'G':
       return contEsp;
+      break;
     case 'M':
       return contPlat;
+      break;
     default:
       return std::numeric_limits<int>::max();
+      break;
   }
 }
 
