@@ -7,9 +7,9 @@ class GameOver : public Menu {
   sf::Text _gameOver;
 
  public:
-  GameOver(ID id);
+  GameOver(ID id, bool venceu);
   ~GameOver();
-  void inicializaTitulo();
+  void inicializaTitulo(bool venceu);
   void criarBotoes();
   void executar();
 };

@@ -2,16 +2,16 @@
 
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
-#include "Gerenciadores/GerenciadorColisoes.h"
 
 #include "Entidades/Personagens/Inimigo.h"
 #include "Entidades/Personagens/Jogador.h"
+#include "Entidades/Personagens/Personagem.h"
+#include "Gerenciadores/GerenciadorColisoes.h"
 #include "IDs.h"
 
 namespace Entidades::Personagens::Inimigos {
 
-Slime::Slime(const sf::Vector2f& pos) : Inimigo(ID::IDslime) {
-
+Slime::Slime(const sf::Vector2f& pos) : Inimigo(ID::IDslime), viscosidade(0.5) {
   setTextura("/assets/Personagens/Slime.png");
   setPos(pos);
 }
@@ -38,24 +38,24 @@ void Slime::colidir(Entidade* pEnt) {
 }
 
 void Slime::executar() {
+  Personagem::executar();
+  atualizarKnockback();
+  setDanificando(false);
+  setNoChao(false);
+  atacar();
+  pGC->notificar(this);
+}
+
+void Slime::atacar() {
   atualizarKnockback();
   setDanificando(false);
   setNoChao(false);
 
-  if (!getNoChao())
-    cair();
+  if (!getNoChao()) cair();
 
   perseguir();
 
-  if (getVisando()) {
-    atacar();
-  }
-
   mover();
-
-  pGC->notificar(this);
 }
-
-void Slime::atacar() {}
 
 }  // namespace Entidades::Personagens::Inimigos
