@@ -1,17 +1,11 @@
 #pragma once
 
-/*
-  Primeira Fase:
-  Criar um numero aleatorio de instancias de cada tipo de inimigo e obstaculo,
-  respeitando os valores minimo e maximo
-*/
-
 #include "Fase.h"
 
 namespace Fases {
 
 class Caverna : public Fase {
-private:
+ private:
   const int minEsq;
   static int contEsq;
 
@@ -24,7 +18,7 @@ private:
   const int minPlat;
   static int contPlat;
 
-public:
+ public:
   Caverna(bool mp);
   ~Caverna();
 
@@ -37,10 +31,10 @@ public:
   void incrementaContadores(char tipoEnt);
 
   void executar();
-  void criarSlime(const sf::Vector2f &pos);
-  void criarPedra(const sf::Vector2f &pos);
-  void criarMadeira(const sf::Vector2f &pos);
-  void criarEspinho(const sf::Vector2f &pos);
+  void criarSlime(const sf::Vector2f& pos);
+  void criarPedra(const sf::Vector2f& pos);
+  void criarMadeira(const sf::Vector2f& pos);
+  void criarEspinho(const sf::Vector2f& pos);
 };
 
-} // namespace Fases
+}  // namespace Fases

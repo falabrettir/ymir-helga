@@ -21,10 +21,17 @@ using namespace Entidades;
 namespace Fases {
 
 Fase::Fase(ID id, bool mp)
-    : Ente(id), States::State(id), listaObstaculos(), listaJogadores(),
-      listaInimigos(), listaProjeteis(), pFE(nullptr),
-      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()), thisObs(),
-      mp(mp) {
+    : Ente(id),
+      States::State(id),
+      listaObstaculos(),
+      listaJogadores(),
+      listaInimigos(),
+      listaProjeteis(),
+      mp(mp),
+      pGC(Gerenciadores::GerenciadorColisoes::getInstancia()),
+      thisObs(nullptr),
+      pFE(nullptr),
+      pJog(nullptr) {
   listaObstaculos.limpar();
   listaJogadores.limpar();
   listaInimigos.limpar();
@@ -37,11 +44,12 @@ Fase::Fase(ID id, bool mp)
 }
 
 Fase::~Fase() {
-  pGC = nullptr;
   listaObstaculos.limpar();
   listaJogadores.limpar();
   listaInimigos.limpar();
   listaProjeteis.limpar();
+  pJog = nullptr;
+  pGC = nullptr;
 }
 
 void Fase::executar() {
@@ -55,7 +63,7 @@ void Fase::executar() {
   thisObs->executar();
 }
 
-void Fase::incluirNaLista(Entidade *novaEntidade) {
+void Fase::incluirNaLista(Entidade* novaEntidade) {
   if (!novaEntidade) {
     std::cerr << "erro: Fase::incluirNaLista(...) => novaEntidade == nullptr\n";
     exit(EXIT_FAILURE);
@@ -66,7 +74,7 @@ void Fase::incluirNaLista(Entidade *novaEntidade) {
   if (ehJogador(id)) {
     listaJogadores.incluir(novaEntidade);
     Personagens::Inimigos::Inimigo::adicionarJogador(
-        dynamic_cast<Personagens::Jogador *>(novaEntidade));
+        dynamic_cast<Personagens::Jogador*>(novaEntidade));
 
   } else if (ehInimigo(id)) {
     listaInimigos.incluir(novaEntidade);
@@ -79,12 +87,17 @@ void Fase::incluirNaLista(Entidade *novaEntidade) {
   }
 }
 
-void Fase::removerProjetil(Projetil *projetil) {
+void Fase::removerProjetil(Projetil* projetil) {
+  if (!projetil) {
+    std::cerr << "erro: Fase::removerProjetil(...) => projetil == nullptr\n";
+    exit(EXIT_FAILURE);
+  }
+
   listaProjeteis.deletar(projetil);
   std::clog << "Fase::removerProjetil => projetil removido" << std::endl;
 }
 
-void Fase::adicionarProjetil(Entidades::Projetil *novoProjetil) {
+void Fase::adicionarProjetil(Entidades::Projetil* novoProjetil) {
   if (!novoProjetil) {
     std::cerr
         << "erro: Fase::adicionarProjetil(...) => novoProjetil == nullptr\n";
@@ -101,23 +114,23 @@ void Fase::criarMapa(const std::string path) {
     exit(EXIT_FAILURE);
   }
 
-  std::clog << "Criando mapa da fase\n";
+  std::clog << "Criando mapa da fase" << std::endl;
 
   std::ifstream arquivoMapa;
   std::string filePath = ROOT;
   filePath += path;
 
-  std::clog << "Abrindo arquivo: " << filePath << "\n";
+  std::clog << "Abrindo arquivo: " << filePath << std::endl;
   arquivoMapa.open(filePath);
 
   if (!arquivoMapa.is_open()) {
-    std::cerr << "erro: arquivoMapa.open()\n";
+    std::cerr << "erro: arquivoMapa.open()" << std::endl;
     exit(EXIT_FAILURE);
   }
-  std::clog << "Arquivo aberto com sucesso\n";
+  std::clog << "Arquivo de mapa aberto com sucesso" << std::endl;
 
   std::string linha;
-  Entidade *novaEntidade;
+  Entidade* novaEntidade;
   for (int j = 0; std::getline(arquivoMapa, linha); j++) {
     for (int i = 0; i < linha.size(); i++) {
       if (linha[i] != ' ') {
@@ -132,7 +145,12 @@ void Fase::criarMapa(const std::string path) {
 
   arquivoMapa.close();
 }
-void Fase::notificarMorreu(Entidades::Entidade *pEnt) {
+void Fase::notificarMorreu(Entidades::Entidade* pEnt) {
+  if (!pEnt) {
+    std::cerr << "erro: Fase::notificarMorreu(...) => pEnt == nullptr\n";
+    exit(EXIT_FAILURE);
+  }
+
   if (pEnt->getId() == ID::IDjogador) {
     pGC->removerEnt(pEnt);
     std::clog << "pGC->removerEnt\n";
@@ -144,6 +162,7 @@ void Fase::notificarMorreu(Entidades::Entidade *pEnt) {
     std::clog << "listaInimigos.deletar()" << std::endl;
   }
 }
+
 void Fase::limparListas() {
   listaProjeteis.limpar();
   listaJogadores.limpar();
@@ -152,6 +171,8 @@ void Fase::limparListas() {
   pGC->limparEntidades();
 }
 
-const bool Fase::getMp() { return mp; }
+const bool Fase::getMp() {
+  return mp;
+}
 
-} // namespace Fases
+}  // namespace Fases

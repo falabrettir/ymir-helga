@@ -33,5 +33,6 @@ void Jogo::atualizar() {
 }
 
 void Jogo::executar() {
-  while (pGG->janelaAberta()) atualizar();
+  while (pGG->janelaAberta())
+    atualizar();
 }
