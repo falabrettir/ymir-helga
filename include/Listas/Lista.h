@@ -1,3 +1,6 @@
+/* Código adaptado da lista do Professor Doutor Jean Marcelo Simão,
+ * diponível em:
+ * https://pessoal.dainf.ct.utfpr.edu.br/jeansimao/Fundamentos2/LinguagemC++UML/Fundamentos2-SlidesC++10B-2020-07-20.pdf*/
 #pragma once
 
 namespace Listas {
@@ -36,13 +39,11 @@ class Lista {
   ~Lista() { limpar(); }
 
   Elemento<TL>* getpPrimeiro() const {
-    if (pPrimeiro)
-      return pPrimeiro;
+    if (pPrimeiro) return pPrimeiro;
   }
 
   Elemento<TL>* getpUltimo() const {
-    if (pUltimo)
-      return pUltimo;
+    if (pUltimo) return pUltimo;
   }
 
   void incluir(TL* p) {
@@ -97,9 +98,7 @@ class Lista {
       return *this;
     }
 
-    bool operator!=(const Iterator& outro) const {
-      return this->pAtual != outro.pAtual;
-    }
+    bool operator!=(const Iterator& outro) const { return this->pAtual != outro.pAtual; }
     Elemento<TL>* getAtual() const { return pAtual; }
 
     friend class Lista;
