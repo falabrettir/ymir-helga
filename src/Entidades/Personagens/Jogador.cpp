@@ -43,7 +43,7 @@ Jogador::~Jogador() {
   pContr = nullptr;
 }
 
-bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
+const bool Jogador::getPrimeiroJog() const { return ehPrimeiroJogador; }
 
 void Jogador::resetJog() { ehPrimeiroJogador = true; }
 

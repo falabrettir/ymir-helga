@@ -25,7 +25,7 @@ class Jogador : public Personagem {
   Jogador(const sf::Vector2f& pos);
   ~Jogador();
 
-  bool getPrimeiroJog() const;
+  const bool getPrimeiroJog() const;
   static void resetJog();
 
   void colidir(Entidade* pEnt = nullptr);

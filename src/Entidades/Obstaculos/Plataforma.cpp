@@ -5,13 +5,13 @@
 #include <cstdlib>
 #include <iostream>
 
+#include "Constants.h"
 #include "Gerenciadores/GerenciadorColisoes.h"
 #include "IDs.h"
 
 namespace Entidades::Obstaculos {
 
-Plataforma::Plataforma(ID id, const sf::Vector2f& pos)
-    : Obstaculo(id, pos), empuxo(0.f, 0.f) {
+Plataforma::Plataforma(ID id, const sf::Vector2f& pos) : Obstaculo(id, pos), empuxo(EMPUXO) {
   switch (id) {
     case (ID::IDparede):
 
@@ -56,13 +56,11 @@ void Plataforma::executar() {
 
 void Plataforma::obstacular(Entidades::Entidade* pEnt) {
   if (pEnt == nullptr) {
-    std::cerr << "erro: Plataforma::obstacular() => pEnt == nullptr"
-              << std::endl;
+    std::cerr << "erro: Plataforma::obstacular() => pEnt == nullptr" << std::endl;
     exit(EXIT_FAILURE);
   }
   if (pGC == nullptr) {
-    std::cerr << "erro: Plataforma::obstacular() => pGC == nullptr"
-              << std::endl;
+    std::cerr << "erro: Plataforma::obstacular() => pGC == nullptr" << std::endl;
     exit(EXIT_FAILURE);
   }
 

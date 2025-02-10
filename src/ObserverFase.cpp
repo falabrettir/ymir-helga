@@ -39,8 +39,7 @@ void ObservadorFase::atualizarTeclasSoltas(sf::Keyboard::Key tecla) {
 }
 void ObservadorFase::pausar() {
   std::cerr << "Pausar chamado\n";
-  if (pGS->getEstadoAtual() == ID::IDcaverna ||
-      pGS->getEstadoAtual() == ID::IDplanicie) {
+  if (pGS->getEstadoAtual() == ID::IDcaverna || pGS->getEstadoAtual() == ID::IDplanicie) {
     std::cerr << "Dentro do if de Pausar\n";
     pGS->inserirEstado(Menus::MenuPausa::getInstancia());
     pGS->mudarEstado(ID::IDmenupause);

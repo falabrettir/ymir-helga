@@ -20,11 +20,9 @@ Entidade::Entidade(ID id)
       velocidade(0, 0),
       noChao(false),
       olhandoEsquerda(false),
-      tamanho({0, 0}) {};
+      tamanho({0, 0}){};
 
-Entidade::~Entidade() {
-  std::clog << "~Entidade" << std::endl;
-}
+Entidade::~Entidade() { std::clog << "~Entidade" << std::endl; }
 
 void Entidade::mover() {
   if (pGG == nullptr) {
@@ -40,8 +38,7 @@ void Entidade::mover() {
     setOlhandoEsquerda(true);
   }
 
-  if (!getNoChao())
-    cair();
+  if (!getNoChao()) cair();
 
   sf::Vector2f novaPos = getPos() + (velocidade * pGG->getDeltaTempo());
   setPos(novaPos);
@@ -63,10 +60,10 @@ void Entidade::cair() {
     exit(EXIT_FAILURE);
   }
 
-  setVel(getVel() + gravidade * pGG->getDeltaTempo());
+  setVel(getVel() + GRAVIDADE * pGG->getDeltaTempo());
 
   if (ehPlataforma(id) || ehProjetil(id)) {
-    setVel(getVel() + empuxo * pGG->getDeltaTempo());
+    setVel(getVel() + EMPUXO * pGG->getDeltaTempo());
   }
 }
 
@@ -83,22 +80,15 @@ void Entidade::desenhar() {
 // Getters e setters
 // ============================================================================
 
-void Entidade::setVel(const sf::Vector2f& novaVel) {
-  velocidade = novaVel;
-}
+void Entidade::setVel(const sf::Vector2f& novaVel) { velocidade = novaVel; }
 
-void Entidade::setVelX(const float& velX) {
-  velocidade.x = velX;
-}
+void Entidade::setVelX(const float& velX) { velocidade.x = velX; }
 
-void Entidade::setVelY(const float& velY) {
-  velocidade.y = velY;
-}
+void Entidade::setVelY(const float& velY) { velocidade.y = velY; }
 
 void Entidade::setPos(const sf::Vector2f& novaPos) {
   pos = novaPos;
-  if (pSprite)
-    pSprite->setPosition(novaPos);
+  if (pSprite) pSprite->setPosition(novaPos);
 }
 
 void Entidade::setPosX(const float& x) {
@@ -115,32 +105,18 @@ void Entidade::setOlhandoEsquerda(const bool& olhandoEsquerda) {
   this->olhandoEsquerda = olhandoEsquerda;
 }
 
-void Entidade::setNoChao(const bool& noChao) {
-  this->noChao = noChao;
-}
+void Entidade::setNoChao(const bool& noChao) { this->noChao = noChao; }
 
-sf::Vector2f Entidade::getPos() const {
-  return pos;
-}
+sf::Vector2f Entidade::getPos() const { return pos; }
 
-sf::Vector2f Entidade::getVel() const {
-  return velocidade;
-}
+sf::Vector2f Entidade::getVel() const { return velocidade; }
 
-bool Entidade::getNoChao() const {
-  return noChao;
-}
+bool Entidade::getNoChao() const { return noChao; }
 
-bool Entidade::getOlhandoEsquerda() const {
-  return olhandoEsquerda;
-}
+bool Entidade::getOlhandoEsquerda() const { return olhandoEsquerda; }
 
-sf::Vector2f Entidade::getTamanho() const {
-  return tamanho;
-}
+sf::Vector2f Entidade::getTamanho() const { return tamanho; }
 
-void Entidade::setTamanho(const sf::Vector2f& tam) {
-  tamanho = tam;
-}
+void Entidade::setTamanho(const sf::Vector2f& tam) { tamanho = tam; }
 
 }  // namespace Entidades
