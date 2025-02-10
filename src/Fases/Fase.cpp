@@ -52,24 +52,6 @@ Fase::~Fase() {
   thisObs = nullptr;
 }
 
-void Fase::executar() {
-  listaProjeteis.executar();
-  listaInimigos.executar();
-  listaJogadores.executar();
-  listaObstaculos.executar();
-  thisObs->executar();
-
-  if (listaInimigos.getSize() == 0) {
-    listaJogadores.limpar();
-    Personagens::Inimigos::Inimigo::resetJogs();
-    thisObs->notificarFim();
-  }
-
-  if (listaJogadores.getSize() == 0 && listaInimigos.getSize() > 0) {
-    thisObs->notificarJogadorMorreu();
-  }
-}
-
 void Fase::incluirNaLista(Entidade* novaEntidade) {
   if (!novaEntidade) {
     std::cerr << "erro: Fase::incluirNaLista(...) => novaEntidade == nullptr\n";

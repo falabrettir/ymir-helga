@@ -22,7 +22,6 @@ class Fase : public Ente, public States::State {
  protected:
   Gerenciadores::GerenciadorColisoes* pGC;
   Fabricas::FabricaEntidades* pFE;
-  ObservadorFase* thisObs;
 
   Listas::ListaEntidades listaObstaculos;
   Listas::ListaEntidades listaInimigos;
@@ -31,11 +30,14 @@ class Fase : public Ente, public States::State {
 
   const bool mp;
 
+ protected:
+  ObservadorFase* thisObs;
+
  public:
   Fase(ID id, bool mp = false);
   ~Fase();
 
-  virtual void executar();
+  virtual void executar() = 0;
   void notificarMorreu(Entidades::Entidade* pEnt);
 
   void limparListas();

@@ -8,6 +8,7 @@
 #include "IDs.h"
 #include "Menu/GameOver.h"
 #include "Menu/MenuPausa.h"
+#include "Menu/MenuPrincipal.h"
 #include "Observer.h"
 
 ObservadorFase::ObservadorFase(Fases::Fase* fAtual)
@@ -59,7 +60,8 @@ void ObservadorFase::executar() {
 void ObservadorFase::notificarFim() {
   if (fAtual->States::State::getId() == ID::IDcaverna) {
     fAtual->limparListas();
-    pGS->inserirEstado(new Fases::Planicie(false));
+    pGS->inserirEstado(
+        new Fases::Planicie(Menus::MenuPrincipal::getInstancia()->getMp()));
     pGS->mudarEstado(ID::IDplanicie);
   } else {
     pGS->inserirEstado(new Menus::GameOver(ID::IDgameover, true));

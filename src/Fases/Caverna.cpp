@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <limits>
+#include "ObserverFase.h"
 
 #include "Fabrica/FabricaEntidadesCaverna.h"
 
@@ -41,7 +42,22 @@ void Caverna::executar() {
 
   // Desenha o fundo
   pGG->getJanela()->draw(getSprite());
-  Fase::executar();
+
+  listaProjeteis.executar();
+  listaInimigos.executar();
+  listaJogadores.executar();
+  listaObstaculos.executar();
+  thisObs->executar();
+
+  if (listaInimigos.getSize() == 0) {
+    listaJogadores.limpar();
+    Personagens::Inimigos::Inimigo::resetJogs();
+    thisObs->notificarFim();
+  }
+
+  if (listaJogadores.getSize() == 0 && listaInimigos.getSize() > 0) {
+    thisObs->notificarJogadorMorreu();
+  }
 }
 
 const int Caverna::getMinEsq() const {

@@ -73,13 +73,10 @@ Entidade* FabEntCaverna::criarEntidade(char tipoEntidade,
       break;
     case 'J':
       return criarJogador(pos);
-      break;
     case 'H':
-      if (pC->getMp()) {
+      if (pC->getMp())
         return criarJogador(pos);
-        break;
-      } else
-        break;
+      break;
     case 'F':
       return criarParede(pos);
     default:
