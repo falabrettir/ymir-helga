@@ -63,14 +63,6 @@ void Mago::executar() {
 
   pGC->notificar(this);
   Personagem::executar();
-
-  // TODO: Apagar
-  // sf::RectangleShape debugShape(tamanho);
-  // debugShape.setPosition(pSprite->getPosition());
-  // debugShape.setFillColor(sf::Color::Transparent);
-  // debugShape.setOutlineColor(sf::Color::Red);
-  // debugShape.setOutlineThickness(1);
-  // pGG->getJanela()->draw(debugShape);
 }
 
 }  // namespace Entidades::Personagens::Inimigos

@@ -37,7 +37,6 @@ void Personagem::tomarDano(int dano, bool esq) {
 
   if (hp <= 0) {
     vivo = false;
-    setPos({-6000, -6000});
   }
 
   if (!invencivel && !emAnimacaoKnockback && getNoChao()) {
