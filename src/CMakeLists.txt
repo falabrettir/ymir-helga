@@ -1,5 +1,5 @@
 # Variáveis de dependências
-set(SFML_LIBS sfml-graphics sfml-window sfml-system sfml-audio)
+set(SFML_LIBS sfml-graphics sfml-window sfml-system)
 
 # ---------------------------------------------------------
 # Biblioteca Jogo
